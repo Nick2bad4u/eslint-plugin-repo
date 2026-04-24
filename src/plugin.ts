@@ -2,6 +2,7 @@
 import type { ESLint, Linter } from "eslint";
 
 import typeScriptParser from "@typescript-eslint/parser";
+import { isEmpty, objectEntries, safeCastTo   } from "ts-extras";
 
 import packageJson from "../package.json" with { type: "json" };
 import {
@@ -73,10 +74,10 @@ const typeCheckedRuleNames: ReadonlySet<RuleNamePattern> =
 export type RepoComplianceRuleId = `repo-compliance/${RepoComplianceRuleName}`;
 export type RepoComplianceRuleName = keyof typeof repoComplianceRules;
 
-const ruleEntries = Object.entries(repoComplianceRules) as readonly (readonly [
+const ruleEntries = safeCastTo<readonly (readonly [
     RepoComplianceRuleName,
     (typeof repoComplianceRules)[RepoComplianceRuleName],
-])[];
+])[]>(objectEntries(repoComplianceRules));
 
 const createEmptyPresetRuleMap = (): Record<
     RepoComplianceConfigName,
@@ -102,7 +103,7 @@ const derivePresetRuleNamesByConfig = (): Readonly<
     for (const [ruleName] of ruleEntries) {
         const configMembership = rulePresetMembership[ruleName];
 
-        if (configMembership === undefined || configMembership.length === 0) {
+        if (configMembership === undefined || isEmpty(configMembership)) {
             throw new TypeError(
                 `Rule '${ruleName}' is missing preset membership metadata.`
             );

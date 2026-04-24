@@ -1,5 +1,6 @@
 /* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { TSESLint } from "@typescript-eslint/utils";
+import type { UnknownArray } from "type-fest";
 
 import requireBitbucketPipelinesConfigFileRule from "../rules/require-bitbucket-pipelines-config-file.js";
 import requireCodeOfConductFileRule from "../rules/require-code-of-conduct-file.js";
@@ -20,7 +21,7 @@ import requireSupportFileRule from "../rules/require-support-file.js";
 
 export type RuleNamePattern = `require-${string}`;
 
-export type RuleWithDocs = TSESLint.RuleModule<string, readonly unknown[]>;
+export type RuleWithDocs = TSESLint.RuleModule<string, Readonly<UnknownArray>>;
 
 export const repoComplianceRules: Readonly<
     Record<RuleNamePattern, RuleWithDocs>

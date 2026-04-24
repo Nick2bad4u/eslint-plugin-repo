@@ -1,4 +1,5 @@
 /* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
+import type { UnknownArray } from "type-fest";
 import type ts from "typescript";
 
 import { ESLintUtils, type TSESLint } from "@typescript-eslint/utils";
@@ -22,7 +23,7 @@ export type TypedRuleServices = {
 type RuleCreator = ReturnType<typeof ESLintUtils.RuleCreator<RuleDocs>>;
 
 type TypedRuleContext = Readonly<
-    TSESLint.RuleContext<string, readonly unknown[]>
+    TSESLint.RuleContext<string, Readonly<UnknownArray>>
 >;
 
 export const createTypedRule: RuleCreator = (ruleDefinition) => {

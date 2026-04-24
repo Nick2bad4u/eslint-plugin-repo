@@ -1,5 +1,8 @@
 /* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { TSESLint } from "@typescript-eslint/utils";
+import type { UnknownArray, UnknownRecord  } from "type-fest";
+
+import { isEmpty, isInteger, objectEntries, safeCastTo    } from "ts-extras";
 
 import {
     type ConfigName,
@@ -34,7 +37,7 @@ type RuleDocsContract = Readonly<{
 }>;
 
 type RuleMap = Readonly<
-    Record<RuleNamePattern, TSESLint.RuleModule<string, readonly unknown[]>>
+    Record<RuleNamePattern, TSESLint.RuleModule<string, Readonly<UnknownArray>>>
 >;
 
 const isRuleNamePattern = (value: string): value is RuleNamePattern =>
@@ -50,7 +53,7 @@ const getRuleDocsContract = (
         );
     }
 
-    const candidate = docs as Record<string, unknown>;
+    const candidate = docs as UnknownRecord;
     const description = candidate["description"];
     const recommended = candidate["recommended"];
     const requiresTypeChecking = candidate["requiresTypeChecking"];
@@ -83,7 +86,7 @@ const getRuleDocsContract = (
 
     if (
         typeof ruleNumber !== "number" ||
-        !Number.isInteger(ruleNumber) ||
+        !isInteger(ruleNumber) ||
         ruleNumber < 1
     ) {
         throw new TypeError(
@@ -134,7 +137,7 @@ const normalizeConfigNames = (
         }
     }
 
-    if (configNames.length === 0) {
+    if (isEmpty(configNames)) {
         throw new TypeError(
             `Rule '${ruleName}' must belong to at least one preset.`
         );
@@ -148,7 +151,7 @@ export const deriveRuleDocsMetadataByName = (
 ): RuleDocsMetadataByName => {
     const metadataByRuleName: Record<RuleNamePattern, RuleDocsMetadata> = {};
 
-    for (const [ruleName, ruleModule] of Object.entries(rules)) {
+    for (const [ruleName, ruleModule] of objectEntries(rules)) {
         if (!isRuleNamePattern(ruleName)) {
             throw new TypeError(`Unexpected rule name '${ruleName}'.`);
         }
@@ -174,7 +177,7 @@ export const deriveRulePresetMembershipByRuleName = (
 ): Readonly<Record<RuleNamePattern, readonly ConfigName[]>> => {
     const membership: Record<RuleNamePattern, readonly ConfigName[]> = {};
 
-    for (const [ruleName, metadata] of Object.entries(metadataByRuleName)) {
+    for (const [ruleName, metadata] of objectEntries(metadataByRuleName)) {
         if (!isRuleNamePattern(ruleName)) {
             throw new TypeError(`Unexpected rule name '${ruleName}'.`);
         }
@@ -189,8 +192,8 @@ export const deriveTypeCheckedRuleNameSet = (
     metadataByRuleName: RuleDocsMetadataByName
 ): ReadonlySet<RuleNamePattern> =>
     new Set(
-        Object.entries(metadataByRuleName)
+        objectEntries(metadataByRuleName)
             .filter(([, metadata]) => metadata.requiresTypeChecking)
-            .map(([ruleName]) => ruleName as RuleNamePattern)
+            .map(([ruleName]) => safeCastTo<RuleNamePattern>(ruleName))
     );
 /* eslint-enable typedoc/require-exported-doc-comment */
