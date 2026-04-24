@@ -85,10 +85,12 @@ export type RepoComplianceRuleId = `repo-compliance/${RepoComplianceRuleName}`;
  */
 export type RepoComplianceRuleName = keyof typeof repoComplianceRules;
 
-const ruleEntries = safeCastTo<readonly (readonly [
-    RepoComplianceRuleName,
-    (typeof repoComplianceRules)[RepoComplianceRuleName],
-])[]>(objectEntries(repoComplianceRules));
+const ruleEntries = safeCastTo<
+    readonly (readonly [
+        RepoComplianceRuleName,
+        (typeof repoComplianceRules)[RepoComplianceRuleName],
+    ])[]
+>(objectEntries(repoComplianceRules));
 
 const createEmptyPresetRuleMap = (): Record<
     RepoComplianceConfigName,

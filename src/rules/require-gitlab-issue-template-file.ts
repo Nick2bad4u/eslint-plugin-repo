@@ -4,9 +4,9 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repo-compliance.configs.gitlab",
-            "repo-compliance.configs.strict",
-            "repo-compliance.configs.all",
+            "repoPlugin.configs.gitlab",
+            "repoPlugin.configs.strict",
+            "repoPlugin.configs.all",
         ],
         description: "require at least one GitLab issue template.",
         messageId: "missingGitLabIssueTemplateFile",

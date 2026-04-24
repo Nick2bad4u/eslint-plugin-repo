@@ -4,9 +4,9 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repo-compliance.configs.bitbucket",
-            "repo-compliance.configs.strict",
-            "repo-compliance.configs.all",
+            "repoPlugin.configs.bitbucket",
+            "repoPlugin.configs.strict",
+            "repoPlugin.configs.all",
         ],
         description: "require a Bitbucket Pipelines configuration.",
         messageId: "missingBitbucketPipelinesConfigFile",

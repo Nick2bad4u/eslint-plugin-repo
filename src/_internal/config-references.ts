@@ -95,15 +95,15 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
  * Mapping from rule metadata preset references to preset names.
  */
 export const configReferenceToName: Readonly<
-    Record<`repo-compliance.configs.${ConfigName}`, ConfigName>
+    Record<`repoPlugin.configs.${ConfigName}`, ConfigName>
 > = {
-    "repo-compliance.configs.all": "all",
-    "repo-compliance.configs.bitbucket": "bitbucket",
-    "repo-compliance.configs.codeberg": "codeberg",
-    "repo-compliance.configs.github": "github",
-    "repo-compliance.configs.gitlab": "gitlab",
-    "repo-compliance.configs.recommended": "recommended",
-    "repo-compliance.configs.strict": "strict",
+    "repoPlugin.configs.all": "all",
+    "repoPlugin.configs.bitbucket": "bitbucket",
+    "repoPlugin.configs.codeberg": "codeberg",
+    "repoPlugin.configs.github": "github",
+    "repoPlugin.configs.gitlab": "gitlab",
+    "repoPlugin.configs.recommended": "recommended",
+    "repoPlugin.configs.strict": "strict",
 };
 
 /**

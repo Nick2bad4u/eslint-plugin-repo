@@ -4,13 +4,13 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repo-compliance.configs.recommended",
-            "repo-compliance.configs.strict",
-            "repo-compliance.configs.github",
-            "repo-compliance.configs.gitlab",
-            "repo-compliance.configs.bitbucket",
-            "repo-compliance.configs.codeberg",
-            "repo-compliance.configs.all",
+            "repoPlugin.configs.recommended",
+            "repoPlugin.configs.strict",
+            "repoPlugin.configs.github",
+            "repoPlugin.configs.gitlab",
+            "repoPlugin.configs.bitbucket",
+            "repoPlugin.configs.codeberg",
+            "repoPlugin.configs.all",
         ],
         description: "require support and help channels documentation.",
         messageId: "missingSupportFile",

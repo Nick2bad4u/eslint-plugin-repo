@@ -108,8 +108,8 @@ Verification flow:
 npx vitest run test/plugin-contract-snapshots.test.ts test/rule-metadata-snapshots.test.ts test/readme-rules-table-sync.test.ts test/docs-heading-snapshots.test.ts
 ```
 
-For detailed design and review guidance, see
-[`docs/rules/guides/snapshot-testing.md`](./docs/rules/guides/snapshot-testing.md).
+For detailed design and review guidance, see the rule-testing and snapshot
+sections in this document.
 
 Optional focused checks:
 

@@ -4,11 +4,11 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repo-compliance.configs.strict",
-            "repo-compliance.configs.github",
-            "repo-compliance.configs.gitlab",
-            "repo-compliance.configs.codeberg",
-            "repo-compliance.configs.all",
+            "repoPlugin.configs.strict",
+            "repoPlugin.configs.github",
+            "repoPlugin.configs.gitlab",
+            "repoPlugin.configs.codeberg",
+            "repoPlugin.configs.all",
         ],
         description:
             "require a CODEOWNERS file for deterministic review ownership.",

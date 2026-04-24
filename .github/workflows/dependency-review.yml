@@ -9,6 +9,7 @@ name: Dependency Review
 run-name: Dependency Review • ${{ github.ref_name }} @${{ github.actor }}
 
 on:
+    workflow_dispatch:
     pull_request:
     merge_group:
         types:

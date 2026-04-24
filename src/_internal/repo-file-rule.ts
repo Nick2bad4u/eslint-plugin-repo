@@ -26,6 +26,10 @@ type FileRequirement =
           extensions: readonly string[];
           kind: "directory-with-extension";
       }>
+    | Readonly<{
+          kind: "any-of";
+          requirements: readonly Exclude<FileRequirement, { kind: "any-of" }>[];
+      }>
     | Readonly<{ kind: "file"; path: string }>
     | Readonly<{ kind: "one-of"; paths: readonly string[] }>;
 
@@ -72,6 +76,12 @@ const doesRequirementExist = (
     requirement: FileRequirement
 ): boolean => {
     switch (requirement.kind) {
+        case "any-of": {
+            return requirement.requirements.some((nestedRequirement) =>
+                doesRequirementExist(rootDirectoryPath, nestedRequirement)
+            );
+        }
+
         case "directory-with-extension": {
             return hasAnyMatchingFileInDirectory(
                 rootDirectoryPath,

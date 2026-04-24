@@ -80,7 +80,9 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
     {
         messageId: "missingPullRequestTemplateFile",
         name: "require-pull-request-template-file",
-        satisfyingFiles: [".github/pull_request_template.md"],
+        satisfyingFiles: [
+            ".github/PULL_REQUEST_TEMPLATE/pull_request_template.md",
+        ],
     },
     {
         messageId: "missingDependabotConfigFile",

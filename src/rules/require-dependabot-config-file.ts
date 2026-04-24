@@ -4,9 +4,9 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repo-compliance.configs.github",
-            "repo-compliance.configs.strict",
-            "repo-compliance.configs.all",
+            "repoPlugin.configs.github",
+            "repoPlugin.configs.strict",
+            "repoPlugin.configs.all",
         ],
         description:
             "require a Dependabot configuration for automated dependency updates on GitHub.",
