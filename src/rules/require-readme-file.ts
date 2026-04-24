@@ -1,5 +1,6 @@
 import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js";
 
+/** Rule definition for this repository compliance requirement. */
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [

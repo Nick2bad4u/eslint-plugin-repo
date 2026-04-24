@@ -1,10 +1,15 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
+/**
+ * Catalog metadata for a rule.
+ */
 export type RuleCatalogEntry = Readonly<{
     ruleId: RuleCatalogId;
     ruleName: string;
     ruleNumber: number;
 }>;
 
+/**
+ * Stable rule identifier in `R###` format.
+ */
 export type RuleCatalogId = `R${string}`;
 
 const orderedRuleNames = [
@@ -29,6 +34,9 @@ const orderedRuleNames = [
 const toRuleCatalogId = (ruleNumber: number): RuleCatalogId =>
     `R${String(ruleNumber).padStart(3, "0")}`;
 
+/**
+ * Ordered catalog entries for all plugin rules.
+ */
 export const ruleCatalogEntries: readonly RuleCatalogEntry[] =
     orderedRuleNames.map((ruleName, index) => {
         const ruleNumber = index + 1;
@@ -44,7 +52,9 @@ const ruleCatalogByRuleName = new Map(
     ruleCatalogEntries.map((entry) => [entry.ruleName, entry])
 );
 
+/**
+ * Returns the catalog entry for a rule name, or `null` if not cataloged.
+ */
 export const getRuleCatalogEntryForRuleNameOrNull = (
     ruleName: string
 ): null | RuleCatalogEntry => ruleCatalogByRuleName.get(ruleName) ?? null;
-/* eslint-enable typedoc/require-exported-doc-comment */

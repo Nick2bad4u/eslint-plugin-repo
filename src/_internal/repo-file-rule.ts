@@ -1,11 +1,14 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import { existsSync, readdirSync, statSync } from "node:fs";
 import * as path from "node:path";
+import { setHas } from "ts-extras";
 
 import type { ConfigReference } from "./config-references.js";
 
 import { createTypedRule } from "./typed-rule.js";
 
+/**
+ * Options for repository-file presence rules.
+ */
 export type RepositoryFilePresenceRuleOptions = Readonly<{
     configReferences: readonly ConfigReference[];
     description: string;
@@ -96,6 +99,9 @@ const doesRequirementExist = (
     }
 };
 
+/**
+ * Creates a repository-file presence rule from declarative options.
+ */
 export const createRepositoryFilePresenceRule = (
     options: RepositoryFilePresenceRuleOptions
 ): ReturnType<typeof createTypedRule> => {
@@ -112,7 +118,7 @@ export const createRepositoryFilePresenceRule = (
                         return;
                     }
 
-                    if (!triggerFileNames.has(path.basename(filename))) {
+                    if (!setHas(triggerFileNames, path.basename(filename))) {
                         return;
                     }
 
@@ -153,4 +159,3 @@ export const createRepositoryFilePresenceRule = (
         name: options.name,
     });
 };
-/* eslint-enable typedoc/require-exported-doc-comment */

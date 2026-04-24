@@ -1,4 +1,8 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- config reference table exports are self-descriptive constants and types. */
+import { objectHasOwn } from "ts-extras";
+
+/**
+ * Canonical preset names exposed by this plugin.
+ */
 export const configNames = [
     "all",
     "recommended",
@@ -9,6 +13,9 @@ export const configNames = [
     "codeberg",
 ] as const;
 
+/**
+ * Metadata describing each preset.
+ */
 export type ConfigMetadata = Readonly<{
     icon: string;
     presetName: `repo-compliance:${ConfigName}`;
@@ -16,8 +23,14 @@ export type ConfigMetadata = Readonly<{
     requiresTypeChecking: boolean;
 }>;
 
+/**
+ * Union of supported preset names.
+ */
 export type ConfigName = (typeof configNames)[number];
 
+/**
+ * Lookup table of preset metadata keyed by preset name.
+ */
 export const configMetadataByName: Readonly<
     Record<ConfigName, ConfigMetadata>
 > = {
@@ -65,6 +78,9 @@ export const configMetadataByName: Readonly<
     },
 };
 
+/**
+ * Preset order used when rendering README and docs tables.
+ */
 export const configNamesByReadmeOrder: readonly ConfigName[] = [
     "recommended",
     "strict",
@@ -75,6 +91,9 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
     "all",
 ];
 
+/**
+ * Mapping from rule metadata preset references to preset names.
+ */
 export const configReferenceToName: Readonly<
     Record<`repo-compliance.configs.${ConfigName}`, ConfigName>
 > = {
@@ -87,9 +106,13 @@ export const configReferenceToName: Readonly<
     "repo-compliance.configs.strict": "strict",
 };
 
+/**
+ * Union of fully qualified preset-reference keys used in rule metadata.
+ */
 export type ConfigReference = keyof typeof configReferenceToName;
 
+/**
+ * Determines whether a value is a valid preset-reference key.
+ */
 export const isConfigReference = (value: unknown): value is ConfigReference =>
-    typeof value === "string" && Object.hasOwn(configReferenceToName, value);
-
-/* eslint-enable typedoc/require-exported-doc-comment */
+    typeof value === "string" && objectHasOwn(configReferenceToName, value);

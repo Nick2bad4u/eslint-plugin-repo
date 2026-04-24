@@ -1,0 +1,12 @@
+# Global default owners
+* @Nick2bad4u
+
+# Repository automation and CI/CD
+/.github/ @Nick2bad4u
+
+# Plugin source and tests
+/src/ @Nick2bad4u
+/test/ @Nick2bad4u
+
+# Documentation
+/docs/ @Nick2bad4u

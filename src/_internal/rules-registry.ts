@@ -1,4 +1,3 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { TSESLint } from "@typescript-eslint/utils";
 import type { UnknownArray } from "type-fest";
 
@@ -19,34 +18,52 @@ import requireReadmeFileRule from "../rules/require-readme-file.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
 import requireSupportFileRule from "../rules/require-support-file.js";
 
+/**
+ * Rule-name pattern used by this plugin.
+ */
 export type RuleNamePattern = `require-${string}`;
 
+/**
+ * Rule module shape for rules with docs metadata.
+ */
 export type RuleWithDocs = TSESLint.RuleModule<string, Readonly<UnknownArray>>;
 
+const asRuleWithDocs = (rule: Readonly<RuleWithDocs>): RuleWithDocs => rule;
+
+/**
+ * Canonical registry of plugin rules keyed by rule name.
+ */
 export const repoComplianceRules: Readonly<
     Record<RuleNamePattern, RuleWithDocs>
 > = {
     "require-bitbucket-pipelines-config-file":
-        requireBitbucketPipelinesConfigFileRule,
-    "require-code-of-conduct-file": requireCodeOfConductFileRule,
-    "require-codeowners-file": requireCodeownersFileRule,
-    "require-contributing-file": requireContributingFileRule,
-    "require-dependabot-config-file": requireDependabotConfigFileRule,
+        asRuleWithDocs(requireBitbucketPipelinesConfigFileRule),
+    "require-code-of-conduct-file": asRuleWithDocs(
+        requireCodeOfConductFileRule
+    ),
+    "require-codeowners-file": asRuleWithDocs(requireCodeownersFileRule),
+    "require-contributing-file": asRuleWithDocs(requireContributingFileRule),
+    "require-dependabot-config-file": asRuleWithDocs(
+        requireDependabotConfigFileRule
+    ),
     "require-forgejo-actions-workflow-file":
-        requireForgejoActionsWorkflowFileRule,
+        asRuleWithDocs(requireForgejoActionsWorkflowFileRule),
     "require-github-actions-workflow-file":
-        requireGitHubActionsWorkflowFileRule,
-    "require-gitlab-ci-config-file": requireGitLabCiConfigFileRule,
-    "require-gitlab-issue-template-file": requireGitLabIssueTemplateFileRule,
+        asRuleWithDocs(requireGitHubActionsWorkflowFileRule),
+    "require-gitlab-ci-config-file": asRuleWithDocs(requireGitLabCiConfigFileRule),
+    "require-gitlab-issue-template-file": asRuleWithDocs(
+        requireGitLabIssueTemplateFileRule
+    ),
     "require-gitlab-merge-request-template-file":
-        requireGitLabMergeRequestTemplateFileRule,
-    "require-issue-template-file": requireIssueTemplateFileRule,
-    "require-license-file": requireLicenseFileRule,
-    "require-pull-request-template-file": requirePullRequestTemplateFileRule,
-    "require-readme-file": requireReadmeFileRule,
-    "require-security-policy-file": requireSecurityPolicyFileRule,
-    "require-support-file": requireSupportFileRule,
+        asRuleWithDocs(requireGitLabMergeRequestTemplateFileRule),
+    "require-issue-template-file": asRuleWithDocs(requireIssueTemplateFileRule),
+    "require-license-file": asRuleWithDocs(requireLicenseFileRule),
+    "require-pull-request-template-file": asRuleWithDocs(
+        requirePullRequestTemplateFileRule
+    ),
+    "require-readme-file": asRuleWithDocs(requireReadmeFileRule),
+    "require-security-policy-file": asRuleWithDocs(requireSecurityPolicyFileRule),
+    "require-support-file": asRuleWithDocs(requireSupportFileRule),
 };
 
 export default repoComplianceRules;
-/* eslint-enable typedoc/require-exported-doc-comment */

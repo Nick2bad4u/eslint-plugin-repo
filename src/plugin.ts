@@ -1,8 +1,7 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { ESLint, Linter } from "eslint";
 
 import typeScriptParser from "@typescript-eslint/parser";
-import { isEmpty, objectEntries, safeCastTo   } from "ts-extras";
+import { isDefined, isEmpty, objectEntries, safeCastTo } from "ts-extras";
 
 import packageJson from "../package.json" with { type: "json" };
 import {
@@ -22,8 +21,14 @@ import { repoComplianceRules } from "./_internal/rules-registry.js";
 const ERROR_SEVERITY = "error" as const;
 const DEFAULT_PRESET_FILES = ["**/*.{js,cjs,mjs,ts,cts,mts}"] as const;
 
+/**
+ * Public preset names exposed by this plugin.
+ */
 export type RepoComplianceConfigName = InternalConfigName;
 
+/**
+ * Public flat-config preset shape exposed by this plugin.
+ */
 export type RepoCompliancePresetConfig = Linter.Config & {
     rules: NonNullable<Linter.Config["rules"]>;
 };
@@ -71,7 +76,13 @@ const rulePresetMembership = deriveRulePresetMembershipByRuleName(
 const typeCheckedRuleNames: ReadonlySet<RuleNamePattern> =
     deriveTypeCheckedRuleNameSet(ruleDocsMetadataByRuleName);
 
+/**
+ * Fully qualified rule identifier.
+ */
 export type RepoComplianceRuleId = `repo-compliance/${RepoComplianceRuleName}`;
+/**
+ * Public rule-name union.
+ */
 export type RepoComplianceRuleName = keyof typeof repoComplianceRules;
 
 const ruleEntries = safeCastTo<readonly (readonly [
@@ -103,7 +114,7 @@ const derivePresetRuleNamesByConfig = (): Readonly<
     for (const [ruleName] of ruleEntries) {
         const configMembership = rulePresetMembership[ruleName];
 
-        if (configMembership === undefined || isEmpty(configMembership)) {
+        if (!isDefined(configMembership) || isEmpty(configMembership)) {
             throw new TypeError(
                 `Rule '${ruleName}' is missing preset membership metadata.`
             );
@@ -140,7 +151,7 @@ const errorRulesFor = (
 const presetRuleNamesByConfig = derivePresetRuleNamesByConfig();
 
 const buildPresetConfig = (
-    pluginRef: ESLint.Plugin,
+    pluginRef: Readonly<ESLint.Plugin>,
     configName: RepoComplianceConfigName,
     ruleNames: readonly RepoComplianceRuleName[]
 ): RepoCompliancePresetConfig => {
@@ -162,6 +173,9 @@ const buildPresetConfig = (
     };
 };
 
+/**
+ * Main plugin object with rule registry and generated presets.
+ */
 const plugin: RepoCompliancePluginContract = {
     configs: {} as RepoComplianceConfigsContract,
     meta: {
@@ -199,10 +213,15 @@ const configs: RepoComplianceConfigsContract = {
 
 plugin.configs = configs;
 
+/**
+ * Rule docs metadata derived from rule definitions.
+ */
 export const ruleDocsByName: typeof ruleDocsMetadataByRuleName =
     ruleDocsMetadataByRuleName;
+/**
+ * Set of rule names that require type checking.
+ */
 export const typeCheckedRules: typeof typeCheckedRuleNames =
     typeCheckedRuleNames;
 
 export default plugin;
-/* eslint-enable typedoc/require-exported-doc-comment */

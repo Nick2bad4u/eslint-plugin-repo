@@ -1,12 +1,15 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { UnknownArray } from "type-fest";
 import type ts from "typescript";
 
 import { ESLintUtils, type TSESLint } from "@typescript-eslint/utils";
+import { assertDefined } from "ts-extras";
 
 import { getRuleCatalogEntryForRuleNameOrNull } from "./rule-catalog.js";
 import { createRuleDocsUrl } from "./rule-docs-url.js";
 
+/**
+ * Additional docs metadata supported by plugin rules.
+ */
 export type RuleDocs = {
     recommended?: boolean;
     repoConfigs?: readonly string[] | string;
@@ -15,6 +18,9 @@ export type RuleDocs = {
     ruleNumber?: number;
 };
 
+/**
+ * Typed services exposed to rules that require type information.
+ */
 export type TypedRuleServices = {
     checker: ts.TypeChecker;
     parserServices: ReturnType<typeof ESLintUtils.getParserServices>;
@@ -26,6 +32,9 @@ type TypedRuleContext = Readonly<
     TSESLint.RuleContext<string, Readonly<UnknownArray>>
 >;
 
+/**
+ * Creates a typed rule with enforced canonical docs metadata.
+ */
 export const createTypedRule: RuleCreator = (ruleDefinition) => {
     const catalogEntry = getRuleCatalogEntryForRuleNameOrNull(
         ruleDefinition.name
@@ -33,11 +42,7 @@ export const createTypedRule: RuleCreator = (ruleDefinition) => {
     const createdRule = ESLintUtils.RuleCreator.withoutDocs(ruleDefinition);
     const ruleDocs = createdRule.meta.docs;
 
-    if (ruleDocs === undefined) {
-        throw new TypeError(
-            `Rule '${ruleDefinition.name}' must define meta.docs.`
-        );
-    }
+    assertDefined(ruleDocs);
 
     const canonicalDocsUrl = createRuleDocsUrl(ruleDefinition.name);
     if (typeof ruleDocs.url === "string" && ruleDocs.url !== canonicalDocsUrl) {
@@ -69,6 +74,9 @@ export const createTypedRule: RuleCreator = (ruleDefinition) => {
     };
 };
 
+/**
+ * Retrieves parser services and type checker for typed rules.
+ */
 export const getTypedRuleServices = (
     context: TypedRuleContext
 ): TypedRuleServices => {
@@ -86,4 +94,3 @@ export const getTypedRuleServices = (
         parserServices,
     };
 };
-/* eslint-enable typedoc/require-exported-doc-comment */

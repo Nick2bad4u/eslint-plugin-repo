@@ -1,8 +1,13 @@
-/* eslint-disable typedoc/require-exported-doc-comment -- migration scaffold stage: exported APIs are still being documented. */
 import type { TSESLint } from "@typescript-eslint/utils";
-import type { UnknownArray, UnknownRecord  } from "type-fest";
+import type { UnknownArray, UnknownRecord } from "type-fest";
 
-import { isEmpty, isInteger, objectEntries, safeCastTo    } from "ts-extras";
+import {
+    arrayIncludes,
+    isEmpty,
+    isInteger,
+    objectEntries,
+    safeCastTo,
+} from "ts-extras";
 
 import {
     type ConfigName,
@@ -10,6 +15,9 @@ import {
     isConfigReference,
 } from "./config-references.js";
 
+/**
+ * Canonical docs metadata derived from rule `meta.docs`.
+ */
 export type RuleDocsMetadata = Readonly<{
     configNames: readonly ConfigName[];
     description: string;
@@ -20,10 +28,16 @@ export type RuleDocsMetadata = Readonly<{
     url: string;
 }>;
 
+/**
+ * Metadata map keyed by rule name.
+ */
 export type RuleDocsMetadataByName = Readonly<
     Record<RuleNamePattern, RuleDocsMetadata>
 >;
 
+/**
+ * Rule-name pattern used by this plugin.
+ */
 export type RuleNamePattern = `require-${string}`;
 
 type RuleDocsContract = Readonly<{
@@ -132,7 +146,7 @@ const normalizeConfigNames = (
         }
 
         const configName = configReferenceToName[reference];
-        if (!configNames.includes(configName)) {
+        if (!arrayIncludes(configNames, configName)) {
             configNames.push(configName);
         }
     }
@@ -146,6 +160,9 @@ const normalizeConfigNames = (
     return configNames;
 };
 
+/**
+ * Derives validated docs metadata for each rule.
+ */
 export const deriveRuleDocsMetadataByName = (
     rules: RuleMap
 ): RuleDocsMetadataByName => {
@@ -172,6 +189,9 @@ export const deriveRuleDocsMetadataByName = (
     return metadataByRuleName;
 };
 
+/**
+ * Derives preset membership keyed by rule name.
+ */
 export const deriveRulePresetMembershipByRuleName = (
     metadataByRuleName: RuleDocsMetadataByName
 ): Readonly<Record<RuleNamePattern, readonly ConfigName[]>> => {
@@ -188,6 +208,9 @@ export const deriveRulePresetMembershipByRuleName = (
     return membership;
 };
 
+/**
+ * Derives the set of rules requiring type checking.
+ */
 export const deriveTypeCheckedRuleNameSet = (
     metadataByRuleName: RuleDocsMetadataByName
 ): ReadonlySet<RuleNamePattern> =>
@@ -196,4 +219,3 @@ export const deriveTypeCheckedRuleNameSet = (
             .filter(([, metadata]) => metadata.requiresTypeChecking)
             .map(([ruleName]) => safeCastTo<RuleNamePattern>(ruleName))
     );
-/* eslint-enable typedoc/require-exported-doc-comment */
