@@ -31,7 +31,7 @@ const projectTagline = `ESLint rules for repository compliance across major host
 const projectKeywords =
     "eslint, eslint-plugin, repository, compliance, github, gitlab, bitbucket, codeberg";
 /** Social preview image used for Open Graph and Twitter cards. */
-const socialCardImagePath = "img/logo.png";
+const socialCardImagePath = "img/social-card.png";
 /** Absolute social preview image URL. */
 const socialCardImageUrl = new URL(socialCardImagePath, siteUrl).toString();
 /** Client module path for runtime DOM enhancement bootstrap script. */
@@ -453,7 +453,7 @@ const config = {
                         },
                         {
                             label: "📏 Rule Reference",
-                            to: "/docs/rules",
+                            to: "/docs/rules/overview",
                         },
                     ],
                     title: "📚 Explore",
@@ -540,12 +540,12 @@ const config = {
                     activeBaseRegex: "^/docs/rules(?:/(?!presets(?:/|$)).*)?$",
                     label: "📜 Rules",
                     position: "left",
-                    to: "/docs/rules",
+                    to: "/docs/rules/overview",
                     type: "dropdown",
                     items: [
                         {
                             label: "• Rule Reference",
-                            to: "/docs/rules",
+                            to: "/docs/rules/overview",
                         },
                         {
                             label: "📁 Repository baseline rules",
@@ -643,7 +643,7 @@ const config = {
                             to: "/docs/developer",
                         },
                         {
-                            label: "• API Reference",
+                            label: "• API Guide",
                             to: "/docs/developer/api",
                         },
                         {
@@ -651,16 +651,16 @@ const config = {
                             to: "/docs/developer/adr",
                         },
                         {
-                            label: "• Types",
-                            to: "/docs/category/types",
-                        },
-                        {
                             label: "• Charts",
                             to: "/docs/developer/charts",
                         },
                         {
-                            label: "• Internals",
-                            to: "/docs/category/runtime",
+                            label: "• Typed Paths",
+                            to: "/docs/developer/typed-paths",
+                        },
+                        {
+                            label: "• Blog",
+                            to: "/blog",
                         },
                     ],
                 },

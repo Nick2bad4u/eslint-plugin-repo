@@ -1,4 +1,645 @@
+:root {
+    --ifm-color-primary: #2f7cff;
+    --ifm-color-primary-dark: #2267ea;
+    --ifm-color-primary-darker: #195bd5;
+    --ifm-color-primary-darkest: #1248ac;
+    --ifm-color-primary-light: #4b8eff;
+    --ifm-color-primary-lighter: #63a0ff;
+    --ifm-color-primary-lightest: #8abcff;
+    --ifm-code-background: #edf4ff;
+    --repo-chip-text-dark: #081626;
+    --repo-sidebar-hover: rgb(47 124 255 / 8%);
+    --repo-sidebar-hover-dark: rgb(99 160 255 / 16%);
+    --repo-sidebar-active: rgb(47 124 255 / 12%);
+    --repo-sidebar-active-dark: rgb(99 160 255 / 22%);
+    --repo-sidebar-accent-overview: #5ce0b3;
+    --repo-sidebar-accent-started: #58c2ff;
+    --repo-sidebar-accent-developer: #8e89ff;
+    --repo-sidebar-accent-ops: #ff7ab8;
+    --repo-sidebar-accent-api: #7ea9ff;
+    --repo-sidebar-accent-types: #66e0d6;
+    --repo-sidebar-accent-runtime: #ffac7f;
+    --repo-sidebar-accent-presets: #8de37b;
+    --repo-sidebar-accent-rules: #d3b7ff;
+    --repo-sidebar-accent-adr: #ff9aba;
+    --repo-sidebar-accent-charts: #ffe07a;
+    --repo-sidebar-accent-links: #ffc58a;
+    --repo-sidebar-accent-repository: #ffe596;
+    --repo-sidebar-accent-github: #8cb3ff;
+    --repo-sidebar-accent-gitlab: #ff9fbb;
+    --repo-sidebar-accent-bitbucket: #78e7ff;
+    --repo-sidebar-accent-forgejo: #ffc68f;
+    --repo-sidebar-inline-prefix: #5e6b84;
+}
+
+html[data-theme="dark"] {
+    --ifm-color-primary: #78aaff;
+    --ifm-color-primary-dark: #5f98ff;
+    --ifm-color-primary-darker: #4e8dff;
+    --ifm-color-primary-darkest: #2f71f6;
+    --ifm-color-primary-light: #95bbff;
+    --ifm-color-primary-lighter: #a9c8ff;
+    --ifm-color-primary-lightest: #c7dcff;
+    --ifm-navbar-background-color: rgb(8 14 29 / 78%);
+    --ifm-footer-background-color: rgb(8 14 27 / 98%);
+    --ifm-heading-color: #f5f8ff;
+    --ifm-code-background: rgb(8 14 27 / 94%);
+    --ifm-card-background-color: rgb(13 20 39 / 82%);
+    --ifm-background-surface-color: rgb(10 16 31 / 90%);
+    --ifm-pagination-nav-border-radius: 20px;
+    --repo-sidebar-accent-overview: #75ecc4;
+    --repo-sidebar-accent-started: #7ad0ff;
+    --repo-sidebar-accent-developer: #aba6ff;
+    --repo-sidebar-accent-ops: #ff99c8;
+    --repo-sidebar-accent-api: #9cbeff;
+    --repo-sidebar-accent-types: #8beddf;
+    --repo-sidebar-accent-runtime: #ffc297;
+    --repo-sidebar-accent-presets: #acef99;
+    --repo-sidebar-accent-rules: #e2ccff;
+    --repo-sidebar-accent-adr: #ffb1cb;
+    --repo-sidebar-accent-charts: #ffe89d;
+    --repo-sidebar-accent-links: #ffd5a8;
+    --repo-sidebar-accent-repository: #ffebb2;
+    --repo-sidebar-accent-github: #aac8ff;
+    --repo-sidebar-accent-gitlab: #ffb6cb;
+    --repo-sidebar-accent-bitbucket: #99f0ff;
+    --repo-sidebar-accent-forgejo: #ffd8af;
+    --repo-sidebar-inline-prefix: #a1afc8;
+}
+
+.navbar .dropdown__menu .navbar-dropdown-divider {
+    margin-block-start: 0.34rem;
+    padding-block-start: 0.48rem;
+    border-block-start: 1px solid var(--ifm-toc-border-color);
+}
+
+.theme-doc-sidebar-menu .menu__link,
+.theme-doc-sidebar-menu .menu__list-item-collapsible {
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
+    transition:
+        background-color 140ms ease-in-out,
+        border-color 140ms ease-in-out,
+        color 140ms ease-in-out,
+        box-shadow 140ms ease-in-out,
+        transform 140ms ease-in-out;
+}
+
+.theme-doc-sidebar-menu :is(.menu__link, .menu__list-item-collapsible):hover,
+.theme-doc-sidebar-menu
+    :is(.menu__link, .menu__list-item-collapsible):focus-visible {
+    background-color: var(--repo-sidebar-hover);
+    text-decoration: none;
+    transform: translateX(2px);
+}
+
+html[data-theme="dark"]
+    .theme-doc-sidebar-menu
+    :is(.menu__link, .menu__list-item-collapsible):hover,
+html[data-theme="dark"]
+    .theme-doc-sidebar-menu
+    :is(.menu__link, .menu__list-item-collapsible):focus-visible {
+    background-color: var(--repo-sidebar-hover-dark);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link,
+        .theme-doc-sidebar-item-link.sb-doc-getting-started > .menu__link,
+        .theme-doc-sidebar-item-link.sb-cat-developer-home > .menu__link,
+        .theme-doc-sidebar-item-link.sb-cat-developer-ops > .menu__link,
+        .theme-doc-sidebar-item-link.sb-api-overview-item > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-developer
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-api-overview
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-developer-adr
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-dev-charts
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-api-types
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-api-runtime
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-dev-links
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-presets
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-repository
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-github
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-github > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-all > .menu__link
+    ) {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    border-inline-start: 4px solid transparent;
+    padding-inline-start: calc(var(--ifm-menu-link-padding-horizontal) - 4px);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-doc-getting-started
+            > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-cat-developer-home > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-cat-developer-ops > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-api-overview-item > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-developer
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-api-overview
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-developer-adr
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-dev-charts
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-api-types
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-api-runtime
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-dev-links
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-presets
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-repository
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-github
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-github > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-all > .menu__link::after
+    ) {
+    margin-inline-start: auto;
+    padding: 0.08rem 0.46rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    color: var(--repo-chip-text-dark);
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-bitbucket);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-doc-overview
+    > .menu__link::after {
+    content: "Start";
+    background-color: rgb(120 231 255 / 22%);
+    border-color: rgb(120 231 255 / 42%);
+    color: var(--repo-sidebar-accent-bitbucket);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-doc-getting-started > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-presets
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-presets);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-doc-getting-started
+            > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-presets
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link::after
+    ) {
+    content: "Core";
+    background-color: rgb(141 227 123 / 18%);
+    border-color: rgb(141 227 123 / 40%);
+    color: var(--repo-sidebar-accent-presets);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-cat-developer-home > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-developer
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-all > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-developer);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-cat-developer-home > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-developer
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Dev";
+    background-color: rgb(142 137 255 / 16%);
+    border-color: rgb(142 137 255 / 38%);
+    color: var(--repo-sidebar-accent-developer);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-all > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "All";
+    background-color: rgb(211 183 255 / 18%);
+    border-color: rgb(211 183 255 / 38%);
+    color: var(--repo-sidebar-accent-rules);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-cat-developer-ops
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-ops);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-cat-developer-ops
+    > .menu__link::after {
+    content: "Ops";
+    background-color: rgb(255 122 184 / 18%);
+    border-color: rgb(255 122 184 / 40%);
+    color: var(--repo-sidebar-accent-ops);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-api-overview
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-api-types
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-api-runtime
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-api-overview-item > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-github > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-github
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-github);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-api-overview
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-api-types
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-api-runtime
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-link.sb-api-overview-item > .menu__link::after
+    ) {
+    content: "API";
+    background-color: rgb(126 169 255 / 18%);
+    border-color: rgb(126 169 255 / 40%);
+    color: var(--repo-sidebar-accent-api);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-github > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-github
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "GitHub";
+    background-color: rgb(140 179 255 / 18%);
+    border-color: rgb(140 179 255 / 40%);
+    color: var(--repo-sidebar-accent-github);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-api-types
+    > .menu__list-item-collapsible {
+    border-inline-start-color: var(--repo-sidebar-accent-types);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-api-types
+    > .menu__list-item-collapsible::after {
+    background-color: rgb(102 224 214 / 18%);
+    border-color: rgb(102 224 214 / 40%);
+    color: var(--repo-sidebar-accent-types);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-api-runtime
+    > .menu__list-item-collapsible {
+    border-inline-start-color: var(--repo-sidebar-accent-runtime);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-api-runtime
+    > .menu__list-item-collapsible::after {
+    background-color: rgb(255 172 127 / 18%);
+    border-color: rgb(255 172 127 / 40%);
+    color: var(--repo-sidebar-accent-runtime);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-developer-adr
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-gitlab);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-developer-adr
+    > .menu__list-item-collapsible::after {
+    content: "ADR";
+    background-color: rgb(255 154 186 / 18%);
+    border-color: rgb(255 154 186 / 40%);
+    color: var(--repo-sidebar-accent-adr);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-preset-strict
+    > .menu__link::after {
+    content: "Strict";
+    background-color: rgb(255 159 187 / 18%);
+    border-color: rgb(255 159 187 / 40%);
+    color: var(--repo-sidebar-accent-gitlab);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "GitLab";
+    background-color: rgb(255 159 187 / 18%);
+    border-color: rgb(255 159 187 / 40%);
+    color: var(--repo-sidebar-accent-gitlab);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-dev-charts
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-repository
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-charts);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-dev-charts
+    > .menu__list-item-collapsible::after {
+    content: "Flow";
+    background-color: rgb(255 224 122 / 18%);
+    border-color: rgb(255 224 122 / 40%);
+    color: var(--repo-sidebar-accent-charts);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-rules-repository
+    > .menu__list-item-collapsible {
+    border-inline-start-color: var(--repo-sidebar-accent-repository);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-rules-repository
+    > .menu__list-item-collapsible::after {
+    content: "Repo";
+    background-color: rgb(255 229 150 / 18%);
+    border-color: rgb(255 229 150 / 40%);
+    color: var(--repo-sidebar-accent-repository);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-dev-links
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-forgejo);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-category.sb-cat-dev-links
+    > .menu__list-item-collapsible::after {
+    content: "Links";
+    background-color: rgb(255 197 138 / 18%);
+    border-color: rgb(255 197 138 / 40%);
+    color: var(--repo-sidebar-accent-links);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Forgejo";
+    background-color: rgb(255 198 143 / 18%);
+    border-color: rgb(255 198 143 / 40%);
+    color: var(--repo-sidebar-accent-forgejo);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Bitbucket";
+    background-color: rgb(120 231 255 / 18%);
+    border-color: rgb(120 231 255 / 40%);
+    color: var(--repo-sidebar-accent-bitbucket);
+}
+
+.theme-doc-sidebar-menu
+    :is(.menu__link--active, .menu__list-item-collapsible--active) {
+    background-color: var(--repo-sidebar-active);
+    border-color: rgb(47 124 255 / 18%);
+    box-shadow: inset 0 0 0 1px rgb(47 124 255 / 12%);
+}
+
+html[data-theme="dark"]
+    .theme-doc-sidebar-menu
+    :is(.menu__link--active, .menu__list-item-collapsible--active) {
+    background-color: var(--repo-sidebar-active-dark);
+    border-color: rgb(120 170 255 / 20%);
+    box-shadow: inset 0 0 0 1px rgb(120 170 255 / 12%);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link-level-2
+    > .menu__link {
+    border-radius: 0.65rem;
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link-level-2
+    > .menu__link.menu__link--active {
+    background-color: rgb(47 124 255 / 10%);
+}
+
+html[data-theme="dark"]
+    .theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link-level-2
+    > .menu__link.menu__link--active {
+    background-color: rgb(120 170 255 / 14%);
+}
+
+.sb-inline-rule-number,
+.sb-inline-runtime-kind {
+    font-weight: 700;
+}
+
+.sb-inline-rule-number {
+    color: var(--repo-sidebar-inline-prefix);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
 .sb-inline-runtime-kind {
     color: var(--ifm-color-emphasis-800);
-    font-weight: 700;
+}
+
+@media (width <= 40rem) {
+    .theme-doc-sidebar-container
+        :is(
+            .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link,
+            .theme-doc-sidebar-item-link.sb-doc-getting-started > .menu__link,
+            .theme-doc-sidebar-item-link.sb-cat-developer-home > .menu__link,
+            .theme-doc-sidebar-item-link.sb-cat-developer-ops > .menu__link,
+            .theme-doc-sidebar-item-link.sb-api-overview-item > .menu__link,
+            .theme-doc-sidebar-item-category.sb-cat-developer
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-api-overview
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-developer-adr
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-dev-charts
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-api-types
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-api-runtime
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-dev-links
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-presets
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-repository
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-github
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-github > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-all > .menu__link
+        ) {
+        padding-inline-end: 1rem;
+    }
+
+    .theme-doc-sidebar-container
+        :is(
+            .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-doc-getting-started
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-cat-developer-home
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-cat-developer-ops
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-api-overview-item
+                > .menu__link::after,
+            .theme-doc-sidebar-item-category.sb-cat-developer
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-api-overview
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-developer-adr
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-dev-charts
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-api-types
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-api-runtime
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-dev-links
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-presets
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-repository
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-github
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-gitlab
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-link.sb-preset-recommended
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-github > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-codeberg
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-bitbucket
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-all > .menu__link::after
+        ) {
+        display: none;
+    }
 }

@@ -1,0 +1,461 @@
+.homepage {
+    position: relative;
+
+    --homepage-link-color: var(--ifm-heading-color);
+}
+
+.hero {
+    position: relative;
+    overflow: clip;
+    padding-block: 4.5rem 3rem;
+    isolation: isolate;
+}
+
+.hero::before,
+.hero::after {
+    position: absolute;
+    border-radius: 999rem;
+    content: "";
+    pointer-events: none;
+}
+
+.hero::before {
+    inset-block-start: -6rem;
+    inset-inline-end: -7rem;
+    inline-size: 26rem;
+    block-size: 26rem;
+    background: radial-gradient(circle, rgb(88 194 255 / 28%), transparent 68%);
+    filter: blur(18px);
+}
+
+.hero::after {
+    inset-block-end: -8rem;
+    inset-inline-start: -6rem;
+    inline-size: 28rem;
+    block-size: 28rem;
+    background: radial-gradient(
+        circle,
+        rgb(171 166 255 / 24%),
+        transparent 70%
+    );
+    filter: blur(22px);
+}
+
+.heroGrid {
+    position: relative;
+    display: grid;
+    gap: 1.6rem;
+    align-items: start;
+    grid-template-columns: minmax(0, 1.28fr) minmax(22rem, 0.95fr);
+}
+
+.heroCopy {
+    position: relative;
+}
+
+.eyebrow {
+    display: inline-flex;
+    gap: 0.55rem;
+    align-items: center;
+    padding: 0.42rem 0.78rem;
+    border: 1px solid rgb(120 170 255 / 34%);
+    border-radius: 999rem;
+    background: rgb(14 28 57 / 72%);
+    color: #f7fbff;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.title {
+    margin-block: 1rem 0;
+    font-size: clamp(3rem, 6vw, 4.75rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+}
+
+.lead {
+    max-inline-size: 62ch;
+    margin-block: 1.1rem 0;
+    color: rgb(232 240 255 / 78%);
+    font-size: 1.08rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+}
+
+.badgeGrid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+    margin-block-start: 1.15rem;
+}
+
+.badgeCard {
+    padding: 0.9rem 0.95rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1rem;
+    background: linear-gradient(
+        180deg,
+        rgb(18 29 56 / 82%),
+        rgb(9 17 33 / 90%)
+    );
+    box-shadow: 0 14px 36px rgb(6 11 24 / 18%);
+}
+
+.badgeTitleRow {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0;
+    color: #f7fbff;
+    font-size: 0.9rem;
+    font-weight: 750;
+}
+
+.badgeIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.7rem;
+    block-size: 1.7rem;
+    border-radius: 0.6rem;
+    background: rgb(255 255 255 / 8%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 6%);
+}
+
+.badgeDescription {
+    margin-block: 0.52rem 0;
+    color: rgb(232 240 255 / 70%);
+    font-size: 0.85rem;
+    line-height: 1.65;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 1.45rem;
+}
+
+.actionButton {
+    border-radius: 999rem;
+    box-shadow: 0 14px 36px rgb(6 11 24 / 26%);
+}
+
+.heroStats {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-block-start: 1.4rem;
+}
+
+.statCard {
+    padding: 0.95rem 1rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1rem;
+    background: rgb(9 17 33 / 62%);
+    backdrop-filter: blur(8px);
+}
+
+.statValue {
+    display: block;
+    color: #f6fbff;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.statLabel {
+    display: block;
+    margin-block-start: 0.32rem;
+    color: rgb(232 240 255 / 66%);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.panelStack {
+    display: grid;
+    gap: 1rem;
+}
+
+.panel,
+.roadmap {
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem;
+    border: 1px solid rgb(120 170 255 / 18%);
+    border-radius: 1.5rem;
+    background: linear-gradient(
+        180deg,
+        rgb(16 25 48 / 88%),
+        rgb(8 14 27 / 95%)
+    );
+    box-shadow: 0 24px 72px rgb(4 9 20 / 34%);
+}
+
+.panel::before,
+.roadmap::before {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    content: "";
+    pointer-events: none;
+}
+
+.panel::before {
+    background: linear-gradient(
+        135deg,
+        rgb(120 170 255 / 12%),
+        transparent 36%,
+        rgb(139 237 223 / 10%)
+    );
+}
+
+.roadmap::before {
+    background: linear-gradient(
+        135deg,
+        rgb(171 166 255 / 10%),
+        transparent 44%,
+        rgb(255 159 187 / 9%)
+    );
+}
+
+.panelHeader {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-block-end: 1rem;
+}
+
+.logoWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 5rem;
+    block-size: 5rem;
+    border-radius: 1.3rem;
+    background: rgb(255 255 255 / 4%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 6%);
+}
+
+.logo {
+    inline-size: 4.1rem;
+    block-size: 4.1rem;
+}
+
+.panelTitle,
+.roadmapTitle {
+    margin: 0;
+    color: #f7fbff;
+    font-size: 1.06rem;
+    font-weight: 800;
+}
+
+.panelSubtitle {
+    margin-block: 0.28rem 0;
+    color: rgb(232 240 255 / 68%);
+    font-size: 0.94rem;
+    line-height: 1.6;
+}
+
+.chipList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style-type: "";
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.42rem 0.68rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 999rem;
+    background: rgb(7 12 26 / 88%);
+    color: #eff6ff;
+    font-size: 0.81rem;
+    font-weight: 650;
+}
+
+.codeBlock {
+    margin: 0;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgb(120 170 255 / 10%);
+    border-radius: 1.1rem;
+    background: rgb(5 10 22 / 94%);
+    color: #dce9ff;
+    overflow: auto;
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+.checklist {
+    display: grid;
+    gap: 0.58rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style-type: "";
+}
+
+.checklistItem {
+    position: relative;
+    padding-inline-start: 1.45rem;
+    color: rgb(232 240 255 / 72%);
+    font-size: 0.87rem;
+    line-height: 1.55;
+}
+
+.checklistItem::before {
+    position: absolute;
+    inset-block-start: 0.08rem;
+    inset-inline-start: 0;
+    color: #8beddf;
+    content: "✓";
+    font-weight: 900;
+}
+
+.meta {
+    display: grid;
+    gap: 0.75rem;
+    margin-block-start: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.metaCard {
+    padding: 0.82rem 0.85rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 4%);
+}
+
+.metaLabel {
+    display: block;
+    color: rgb(232 240 255 / 58%);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.metaValue {
+    display: block;
+    margin-block-start: 0.34rem;
+    color: #f6fbff;
+    font-size: 0.98rem;
+    font-weight: 780;
+}
+
+.roadmapList {
+    display: grid;
+    gap: 0.82rem;
+    margin: 0.95rem 0 0;
+    padding: 0;
+    list-style-type: "";
+}
+
+.roadmapItem {
+    display: grid;
+    gap: 0.8rem;
+    align-items: start;
+    grid-template-columns: auto 1fr;
+    padding: 0.86rem 0.9rem;
+    border: 1px solid rgb(255 255 255 / 7%);
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 4%);
+}
+
+.roadmapStep {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 999rem;
+    background: linear-gradient(135deg, #aba6ff, #58c2ff);
+    color: #081626;
+    font-size: 0.78rem;
+    font-weight: 900;
+}
+
+.roadmapCopy strong {
+    display: block;
+    color: #f7fbff;
+    font-size: 0.92rem;
+}
+
+.roadmapCopy p {
+    margin: 0.32rem 0 0;
+    color: rgb(232 240 255 / 70%);
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+.quickLinks {
+    display: grid;
+    gap: 0.7rem;
+    margin-block-start: 1rem;
+}
+
+.quickLink {
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 0.82rem 0.95rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 4%);
+    color: var(--homepage-link-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        transform 150ms ease;
+}
+
+.quickLink::after {
+    color: rgb(139 237 223 / 90%);
+    content: "→";
+    font-size: 0.95rem;
+}
+
+.quickLink:hover,
+.quickLink:focus-visible {
+    border-color: rgb(120 170 255 / 22%);
+    background: rgb(47 124 255 / 10%);
+    text-decoration: none;
+    transform: translateX(2px);
+}
+
+@media (width <= 70rem) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .panelStack,
+    .heroStats,
+    .meta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (width <= 40rem) {
+    .hero {
+        padding-block: 3.25rem 2.5rem;
+    }
+
+    .title {
+        font-size: 2.65rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .badgeGrid {
+        grid-template-columns: 1fr;
+    }
+}

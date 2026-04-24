@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1280"
+  height="640"
+  viewBox="0 0 1280 640"
+  role="img"
+  aria-labelledby="social-card-title social-card-desc"
+>
+  <title id="social-card-title">eslint-plugin-repo social card</title>
+  <desc id="social-card-desc">
+    A wide social share card for eslint-plugin-repo featuring repository compliance messaging,
+    provider chips, and a stylized repository dashboard panel.
+  </desc>
+  <defs>
+    <linearGradient id="bg-gradient" x1="64" y1="32" x2="1216" y2="608" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#152B57" />
+      <stop offset="0.36" stop-color="#2F7CFF" />
+      <stop offset="0.72" stop-color="#5A9BFF" />
+      <stop offset="1" stop-color="#7DE7C0" />
+    </linearGradient>
+    <radialGradient id="glow-purple" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1060 102) rotate(90) scale(240)">
+      <stop offset="0" stop-color="#ABA6FF" stop-opacity="0.54" />
+      <stop offset="1" stop-color="#ABA6FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow-cyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 552) rotate(90) scale(220)">
+      <stop offset="0" stop-color="#58C2FF" stop-opacity="0.48" />
+      <stop offset="1" stop-color="#58C2FF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="panel-gradient" x1="716" y1="120" x2="1152" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#101D37" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#08111F" stop-opacity="0.98" />
+    </linearGradient>
+    <linearGradient id="card-gradient-1" x1="780" y1="190" x2="1080" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EDF4FF" />
+      <stop offset="1" stop-color="#C7DCFF" />
+    </linearGradient>
+    <linearGradient id="card-gradient-2" x1="780" y1="278" x2="1080" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D5CBFF" />
+      <stop offset="1" stop-color="#9ADFFF" />
+    </linearGradient>
+    <linearGradient id="card-gradient-3" x1="780" y1="364" x2="1080" y2="428" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9EF0D3" />
+      <stop offset="1" stop-color="#FFE596" />
+    </linearGradient>
+    <filter id="panel-shadow" x="660" y="90" width="560" height="470" filterUnits="userSpaceOnUse">
+      <feOffset dy="18" />
+      <feGaussianBlur stdDeviation="26" result="blur" />
+      <feColorMatrix
+        in="blur"
+        type="matrix"
+        values="0 0 0 0 0.015 0 0 0 0 0.03 0 0 0 0 0.08 0 0 0 0.34 0"
+      />
+      <feBlend in="SourceGraphic" mode="normal" />
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" rx="44" fill="url(#bg-gradient)" />
+  <rect x="28" y="28" width="1224" height="584" rx="36" fill="#08111F" fill-opacity="0.12" />
+  <circle cx="1060" cy="102" r="240" fill="url(#glow-purple)" />
+  <circle cx="220" cy="552" r="220" fill="url(#glow-cyan)" />
+
+  <g opacity="0.24">
+    <path d="M110 112C256 52 454 56 614 136" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+    <path d="M120 552C258 606 506 602 684 518" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+  </g>
+
+  <g>
+    <rect x="88" y="96" width="146" height="40" rx="20" fill="#102345" fill-opacity="0.72" stroke="#C7DCFF" stroke-opacity="0.34" />
+    <text x="116" y="121" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="1.8">ESLINT-PLUGIN-REPO</text>
+
+    <text x="88" y="212" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="64" font-weight="900" letter-spacing="-1.8">
+      Repository
+    </text>
+    <text x="88" y="282" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="64" font-weight="900" letter-spacing="-1.8">
+      compliance
+    </text>
+
+    <text x="88" y="352" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="64" font-weight="900" letter-spacing="-1.8">
+      before CI bites back.
+    </text>
+
+    <text x="88" y="408" fill="#E0ECFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="500">
+      ESLint rules, presets, docs, and generated API references for
+    </text>
+    <text x="88" y="442" fill="#E0ECFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="500">
+      GitHub, GitLab, Bitbucket, and Forgejo / Codeberg teams.
+    </text>
+
+    <g transform="translate(88 480)">
+      <rect width="122" height="38" rx="19" fill="#0A1831" fill-opacity="0.82" stroke="#8CB3FF" stroke-opacity="0.48" />
+      <text x="30" y="24" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">🐙 GitHub</text>
+    </g>
+    <g transform="translate(224 480)">
+      <rect width="118" height="38" rx="19" fill="#0A1831" fill-opacity="0.82" stroke="#FF9FBB" stroke-opacity="0.48" />
+      <text x="27" y="24" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">🦊 GitLab</text>
+    </g>
+    <g transform="translate(356 480)">
+      <rect width="142" height="38" rx="19" fill="#0A1831" fill-opacity="0.82" stroke="#78E7FF" stroke-opacity="0.48" />
+      <text x="24" y="24" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">🪣 Bitbucket</text>
+    </g>
+    <g transform="translate(514 480)">
+      <rect width="164" height="38" rx="19" fill="#0A1831" fill-opacity="0.82" stroke="#FFC68F" stroke-opacity="0.48" />
+      <text x="24" y="24" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">🗻 Forgejo</text>
+    </g>
+
+    <g transform="translate(88 548)">
+      <rect width="138" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.14" />
+      <text x="24" y="22" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="16" font-weight="700">Flat Config</text>
+    </g>
+    <g transform="translate(242 548)">
+      <rect width="104" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.14" />
+      <text x="28" y="22" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="16" font-weight="700">Presets</text>
+    </g>
+    <g transform="translate(360 548)">
+      <rect width="92" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.14" />
+      <text x="30" y="22" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="16" font-weight="700">Rules</text>
+    </g>
+    <g transform="translate(466 548)">
+      <rect width="126" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.14" />
+      <text x="24" y="22" fill="#F7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="16" font-weight="700">Docs &amp; API</text>
+    </g>
+  </g>
+
+  <g filter="url(#panel-shadow)">
+    <rect x="748" y="118" width="432" height="404" rx="42" fill="url(#panel-gradient)" />
+    <rect x="770" y="142" width="388" height="356" rx="30" fill="#09111F" fill-opacity="0.58" stroke="#FFFFFF" stroke-opacity="0.08" />
+
+    <rect x="808" y="182" width="318" height="70" rx="22" fill="url(#card-gradient-1)" />
+    <rect x="808" y="270" width="318" height="70" rx="22" fill="url(#card-gradient-2)" />
+    <rect x="808" y="356" width="318" height="70" rx="22" fill="url(#card-gradient-3)" />
+
+    <rect x="842" y="206" width="124" height="12" rx="6" fill="#253A5D" fill-opacity="0.92" />
+    <rect x="842" y="228" width="92" height="9" rx="4.5" fill="#253A5D" fill-opacity="0.58" />
+
+    <circle cx="868" cy="305" r="10" fill="#253A5D" />
+    <circle cx="938" cy="305" r="10" fill="#253A5D" />
+    <circle cx="1008" cy="305" r="10" fill="#253A5D" />
+    <path d="M878 305H928" stroke="#253A5D" stroke-width="7" stroke-linecap="round" />
+    <path d="M948 305H998" stroke="#253A5D" stroke-width="7" stroke-linecap="round" />
+
+    <path d="M854 386L890 410L952 362" fill="none" stroke="#0C3A2A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="992" y="376" width="98" height="12" rx="6" fill="#1D4D3A" fill-opacity="0.82" />
+    <rect x="992" y="399" width="74" height="9" rx="4.5" fill="#1D4D3A" fill-opacity="0.52" />
+
+    <g>
+      <path d="M810 162C843 141 864 129 900 108" stroke="#ABA6FF" stroke-width="9" stroke-linecap="round" />
+      <path d="M1102 192C1072 170 1052 158 1017 136" stroke="#78E7FF" stroke-width="9" stroke-linecap="round" />
+      <path d="M814 450C850 424 872 412 909 388" stroke="#8BEDDF" stroke-width="9" stroke-linecap="round" />
+      <path d="M1098 424C1065 406 1044 392 1012 372" stroke="#FFC68F" stroke-width="9" stroke-linecap="round" />
+
+      <circle cx="790" cy="172" r="22" fill="#ABA6FF" stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="5" />
+      <circle cx="1118" cy="202" r="22" fill="#78E7FF" stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="5" />
+      <circle cx="800" cy="456" r="22" fill="#8BEDDF" stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="5" />
+      <circle cx="1112" cy="432" r="22" fill="#FFC68F" stroke="#FFFFFF" stroke-opacity="0.36" stroke-width="5" />
+    </g>
+  </g>
+</svg>

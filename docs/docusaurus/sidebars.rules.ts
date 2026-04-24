@@ -62,50 +62,71 @@ const sidebars = {
         {
             className: "sb-cat-presets",
             collapsed: true,
+            collapsible: true,
             customProps: {
                 badge: "presets",
             },
-            type: "category",
-            label: "Presets",
-            link: {
-                type: "doc",
-                id: "presets/index",
-            },
             items: [
                 {
+                    className: "sb-preset-recommended",
                     id: "presets/recommended",
                     label: "✅ Recommended",
                     type: "doc",
                 },
-                { id: "presets/strict", label: "🔒 Strict", type: "doc" },
-                { id: "presets/github", label: "🐙 GitHub", type: "doc" },
-                { id: "presets/gitlab", label: "🦊 GitLab", type: "doc" },
-                { id: "presets/codeberg", label: "🗻 Codeberg", type: "doc" },
-                { id: "presets/bitbucket", label: "🪣 Bitbucket", type: "doc" },
-                { id: "presets/all", label: "🧩 All", type: "doc" },
+                {
+                    className: "sb-preset-strict",
+                    id: "presets/strict",
+                    label: "🔒 Strict",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-github",
+                    id: "presets/github",
+                    label: "🐙 GitHub",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-gitlab",
+                    id: "presets/gitlab",
+                    label: "🦊 GitLab",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-codeberg",
+                    id: "presets/codeberg",
+                    label: "🗻 Codeberg / Forgejo",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-bitbucket",
+                    id: "presets/bitbucket",
+                    label: "🪣 Bitbucket",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-all",
+                    id: "presets/all",
+                    label: "🧩 All",
+                    type: "doc",
+                },
             ],
+            label: "🛠️ Presets",
+            link: {
+                id: "presets/index",
+                type: "doc",
+            },
+            type: "category",
         },
         {
             className: "sb-cat-rules",
             collapsed: true,
-            type: "category",
-            label: "Rules",
-            link: {
-                type: "generated-index",
-                title: "Rule Reference",
-                description:
-                    "Rule documentation for every eslint-plugin-repo rule.",
+            collapsible: true,
+            customProps: {
+                badge: "rules",
             },
             items: [
                 {
-                    type: "category",
-                    label: "Repository baseline",
-                    link: {
-                        type: "generated-index",
-                        title: "Repository baseline rules",
-                        description:
-                            "Cross-provider repository policy file checks.",
-                    },
+                    className: "sb-cat-rules-repository",
                     items: createRuleItemsByKeyword("require-").filter(
                         (item) =>
                             !item.id.includes("github") &&
@@ -113,52 +134,77 @@ const sidebars = {
                             !item.id.includes("bitbucket") &&
                             !item.id.includes("forgejo")
                     ),
+                    label: "📁 Repository baseline",
+                    link: {
+                        description:
+                            "Cross-provider repository policy file checks.",
+                        slug: "/category/repository-baseline",
+                        title: "Repository baseline rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
                 },
                 {
-                    type: "category",
-                    label: "GitHub",
+                    className: "sb-cat-rules-github",
+                    items: createRuleItemsByKeyword("github"),
+                    label: "🐙 GitHub",
                     link: {
-                        type: "generated-index",
-                        title: "GitHub compliance rules",
                         description:
                             "Rules for GitHub-specific repository requirements.",
+                        slug: "/category/github",
+                        title: "GitHub compliance rules",
+                        type: "generated-index",
                     },
-                    items: createRuleItemsByKeyword("github"),
+                    type: "category",
                 },
                 {
-                    type: "category",
-                    label: "GitLab",
+                    className: "sb-cat-rules-gitlab",
+                    items: createRuleItemsByKeyword("gitlab"),
+                    label: "🦊 GitLab",
                     link: {
-                        type: "generated-index",
-                        title: "GitLab compliance rules",
                         description:
                             "Rules for GitLab-specific repository requirements.",
+                        slug: "/category/gitlab",
+                        title: "GitLab compliance rules",
+                        type: "generated-index",
                     },
-                    items: createRuleItemsByKeyword("gitlab"),
+                    type: "category",
                 },
                 {
-                    type: "category",
-                    label: "Bitbucket",
+                    className: "sb-cat-rules-bitbucket",
+                    items: createRuleItemsByKeyword("bitbucket"),
+                    label: "🪣 Bitbucket",
                     link: {
-                        type: "generated-index",
-                        title: "Bitbucket compliance rules",
                         description:
                             "Rules for Bitbucket-specific repository requirements.",
+                        slug: "/category/bitbucket",
+                        title: "Bitbucket compliance rules",
+                        type: "generated-index",
                     },
-                    items: createRuleItemsByKeyword("bitbucket"),
+                    type: "category",
                 },
                 {
-                    type: "category",
-                    label: "Codeberg / Forgejo",
-                    link: {
-                        type: "generated-index",
-                        title: "Codeberg and Forgejo compliance rules",
-                        description:
-                            "Rules for Codeberg/Forgejo workflow requirements.",
-                    },
+                    className: "sb-cat-rules-forgejo",
                     items: createRuleItemsByKeyword("forgejo"),
+                    label: "🗻 Codeberg / Forgejo",
+                    link: {
+                        description:
+                            "Rules for Codeberg and Forgejo workflow requirements.",
+                        slug: "/category/codeberg--forgejo",
+                        title: "Codeberg and Forgejo compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
                 },
             ],
+            label: "📜 Rules",
+            link: {
+                description:
+                    "Rule documentation for every eslint-plugin-repo rule.",
+                title: "Rule Reference",
+                type: "generated-index",
+            },
+            type: "category",
         },
     ],
 } satisfies SidebarsConfig;
