@@ -158,7 +158,7 @@ const sidebars = {
             label: "🧭 Architecture Decisions",
             collapsible: true,
             description:
-                "Architectural decisions and design rationale for eslint-plugin-repo-compliance.",
+                "Architectural decisions and design rationale for eslint-plugin-repo.",
             link: {
                 id: "developer/adr/index",
                 type: "doc",
@@ -325,7 +325,7 @@ const sidebars = {
             label: "Runtime",
             link: {
                 description:
-                    "Runtime exports and internal utility API references from eslint-plugin-repo-compliance.",
+                    "Runtime exports and internal utility API references from eslint-plugin-repo.",
                 title: "Runtime Exports",
                 type: "generated-index",
             },
@@ -367,12 +367,12 @@ const sidebars = {
                     type: "link",
                 },
                 {
-                    href: "/blog/the-thinking-behind-eslint-plugin-repo-compliance",
+                    href: "/blog/the-thinking-behind-eslint-plugin-repo",
                     label: "🧠 Blog · Thinking behind plugin",
                     type: "link",
                 },
                 {
-                    href: "/blog/designing-safe-autofixes-for-eslint-plugin-repo-compliance",
+                    href: "/blog/designing-safe-autofixes-for-eslint-plugin-repo",
                     label: "🛡️ Blog · Designing safe autofixes",
                     type: "link",
                 },
@@ -392,22 +392,22 @@ const sidebars = {
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo/issues?q=is%3Aissue%20is%3Aopen",
                     label: "🐛 Open issues",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Abug",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo/issues?q=is%3Aissue%20is%3Aopen%20label%3Abug",
                     label: "🐞 Issues · bug",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Adocumentation",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo/issues?q=is%3Aissue%20is%3Aopen%20label%3Adocumentation",
                     label: "📚 Issues · documentation",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Arules",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo/issues?q=is%3Aissue%20is%3Aopen%20label%3Arules",
                     label: "🧩 Issues · rules",
                     type: "link",
                 },

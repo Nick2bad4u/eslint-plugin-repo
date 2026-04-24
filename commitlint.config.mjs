@@ -1,5 +1,5 @@
 /**
- * Commitlint configuration for eslint-plugin-repo-compliance.
+ * Commitlint configuration for eslint-plugin-repo.
  *
  * Enforces the repository's hybrid Gitmoji format, e.g.:
  *

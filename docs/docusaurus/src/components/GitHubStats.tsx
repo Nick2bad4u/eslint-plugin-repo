@@ -12,8 +12,8 @@ type LiveBadge = {
     readonly src: string;
 };
 
-const packageName = "eslint-plugin-repo-compliance";
-const repositorySlug = "Nick2bad4u/eslint-plugin-repo-compliance";
+const packageName = "eslint-plugin-repo";
+const repositorySlug = "Nick2bad4u/eslint-plugin-repo";
 
 const liveBadges = [
     {

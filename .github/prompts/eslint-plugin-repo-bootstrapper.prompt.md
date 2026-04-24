@@ -1,6 +1,6 @@
 ---
 name: eslint-plugin-repo-bootstrapper
-description: "🤖🤖 Use this prompt to bootstrap a new ESLint plugin repository by migrating the source plugin into my modern template structure. IMPORTANT: treat eslint-plugin-repo-compliance only as a structural and quality guide, never as rule content to port or convert unless the source plugin already has an equivalent rule."
+description: "🤖🤖 Use this prompt to bootstrap a new ESLint plugin repository by migrating the source plugin into my modern template structure. IMPORTANT: treat eslint-plugin-repo only as a structural and quality guide, never as rule content to port or convert unless the source plugin already has an equivalent rule."
 argument-hint: Provide the folder name of the existing plugin to port, such as `eslint-plugin-legacy`.
 ---
 
@@ -8,7 +8,7 @@ This is a comprehensive, multi-step task to bootstrap a new ESLint plugin reposi
 
 ## Critical framing: use the template as a guide, not as source rule content
 
-The current repository may have been scaffolded from my `eslint-plugin-repo-compliance` template, but that does **not** mean you should port, rename, reinterpret, or adapt the TypeFest-specific rules into the new plugin.
+The current repository may have been scaffolded from my `eslint-plugin-repo` template, but that does **not** mean you should port, rename, reinterpret, or adapt the TypeFest-specific rules into the new plugin.
 
 Treat this repo only as a **template and quality baseline** for:
 
@@ -22,7 +22,7 @@ Treat this repo only as a **template and quality baseline** for:
 
 Do **not** do any of the following unless the source plugin already contains an equivalent concept that you are intentionally migrating:
 
-- do not convert `eslint-plugin-repo-compliance` rules into rules for the new plugin
+- do not convert `eslint-plugin-repo` rules into rules for the new plugin
 - do not rename TypeFest or ts-extras rule implementations to fit the new plugin
 - do not copy TypeFest rule docs/examples/options into the new plugin unless they are genuinely part of the source plugin being migrated
 - do not infer that missing rules should be filled in by cloning rules from this template repo
@@ -49,7 +49,7 @@ Forbidden shortcuts:
 
 **Project Context & Current State:**
 1. We are adapting an old plugin currently located in the folder: `./[SOURCE_PLUGIN_FOLDER]`
-2. The root of this repository has been scaffolded using my template (based on my `eslint-plugin-repo-compliance` repo). All root `package.json` dependencies & devDependencies are already installed.
+2. The root of this repository has been scaffolded using my template (based on my `eslint-plugin-repo` repo). All root `package.json` dependencies & devDependencies are already installed.
 3. The target stack uses TypeScript and a Docusaurus documentation site.
 4. The root contains configuration files copied from my template. Do NOT just delete and recreate them (tsconfig, lint configs, etc.). Instead, **adapt** them. Use the strict rules and configs already present as your baseline. Keep the Typedoc, ESLint, Remark, tsconfig, testing, Docusaurus, and other configs mostly intact, only making adjustments if absolutely necessary to get the new code working. Scripts may need some slight changes. The Typedoc and Remark plugins are to be used to help keep the docs up to date and in sync with the code.
 
@@ -79,7 +79,7 @@ If a rule or doc section exists in the template but not in the source plugin, de
 A. All migrated rules are updated for ESLint 10 and written in TypeScript.
 B. **0 lint warnings/errors, 0 type errors, and 0 failing tests.**
 C. Docusaurus site is fully functional via the copied config, with updated documentation for every rule, ready for release.
-D. The entire project matches the layout, doc standards, and coding standards of my `eslint-plugin-repo-compliance` template **without importing unrelated TypeFest-specific rule content**.
+D. The entire project matches the layout, doc standards, and coding standards of my `eslint-plugin-repo` template **without importing unrelated TypeFest-specific rule content**.
 E. Feel free to make improvements to this template if you see anything that should be added to help with future plugin bootstrapping. I want to make this process as smooth and efficient as possible for future plugins.
 
 Work methodically through these requirements without taking shortcuts or cheating. This prompt will repeat a few times to give you plenty of time to do accurate, high-quality work. If you hit limits, stop at a logical checkpoint so we can continue in the next prompt. Get as much done as you can in each prompt, but prioritize quality and accuracy over quantity. The goal is to have a perfectly bootstrapped plugin that meets all the criteria above.

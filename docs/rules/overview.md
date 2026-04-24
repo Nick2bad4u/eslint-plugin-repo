@@ -3,7 +3,7 @@ title: Overview
 description: Enforce hosting-provider repository compliance with ESLint.
 ---
 
-# eslint-plugin-repo-compliance
+# eslint-plugin-repo
 
 This plugin enforces repository policy files and provider-specific automation conventions.
 

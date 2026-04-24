@@ -7,13 +7,13 @@ sidebar_position: 2
 Install the plugin:
 
 ```bash
-npm install --save-dev eslint-plugin-repo-compliance
+npm install --save-dev eslint-plugin-repo
 ```
 
 Then enable it in your Flat Config:
 
 ```ts
-import plugin from "eslint-plugin-repo-compliance";
+import plugin from "eslint-plugin-repo";
 
 export default [plugin.configs.recommended];
 ```

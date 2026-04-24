@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nick2bad4u.github.io/eslint-plugin-repo-compliance/sitemap.xml
+Sitemap: https://nick2bad4u.github.io/eslint-plugin-repo/sitemap.xml

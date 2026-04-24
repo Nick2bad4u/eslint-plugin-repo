@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# eslint-plugin-repo-compliance
+# eslint-plugin-repo
 
-`eslint-plugin-repo-compliance` helps repositories enforce provider-specific governance and hygiene files.
+`eslint-plugin-repo` helps repositories enforce provider-specific governance and hygiene files.
 
 ## What this documentation includes
 

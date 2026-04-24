@@ -164,7 +164,7 @@ const buildPresetConfig = (
 const plugin: RepoCompliancePluginContract = {
     configs: {} as RepoComplianceConfigsContract,
     meta: {
-        name: "eslint-plugin-repo-compliance",
+        name: "eslint-plugin-repo",
         namespace: "repo-compliance",
         version: getPackageVersion(packageJson),
     },

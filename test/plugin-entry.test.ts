@@ -15,7 +15,7 @@ describe("plugin entry module", () => {
 
         expect(plugin.meta).toStrictEqual(
             expect.objectContaining({
-                name: "eslint-plugin-repo-compliance",
+                name: "eslint-plugin-repo",
                 namespace: "repo-compliance",
                 version: packageJson.version,
             })

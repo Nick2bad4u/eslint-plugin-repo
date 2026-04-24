@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a new rule or improvement for eslint-plugin-repo-compliance
+about: Suggest a new rule or improvement for eslint-plugin-repo
 title: "Feature: "
 labels:
     - enhancement

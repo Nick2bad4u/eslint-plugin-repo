@@ -94,7 +94,7 @@ const sidebars = {
                 type: "generated-index",
                 title: "Rule Reference",
                 description:
-                    "Rule documentation for every eslint-plugin-repo-compliance rule.",
+                    "Rule documentation for every eslint-plugin-repo rule.",
             },
             items: [
                 {

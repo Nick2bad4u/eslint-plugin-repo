@@ -1,4 +1,4 @@
-# Contributing to eslint-plugin-repo-compliance
+# Contributing to eslint-plugin-repo
 
 Thanks for your interest in contributing.
 

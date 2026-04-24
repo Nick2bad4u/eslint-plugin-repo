@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible bug in eslint-plugin-repo-compliance
+about: Report a reproducible bug in eslint-plugin-repo
 title: "Bug: "
 labels:
     - bug
@@ -53,7 +53,7 @@ assignees: []
 - ESLint version:
 - TypeScript version:
 - `@typescript-eslint/*` version:
-- `eslint-plugin-repo-compliance` version/commit:
+- `eslint-plugin-repo` version/commit:
 - OS:
 
 ## Additional context

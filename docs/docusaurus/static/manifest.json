@@ -7,7 +7,7 @@
         "education",
         "productivity"
     ],
-    "description": "Documentation site for eslint-plugin-repo-compliance, including provider presets and rule reference.",
+    "description": "Documentation site for eslint-plugin-repo, including provider presets and rule reference.",
     "dir": "ltr",
     "display": "standalone",
     "display_override": [
@@ -43,14 +43,14 @@
     ],
     "id": "./",
     "lang": "en",
-    "name": "eslint-plugin-repo-compliance Documentation",
+    "name": "eslint-plugin-repo Documentation",
     "orientation": "any",
     "prefer_related_applications": false,
     "scope": ".",
     "short_name": "Repo Compliance Docs",
     "shortcuts": [
         {
-            "description": "Browse the full eslint-plugin-repo-compliance rule catalog.",
+            "description": "Browse the full eslint-plugin-repo rule catalog.",
             "icons": [
                 {
                     "sizes": "192x192",

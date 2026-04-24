@@ -5,18 +5,18 @@ import Heading from "@theme/Heading";
 import GitHubStats from "../components/GitHubStats";
 
 /**
- * Render docs homepage content for eslint-plugin-repo-compliance.
+ * Render docs homepage content for eslint-plugin-repo.
  *
  * @returns Homepage route element.
  */
 export default function HomePage() {
     return (
         <Layout
-            title="eslint-plugin-repo-compliance"
+            title="eslint-plugin-repo"
             description="ESLint rules for repository compliance across major hosting providers."
         >
             <main className="container padding-vert--xl">
-                <Heading as="h1">eslint-plugin-repo-compliance</Heading>
+                <Heading as="h1">eslint-plugin-repo</Heading>
                 <p>
                     Enforce repository policy files and provider-specific
                     workflows for GitHub, GitLab, Bitbucket, and

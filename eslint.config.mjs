@@ -85,6 +85,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as tomlEslintParser from "toml-eslint-parser";
 import * as yamlEslintParser from "yaml-eslint-parser";
+import typefest from "eslint-plugin-typefest";
 
 /**
  * @remarks
@@ -95,7 +96,7 @@ import * as yamlEslintParser from "yaml-eslint-parser";
  *    name and path
  * 3. Setup the `🚢 Local Plugin Import` section below for new plugin
  */
-import repoCompliancePlugin from "./plugin.mjs";
+import repoPlugin from "./plugin.mjs";
 
 // NOTE: eslint-plugin-json-schema-validator may attempt to fetch remote schemas
 // at lint time. That makes linting flaky/offline-hostile.
@@ -308,6 +309,7 @@ export default defineConfig([
             "docusaurus-2/local-search-will-not-work-in-dev": "off",
         },
     },
+    repoPlugin.configs.all,
     progress.configs["recommended-ci"],
     copilot.configs.all,
     sdl.configs.required,
@@ -744,19 +746,24 @@ export default defineConfig([
     // ═══════════════════════════════════════════════════════════════════════════════
     // SECTION: ⌨️ Local Plugin (repo-compliance/*)
     // ═══════════════════════════════════════════════════════════════════════════════
+    // #region ⌨️ Typefest
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SECTION: ⌨️ Typefest (typefest/*)
+    // ═══════════════════════════════════════════════════════════════════════════════
     {
         files: [
             "src/**/*.{ts,tsx,mts,cts}",
             //    "test/**/*.{ts,tsx,mts,cts}"
         ],
-        name: "Local Plugin Rules for Source",
+        name: "Typefest Rules for Source",
         plugins: {
-            "repo-compliance": repoCompliancePlugin,
+            typefest: typefest,
         },
         rules: {
-            ...repoCompliancePlugin.configs.all.rules,
+            ...typefest.configs.experimental.rules,
         },
     },
+    // #endregion
     // #endregion
     // #region ⌨ Etc-Misc
     // ═══════════════════════════════════════════════════════════════════════════════
@@ -3140,27 +3147,6 @@ export default defineConfig([
             // return value is intentionally ignored.
             "@typescript-eslint/strict-void-return": "off",
             "typedoc/require-exported-doc-comment": "off", // Benchmarks and scripts often have non-exported members where doc comments would be low-value and high-effort.
-        },
-    },
-    {
-        files: [
-            "src/_internal/**/*.{ts,tsx,mts,cts}",
-            "src/rules/require-*.ts",
-            "src/plugin.ts",
-        ],
-        name: "Repo compliance migration TSDoc overrides",
-        rules: {
-            "@eslint-community/eslint-comments/require-description": "off",
-            "@typescript-eslint/prefer-readonly-parameter-types": "off",
-            "canonical/no-re-export": "off",
-            "tsdoc-require-2/require": "off",
-        },
-    },
-    {
-        files: ["test/plugin-entry.test.ts"],
-        name: "Plugin entry test migration override",
-        rules: {
-            "@typescript-eslint/no-unsafe-argument": "off",
         },
     },
     {

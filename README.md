@@ -1,17 +1,17 @@
-# eslint-plugin-repo-compliance
+# eslint-plugin-repo
 
 ESLint plugin for enforcing repository-compliance standards across hosting providers such as GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.
 
 ## Installation
 
 ```sh
-npm install --save-dev eslint-plugin-repo-compliance typescript
+npm install --save-dev eslint-plugin-repo typescript
 ```
 
 ## Quick start (Flat Config)
 
 ```js
-import plugin from "eslint-plugin-repo-compliance";
+import plugin from "eslint-plugin-repo";
 
 export default [plugin.configs.recommended];
 ```
@@ -33,7 +33,7 @@ See detailed preset pages under [`docs/rules/presets`](./docs/rules/presets/).
 This section is synchronized from rule metadata.
 
 | Rule | Description | ✅ | 🔒 | 🐙 | 🦊 | 🗻 | 🪣 | 🧩 | Fix |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ---- | ----------- | - | -- | -- | -- | -- | -- | -- | --- |
 
 ## Contributing
 

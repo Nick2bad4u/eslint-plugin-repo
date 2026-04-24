@@ -8,13 +8,13 @@ description: Add repository compliance linting to your Flat Config.
 Install the plugin:
 
 ```bash
-npm install --save-dev eslint-plugin-repo-compliance typescript
+npm install --save-dev eslint-plugin-repo typescript
 ```
 
 Enable a preset:
 
 ```js
-import plugin from "eslint-plugin-repo-compliance";
+import plugin from "eslint-plugin-repo";
 
 export default [plugin.configs.recommended];
 ```

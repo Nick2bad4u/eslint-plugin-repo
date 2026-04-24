@@ -1,6 +1,6 @@
 ---
 name: eslint-plugin-new-plugin-bootstrapper
-description: "🤖🤖 Use this prompt to scaffold a brand-new ESLint plugin repository from my modern template. IMPORTANT: treat eslint-plugin-repo-compliance only as a structural and quality guide, never as rule content to keep, rename, or adapt unless I explicitly ask for a similar rule."
+description: "🤖🤖 Use this prompt to scaffold a brand-new ESLint plugin repository from my modern template. IMPORTANT: treat eslint-plugin-repo only as a structural and quality guide, never as rule content to keep, rename, or adapt unless I explicitly ask for a similar rule."
 argument-hint: Provide the new package name, plugin namespace, short purpose, and optionally the initial rules to create, such as `@acme/eslint-plugin-sdk, namespace: acme-sdk, purpose: safer ACME SDK usage, initial rules: no-unsafe-client, require-result-check`.
 ---
 
@@ -8,7 +8,7 @@ This is a comprehensive, multi-step task to scaffold a brand-new ESLint plugin r
 
 ## Critical framing: use the template as a guide, not as source rule content
 
-The current repository may have been scaffolded from my `eslint-plugin-repo-compliance` template, but that does **not** mean you should keep, port, rename, reinterpret, or adapt the TypeFest-specific rules into the new plugin unless I explicitly ask for a similar rule.
+The current repository may have been scaffolded from my `eslint-plugin-repo` template, but that does **not** mean you should keep, port, rename, reinterpret, or adapt the TypeFest-specific rules into the new plugin unless I explicitly ask for a similar rule.
 
 Treat this repo only as a **template and quality baseline** for:
 
@@ -24,7 +24,7 @@ Treat this repo only as a **template and quality baseline** for:
 
 Do **not** do any of the following unless I explicitly request it:
 
-- do not keep `eslint-plugin-repo-compliance` rules as starter rules for the new plugin
+- do not keep `eslint-plugin-repo` rules as starter rules for the new plugin
 - do not rename TypeFest or ts-extras rule implementations to fit the new plugin
 - do not copy TypeFest rule docs/examples/options into the new plugin as filler
 - do not infer that missing rule ideas should be filled in by cloning rules from this template repo
@@ -69,7 +69,7 @@ If the package name implies the namespace, use the obvious derived namespace unl
 
 ## Project Context & Current State
 
-1. The root of this repository has been scaffolded using my template (based on my `eslint-plugin-repo-compliance` repo). All root `package.json` dependencies & devDependencies are already installed unless the user says otherwise.
+1. The root of this repository has been scaffolded using my template (based on my `eslint-plugin-repo` repo). All root `package.json` dependencies & devDependencies are already installed unless the user says otherwise.
 2. The target stack uses TypeScript and a Docusaurus documentation site.
 3. The root contains configuration files copied from my template. Do NOT just delete and recreate them (tsconfig, lint configs, Docusaurus config, scripts, workflows, etc.). Instead, **adapt** them.
 4. Use the strict rules and configs already present as your baseline. Keep the Typedoc, ESLint, Remark, tsconfig, testing, Docusaurus, and other configs mostly intact, only making adjustments if absolutely necessary to get the new plugin working.
@@ -87,7 +87,7 @@ If the package name implies the namespace, use the obvious derived namespace unl
      - README references
      - Docusaurus site metadata
      - workflow/release labels where appropriate
-   - Remove or update all stale references to `eslint-plugin-repo-compliance`, `typefest`, and `ts-extras`.
+   - Remove or update all stale references to `eslint-plugin-repo`, `typefest`, and `ts-extras`.
 
 7. **Adapt infrastructure, do not re-scaffold it from scratch:**
    - Keep the template's structure, strictness, and quality bar.
@@ -160,12 +160,12 @@ If a rule, doc section, test, or README block exists in the template but is not 
 
 ## Definition of Done (Final Goals)
 
-A. The repository is fully re-identified as the new plugin rather than `eslint-plugin-repo-compliance`.
+A. The repository is fully re-identified as the new plugin rather than `eslint-plugin-repo`.
 B. All explicitly requested rules are implemented in TypeScript using modern ESLint plugin patterns.
 C. If no rules were requested yet, the repository is still a coherent, clean plugin scaffold with no leftover template rule content.
 D. **0 lint warnings/errors, 0 type errors, and 0 failing tests.**
 E. Docusaurus site is fully functional, correctly branded, and aligned with the new plugin.
-F. The entire project matches the layout, doc standards, and coding standards of my `eslint-plugin-repo-compliance` template **without importing unrelated TypeFest-specific rule content**.
+F. The entire project matches the layout, doc standards, and coding standards of my `eslint-plugin-repo` template **without importing unrelated TypeFest-specific rule content**.
 G. Feel free to improve the template or instructions if you see anything that should be added to make future from-scratch plugin creation smoother.
 
 Work methodically through these requirements without taking shortcuts or cheating. This prompt will repeat a few times to give you plenty of time to do accurate, high-quality work. If you hit limits, stop at a logical checkpoint so we can continue in the next prompt. Get as much done as you can in each prompt, but prioritize quality and accuracy over quantity. The goal is to have a perfectly scaffolded plugin that meets all the criteria above.

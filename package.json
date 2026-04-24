@@ -1,6 +1,6 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
-    "name": "eslint-plugin-repo-compliance",
+    "name": "eslint-plugin-repo",
     "version": "1.2.4",
     "private": false,
     "description": "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.",
@@ -15,14 +15,14 @@
         "bitbucket",
         "codeberg"
     ],
-    "homepage": "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance",
+    "homepage": "https://github.com/Nick2bad4u/eslint-plugin-repo",
     "bugs": {
-        "url": "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues",
+        "url": "https://github.com/Nick2bad4u/eslint-plugin-repo/issues",
         "email": "20943337+Nick2bad4u@users.noreply.github.com"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Nick2bad4u/eslint-plugin-repo-compliance.git"
+        "url": "git+https://github.com/Nick2bad4u/eslint-plugin-repo.git"
     },
     "license": "MIT",
     "author": "Nick2bad4u <20943337+Nick2bad4u@users.noreply.github.com> (https://github.com/Nick2bad4u)",
@@ -77,9 +77,9 @@
         "build": "tsc -b tsconfig.build.json --force && npm run build:types:cjs && npm run build:cjs",
         "build:cjs": "esbuild dist/plugin.js --bundle --format=cjs --platform=node --packages=external --sourcemap --outfile=dist/plugin.cjs --footer:js=\"module.exports = module.exports.default;\"",
         "build:clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
-        "build:eslint-inspector": "npx -y @eslint/config-inspector@1.4.2 build --outDir \"docs/docusaurus/static/eslint-inspector\" --base \"/eslint-plugin-repo-compliance/eslint-inspector/\"",
+        "build:eslint-inspector": "npx -y @eslint/config-inspector@1.4.2 build --outDir \"docs/docusaurus/static/eslint-inspector\" --base \"/eslint-plugin-repo/eslint-inspector/\"",
         "build:eslint-inspector:local": "npx @eslint/config-inspector",
-        "build:stylelint-inspector": "npx -y stylelint-config-inspector@latest build --outDir \"docs/docusaurus/static/stylelint-inspector\" --base \"/eslint-plugin-repo-compliance/stylelint-inspector/\"",
+        "build:stylelint-inspector": "npx -y stylelint-config-inspector@latest build --outDir \"docs/docusaurus/static/stylelint-inspector\" --base \"/eslint-plugin-repo/stylelint-inspector/\"",
         "build:stylelint-inspector:local": "npx stylelint-config-inspector@latest",
         "build:types:cjs": "node -e \"require('node:fs').copyFileSync('dist/plugin.d.ts','dist/plugin.d.cts')\"",
         "changelog:generate": "git-cliff --config cliff.toml --output CHANGELOG.md",
@@ -144,7 +144,7 @@
         "lint:exports": "ts-unused-exports tsconfig.json src/plugin.ts --excludePathsFromReport=plugin.ts",
         "lint:fix": "cross-env NODE_OPTIONS=--max_old_space_size=16384 eslint . --cache --cache-strategy content --cache-location .cache/.eslintcache --fix",
         "lint:fix:quiet": "cross-env ESLINT_PROGRESS=off NODE_OPTIONS=--max_old_space_size=16384 eslint . --cache --cache-strategy content --cache-location .cache/.eslintcache --fix && echo \"Eslint fix done!\"",
-        "lint:grype": "grype . -c .grype.yaml --name eslint-plugin-repo-compliance",
+        "lint:grype": "grype . -c .grype.yaml --name eslint-plugin-repo",
         "lint:knip": "npm run knip",
         "lint:knip:exports": "npm run knip -- --include exports,nsExports,classMembers,types,nsTypes,enumMembers,duplicates",
         "lint:knip:unused:exports": "npm run knip -- --dependencies --exports",
@@ -222,7 +222,9 @@
     "dependencies": {
         "@typescript-eslint/parser": "^8.59.0",
         "@typescript-eslint/type-utils": "^8.59.0",
-        "@typescript-eslint/utils": "^8.59.0"
+        "@typescript-eslint/utils": "^8.59.0",
+        "ts-extras": "^1.0.0",
+        "type-fest": "^5.6.0"
     },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.2",
@@ -335,7 +337,7 @@
         "eslint-plugin-promise": "^7.2.1",
         "eslint-plugin-redos": "^4.5.0",
         "eslint-plugin-regexp": "^3.1.0",
-        "eslint-plugin-repo-compliance": "^1.2.4",
+        "eslint-plugin-repo": "^1.2.4",
         "eslint-plugin-require-jsdoc": "^1.0.4",
         "eslint-plugin-sdl-2": "^1.0.7",
         "eslint-plugin-security": "^4.0.0",

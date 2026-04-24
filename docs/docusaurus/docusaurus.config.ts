@@ -7,8 +7,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 /** Route base path where docs site is deployed (GitHub Pages project path). */
-const baseUrl =
-    process.env["DOCUSAURUS_BASE_URL"] ?? "/eslint-plugin-repo-compliance/";
+const baseUrl = process.env["DOCUSAURUS_BASE_URL"] ?? "/eslint-plugin-repo/";
 /** Opt-in flag for experimental Docusaurus performance features. */
 const enableExperimentalFaster =
     process.env["DOCUSAURUS_ENABLE_EXPERIMENTAL"] === "true";
@@ -16,7 +15,7 @@ const enableExperimentalFaster =
 /** GitHub organization used for edit links and project metadata. */
 const organizationName = "Nick2bad4u";
 /** Repository name used for edit links and project metadata. */
-const projectName = "eslint-plugin-repo-compliance";
+const projectName = "eslint-plugin-repo";
 /** Public origin for the published documentation site. */
 const siteOrigin = "https://nick2bad4u.github.io";
 /** Canonical public site URL including the GitHub Pages project path. */
@@ -470,7 +469,7 @@ const config = {
                             label: "\ue7d2 ESLint Inspector",
                         },
                         {
-                            href: `https://www.npmjs.com/package/eslint-plugin-repo-compliance`,
+                            href: `https://www.npmjs.com/package/eslint-plugin-repo`,
                             label: "\uf113 npm package",
                         },
                         {

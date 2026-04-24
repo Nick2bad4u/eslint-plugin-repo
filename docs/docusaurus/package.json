@@ -1,9 +1,9 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
-    "name": "@eslint-plugin-repo-compliance/docs",
+    "name": "@eslint-plugin-repo/docs",
     "version": "0.1.0",
     "private": true,
-    "description": "Docusaurus documentation site for eslint-plugin-repo-compliance.",
+    "description": "Docusaurus documentation site for eslint-plugin-repo.",
     "keywords": [
         "docusaurus",
         "documentation",
@@ -12,13 +12,13 @@
         "repository",
         "compliance"
     ],
-    "homepage": "https://nick2bad4u.github.io/eslint-plugin-repo-compliance/",
+    "homepage": "https://nick2bad4u.github.io/eslint-plugin-repo/",
     "bugs": {
-        "url": "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues"
+        "url": "https://github.com/Nick2bad4u/eslint-plugin-repo/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Nick2bad4u/eslint-plugin-repo-compliance.git"
+        "url": "git+https://github.com/Nick2bad4u/eslint-plugin-repo.git"
     },
     "license": "MIT",
     "author": "Nick2bad4u",
@@ -26,7 +26,7 @@
         {
             "name": "Nick2bad4u",
             "email": "20943337+Nick2bad4u@users.noreply.github.com",
-            "url": "https://nick2bad4u.github.io/eslint-plugin-repo-compliance"
+            "url": "https://nick2bad4u.github.io/eslint-plugin-repo"
         }
     ],
     "sideEffects": false,

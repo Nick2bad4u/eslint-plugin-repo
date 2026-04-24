@@ -170,7 +170,7 @@ Do not assume all repos have the same structure.
 
 Use the repository's own assets and structure first, but inspect this reference site for concrete examples of the expected level of polish:
 
-- `https://nick2bad4u.github.io/eslint-plugin-repo-compliance/`
+- `https://nick2bad4u.github.io/eslint-plugin-repo/`
 
 When reviewing that reference, pay attention to these patterns:
 - a balanced navbar with primary docs links on the left and developer/support/search surfaces on the right
