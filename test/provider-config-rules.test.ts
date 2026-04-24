@@ -21,7 +21,8 @@ mkdirSync(fixtureRoot, { recursive: true });
 const writeFixtureRepo = (
     ruleName: string,
     variant: string,
-    files: readonly FileFixture[]
+    files: readonly FileFixture[],
+    lintTargetRelativePath = "eslint.config.mjs"
 ): string => {
     const repoPath = path.join(fixtureRoot, `${ruleName}-${variant}`);
     mkdirSync(repoPath, { recursive: true });
@@ -32,7 +33,8 @@ const writeFixtureRepo = (
         writeFileSync(absolutePath, file.content, "utf8");
     }
 
-    const lintTargetPath = path.join(repoPath, "eslint.config.mjs");
+    const lintTargetPath = path.join(repoPath, lintTargetRelativePath);
+    mkdirSync(path.dirname(lintTargetPath), { recursive: true });
     writeFileSync(lintTargetPath, lintTargetSource, "utf8");
 
     return lintTargetPath;
@@ -303,6 +305,31 @@ ruleTester.run(
                 ),
                 name: "reports Forgejo workflows missing explicit permissions",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingWorkflowPermissions" }],
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "invalid-commented-permissions-only",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "# permissions:",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - uses: actions/checkout@v4",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "ignores commented permissions keys and still reports the workflow",
+            },
         ],
         valid: [
             {
@@ -359,10 +386,117 @@ ruleTester.run(
                 code: lintTargetSource,
                 filename: writeFixtureRepo(
                     "require-forgejo-actions-workflow-permissions",
+                    "valid-yaml-and-extra-non-workflow-files",
+                    [
+                        {
+                            content: "ignored\n",
+                            relativePath: ".forgejo/workflows/notes.txt",
+                        },
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "permissions:",
+                                "  contents: read",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - uses: actions/checkout@v4",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts yaml workflows and ignores non-workflow extensions",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
                     "valid-no-forgejo-workflows",
                     []
                 ),
                 name: "skips check when .forgejo/workflows/ directory is absent",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "valid-multiple-workflows-all-covered",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "permissions:",
+                                "  contents: read",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - uses: actions/checkout@v4",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                        {
+                            content: [
+                                "name: Release",
+                                "on:",
+                                "  workflow_dispatch:",
+                                "jobs:",
+                                "  release:",
+                                "    permissions:",
+                                "      contents: write",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - uses: actions/checkout@v4",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/release.yml",
+                        },
+                    ]
+                ),
+                name: "accepts multiple Forgejo workflows when each declares permissions",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "valid-nested-directory-only",
+                    [
+                        {
+                            content: "name: nested\n",
+                            relativePath: ".forgejo/workflows/nested/ci.yml",
+                        },
+                    ]
+                ),
+                name: "skips nested workflow directories because only top-level workflow files are considered",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "valid-non-trigger-file",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - uses: actions/checkout@v4",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ],
+                    "src/index.ts"
+                ),
+                name: "skips evaluation when linting a non-trigger file",
             },
         ],
     }
@@ -698,6 +832,26 @@ ruleTester.run(
                 ),
                 name: "reports missing root workflow rules",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingGitLabWorkflowRules" }],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-workflow-rules",
+                    "invalid-workflow-without-rules-block",
+                    [
+                        {
+                            content: [
+                                "workflow:",
+                                "  name: pipeline",
+                                "stages:",
+                                "  - test",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports workflow sections that exist but omit rules",
+            },
         ],
         valid: [
             {
@@ -719,6 +873,35 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts root workflow rules",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-workflow-rules",
+                    "valid-yaml-extension-with-comments",
+                    [
+                        {
+                            content: [
+                                "# pipeline control",
+                                "workflow:",
+                                "  # allowed pipeline sources",
+                                "  rules:",
+                                '    - if: $CI_PIPELINE_SOURCE == "push"',
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts .gitlab-ci.yaml and ignores comment lines inside workflow",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-workflow-rules",
+                    "valid-no-gitlab-ci-file",
+                    []
+                ),
+                name: "skips when no GitLab CI config file exists",
             },
         ],
     }
@@ -797,6 +980,52 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts per-step max-time",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-max-time",
+                    "valid-inline-comment-max-time",
+                    [
+                        {
+                            content: [
+                                "options:",
+                                "  max-time: 20 # default timeout",
+                                "pipelines:",
+                                "  default:",
+                                "    - step:",
+                                "        name: build",
+                                "        script:",
+                                "          - npm test",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts max-time values with inline comments",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-max-time",
+                    "valid-empty-file",
+                    [
+                        {
+                            content: "",
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "skips empty pipelines files",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-max-time",
+                    "valid-no-pipelines-file",
+                    []
+                ),
+                name: "skips when bitbucket-pipelines.yml is absent",
             },
         ],
     }
@@ -995,6 +1224,30 @@ ruleTester.run(
                 ),
                 name: "reports forgejo workflows without root name",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingForgejoWorkflowName" }],
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-name",
+                    "invalid-nested-name-only",
+                    [
+                        {
+                            content: [
+                                "on:",
+                                "  push:",
+                                "jobs:",
+                                "  test:",
+                                "    name: nested job name",
+                                "    runs-on: docker",
+                                "    steps:",
+                                "      - run: echo test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports workflows that only define nested job names",
+            },
         ],
         valid: [
             {
@@ -1019,6 +1272,40 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts forgejo workflows with explicit name",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-name",
+                    "valid-yaml-extension-and-leading-comments",
+                    [
+                        {
+                            content: [
+                                "# workflow heading",
+                                "",
+                                "name: Release",
+                                "on:",
+                                "  workflow_dispatch:",
+                                "jobs:",
+                                "  release:",
+                                "    runs-on: docker",
+                                "    steps:",
+                                "      - run: echo release",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/release.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts yaml workflows with leading comments before the root name",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-name",
+                    "valid-no-workflows-directory",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory exists",
             },
         ],
     }
@@ -1050,6 +1337,31 @@ ruleTester.run(
                 ),
                 name: "reports step blocks missing name",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingBitbucketStepName" }],
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "invalid-multiple-steps-one-missing-name",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  default:",
+                                "    - step:",
+                                "        name: build",
+                                "        script:",
+                                "          - npm run build",
+                                "    - step:",
+                                "        script:",
+                                "          - npm test",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports unnamed steps even when earlier steps are named",
+            },
         ],
         valid: [
             {
@@ -1072,6 +1384,73 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts step blocks with name",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-inline-step-name",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  default:",
+                                "    - step: { name: inline, script: ['npm test'] }",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts inline step declarations that include name on the step line",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-no-step-blocks",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  branches:",
+                                "    main: []",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "skips configs that do not contain any step blocks",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-step-name-after-comment",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  default:",
+                                "    - step:",
+                                "        # helpful label follows",
+                                "        name: commented-name-case",
+                                "        script:",
+                                "          - npm test",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts step names that appear after comment lines inside the step block",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-no-pipelines-file",
+                    []
+                ),
+                name: "skips when no Bitbucket pipelines file exists",
             },
         ],
     }
@@ -1122,6 +1501,68 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts pull-requests blocks that declare target branches",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests-target-branches",
+                    "valid-no-pull-requests-heading",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  branches:",
+                                "    main:",
+                                "      - step:",
+                                "          name: build",
+                                "          script:",
+                                "            - npm test",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "skips configs that do not define a pull-requests block",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests-target-branches",
+                    "valid-pull-requests-with-comments",
+                    [
+                        {
+                            content: [
+                                "pipelines:",
+                                "  pull-requests:",
+                                "    # shared rule",
+                                '    "release/*":',
+                                "      - step:",
+                                "          name: validate release pull requests",
+                                "          script:",
+                                "            - npm test",
+                            ].join("\n"),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts pull-request target branches even with intervening comments",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests-target-branches",
+                    "valid-non-trigger-file",
+                    [
+                        {
+                            content: ["pipelines:", "  pull-requests:"].join(
+                                "\n"
+                            ),
+                            relativePath: "bitbucket-pipelines.yml",
+                        },
+                    ],
+                    "src/index.ts"
+                ),
+                name: "skips evaluation when linting a non-trigger file",
             },
         ],
     }
@@ -1178,6 +1619,60 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts dependabot updates with reviewers",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dependabot-reviewers",
+                    "valid-assignees-and-yaml-extension",
+                    [
+                        {
+                            content: [
+                                "version: 2",
+                                "updates:",
+                                "  - package-ecosystem: npm",
+                                "    directory: /",
+                                "    schedule:",
+                                "      interval: weekly",
+                                "    assignees:",
+                                "      - octocat",
+                            ].join("\n"),
+                            relativePath: ".github/dependabot.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts dependabot yaml with assignees only",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dependabot-reviewers",
+                    "valid-no-dependabot-config",
+                    []
+                ),
+                name: "skips when no dependabot config file exists",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dependabot-reviewers",
+                    "valid-non-trigger-file",
+                    [
+                        {
+                            content: [
+                                "version: 2",
+                                "updates:",
+                                "  - package-ecosystem: npm",
+                                "    directory: /",
+                                "    schedule:",
+                                "      interval: weekly",
+                            ].join("\n"),
+                            relativePath: ".github/dependabot.yml",
+                        },
+                    ],
+                    "src/index.ts"
+                ),
+                name: "skips evaluation when linting a non-trigger file",
             },
         ],
     }
@@ -1248,6 +1743,85 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts forgejo workflows with workflow_dispatch",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-inline-on-trigger",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on: [push, workflow_dispatch]",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts inline on: declarations that include workflow_dispatch",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-list-item-trigger",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  - push",
+                                "  - workflow_dispatch",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "accepts workflow_dispatch declared as a list item",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-no-workflow-directory",
+                    []
+                ),
+                name: "skips when no Forgejo workflow directory exists",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-non-trigger-file",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: ubuntu-latest",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ],
+                    "src/index.ts"
+                ),
+                name: "skips evaluation for non-trigger files even when workflows are missing workflow_dispatch",
             },
         ],
     }

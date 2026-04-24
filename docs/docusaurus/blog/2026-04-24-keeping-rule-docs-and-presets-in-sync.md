@@ -1,8 +1,12 @@
 ---
 slug: keeping-rule-docs-and-presets-in-sync
 title: Keeping Rule Docs and Presets in Sync
-authors: [nick]
-tags: [documentation, presets, automation]
+authors:
+  - nick
+tags:
+  - documentation
+  - presets
+  - automation
 ---
 
 # Keeping Rule Docs and Presets in Sync

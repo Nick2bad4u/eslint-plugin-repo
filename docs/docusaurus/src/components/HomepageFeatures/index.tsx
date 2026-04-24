@@ -1,4 +1,5 @@
 import Link from "@docusaurus/Link";
+import Heading from "@theme/Heading";
 
 import type { ReactNode } from "react";
 
@@ -103,10 +104,10 @@ export default function HomepageFeatures() {
             <div className="container">
                 <div className={styles.heading}>
                     <span className={styles.eyebrow}>Why this plugin</span>
-                    <h2 className={styles.title}>
+                    <Heading as="h2" className={styles.title}>
                         Built for repository governance, not generic lint
                         vanity.
-                    </h2>
+                    </Heading>
                     <p className={styles.lead}>
                         <code>eslint-plugin-repo</code> targets the policies
                         that usually drift across repository hosts: workflow
@@ -124,9 +125,9 @@ export default function HomepageFeatures() {
                             <div className={styles.icon} aria-hidden="true">
                                 {feature.icon}
                             </div>
-                            <h3 className={styles.cardTitle}>
+                            <Heading as="h3" className={styles.cardTitle}>
                                 {feature.title}
-                            </h3>
+                            </Heading>
                             <p className={styles.description}>
                                 {feature.description}
                             </p>
@@ -149,9 +150,9 @@ export default function HomepageFeatures() {
                         <span className={styles.secondaryEyebrow}>
                             Maintainer shortcuts
                         </span>
-                        <h3 className={styles.secondaryTitle}>
+                        <Heading as="h3" className={styles.secondaryTitle}>
                             More than a rule catalog
-                        </h3>
+                        </Heading>
                         <p className={styles.secondaryLead}>
                             The docs app now doubles as a maintenance surface
                             for charts, ADRs, generated API output, and
@@ -165,9 +166,12 @@ export default function HomepageFeatures() {
                                 key={feature.title}
                                 className={styles.secondaryCard}
                             >
-                                <h4 className={styles.secondaryCardTitle}>
+                                <Heading
+                                    as="h4"
+                                    className={styles.secondaryCardTitle}
+                                >
                                     {feature.title}
-                                </h4>
+                                </Heading>
                                 <p className={styles.secondaryDescription}>
                                     {feature.description}
                                 </p>

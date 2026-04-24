@@ -155,21 +155,20 @@ const vitestConfig: ReturnType<typeof defineConfig> = defineConfig({
             reportOnFailure: true,
             reportsDirectory: "./coverage",
             skipFull: true, // Don't skip full coverage collection
-            // NOTE: Coverage thresholds adjusted after empirical analysis of current
-            // instrumentation (November 2025). JSX-heavy components and patched CSS
-            // modules generate synthetic branches that Vitest counts but cannot be
-            // exercised in runtime. The revised values enforce strong coverage for
-            // executable logic without blocking on non-actionable gaps.
+            // NOTE: Coverage thresholds reflect the current validated baseline of
+            // executable repository logic. Docs app assets, CSS modules, and other
+            // non-runtime surfaces are excluded above; the remaining thresholds are
+            // intentionally set high enough to keep rule and helper coverage honest.
             thresholds: {
                 // Auto-update requires Vitest to rewrite the originating config file.
                 // Our configuration is generated dynamically via defineConfig callbacks,
                 // which Magicast cannot safely mutate, so we keep this disabled to
                 // avoid runtime parse failures during coverage reporting.
                 autoUpdate: false,
-                branches: 50, // Tightened to reflect real-world branch coverage considering JSX/CSS-module instrumentation (see analysis)
-                functions: 50,
-                lines: 50,
-                statements: 50,
+                branches: 80,
+                functions: 80,
+                lines: 80,
+                statements: 80,
             },
         },
         css: false,

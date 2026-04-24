@@ -453,7 +453,7 @@ const config = {
                         },
                         {
                             label: "📏 Rule Reference",
-                            to: "/docs/rules/overview",
+                            to: "/docs/rules/category/repository-baseline",
                         },
                     ],
                     title: "📚 Explore",
@@ -523,10 +523,6 @@ const config = {
                     type: "dropdown",
                     items: [
                         {
-                            label: "• Overview",
-                            to: "/docs/rules/overview",
-                        },
-                        {
                             label: "• Getting Started",
                             to: "/docs/rules/getting-started",
                         },
@@ -540,13 +536,9 @@ const config = {
                     activeBaseRegex: "^/docs/rules(?:/(?!presets(?:/|$)).*)?$",
                     label: "📜 Rules",
                     position: "left",
-                    to: "/docs/rules/overview",
+                    to: "/docs/rules/category/repository-baseline",
                     type: "dropdown",
                     items: [
-                        {
-                            label: "• Rule Reference",
-                            to: "/docs/rules/overview",
-                        },
                         {
                             label: "📁 Repository baseline rules",
                             to: "/docs/rules/category/repository-baseline",
