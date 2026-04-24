@@ -11,9 +11,9 @@ npm install --save-dev eslint-plugin-repo typescript
 ## Quick start (Flat Config)
 
 ```js
-import plugin from "eslint-plugin-repo";
+import repoPlugin from "eslint-plugin-repo";
 
-export default [plugin.configs.recommended];
+export default [repoPlugin.configs.recommended];
 ```
 
 ## Presets
@@ -30,10 +30,37 @@ See detailed preset pages under [`docs/rules/presets`](./docs/rules/presets/).
 
 ## Rules
 
-This section is synchronized from rule metadata.
+- Fix legend:
+  - 🔧 = autofixable
+  - 💡 = suggestions available
+  - — = report only
+- Preset key legend:
+  - [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) — [`repo-compliance.configs.recommended`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended)
+  - [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) — [`repo-compliance.configs.strict`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict)
+  - [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) — [`repo-compliance.configs.github`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github)
+  - [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) — [`repo-compliance.configs.gitlab`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab)
+  - [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) — [`repo-compliance.configs.codeberg`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg)
+  - [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) — [`repo-compliance.configs.bitbucket`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket)
+  - [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) — [`repo-compliance.configs.all`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all)
 
-| Rule | Description | ✅ | 🔒 | 🐙 | 🦊 | 🗻 | 🪣 | 🧩 | Fix |
-| ---- | ----------- | - | -- | -- | -- | -- | -- | -- | --- |
+| Rule | Fix | Preset key |
+| --- | :-: | :-: |
+| [`require-bitbucket-pipelines-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-forgejo-actions-workflow-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-workflow-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-github-actions-workflow-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-actions-workflow-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-gitlab-ci-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-gitlab-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-issue-template-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-gitlab-merge-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-merge-request-template-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 
 ## Contributing
 
