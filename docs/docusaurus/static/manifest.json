@@ -7,7 +7,7 @@
         "education",
         "productivity"
     ],
-    "description": "Documentation site for eslint-plugin-typefest, including rule reference, presets, architecture notes, and API docs.",
+    "description": "Documentation site for eslint-plugin-repo-compliance, including provider presets and rule reference.",
     "dir": "ltr",
     "display": "standalone",
     "display_override": [
@@ -43,14 +43,14 @@
     ],
     "id": "./",
     "lang": "en",
-    "name": "eslint-plugin-typefest Documentation",
+    "name": "eslint-plugin-repo-compliance Documentation",
     "orientation": "any",
     "prefer_related_applications": false,
     "scope": ".",
-    "short_name": "Typefest Docs",
+    "short_name": "Repo Compliance Docs",
     "shortcuts": [
         {
-            "description": "Browse the full eslint-plugin-typefest rule catalog.",
+            "description": "Browse the full eslint-plugin-repo-compliance rule catalog.",
             "icons": [
                 {
                     "sizes": "192x192",

@@ -2,19 +2,16 @@
 sidebar_position: 1
 ---
 
-# eslint-plugin-typefest
+# eslint-plugin-repo-compliance
 
-`eslint-plugin-typefest` helps TypeScript codebases adopt more explicit, safer patterns with:
-
-- [`type-fest`](https://github.com/sindresorhus/type-fest) utility types.
-- [`ts-extras`](https://github.com/sindresorhus/ts-extras) runtime helpers.
+`eslint-plugin-repo-compliance` helps repositories enforce provider-specific governance and hygiene files.
 
 ## What this documentation includes
 
-- A complete **rule reference** with examples for every rule.
+- A complete **rule reference** for repository-file and provider compliance checks.
 - **Getting Started** guidance for Flat Config projects.
-- A small **Developer API** section generated with TypeDoc.
+- **Preset docs** for GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.
 
 ## Next step
 
-Next, open the **Getting Started** page in the sidebar to enable the plugin in your project.
+Open the **Getting Started** page in the sidebar and enable your first preset.

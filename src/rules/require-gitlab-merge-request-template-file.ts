@@ -1,0 +1,23 @@
+import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js";
+
+const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
+    createRepositoryFilePresenceRule({
+        configReferences: [
+            "repo-compliance.configs.gitlab",
+            "repo-compliance.configs.strict",
+            "repo-compliance.configs.all",
+        ],
+        description: "require at least one GitLab merge request template.",
+        messageId: "missingGitLabMergeRequestTemplateFile",
+        messageText:
+            "GitLab preset requires .gitlab/merge_request_templates/*.md. Add merge request templates to standardize change summaries and review checklists.",
+        name: "require-gitlab-merge-request-template-file",
+        recommendation: false,
+        requirement: {
+            directory: ".gitlab/merge_request_templates",
+            extensions: [".md"],
+            kind: "directory-with-extension",
+        },
+    });
+
+export default rule;

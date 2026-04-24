@@ -43,20 +43,20 @@ const sidebars = {
                 },
                 {
                     className: "sb-api-overview-item",
-                    id: "developer/api/plugin/type-aliases/TypefestPlugin",
-                    label: "🧠 Type aliases · TypefestPlugin",
+                    id: "developer/api/plugin/type-aliases/RepoCompliancePlugin",
+                    label: "🧠 Type aliases · RepoCompliancePlugin",
                     type: "doc",
                 },
                 {
                     className: "sb-api-overview-item",
-                    id: "developer/api/plugin/variables/typefestPlugin",
-                    label: "⚙️ Runtime exports · typefestPlugin",
+                    id: "developer/api/plugin/variables/plugin",
+                    label: "⚙️ Runtime exports · plugin",
                     type: "doc",
                 },
                 {
                     className: "sb-api-overview-item",
-                    id: "developer/api/plugin/variables/typefestConfigs",
-                    label: "⚙️ Runtime exports · typefestConfigs",
+                    id: "developer/api/plugin/variables/ruleDocsByName",
+                    label: "⚙️ Runtime exports · ruleDocsByName",
                     type: "doc",
                 },
             ],
@@ -158,7 +158,7 @@ const sidebars = {
             label: "🧭 Architecture Decisions",
             collapsible: true,
             description:
-                "Architectural decisions and design rationale for eslint-plugin-typefest.",
+                "Architectural decisions and design rationale for eslint-plugin-repo-compliance.",
             link: {
                 id: "developer/adr/index",
                 type: "doc",
@@ -325,7 +325,7 @@ const sidebars = {
             label: "Runtime",
             link: {
                 description:
-                    "Runtime exports and internal utility API references from eslint-plugin-typefest.",
+                    "Runtime exports and internal utility API references from eslint-plugin-repo-compliance.",
                 title: "Runtime Exports",
                 type: "generated-index",
             },
@@ -342,23 +342,23 @@ const sidebars = {
                 "External package docs, project blog resources, and issue tracker links.",
             items: [
                 {
-                    href: "https://github.com/sindresorhus/ts-extras",
-                    label: "💠 \ue709 ts-extras",
+                    href: "https://docs.github.com/",
+                    label: "🐙 GitHub Docs",
                     type: "link",
                 },
                 {
-                    href: "https://www.npmjs.com/package/ts-extras",
-                    label: "💠 \ue616 ts-extras",
+                    href: "https://docs.gitlab.com/",
+                    label: "🦊 GitLab Docs",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/sindresorhus/type-fest",
-                    label: "✴️ \ue709 type-fest",
+                    href: "https://support.atlassian.com/bitbucket-cloud/docs/",
+                    label: "🪣 Bitbucket Docs",
                     type: "link",
                 },
                 {
-                    href: "https://www.npmjs.com/package/type-fest",
-                    label: "✴️ \ue616 type-fest",
+                    href: "https://docs.codeberg.org/",
+                    label: "🗻 Codeberg Docs",
                     type: "link",
                 },
                 {
@@ -367,12 +367,12 @@ const sidebars = {
                     type: "link",
                 },
                 {
-                    href: "/blog/the-thinking-behind-eslint-plugin-typefest",
+                    href: "/blog/the-thinking-behind-eslint-plugin-repo-compliance",
                     label: "🧠 Blog · Thinking behind plugin",
                     type: "link",
                 },
                 {
-                    href: "/blog/designing-safe-autofixes-for-eslint-plugin-typefest",
+                    href: "/blog/designing-safe-autofixes-for-eslint-plugin-repo-compliance",
                     label: "🛡️ Blog · Designing safe autofixes",
                     type: "link",
                 },
@@ -392,22 +392,22 @@ const sidebars = {
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-typefest/issues?q=is%3Aissue%20is%3Aopen",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen",
                     label: "🐛 Open issues",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-typefest/issues?q=is%3Aissue%20is%3Aopen%20label%3Abug",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Abug",
                     label: "🐞 Issues · bug",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-typefest/issues?q=is%3Aissue%20is%3Aopen%20label%3Adocumentation",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Adocumentation",
                     label: "📚 Issues · documentation",
                     type: "link",
                 },
                 {
-                    href: "https://github.com/Nick2bad4u/eslint-plugin-typefest/issues?q=is%3Aissue%20is%3Aopen%20label%3Arules",
+                    href: "https://github.com/Nick2bad4u/eslint-plugin-repo-compliance/issues?q=is%3Aissue%20is%3Aopen%20label%3Arules",
                     label: "🧩 Issues · rules",
                     type: "link",
                 },

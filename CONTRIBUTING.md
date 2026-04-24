@@ -1,9 +1,9 @@
-# Contributing to eslint-plugin-typefest
+# Contributing to eslint-plugin-repo-compliance
 
 Thanks for your interest in contributing.
 
-This repository contains an ESLint plugin focused on `type-fest` and
-`ts-extras` usage patterns for TypeScript codebases.
+This repository contains an ESLint plugin focused on repository-compliance
+policies for major hosting providers.
 
 ## Prerequisites
 
@@ -127,9 +127,9 @@ Format:
 
 Examples:
 
-- `:sparkles: feat(rule): add prefer-type-fest-xyz`
-- `:bug: fix(rule): avoid false positive in union type handling`
-- `:memo: docs: clarify configuration for type-aware rules`
+- `:sparkles: feat(rule): add require-security-policy-file`
+- `:bug: fix(rule): improve root-directory detection`
+- `:memo: docs: clarify provider preset selection`
 
 ## Pull request expectations
 

@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 /** Route base path where docs site is deployed (GitHub Pages project path). */
 const baseUrl =
-    process.env["DOCUSAURUS_BASE_URL"] ?? "/eslint-plugin-typefest/";
+    process.env["DOCUSAURUS_BASE_URL"] ?? "/eslint-plugin-repo-compliance/";
 /** Opt-in flag for experimental Docusaurus performance features. */
 const enableExperimentalFaster =
     process.env["DOCUSAURUS_ENABLE_EXPERIMENTAL"] === "true";
@@ -16,21 +16,21 @@ const enableExperimentalFaster =
 /** GitHub organization used for edit links and project metadata. */
 const organizationName = "Nick2bad4u";
 /** Repository name used for edit links and project metadata. */
-const projectName = "eslint-plugin-typefest";
+const projectName = "eslint-plugin-repo-compliance";
 /** Public origin for the published documentation site. */
 const siteOrigin = "https://nick2bad4u.github.io";
 /** Canonical public site URL including the GitHub Pages project path. */
 const siteUrl = `${siteOrigin}${baseUrl}`;
 /** Global site description used for SEO and social cards. */
 const siteDescription =
-    "Type-safe ESLint rules for adopting type-fest and ts-extras patterns in modern TypeScript codebases.";
+    "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.";
 /** Global blog description used for SEO and social cards. */
 const projectBlogDescription = `Updates, architecture notes, and practical guidance for ${projectName} users.`;
 /** Global project tagline used for SEO metadata. */
-const projectTagline = `Type-safe ESLint rules for adopting type-fest and ts-extras patterns in modern TypeScript codebases.`;
+const projectTagline = `ESLint rules for repository compliance across major hosting providers.`;
 /** Global project keywords used for SEO metadata. */
 const projectKeywords =
-    "eslint, eslint-plugin, type-fest, ts-extras, typescript, flat config, static analysis";
+    "eslint, eslint-plugin, repository, compliance, github, gitlab, bitbucket, codeberg";
 /** Social preview image used for Open Graph and Twitter cards. */
 const socialCardImagePath = "img/logo.png";
 /** Absolute social preview image URL. */
@@ -470,12 +470,12 @@ const config = {
                             label: "\ue7d2 ESLint Inspector",
                         },
                         {
-                            href: `https://www.npmjs.com/package/ts-extras`,
-                            label: "\uf113 ts-extras",
+                            href: `https://www.npmjs.com/package/eslint-plugin-repo-compliance`,
+                            label: "\uf113 npm package",
                         },
                         {
-                            href: `https://www.npmjs.com/package/type-fest`,
-                            label: "\ue65b type-fest",
+                            href: `https://docs.github.com/`,
+                            label: "\ue65b GitHub Docs",
                         },
                     ],
                     title: "📁 Project",
@@ -532,8 +532,8 @@ const config = {
                             to: "/docs/rules/getting-started",
                         },
                         {
-                            label: "• Adoption & Rollout",
-                            to: "/docs/rules/category/-adoption--rollout",
+                            label: "• Presets",
+                            to: "/docs/rules/presets",
                         },
                     ],
                 },
@@ -549,12 +549,12 @@ const config = {
                             to: "/docs/rules",
                         },
                         {
-                            label: "💠 Rules for ts-extras",
-                            to: "/docs/rules/category/ts-extras",
+                            label: "📁 Repository baseline rules",
+                            to: "/docs/rules/category/repository-baseline",
                         },
                         {
-                            label: "✴️ Rules for type-fest",
-                            to: "/docs/rules/category/type-fest",
+                            label: "🐙 GitHub rules",
+                            to: "/docs/rules/category/github",
                         },
                     ],
                 },
@@ -570,32 +570,32 @@ const config = {
                             to: "/docs/rules/presets",
                         },
                         {
-                            label: "🟢 Minimal",
-                            to: "/docs/rules/presets/minimal",
-                        },
-                        {
-                            label: "🟡 Recommended",
+                            label: "✅ Recommended",
                             to: "/docs/rules/presets/recommended",
                         },
                         {
-                            label: "🔴 Strict",
+                            label: "🔒 Strict",
                             to: "/docs/rules/presets/strict",
                         },
                         {
-                            label: "🟣 All",
+                            label: "🐙 GitHub",
+                            to: "/docs/rules/presets/github",
+                        },
+                        {
+                            label: "🦊 GitLab",
+                            to: "/docs/rules/presets/gitlab",
+                        },
+                        {
+                            label: "🗻 Codeberg",
+                            to: "/docs/rules/presets/codeberg",
+                        },
+                        {
+                            label: "🪣 Bitbucket",
+                            to: "/docs/rules/presets/bitbucket",
+                        },
+                        {
+                            label: "🧩 All",
                             to: "/docs/rules/presets/all",
-                        },
-                        {
-                            label: "🧪 Experimental",
-                            to: "/docs/rules/presets/experimental",
-                        },
-                        {
-                            label: "💠 type-fest",
-                            to: "/docs/rules/presets/type-fest-types",
-                        },
-                        {
-                            label: "✴️ ts-extras",
-                            to: "/docs/rules/presets/ts-extras-type-guards",
                         },
                     ],
                 },
@@ -614,22 +614,22 @@ const config = {
                             label: "• \ue616 NPM",
                         },
                         {
-                            href: `https://github.com/sindresorhus/type-fest`,
+                            href: "https://docs.github.com/",
                             className: "navbar-dropdown-divider-before",
-                            label: "💠 \ue709 type-fest",
+                            label: "🐙 GitHub Docs",
                         },
                         {
-                            href: `https://www.npmjs.com/package/type-fest`,
-                            label: "💠 \ue616 type-fest",
+                            href: "https://docs.gitlab.com/",
+                            label: "🦊 GitLab Docs",
                         },
                         {
-                            href: `https://github.com/sindresorhus/ts-extras`,
+                            href: "https://support.atlassian.com/bitbucket-cloud/docs/",
                             className: "navbar-dropdown-divider-before",
-                            label: "✴️ \ue709 ts-extras",
+                            label: "🪣 Bitbucket Docs",
                         },
                         {
-                            href: `https://www.npmjs.com/package/ts-extras`,
-                            label: "✴️ \ue616 ts-extras",
+                            href: "https://docs.codeberg.org/",
+                            label: "🗻 Codeberg Docs",
                         },
                     ],
                 },

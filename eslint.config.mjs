@@ -90,11 +90,12 @@ import * as yamlEslintParser from "yaml-eslint-parser";
  * @remarks
  * When bootstrapping a new ESLint plugin, do the following:
  *
- * 1. Import `typefest` from the npm package and add it above
- * 2. Change the `typefest` local import below to be the new plugin's name and path
+ * 1. Import your plugin from the npm package and add it above
+ * 2. Change the `repoCompliancePlugin` local import below to be the new plugin's
+ *    name and path
  * 3. Setup the `🚢 Local Plugin Import` section below for new plugin
  */
-import typefest from "./plugin.mjs";
+import repoCompliancePlugin from "./plugin.mjs";
 
 // NOTE: eslint-plugin-json-schema-validator may attempt to fetch remote schemas
 // at lint time. That makes linting flaky/offline-hostile.
@@ -732,28 +733,28 @@ export default defineConfig([
     //     ],
     //     name: "Local Plugin Rules from Source",
     //     plugins: {
-    //         typefest: typefest,
+    //         "repo-compliance": repoCompliancePlugin,
     //     },
     //     rules: {
-    //         ...typefest.configs.all.rules,
+    //         ...repoCompliancePlugin.configs.all.rules,
     //     },
     // },
     // #endregion
-    // #region ⌨️ Typefest
+    // #region ⌨️ Local Plugin
     // ═══════════════════════════════════════════════════════════════════════════════
-    // SECTION: ⌨️ Typefest (typefest/*)
+    // SECTION: ⌨️ Local Plugin (repo-compliance/*)
     // ═══════════════════════════════════════════════════════════════════════════════
     {
         files: [
             "src/**/*.{ts,tsx,mts,cts}",
             //    "test/**/*.{ts,tsx,mts,cts}"
         ],
-        name: "Typefest Rules for Source",
+        name: "Local Plugin Rules for Source",
         plugins: {
-            typefest: typefest,
+            "repo-compliance": repoCompliancePlugin,
         },
         rules: {
-            ...typefest.configs.experimental.rules,
+            ...repoCompliancePlugin.configs.all.rules,
         },
     },
     // #endregion
@@ -3139,6 +3140,27 @@ export default defineConfig([
             // return value is intentionally ignored.
             "@typescript-eslint/strict-void-return": "off",
             "typedoc/require-exported-doc-comment": "off", // Benchmarks and scripts often have non-exported members where doc comments would be low-value and high-effort.
+        },
+    },
+    {
+        files: [
+            "src/_internal/**/*.{ts,tsx,mts,cts}",
+            "src/rules/require-*.ts",
+            "src/plugin.ts",
+        ],
+        name: "Repo compliance migration TSDoc overrides",
+        rules: {
+            "@eslint-community/eslint-comments/require-description": "off",
+            "@typescript-eslint/prefer-readonly-parameter-types": "off",
+            "canonical/no-re-export": "off",
+            "tsdoc-require-2/require": "off",
+        },
+    },
+    {
+        files: ["test/plugin-entry.test.ts"],
+        name: "Plugin entry test migration override",
+        rules: {
+            "@typescript-eslint/no-unsafe-argument": "off",
         },
     },
     {

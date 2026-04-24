@@ -1,0 +1,29 @@
+import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js";
+
+const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
+    createRepositoryFilePresenceRule({
+        configReferences: [
+            "repo-compliance.configs.strict",
+            "repo-compliance.configs.github",
+            "repo-compliance.configs.gitlab",
+            "repo-compliance.configs.codeberg",
+            "repo-compliance.configs.all",
+        ],
+        description:
+            "require a CODEOWNERS file for deterministic review ownership.",
+        messageId: "missingCodeownersFile",
+        messageText:
+            "Repository is missing CODEOWNERS. Add CODEOWNERS (root, .github, or docs) so review ownership is explicit and enforceable.",
+        name: "require-codeowners-file",
+        recommendation: false,
+        requirement: {
+            kind: "one-of",
+            paths: [
+                "CODEOWNERS",
+                ".github/CODEOWNERS",
+                "docs/CODEOWNERS",
+            ],
+        },
+    });
+
+export default rule;

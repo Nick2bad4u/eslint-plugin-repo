@@ -7,32 +7,23 @@ sidebar_position: 2
 Install the plugin:
 
 ```bash
-npm install --save-dev eslint-plugin-typefest
+npm install --save-dev eslint-plugin-repo-compliance
 ```
 
 Then enable it in your Flat Config:
 
 ```ts
-import typefest from "eslint-plugin-typefest";
+import plugin from "eslint-plugin-repo-compliance";
 
-export default [
-    {
-        plugins: {
-            typefest,
-        },
-        rules: {
-            "typefest/prefer-ts-extras-is-defined": "error",
-        },
-    },
-];
+export default [plugin.configs.recommended];
 ```
 
 ## Recommended approach
 
-- Start with one ruleset (`typefest.configs.recommended` or `typefest.configs.strict`).
-- Fix violations in small batches.
-- Promote warnings to errors after stabilization.
+- Start with `plugin.configs.recommended`.
+- Add provider presets (`github`, `gitlab`, `bitbucket`, `codeberg`) as needed.
+- Use `plugin.configs.strict` for stronger policy coverage.
 
 ## Rule navigation
 
-Use the sidebar **Rules** section for the full list of rule docs synced from the repository.
+Use the sidebar **Rules** section for the full list of rule docs.
