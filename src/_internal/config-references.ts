@@ -6,12 +6,19 @@ import { objectHasOwn } from "ts-extras";
 export const configNames = [
     "ai",
     "all",
+    "aws",
+    "azure",
     "bitbucket",
     "codeberg",
+    "digitalOcean",
+    "docker",
     "github",
     "gitlab",
+    "googleCloud",
+    "netlify",
     "recommended",
     "strict",
+    "vercel",
 ] as const;
 
 /**
@@ -44,6 +51,18 @@ export const configMetadataByName: Readonly<
     all: {
         icon: "🧩",
         presetName: "repo-compliance:all",
+        readmeOrder: 16,
+        requiresTypeChecking: false,
+    },
+    aws: {
+        icon: "☁️",
+        presetName: "repo-compliance:aws",
+        readmeOrder: 8,
+        requiresTypeChecking: false,
+    },
+    azure: {
+        icon: "🔷",
+        presetName: "repo-compliance:azure",
         readmeOrder: 9,
         requiresTypeChecking: false,
     },
@@ -59,6 +78,18 @@ export const configMetadataByName: Readonly<
         readmeOrder: 6,
         requiresTypeChecking: false,
     },
+    digitalOcean: {
+        icon: "🌊",
+        presetName: "repo-compliance:digitalOcean",
+        readmeOrder: 14,
+        requiresTypeChecking: false,
+    },
+    docker: {
+        icon: "🐳",
+        presetName: "repo-compliance:docker",
+        readmeOrder: 11,
+        requiresTypeChecking: false,
+    },
     github: {
         icon: "🐙",
         presetName: "repo-compliance:github",
@@ -69,6 +100,18 @@ export const configMetadataByName: Readonly<
         icon: "🦊",
         presetName: "repo-compliance:gitlab",
         readmeOrder: 5,
+        requiresTypeChecking: false,
+    },
+    googleCloud: {
+        icon: "🌤️",
+        presetName: "repo-compliance:googleCloud",
+        readmeOrder: 10,
+        requiresTypeChecking: false,
+    },
+    netlify: {
+        icon: "🌐",
+        presetName: "repo-compliance:netlify",
+        readmeOrder: 13,
         requiresTypeChecking: false,
     },
     recommended: {
@@ -83,6 +126,12 @@ export const configMetadataByName: Readonly<
         readmeOrder: 2,
         requiresTypeChecking: false,
     },
+    vercel: {
+        icon: "▲",
+        presetName: "repo-compliance:vercel",
+        readmeOrder: 12,
+        requiresTypeChecking: false,
+    },
 };
 
 /**
@@ -95,6 +144,13 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
     "gitlab",
     "codeberg",
     "bitbucket",
+    "aws",
+    "azure",
+    "googleCloud",
+    "docker",
+    "vercel",
+    "netlify",
+    "digitalOcean",
     "ai",
     "all",
 ];
@@ -107,12 +163,19 @@ export const configReferenceToName: Readonly<
 > = {
     "repoPlugin.configs.ai": "ai",
     "repoPlugin.configs.all": "all",
+    "repoPlugin.configs.aws": "aws",
+    "repoPlugin.configs.azure": "azure",
     "repoPlugin.configs.bitbucket": "bitbucket",
     "repoPlugin.configs.codeberg": "codeberg",
+    "repoPlugin.configs.digitalOcean": "digitalOcean",
+    "repoPlugin.configs.docker": "docker",
     "repoPlugin.configs.github": "github",
     "repoPlugin.configs.gitlab": "gitlab",
+    "repoPlugin.configs.googleCloud": "googleCloud",
+    "repoPlugin.configs.netlify": "netlify",
     "repoPlugin.configs.recommended": "recommended",
     "repoPlugin.configs.strict": "strict",
+    "repoPlugin.configs.vercel": "vercel",
 };
 
 /**

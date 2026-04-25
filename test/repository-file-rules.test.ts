@@ -38,6 +38,16 @@ const ensureFixtureRepo = (
 
 const descriptors: readonly RuleFixtureDescriptor[] = [
     {
+        messageId: "missingAwsAmplifyConfigFile",
+        name: "require-aws-amplify-config-file",
+        satisfyingFiles: ["amplify.yml"],
+    },
+    {
+        messageId: "missingAzurePipelinesConfigFile",
+        name: "require-azure-pipelines-config-file",
+        satisfyingFiles: ["azure-pipelines.yml"],
+    },
+    {
         messageId: "missingReadmeFile",
         name: "require-readme-file",
         satisfyingFiles: ["README.md"],
@@ -110,9 +120,19 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         satisfyingFiles: [".github/secret-scanning/custom-patterns.yml"],
     },
     {
+        messageId: "missingDockerfile",
+        name: "require-dockerfile",
+        satisfyingFiles: ["Dockerfile"],
+    },
+    {
         messageId: "missingGitHubActionsWorkflowFile",
         name: "require-github-actions-workflow-file",
         satisfyingFiles: [".github/workflows/ci.yml"],
+    },
+    {
+        messageId: "missingGoogleCloudBuildConfigFile",
+        name: "require-google-cloud-build-config-file",
+        satisfyingFiles: ["cloudbuild.yaml"],
     },
     {
         messageId: "missingGitLabCiConfigFile",
@@ -133,6 +153,21 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         messageId: "missingBitbucketPipelinesConfigFile",
         name: "require-bitbucket-pipelines-config-file",
         satisfyingFiles: ["bitbucket-pipelines.yml"],
+    },
+    {
+        messageId: "missingNetlifyConfigFile",
+        name: "require-netlify-config-file",
+        satisfyingFiles: ["netlify.toml"],
+    },
+    {
+        messageId: "missingVercelConfigFile",
+        name: "require-vercel-config-file",
+        satisfyingFiles: ["vercel.json"],
+    },
+    {
+        messageId: "missingDigitalOceanAppSpecFile",
+        name: "require-digitalocean-app-spec-file",
+        satisfyingFiles: [".do/app.yaml"],
     },
     {
         messageId: "missingForgejoActionsWorkflowFile",

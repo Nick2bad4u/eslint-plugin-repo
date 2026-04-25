@@ -29,12 +29,19 @@ import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.m
 /**
  * @typedef {"ai"
  *     | "all"
+ *     | "aws"
+ *     | "azure"
  *     | "bitbucket"
  *     | "codeberg"
+ *     | "digitalOcean"
+ *     | "docker"
  *     | "github"
  *     | "gitlab"
+ *     | "googleCloud"
+ *     | "netlify"
  *     | "recommended"
- *     | "strict"} PresetConfigName
+ *     | "strict"
+ *     | "vercel"} PresetConfigName
  */
 
 const matrixSectionHeading = "## Rule matrix";
@@ -62,12 +69,19 @@ const normalizeMarkdownLineEndings = (markdown, lineEnding) =>
 const presetDocSlugByConfigName = {
     ai: "ai",
     all: "all",
+    aws: "aws",
+    azure: "azure",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
+    digitalOcean: "digitalocean",
+    docker: "docker",
     github: "github",
     gitlab: "gitlab",
+    googleCloud: "google-cloud",
+    netlify: "netlify",
     recommended: "recommended",
     strict: "strict",
+    vercel: "vercel",
 };
 
 /** @type {readonly PresetConfigName[]} */
@@ -80,6 +94,13 @@ const standardPresetConfigNames = [
     "gitlab",
     "codeberg",
     "bitbucket",
+    "aws",
+    "azure",
+    "googleCloud",
+    "docker",
+    "vercel",
+    "netlify",
+    "DigitalOcean",
 ];
 
 /**

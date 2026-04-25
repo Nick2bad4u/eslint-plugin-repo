@@ -13,7 +13,20 @@ const readmeRelativePaths = [
     "README.txt",
 ] as const;
 
+const amplifyRelativePaths = ["amplify.yml", "amplify.yaml"] as const;
+const azurePipelinesRelativePaths = [
+    "azure-pipelines.yml",
+    "azure-pipelines.yaml",
+] as const;
+const cloudBuildRelativePaths = ["cloudbuild.yaml", "cloudbuild.yml"] as const;
+const digitalOceanAppSpecRelativePaths = [
+    ".do/app.yaml",
+    ".do/app.yml",
+] as const;
+const dockerfileRelativePaths = ["Dockerfile"] as const;
 const gitlabCiRelativePaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
+const netlifyRelativePaths = ["netlify.toml"] as const;
+const vercelRelativePaths = ["vercel.json"] as const;
 const workflowExtensions = new Set([".yaml", ".yml"]);
 
 const findFirstExistingRepositoryFile = (
@@ -41,6 +54,36 @@ export const getDependabotConfigPath = (
     findFirstExistingRepositoryFile(rootDirectoryPath, dependabotRelativePaths);
 
 /**
+ * Resolves the first supported AWS Amplify build specification from the
+ * repository root.
+ */
+export const getAwsAmplifyConfigPath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(rootDirectoryPath, amplifyRelativePaths);
+
+/**
+ * Resolves the first supported Azure Pipelines configuration file from the
+ * repository root.
+ */
+export const getAzurePipelinesConfigPath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(
+        rootDirectoryPath,
+        azurePipelinesRelativePaths
+    );
+
+/**
+ * Resolves the first supported Google Cloud Build configuration file from the
+ * repository root.
+ */
+export const getGoogleCloudBuildConfigPath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(rootDirectoryPath, cloudBuildRelativePaths);
+
+/**
  * Resolves the first supported repository README file from the repository root.
  */
 export const getRepositoryReadmePath = (
@@ -56,6 +99,40 @@ export const getGitLabCiConfigPath = (
     rootDirectoryPath: string
 ): null | string =>
     findFirstExistingRepositoryFile(rootDirectoryPath, gitlabCiRelativePaths);
+
+/**
+ * Resolves the repository-root Dockerfile path when present.
+ */
+export const getRepositoryDockerfilePath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(rootDirectoryPath, dockerfileRelativePaths);
+
+/**
+ * Resolves the Netlify configuration file from the repository root.
+ */
+export const getNetlifyConfigPath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(rootDirectoryPath, netlifyRelativePaths);
+
+/**
+ * Resolves the Vercel configuration file from the repository root.
+ */
+export const getVercelConfigPath = (rootDirectoryPath: string): null | string =>
+    findFirstExistingRepositoryFile(rootDirectoryPath, vercelRelativePaths);
+
+/**
+ * Resolves the first supported DigitalOcean App Platform specification from the
+ * repository root.
+ */
+export const getDigitalOceanAppSpecPath = (
+    rootDirectoryPath: string
+): null | string =>
+    findFirstExistingRepositoryFile(
+        rootDirectoryPath,
+        digitalOceanAppSpecRelativePaths
+    );
 
 /**
  * Returns all readable Forgejo workflow file paths from `.forgejo/workflows`

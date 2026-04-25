@@ -1898,3 +1898,333 @@ ruleTester.run(
         ],
     }
 );
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-base-directory",
+    getPluginRule("require-aws-amplify-artifacts-base-directory"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId: "missingAwsAmplifyArtifactsBaseDirectory",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory",
+                    "invalid-missing-base-directory",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                                "  artifacts:",
+                                "    files:",
+                                "      - '**/*'",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports Amplify specs that omit artifacts.baseDirectory",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory",
+                    "valid-base-directory-present",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: dist",
+                                "    files:",
+                                "      - '**/*'",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Amplify specs with artifacts.baseDirectory",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory",
+                    "valid-no-amplify-config",
+                    []
+                ),
+                name: "skips the rule when Amplify config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-pr-trigger",
+    getPluginRule("require-azure-pipelines-pr-trigger"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesPrTrigger" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "invalid-push-only",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs without a pr trigger",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesPrTrigger" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "invalid-pr-none",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  - main",
+                                "pr: none",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs that explicitly disable pr validation",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "valid-root-pr",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  - main",
+                                "pr:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with a root pr trigger block",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "valid-no-azure-config",
+                    []
+                ),
+                name: "skips the rule when azure-pipelines.yml is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout",
+    getPluginRule("require-google-cloud-build-timeout"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingGoogleCloudBuildTimeout" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout",
+                    "invalid-missing-timeout",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                                "    args: ['test']",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports Cloud Build configs without a root timeout",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout",
+                    "valid-root-timeout",
+                    [
+                        {
+                            content: [
+                                "timeout: 1200s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                                "    args: ['test']",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts Cloud Build configs with an explicit timeout",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips the rule when cloudbuild.yaml is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerignore-file",
+    getPluginRule("require-dockerignore-file"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDockerignoreFile" }],
+                filename: writeFixtureRepo(
+                    "require-dockerignore-file",
+                    "invalid-missing-dockerignore",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "COPY . .",
+                                "RUN npm ci",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports repositories with a Dockerfile but no .dockerignore",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerignore-file",
+                    "valid-dockerignore-present",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "COPY . .",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                        {
+                            content: [
+                                "node_modules",
+                                ".git",
+                                ".env",
+                            ].join("\n"),
+                            relativePath: ".dockerignore",
+                        },
+                    ]
+                ),
+                name: "accepts repositories that pair Dockerfile with .dockerignore",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerignore-file",
+                    "valid-no-dockerfile",
+                    []
+                ),
+                name: "skips the rule when Dockerfile is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-publish-directory",
+    getPluginRule("require-netlify-build-publish-directory"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingNetlifyBuildPublishDirectory" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-build-publish-directory",
+                    "invalid-missing-publish",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports netlify.toml files that omit publish output configuration",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-publish-directory",
+                    "valid-build-publish",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts netlify.toml files with an explicit publish directory",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-publish-directory",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips the rule when netlify.toml is absent",
+            },
+        ],
+    }
+);

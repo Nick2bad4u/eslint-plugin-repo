@@ -130,12 +130,19 @@ const derivePresetRuleNamesByConfig = (): Readonly<
     return {
         ai: [...new Set(presetRuleMap.ai)],
         all: [...new Set(presetRuleMap.all)],
+        aws: [...new Set(presetRuleMap.aws)],
+        azure: [...new Set(presetRuleMap.azure)],
         bitbucket: [...new Set(presetRuleMap.bitbucket)],
         codeberg: [...new Set(presetRuleMap.codeberg)],
+        digitalOcean: [...new Set(presetRuleMap.digitalOcean)],
+        docker: [...new Set(presetRuleMap.docker)],
         github: [...new Set(presetRuleMap.github)],
         gitlab: [...new Set(presetRuleMap.gitlab)],
+        googleCloud: [...new Set(presetRuleMap.googleCloud)],
+        netlify: [...new Set(presetRuleMap.netlify)],
         recommended: [...new Set(presetRuleMap.recommended)],
         strict: [...new Set(presetRuleMap.strict)],
+        vercel: [...new Set(presetRuleMap.vercel)],
     };
 };
 
@@ -195,6 +202,8 @@ const plugin: RepoCompliancePluginContract = {
 const configs: RepoComplianceConfigsContract = {
     ai: buildPresetConfig(plugin, "ai", presetRuleNamesByConfig.ai),
     all: buildPresetConfig(plugin, "all", presetRuleNamesByConfig.all),
+    aws: buildPresetConfig(plugin, "aws", presetRuleNamesByConfig.aws),
+    azure: buildPresetConfig(plugin, "azure", presetRuleNamesByConfig.azure),
     bitbucket: buildPresetConfig(
         plugin,
         "bitbucket",
@@ -205,14 +214,31 @@ const configs: RepoComplianceConfigsContract = {
         "codeberg",
         presetRuleNamesByConfig.codeberg
     ),
+    digitalOcean: buildPresetConfig(
+        plugin,
+        "digitalOcean",
+        presetRuleNamesByConfig.digitalOcean
+    ),
+    docker: buildPresetConfig(plugin, "docker", presetRuleNamesByConfig.docker),
     github: buildPresetConfig(plugin, "github", presetRuleNamesByConfig.github),
     gitlab: buildPresetConfig(plugin, "gitlab", presetRuleNamesByConfig.gitlab),
+    googleCloud: buildPresetConfig(
+        plugin,
+        "googleCloud",
+        presetRuleNamesByConfig.googleCloud
+    ),
+    netlify: buildPresetConfig(
+        plugin,
+        "netlify",
+        presetRuleNamesByConfig.netlify
+    ),
     recommended: buildPresetConfig(
         plugin,
         "recommended",
         presetRuleNamesByConfig.recommended
     ),
     strict: buildPresetConfig(plugin, "strict", presetRuleNamesByConfig.strict),
+    vercel: buildPresetConfig(plugin, "vercel", presetRuleNamesByConfig.vercel),
 };
 
 plugin.configs = configs;

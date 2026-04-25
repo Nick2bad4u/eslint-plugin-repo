@@ -22,14 +22,14 @@ const siteOrigin = "https://nick2bad4u.github.io";
 const siteUrl = `${siteOrigin}${baseUrl}`;
 /** Global site description used for SEO and social cards. */
 const siteDescription =
-    "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.";
+    "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean.";
 /** Global blog description used for SEO and social cards. */
 const projectBlogDescription = `Updates, architecture notes, and practical guidance for ${projectName} users.`;
 /** Global project tagline used for SEO metadata. */
 const projectTagline = `ESLint rules for repository compliance across major hosting providers.`;
 /** Global project keywords used for SEO metadata. */
 const projectKeywords =
-    "eslint, eslint-plugin, repository, compliance, github, gitlab, bitbucket, codeberg";
+    "eslint, eslint-plugin, repository, compliance, github, gitlab, bitbucket, codeberg, aws, azure, google cloud, docker, vercel, netlify, digitalocean";
 /** Social preview image used for Open Graph and Twitter cards. */
 const socialCardImagePath = "img/social-card.png";
 /** Absolute social preview image URL. */

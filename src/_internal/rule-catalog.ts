@@ -74,6 +74,18 @@ const orderedRuleNames = [
     "require-bitbucket-pipelines-clone-depth",
     "require-forgejo-actions-concurrency",
     "require-forgejo-actions-workflow-trigger-coverage",
+    "require-aws-amplify-config-file",
+    "require-aws-amplify-artifacts-base-directory",
+    "require-azure-pipelines-config-file",
+    "require-azure-pipelines-pr-trigger",
+    "require-google-cloud-build-config-file",
+    "require-google-cloud-build-timeout",
+    "require-dockerfile",
+    "require-dockerignore-file",
+    "require-vercel-config-file",
+    "require-netlify-config-file",
+    "require-netlify-build-publish-directory",
+    "require-digitalocean-app-spec-file",
 ] as const;
 
 const toRuleCatalogId = (ruleNumber: number): RuleCatalogId =>

@@ -14,6 +14,13 @@ This plugin enforces repository policy files and provider-specific automation co
 - GitLab compliance (CI and template requirements)
 - Bitbucket compliance (Pipelines configuration)
 - Codeberg/Forgejo compliance (workflow requirements)
+- AWS compliance (Amplify build-spec requirements)
+- Azure compliance (Pipelines requirements)
+- Google Cloud compliance (Cloud Build requirements)
+- Docker compliance (container packaging requirements)
+- Vercel compliance (project config requirements)
+- Netlify compliance (build config requirements)
+- DigitalOcean compliance (App Platform spec requirements)
 
 ## Next steps
 

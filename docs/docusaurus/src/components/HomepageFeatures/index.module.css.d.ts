@@ -1,26 +1,10 @@
 declare const styles: {
-    readonly action: string;
     readonly card: string;
     readonly cardTitle: string;
     readonly description: string;
-    readonly eyebrow: string;
     readonly features: string;
     readonly grid: string;
-    readonly heading: string;
-    readonly icon: string;
-    readonly kicker: string;
-    readonly lead: string;
-    readonly list: string;
-    readonly secondaryCard: string;
-    readonly secondaryCardTitle: string;
-    readonly secondaryDescription: string;
-    readonly secondaryEyebrow: string;
-    readonly secondaryGrid: string;
-    readonly secondaryIntro: string;
-    readonly secondaryLead: string;
-    readonly secondaryLink: string;
-    readonly secondarySection: string;
-    readonly secondaryTitle: string;
-    readonly title: string;
+    readonly iconBadge: string;
+    readonly link: string;
 };
 export = styles;

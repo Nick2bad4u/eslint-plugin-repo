@@ -9,83 +9,54 @@ import HomepageFeatures from "../components/HomepageFeatures";
 import styles from "./index.module.css";
 
 type HeroBadge = {
-    readonly title: string;
+    readonly description: string;
     readonly icon: string;
-    readonly description: string;
-};
-
-type HeroStat = {
-    readonly value: string;
-    readonly label: string;
-};
-
-type AdoptionStep = {
-    readonly step: string;
     readonly title: string;
-    readonly description: string;
 };
 
 const homepageDescription =
-    "Repository compliance docs, presets, and rule references for GitHub, GitLab, Bitbucket, and Forgejo teams.";
+    "Repository compliance docs, presets, and rule references for GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean teams.";
 const homepageKeywords =
-    "eslint-plugin-repo, repository compliance, github actions, gitlab ci, bitbucket pipelines, forgejo, eslint flat config";
+    "eslint-plugin-repo, repository compliance, github actions, gitlab ci, bitbucket pipelines, forgejo, aws amplify, azure pipelines, google cloud build, docker, vercel, netlify, digitalocean, eslint flat config";
 
 const heroBadges = [
     {
         description:
-            "Start with recommended coverage and layer in provider presets as your repository policies mature.",
+            "Start with recommended coverage, then layer in the provider preset that matches the host you actually use.",
         icon: "🧩",
-        title: "Preset-driven rollout",
+        title: "Flat Config native",
     },
     {
         description:
-            "Rule docs, generated API references, ADRs, charts, and inspector builds now live in one coherent docs app.",
+            "Repository-baseline and provider presets stay focused on the policy files and workflow structure teams actually drift on.",
         icon: "📘",
-        title: "Docs that explain intent",
+        title: "Provider-aware presets",
     },
     {
         description:
-            "Catch drift in workflow files, governance defaults, and repository hygiene before CI or review queues do.",
+            "Rule docs and generated API pages explain what the plugin is enforcing before CI or review queues discover drift for you.",
         icon: "🛡️",
-        title: "Governance before drift",
+        title: "Actionable rule docs",
     },
 ] as const satisfies readonly HeroBadge[];
 
 const heroStats = [
     {
         label: "Hosting providers covered",
-        value: "4 providers",
+        value: "11 providers",
     },
     {
-        label: "Entry points to adopt",
-        value: "Preset-first",
+        label: "Start small, scale later",
+        value: "Presets first",
     },
     {
-        label: "Maintainer surfaces",
-        value: "Docs + API",
+        label: "Reference surface",
+        value: "Rules + API",
     },
-] as const satisfies readonly HeroStat[];
-
-const adoptionSteps = [
-    {
-        description:
-            "Enable the recommended baseline, then add the host preset that matches the repository you actually run.",
-        step: "01",
-        title: "Adopt incrementally",
-    },
-    {
-        description:
-            "Use rule docs, generated API pages, and inspector builds to understand what the plugin is enforcing.",
-        step: "02",
-        title: "Inspect confidently",
-    },
-    {
-        description:
-            "Ratchet toward strict coverage only after the baseline is stable and noisy migrations are under control.",
-        step: "03",
-        title: "Scale deliberately",
-    },
-] as const satisfies readonly AdoptionStep[];
+] as const satisfies readonly {
+    readonly label: string;
+    readonly value: string;
+}[];
 
 const homepageStructuredData = {
     "@context": "https://schema.org",
@@ -123,38 +94,37 @@ export default function HomePage() {
             </Head>
             <main className={styles.homepage}>
                 <section className={styles.hero}>
-                    <div className={`container ${styles.heroGrid}`}>
-                        <div className={styles.heroCopy}>
+                    <div className={`container ${styles.heroInner}`}>
+                        <div className={styles.copyColumn}>
                             <span className={styles.eyebrow}>
-                                Repository compliance for modern teams
+                                ESLint plugin for modern repository teams
                             </span>
                             <Heading as="h1" className={styles.title}>
-                                Enforce repository rules before CI bites back.
+                                eslint-plugin-repo
                             </Heading>
                             <p className={styles.lead}>
                                 <code>eslint-plugin-repo</code> helps teams
-                                standardize repository policy files, CI workflow
+                                enforce repository policy files, CI workflow
                                 structure, and provider-specific governance
-                                across GitHub, GitLab, Bitbucket, and Forgejo /
-                                Codeberg.
+                                across major repository and hosting providers.
                             </p>
 
-                            <div className={styles.badgeGrid}>
+                            <div className={styles.infoGrid}>
                                 {heroBadges.map((badge) => (
                                     <article
                                         key={badge.title}
-                                        className={styles.badgeCard}
+                                        className={styles.infoCard}
                                     >
-                                        <p className={styles.badgeTitleRow}>
+                                        <p className={styles.infoTitle}>
                                             <span
-                                                className={styles.badgeIcon}
+                                                className={styles.infoIcon}
                                                 aria-hidden="true"
                                             >
                                                 {badge.icon}
                                             </span>
                                             {badge.title}
                                         </p>
-                                        <p className={styles.badgeDescription}>
+                                        <p className={styles.infoDescription}>
                                             {badge.description}
                                         </p>
                                     </article>
@@ -164,27 +134,21 @@ export default function HomePage() {
                             <div className={styles.actions}>
                                 <Link
                                     className={`button button--primary button--lg ${styles.actionButton}`}
-                                    to="/docs/rules/overview"
+                                    to="/docs/intro"
                                 >
-                                    Browse Rules
+                                    Start with Overview
                                 </Link>
                                 <Link
                                     className={`button button--secondary button--lg ${styles.actionButton}`}
                                     to="/docs/rules/presets"
                                 >
-                                    Explore Presets
-                                </Link>
-                                <Link
-                                    className={`button button--outline button--lg ${styles.actionButton}`}
-                                    to="/docs/developer"
-                                >
-                                    Maintainer Docs
+                                    Compare Presets
                                 </Link>
                             </div>
 
-                            <GitHubStats />
+                            <GitHubStats className={styles.badges} />
 
-                            <div className={styles.heroStats}>
+                            <div className={styles.statGrid}>
                                 {heroStats.map((stat) => (
                                     <article
                                         key={stat.label}
@@ -201,137 +165,62 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        <div className={styles.panelStack}>
-                            <aside
-                                className={styles.panel}
-                                aria-label="Project summary"
-                            >
-                                <div className={styles.panelHeader}>
-                                    <div className={styles.logoWrap}>
-                                        <img
-                                            alt="eslint-plugin-repo logo"
-                                            className={styles.logo}
-                                            src={logoUrl}
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className={styles.panelTitle}>
-                                            eslint-plugin-repo
-                                        </p>
-                                        <p className={styles.panelSubtitle}>
-                                            Flat-config-first repository linting
-                                            with provider-aware rule groups.
-                                        </p>
-                                    </div>
+                        <aside
+                            className={styles.visualPanel}
+                            aria-label="Project summary"
+                        >
+                            <div className={styles.visualHeader}>
+                                <div className={styles.logoFrame}>
+                                    <img
+                                        alt="eslint-plugin-repo logo"
+                                        className={styles.logo}
+                                        src={logoUrl}
+                                    />
                                 </div>
+                                <div>
+                                    <p className={styles.visualTitle}>
+                                        Repository rules, not generic lint
+                                        vanity
+                                    </p>
+                                    <p className={styles.visualLead}>
+                                        Provider-aware repository policy linting
+                                        with docs and generated API references.
+                                    </p>
+                                </div>
+                            </div>
 
-                                <ul className={styles.chipList}>
-                                    <li className={styles.chip}>🐙 GitHub</li>
-                                    <li className={styles.chip}>🦊 GitLab</li>
-                                    <li className={styles.chip}>
-                                        🪣 Bitbucket
-                                    </li>
-                                    <li className={styles.chip}>🗻 Forgejo</li>
-                                </ul>
-
-                                <pre className={styles.codeBlock}>
-                                    <code>{`import plugin from "eslint-plugin-repo";
+                            <pre className={styles.codeBlock}>
+                                <code>{`import plugin from "eslint-plugin-repo";
 
 export default [
   plugin.configs.recommended,
   plugin.configs.github,
 ];`}</code>
-                                </pre>
+                            </pre>
 
-                                <ul className={styles.checklist}>
-                                    <li className={styles.checklistItem}>
-                                        Repository baseline and provider presets
-                                    </li>
-                                    <li className={styles.checklistItem}>
-                                        Generated API docs and config inspectors
-                                    </li>
-                                    <li className={styles.checklistItem}>
-                                        Maintainer ADRs, charts, and rollout
-                                        guidance
-                                    </li>
-                                </ul>
+                            <ul className={styles.chipList}>
+                                <li className={styles.chip}>🐙 GitHub</li>
+                                <li className={styles.chip}>🦊 GitLab</li>
+                                <li className={styles.chip}>🪣 Bitbucket</li>
+                                <li className={styles.chip}>🗻 Forgejo</li>
+                                <li className={styles.chip}>☁️ AWS</li>
+                                <li className={styles.chip}>🔷 Azure</li>
+                                <li className={styles.chip}>🐳 Docker</li>
+                            </ul>
 
-                                <div className={styles.meta}>
-                                    <div className={styles.metaCard}>
-                                        <span className={styles.metaLabel}>
-                                            Coverage
-                                        </span>
-                                        <span className={styles.metaValue}>
-                                            4 providers
-                                        </span>
-                                    </div>
-                                    <div className={styles.metaCard}>
-                                        <span className={styles.metaLabel}>
-                                            Docs
-                                        </span>
-                                        <span className={styles.metaValue}>
-                                            Rules + API
-                                        </span>
-                                    </div>
-                                    <div className={styles.metaCard}>
-                                        <span className={styles.metaLabel}>
-                                            Workflow
-                                        </span>
-                                        <span className={styles.metaValue}>
-                                            Flat Config
-                                        </span>
-                                    </div>
-                                </div>
-                            </aside>
-
-                            <aside
-                                className={styles.roadmap}
-                                aria-label="Adoption roadmap"
-                            >
-                                <p className={styles.roadmapTitle}>
-                                    Adoption path
-                                </p>
-                                <ol className={styles.roadmapList}>
-                                    {adoptionSteps.map((item) => (
-                                        <li
-                                            key={item.step}
-                                            className={styles.roadmapItem}
-                                        >
-                                            <span
-                                                className={styles.roadmapStep}
-                                            >
-                                                {item.step}
-                                            </span>
-                                            <div className={styles.roadmapCopy}>
-                                                <strong>{item.title}</strong>
-                                                <p>{item.description}</p>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ol>
-
-                                <div className={styles.quickLinks}>
-                                    <Link
-                                        className={styles.quickLink}
-                                        to="/docs/getting-started"
-                                    >
-                                        Quick start guide
-                                    </Link>
-                                    <Link
-                                        className={styles.quickLink}
-                                        to="/docs/rules/presets"
-                                    >
-                                        Compare presets
-                                    </Link>
-                                    <Link
-                                        className={styles.quickLink}
-                                        to="/docs/developer"
-                                    >
-                                        Maintainer workflows
-                                    </Link>
-                                </div>
-                            </aside>
-                        </div>
+                            <ul className={styles.visualList}>
+                                <li className={styles.visualListItem}>
+                                    Start with the recommended baseline.
+                                </li>
+                                <li className={styles.visualListItem}>
+                                    Add the provider preset your repository
+                                    actually uses.
+                                </li>
+                                <li className={styles.visualListItem}>
+                                    Browse rule docs before CI surprises you.
+                                </li>
+                            </ul>
+                        </aside>
                     </div>
                 </section>
 

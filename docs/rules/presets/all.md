@@ -15,6 +15,10 @@ Use epo-compliance.configs.all to enable every current rule.
 
 | Rule | Fix |
 | --- | :-: |
+| [`require-aws-amplify-artifacts-base-directory`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-aws-amplify-artifacts-base-directory) | — |
+| [`require-aws-amplify-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-aws-amplify-config-file) | — |
+| [`require-azure-pipelines-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-azure-pipelines-config-file) | — |
+| [`require-azure-pipelines-pr-trigger`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-azure-pipelines-pr-trigger) | — |
 | [`require-bitbucket-pipelines-clone-depth`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-clone-depth) | — |
 | [`require-bitbucket-pipelines-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-config-file) | — |
 | [`require-bitbucket-pipelines-default-pipeline`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-default-pipeline) | — |
@@ -35,6 +39,9 @@ Use epo-compliance.configs.all to enable every current rule.
 | [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
 | [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — |
 | [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — |
+| [`require-digitalocean-app-spec-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-file) | — |
+| [`require-dockerfile`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dockerfile) | — |
+| [`require-dockerignore-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dockerignore-file) | — |
 | [`require-forgejo-actions-concurrency`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-concurrency) | — |
 | [`require-forgejo-actions-job-timeout-minutes`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-job-timeout-minutes) | — |
 | [`require-forgejo-actions-no-write-all-permissions`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-no-write-all-permissions) | — |
@@ -62,9 +69,13 @@ Use epo-compliance.configs.all to enable every current rule.
 | [`require-gitlab-ci-workflow-rules`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-workflow-rules) | — |
 | [`require-gitlab-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-issue-template-file) | — |
 | [`require-gitlab-merge-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-merge-request-template-file) | — |
+| [`require-google-cloud-build-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-google-cloud-build-config-file) | — |
+| [`require-google-cloud-build-timeout`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-google-cloud-build-timeout) | — |
 | [`require-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-file) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-license-spdx-identifier`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-spdx-identifier) | — |
+| [`require-netlify-build-publish-directory`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-build-publish-directory) | — |
+| [`require-netlify-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-config-file) | — |
 | [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
 | [`require-pr-template-checklist-items`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pr-template-checklist-items) | — |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
@@ -76,3 +87,4 @@ Use epo-compliance.configs.all to enable every current rule.
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
+| [`require-vercel-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-config-file) | — |

@@ -151,24 +151,38 @@ export const normalizeRulesSectionMarkdown = (markdown) =>
 const presetDocsSlugByName = {
     ai: "ai",
     all: "all",
+    aws: "aws",
+    azure: "azure",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
+    digitalOcean: "digitalocean",
+    docker: "docker",
     github: "github",
     gitlab: "gitlab",
+    googleCloud: "google-cloud",
+    netlify: "netlify",
     recommended: "recommended",
     strict: "strict",
+    vercel: "vercel",
 };
 
 /** @type {Readonly<Record<PresetName, string>>} */
 const presetConfigReferenceByName = {
     ai: "repo-compliance.configs.ai",
     all: "repo-compliance.configs.all",
+    aws: "repo-compliance.configs.aws",
+    azure: "repo-compliance.configs.azure",
     bitbucket: "repo-compliance.configs.bitbucket",
     codeberg: "repo-compliance.configs.codeberg",
+    digitalOcean: "repo-compliance.configs.DigitalOcean",
+    docker: "repo-compliance.configs.docker",
     github: "repo-compliance.configs.github",
     gitlab: "repo-compliance.configs.gitlab",
+    googleCloud: "repo-compliance.configs.googleCloud",
+    netlify: "repo-compliance.configs.netlify",
     recommended: "repo-compliance.configs.recommended",
     strict: "repo-compliance.configs.strict",
+    vercel: "repo-compliance.configs.vercel",
 };
 
 /**

@@ -3,7 +3,7 @@
     "name": "eslint-plugin-repo",
     "version": "1.2.4",
     "private": false,
-    "description": "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.",
+    "description": "ESLint rules for repository compliance across GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean.",
     "keywords": [
         "eslint",
         "eslint-plugin",
@@ -13,7 +13,14 @@
         "github",
         "gitlab",
         "bitbucket",
-        "codeberg"
+        "codeberg",
+        "aws",
+        "azure",
+        "google-cloud",
+        "docker",
+        "vercel",
+        "netlify",
+        "digitalocean"
     ],
     "homepage": "https://github.com/Nick2bad4u/eslint-plugin-repo",
     "bugs": {

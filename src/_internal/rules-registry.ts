@@ -1,6 +1,10 @@
 import type { TSESLint } from "@typescript-eslint/utils";
 import type { UnknownArray } from "type-fest";
 
+import requireAwsAmplifyArtifactsBaseDirectoryRule from "../rules/require-aws-amplify-artifacts-base-directory.js";
+import requireAwsAmplifyConfigFileRule from "../rules/require-aws-amplify-config-file.js";
+import requireAzurePipelinesConfigFileRule from "../rules/require-azure-pipelines-config-file.js";
+import requireAzurePipelinesPrTriggerRule from "../rules/require-azure-pipelines-pr-trigger.js";
 import requireBitbucketPipelinesCloneDepthRule from "../rules/require-bitbucket-pipelines-clone-depth.js";
 import requireBitbucketPipelinesConfigFileRule from "../rules/require-bitbucket-pipelines-config-file.js";
 import requireBitbucketPipelinesDefaultPipelineRule from "../rules/require-bitbucket-pipelines-default-pipeline.js";
@@ -21,6 +25,9 @@ import requireDependabotReviewersRule from "../rules/require-dependabot-reviewer
 import requireDependabotScheduleRule from "../rules/require-dependabot-schedule.js";
 import requireDependabotUpdateEntriesRule from "../rules/require-dependabot-update-entries.js";
 import requireDependencyUpdateConfigRule from "../rules/require-dependency-update-config.js";
+import requireDigitalOceanAppSpecFileRule from "../rules/require-digitalocean-app-spec-file.js";
+import requireDockerfileRule from "../rules/require-dockerfile.js";
+import requireDockerignoreFileRule from "../rules/require-dockerignore-file.js";
 import requireForgejoActionsConcurrencyRule from "../rules/require-forgejo-actions-concurrency.js";
 import requireForgejoActionsJobTimeoutMinutesRule from "../rules/require-forgejo-actions-job-timeout-minutes.js";
 import requireForgejoActionsNoWriteAllPermissionsRule from "../rules/require-forgejo-actions-no-write-all-permissions.js";
@@ -48,9 +55,13 @@ import requireGitLabCiStagesRule from "../rules/require-gitlab-ci-stages.js";
 import requireGitLabCiWorkflowRulesRule from "../rules/require-gitlab-ci-workflow-rules.js";
 import requireGitLabIssueTemplateFileRule from "../rules/require-gitlab-issue-template-file.js";
 import requireGitLabMergeRequestTemplateFileRule from "../rules/require-gitlab-merge-request-template-file.js";
+import requireGoogleCloudBuildConfigFileRule from "../rules/require-google-cloud-build-config-file.js";
+import requireGoogleCloudBuildTimeoutRule from "../rules/require-google-cloud-build-timeout.js";
 import requireIssueTemplateFileRule from "../rules/require-issue-template-file.js";
 import requireLicenseFileRule from "../rules/require-license-file.js";
 import requireLicenseSpdxIdentifierRule from "../rules/require-license-spdx-identifier.js";
+import requireNetlifyBuildPublishDirectoryRule from "../rules/require-netlify-build-publish-directory.js";
+import requireNetlifyConfigFileRule from "../rules/require-netlify-config-file.js";
 import requireNodeVersionFileRule from "../rules/require-node-version-file.js";
 import requirePrTemplateChecklistItemsRule from "../rules/require-pr-template-checklist-items.js";
 import requirePullRequestTemplateFileRule from "../rules/require-pull-request-template-file.js";
@@ -62,6 +73,7 @@ import requireSecretScanningConfigRule from "../rules/require-secret-scanning-co
 import requireSecurityPolicyContactChannelRule from "../rules/require-security-policy-contact-channel.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
 import requireSupportFileRule from "../rules/require-support-file.js";
+import requireVercelConfigFileRule from "../rules/require-vercel-config-file.js";
 
 /**
  * Rule-name pattern used by this plugin.
@@ -81,6 +93,18 @@ const asRuleWithDocs = (rule: Readonly<RuleWithDocs>): RuleWithDocs => rule;
 export const repoComplianceRules: Readonly<
     Record<RuleNamePattern, RuleWithDocs>
 > = {
+    "require-aws-amplify-artifacts-base-directory": asRuleWithDocs(
+        requireAwsAmplifyArtifactsBaseDirectoryRule
+    ),
+    "require-aws-amplify-config-file": asRuleWithDocs(
+        requireAwsAmplifyConfigFileRule
+    ),
+    "require-azure-pipelines-config-file": asRuleWithDocs(
+        requireAzurePipelinesConfigFileRule
+    ),
+    "require-azure-pipelines-pr-trigger": asRuleWithDocs(
+        requireAzurePipelinesPrTriggerRule
+    ),
     "require-bitbucket-pipelines-clone-depth": asRuleWithDocs(
         requireBitbucketPipelinesCloneDepthRule
     ),
@@ -135,6 +159,11 @@ export const repoComplianceRules: Readonly<
     "require-dependency-update-config": asRuleWithDocs(
         requireDependencyUpdateConfigRule
     ),
+    "require-digitalocean-app-spec-file": asRuleWithDocs(
+        requireDigitalOceanAppSpecFileRule
+    ),
+    "require-dockerfile": asRuleWithDocs(requireDockerfileRule),
+    "require-dockerignore-file": asRuleWithDocs(requireDockerignoreFileRule),
     "require-forgejo-actions-concurrency": asRuleWithDocs(
         requireForgejoActionsConcurrencyRule
     ),
@@ -208,11 +237,21 @@ export const repoComplianceRules: Readonly<
     "require-gitlab-merge-request-template-file": asRuleWithDocs(
         requireGitLabMergeRequestTemplateFileRule
     ),
+    "require-google-cloud-build-config-file": asRuleWithDocs(
+        requireGoogleCloudBuildConfigFileRule
+    ),
+    "require-google-cloud-build-timeout": asRuleWithDocs(
+        requireGoogleCloudBuildTimeoutRule
+    ),
     "require-issue-template-file": asRuleWithDocs(requireIssueTemplateFileRule),
     "require-license-file": asRuleWithDocs(requireLicenseFileRule),
     "require-license-spdx-identifier": asRuleWithDocs(
         requireLicenseSpdxIdentifierRule
     ),
+    "require-netlify-build-publish-directory": asRuleWithDocs(
+        requireNetlifyBuildPublishDirectoryRule
+    ),
+    "require-netlify-config-file": asRuleWithDocs(requireNetlifyConfigFileRule),
     "require-node-version-file": asRuleWithDocs(requireNodeVersionFileRule),
     "require-pr-template-checklist-items": asRuleWithDocs(
         requirePrTemplateChecklistItemsRule
@@ -234,6 +273,7 @@ export const repoComplianceRules: Readonly<
         requireSecurityPolicyFileRule
     ),
     "require-support-file": asRuleWithDocs(requireSupportFileRule),
+    "require-vercel-config-file": asRuleWithDocs(requireVercelConfigFileRule),
 };
 
 export default repoComplianceRules;

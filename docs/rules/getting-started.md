@@ -25,5 +25,12 @@ export default [plugin.configs.recommended];
 - `plugin.configs.gitlab`
 - `plugin.configs.bitbucket`
 - `plugin.configs.codeberg`
+- `plugin.configs.aws`
+- `plugin.configs.azure`
+- `plugin.configs.googleCloud`
+- `plugin.configs.docker`
+- `plugin.configs.vercel`
+- `plugin.configs.netlify`
+- `plugin.configs.digitalOcean`
 
 Use `plugin.configs.strict` for stronger baseline policy and `plugin.configs.all` to apply every rule.

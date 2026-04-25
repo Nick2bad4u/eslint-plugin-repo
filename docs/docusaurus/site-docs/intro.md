@@ -18,7 +18,7 @@ sidebar_position: 1
 
 - A complete **rule reference** for repository-file and provider compliance checks.
 - **Getting Started** guidance for Flat Config projects.
-- **Preset docs** for GitHub, GitLab, Bitbucket, and Codeberg/Forgejo.
+- **Preset docs** for GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean.
 - A dedicated **developer section** with architecture notes, ADRs, and docs pipeline guidance.
 
 ## What to read first
@@ -32,7 +32,7 @@ sidebar_position: 1
 ### I want to lint one repository host well
 
 - Start with [recommended](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended).
-- Add exactly one provider preset: [GitHub](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github), [GitLab](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab), [Bitbucket](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket), or [Codeberg / Forgejo](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg).
+- Add the provider preset your repository actually uses, such as [GitHub](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github), [GitLab](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab), [Bitbucket](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket), [Codeberg / Forgejo](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg), [AWS](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/aws), [Azure](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/azure), [Google Cloud](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/google-cloud), [Docker](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/docker), [Vercel](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel), [Netlify](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify), or [DigitalOcean](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean).
 - Use [strict](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) only after the baseline is stable.
 
 ### I want to understand the rule catalog
