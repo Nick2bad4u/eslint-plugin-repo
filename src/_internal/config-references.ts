@@ -4,13 +4,14 @@ import { objectHasOwn } from "ts-extras";
  * Canonical preset names exposed by this plugin.
  */
 export const configNames = [
+    "ai",
     "all",
-    "recommended",
-    "strict",
-    "github",
-    "gitlab",
     "bitbucket",
     "codeberg",
+    "github",
+    "gitlab",
+    "recommended",
+    "strict",
 ] as const;
 
 /**
@@ -34,34 +35,40 @@ export type ConfigName = (typeof configNames)[number];
 export const configMetadataByName: Readonly<
     Record<ConfigName, ConfigMetadata>
 > = {
+    ai: {
+        icon: "🤖",
+        presetName: "repo-compliance:ai",
+        readmeOrder: 8,
+        requiresTypeChecking: false,
+    },
     all: {
         icon: "🧩",
         presetName: "repo-compliance:all",
-        readmeOrder: 7,
+        readmeOrder: 9,
         requiresTypeChecking: false,
     },
     bitbucket: {
         icon: "🪣",
         presetName: "repo-compliance:bitbucket",
-        readmeOrder: 6,
+        readmeOrder: 7,
         requiresTypeChecking: false,
     },
     codeberg: {
         icon: "🗻",
         presetName: "repo-compliance:codeberg",
-        readmeOrder: 5,
+        readmeOrder: 6,
         requiresTypeChecking: false,
     },
     github: {
         icon: "🐙",
         presetName: "repo-compliance:github",
-        readmeOrder: 3,
+        readmeOrder: 4,
         requiresTypeChecking: false,
     },
     gitlab: {
         icon: "🦊",
         presetName: "repo-compliance:gitlab",
-        readmeOrder: 4,
+        readmeOrder: 5,
         requiresTypeChecking: false,
     },
     recommended: {
@@ -88,6 +95,7 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
     "gitlab",
     "codeberg",
     "bitbucket",
+    "ai",
     "all",
 ];
 
@@ -97,6 +105,7 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
 export const configReferenceToName: Readonly<
     Record<`repoPlugin.configs.${ConfigName}`, ConfigName>
 > = {
+    "repoPlugin.configs.ai": "ai",
     "repoPlugin.configs.all": "all",
     "repoPlugin.configs.bitbucket": "bitbucket",
     "repoPlugin.configs.codeberg": "codeberg",

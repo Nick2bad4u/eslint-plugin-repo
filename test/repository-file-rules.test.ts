@@ -119,6 +119,11 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         name: "require-forgejo-actions-workflow-file",
         satisfyingFiles: [".forgejo/workflows/ci.yml"],
     },
+    {
+        messageId: "missingRepositorySettingsFile",
+        name: "require-repository-settings-file",
+        satisfyingFiles: [".github/settings.yml"],
+    },
 ];
 
 for (const descriptor of descriptors) {

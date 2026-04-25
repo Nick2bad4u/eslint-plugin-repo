@@ -128,6 +128,7 @@ const derivePresetRuleNamesByConfig = (): Readonly<
     }
 
     return {
+        ai: [...new Set(presetRuleMap.ai)],
         all: [...new Set(presetRuleMap.all)],
         bitbucket: [...new Set(presetRuleMap.bitbucket)],
         codeberg: [...new Set(presetRuleMap.codeberg)],
@@ -192,6 +193,7 @@ const plugin: RepoCompliancePluginContract = {
 };
 
 const configs: RepoComplianceConfigsContract = {
+    ai: buildPresetConfig(plugin, "ai", presetRuleNamesByConfig.ai),
     all: buildPresetConfig(plugin, "all", presetRuleNamesByConfig.all),
     bitbucket: buildPresetConfig(
         plugin,

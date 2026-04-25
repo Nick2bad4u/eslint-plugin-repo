@@ -1,0 +1,56 @@
+branches:
+    - name: main
+      protection:
+          enforce_admins: false
+          required_pull_request_reviews:
+              dismiss_stale_reviews: true
+              require_code_owner_reviews: true
+              required_approving_review_count: 1
+          required_status_checks:
+              contexts: []
+              strict: true
+          restrictions: null
+
+labels:
+    - color: "CC0000"
+      description: "An unexpected problem or unintended behaviour."
+      name: bug
+    - color: "84b6eb"
+      description: "New feature or improvement request."
+      name: enhancement
+    - color: "0075ca"
+      description: "Documentation improvements."
+      name: documentation
+    - color: "e4e669"
+      description: "Chores, dependency updates, and refactoring."
+      name: maintenance
+    - color: "d93f0b"
+      description: "Introduces a breaking API change."
+      name: breaking-change
+    - color: "7057ff"
+      description: "Good for newcomers."
+      name: good first issue
+    - color: "008672"
+      description: "Extra attention is needed."
+      name: help wanted
+
+repository:
+    allow_merge_commit: false
+    allow_rebase_merge: false
+    allow_squash_merge: true
+    default_branch: main
+    delete_branch_on_merge: true
+    description: "ESLint plugin for repository compliance checks."
+    has_downloads: true
+    has_issues: true
+    has_projects: false
+    has_wiki: false
+    homepage: ""
+    name: eslint-plugin-repo
+    private: false
+    topics:
+        - eslint
+        - eslint-plugin
+        - repository-compliance
+        - static-analysis
+        - typescript

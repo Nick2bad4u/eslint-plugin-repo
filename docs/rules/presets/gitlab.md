@@ -18,9 +18,12 @@ Use epo-compliance.configs.gitlab for GitLab-specific repository compliance req
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — |
 | [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
+| [`require-gitlab-ci-cache-policy`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-cache-policy) | — |
 | [`require-gitlab-ci-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-config-file) | — |
 | [`require-gitlab-ci-default-timeout`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-default-timeout) | — |
+| [`require-gitlab-ci-interruptible`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-interruptible) | — |
 | [`require-gitlab-ci-merge-request-pipelines`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-merge-request-pipelines) | — |
+| [`require-gitlab-ci-needs-dag`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-needs-dag) | — |
 | [`require-gitlab-ci-rules-over-only-except`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-rules-over-only-except) | — |
 | [`require-gitlab-ci-security-scanning`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-security-scanning) | — |
 | [`require-gitlab-ci-stages`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-stages) | — |
