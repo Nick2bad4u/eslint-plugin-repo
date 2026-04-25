@@ -383,6 +383,16 @@ export default defineConfig([
     },
     deMorgan.configs.recommended,
     ...pluginCasePolice.configs.recommended,
+    // Override: 'digitalOcean' is the correct camelCase JS property name for the
+    // `repoPlugin.configs.digitalOcean` config key. case-police treats it as the
+    // brand name "DigitalOcean" and auto-fixes the lowercase 'd', which breaks the
+    // config registry lookup. Ignoring "digitalocean" preserves the JS convention.
+    {
+        name: "Case police: ignore digitalOcean camelCase JS property name",
+        rules: {
+            "case-police/string-check": ["warn", { ignore: ["digitalocean"] }],
+        },
+    },
     // ...jsdocPlugin.configs["examples-and-default-expressions"],
     // #endregion
     // #region 🧩 Custom Flat Configs

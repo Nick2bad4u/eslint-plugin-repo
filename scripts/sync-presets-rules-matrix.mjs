@@ -100,7 +100,7 @@ const standardPresetConfigNames = [
     "docker",
     "vercel",
     "netlify",
-    "DigitalOcean",
+    "digitalOcean",
 ];
 
 /**

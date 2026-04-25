@@ -1,10 +1,22 @@
 import type { TSESLint } from "@typescript-eslint/utils";
 import type { UnknownArray } from "type-fest";
 
+import requireAwsAmplifyArtifactsBaseDirectoryRelativePathRule from "../rules/require-aws-amplify-artifacts-base-directory-relative-path.js";
 import requireAwsAmplifyArtifactsBaseDirectoryRule from "../rules/require-aws-amplify-artifacts-base-directory.js";
+import requireAwsAmplifyArtifactsFilesNonEmptyRule from "../rules/require-aws-amplify-artifacts-files-non-empty.js";
+import requireAwsAmplifyArtifactsFilesRule from "../rules/require-aws-amplify-artifacts-files.js";
+import requireAwsAmplifyBuildCommandsRule from "../rules/require-aws-amplify-build-commands.js";
 import requireAwsAmplifyConfigFileRule from "../rules/require-aws-amplify-config-file.js";
+import requireAwsAmplifyVersionValueRule from "../rules/require-aws-amplify-version-value.js";
+import requireAwsAmplifyVersionRule from "../rules/require-aws-amplify-version.js";
 import requireAzurePipelinesConfigFileRule from "../rules/require-azure-pipelines-config-file.js";
+import requireAzurePipelinesExecutionPlanRule from "../rules/require-azure-pipelines-execution-plan.js";
+import requireAzurePipelinesNameRule from "../rules/require-azure-pipelines-name.js";
+import requireAzurePipelinesPrBranchesRule from "../rules/require-azure-pipelines-pr-branches.js";
 import requireAzurePipelinesPrTriggerRule from "../rules/require-azure-pipelines-pr-trigger.js";
+import requireAzurePipelinesTriggerBranchesRule from "../rules/require-azure-pipelines-trigger-branches.js";
+import requireAzurePipelinesTriggerIncludeBranchesRule from "../rules/require-azure-pipelines-trigger-include-branches.js";
+import requireAzurePipelinesTriggerRule from "../rules/require-azure-pipelines-trigger.js";
 import requireBitbucketPipelinesCloneDepthRule from "../rules/require-bitbucket-pipelines-clone-depth.js";
 import requireBitbucketPipelinesConfigFileRule from "../rules/require-bitbucket-pipelines-config-file.js";
 import requireBitbucketPipelinesDefaultPipelineRule from "../rules/require-bitbucket-pipelines-default-pipeline.js";
@@ -25,7 +37,19 @@ import requireDependabotReviewersRule from "../rules/require-dependabot-reviewer
 import requireDependabotScheduleRule from "../rules/require-dependabot-schedule.js";
 import requireDependabotUpdateEntriesRule from "../rules/require-dependabot-update-entries.js";
 import requireDependencyUpdateConfigRule from "../rules/require-dependency-update-config.js";
+import requireDigitalOceanAppSpecComponentRule from "../rules/require-digitalocean-app-spec-component.js";
 import requireDigitalOceanAppSpecFileRule from "../rules/require-digitalocean-app-spec-file.js";
+import requireDigitalOceanAppSpecNameValueRule from "../rules/require-digitalocean-app-spec-name-value.js";
+import requireDigitalOceanAppSpecNameRule from "../rules/require-digitalocean-app-spec-name.js";
+import requireDigitalOceanAppSpecRegionLowercaseRule from "../rules/require-digitalocean-app-spec-region-lowercase.js";
+import requireDigitalOceanAppSpecRegionValueRule from "../rules/require-digitalocean-app-spec-region-value.js";
+import requireDigitalOceanAppSpecRegionRule from "../rules/require-digitalocean-app-spec-region.js";
+import requireDockerfileBaseImageTagRule from "../rules/require-dockerfile-base-image-tag.js";
+import requireDockerfileCmdOrEntrypointRule from "../rules/require-dockerfile-cmd-or-entrypoint.js";
+import requireDockerfileFirstInstructionFromRule from "../rules/require-dockerfile-first-instruction-from.js";
+import requireDockerfileFromInstructionRule from "../rules/require-dockerfile-from-instruction.js";
+import requireDockerfileUserRule from "../rules/require-dockerfile-user.js";
+import requireDockerfileWorkdirRule from "../rules/require-dockerfile-workdir.js";
 import requireDockerfileRule from "../rules/require-dockerfile.js";
 import requireDockerignoreFileRule from "../rules/require-dockerignore-file.js";
 import requireForgejoActionsConcurrencyRule from "../rules/require-forgejo-actions-concurrency.js";
@@ -56,12 +80,24 @@ import requireGitLabCiWorkflowRulesRule from "../rules/require-gitlab-ci-workflo
 import requireGitLabIssueTemplateFileRule from "../rules/require-gitlab-issue-template-file.js";
 import requireGitLabMergeRequestTemplateFileRule from "../rules/require-gitlab-merge-request-template-file.js";
 import requireGoogleCloudBuildConfigFileRule from "../rules/require-google-cloud-build-config-file.js";
+import requireGoogleCloudBuildStepNameRule from "../rules/require-google-cloud-build-step-name.js";
+import requireGoogleCloudBuildStepsNonEmptyRule from "../rules/require-google-cloud-build-steps-non-empty.js";
+import requireGoogleCloudBuildStepsRule from "../rules/require-google-cloud-build-steps.js";
+import requireGoogleCloudBuildTimeoutFormatRule from "../rules/require-google-cloud-build-timeout-format.js";
+import requireGoogleCloudBuildTimeoutMaxRule from "../rules/require-google-cloud-build-timeout-max.js";
+import requireGoogleCloudBuildTimeoutPositiveRule from "../rules/require-google-cloud-build-timeout-positive.js";
 import requireGoogleCloudBuildTimeoutRule from "../rules/require-google-cloud-build-timeout.js";
 import requireIssueTemplateFileRule from "../rules/require-issue-template-file.js";
 import requireLicenseFileRule from "../rules/require-license-file.js";
 import requireLicenseSpdxIdentifierRule from "../rules/require-license-spdx-identifier.js";
+import requireNetlifyBuildCommandNonEmptyRule from "../rules/require-netlify-build-command-non-empty.js";
+import requireNetlifyBuildCommandRule from "../rules/require-netlify-build-command.js";
 import requireNetlifyBuildPublishDirectoryRule from "../rules/require-netlify-build-publish-directory.js";
+import requireNetlifyBuildSectionRule from "../rules/require-netlify-build-section.js";
 import requireNetlifyConfigFileRule from "../rules/require-netlify-config-file.js";
+import requireNetlifyPublishDirectoryNoTrailingSlashRule from "../rules/require-netlify-publish-directory-no-trailing-slash.js";
+import requireNetlifyPublishDirectoryNonEmptyRule from "../rules/require-netlify-publish-directory-non-empty.js";
+import requireNetlifyPublishRelativePathRule from "../rules/require-netlify-publish-relative-path.js";
 import requireNodeVersionFileRule from "../rules/require-node-version-file.js";
 import requirePrTemplateChecklistItemsRule from "../rules/require-pr-template-checklist-items.js";
 import requirePullRequestTemplateFileRule from "../rules/require-pull-request-template-file.js";
@@ -73,7 +109,13 @@ import requireSecretScanningConfigRule from "../rules/require-secret-scanning-co
 import requireSecurityPolicyContactChannelRule from "../rules/require-security-policy-contact-channel.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
 import requireSupportFileRule from "../rules/require-support-file.js";
+import requireVercelBuildCommandRule from "../rules/require-vercel-build-command.js";
 import requireVercelConfigFileRule from "../rules/require-vercel-config-file.js";
+import requireVercelConfigObjectRule from "../rules/require-vercel-config-object.js";
+import requireVercelSchemaUrlRule from "../rules/require-vercel-schema-url.js";
+import requireVercelSchemaRule from "../rules/require-vercel-schema.js";
+import requireVercelValidJsonRule from "../rules/require-vercel-valid-json.js";
+import requireVercelVersionValueRule from "../rules/require-vercel-version-value.js";
 
 /**
  * Rule-name pattern used by this plugin.
@@ -96,14 +138,47 @@ export const repoComplianceRules: Readonly<
     "require-aws-amplify-artifacts-base-directory": asRuleWithDocs(
         requireAwsAmplifyArtifactsBaseDirectoryRule
     ),
+    "require-aws-amplify-artifacts-base-directory-relative-path":
+        asRuleWithDocs(requireAwsAmplifyArtifactsBaseDirectoryRelativePathRule),
+    "require-aws-amplify-artifacts-files": asRuleWithDocs(
+        requireAwsAmplifyArtifactsFilesRule
+    ),
+    "require-aws-amplify-artifacts-files-non-empty": asRuleWithDocs(
+        requireAwsAmplifyArtifactsFilesNonEmptyRule
+    ),
+    "require-aws-amplify-build-commands": asRuleWithDocs(
+        requireAwsAmplifyBuildCommandsRule
+    ),
     "require-aws-amplify-config-file": asRuleWithDocs(
         requireAwsAmplifyConfigFileRule
+    ),
+    "require-aws-amplify-version": asRuleWithDocs(requireAwsAmplifyVersionRule),
+    "require-aws-amplify-version-value": asRuleWithDocs(
+        requireAwsAmplifyVersionValueRule
     ),
     "require-azure-pipelines-config-file": asRuleWithDocs(
         requireAzurePipelinesConfigFileRule
     ),
+    "require-azure-pipelines-execution-plan": asRuleWithDocs(
+        requireAzurePipelinesExecutionPlanRule
+    ),
+    "require-azure-pipelines-name": asRuleWithDocs(
+        requireAzurePipelinesNameRule
+    ),
+    "require-azure-pipelines-pr-branches": asRuleWithDocs(
+        requireAzurePipelinesPrBranchesRule
+    ),
     "require-azure-pipelines-pr-trigger": asRuleWithDocs(
         requireAzurePipelinesPrTriggerRule
+    ),
+    "require-azure-pipelines-trigger": asRuleWithDocs(
+        requireAzurePipelinesTriggerRule
+    ),
+    "require-azure-pipelines-trigger-branches": asRuleWithDocs(
+        requireAzurePipelinesTriggerBranchesRule
+    ),
+    "require-azure-pipelines-trigger-include-branches": asRuleWithDocs(
+        requireAzurePipelinesTriggerIncludeBranchesRule
     ),
     "require-bitbucket-pipelines-clone-depth": asRuleWithDocs(
         requireBitbucketPipelinesCloneDepthRule
@@ -159,10 +234,42 @@ export const repoComplianceRules: Readonly<
     "require-dependency-update-config": asRuleWithDocs(
         requireDependencyUpdateConfigRule
     ),
+    "require-digitalocean-app-spec-component": asRuleWithDocs(
+        requireDigitalOceanAppSpecComponentRule
+    ),
     "require-digitalocean-app-spec-file": asRuleWithDocs(
         requireDigitalOceanAppSpecFileRule
     ),
+    "require-digitalocean-app-spec-name": asRuleWithDocs(
+        requireDigitalOceanAppSpecNameRule
+    ),
+    "require-digitalocean-app-spec-name-value": asRuleWithDocs(
+        requireDigitalOceanAppSpecNameValueRule
+    ),
+    "require-digitalocean-app-spec-region": asRuleWithDocs(
+        requireDigitalOceanAppSpecRegionRule
+    ),
+    "require-digitalocean-app-spec-region-lowercase": asRuleWithDocs(
+        requireDigitalOceanAppSpecRegionLowercaseRule
+    ),
+    "require-digitalocean-app-spec-region-value": asRuleWithDocs(
+        requireDigitalOceanAppSpecRegionValueRule
+    ),
     "require-dockerfile": asRuleWithDocs(requireDockerfileRule),
+    "require-dockerfile-base-image-tag": asRuleWithDocs(
+        requireDockerfileBaseImageTagRule
+    ),
+    "require-dockerfile-cmd-or-entrypoint": asRuleWithDocs(
+        requireDockerfileCmdOrEntrypointRule
+    ),
+    "require-dockerfile-first-instruction-from": asRuleWithDocs(
+        requireDockerfileFirstInstructionFromRule
+    ),
+    "require-dockerfile-from-instruction": asRuleWithDocs(
+        requireDockerfileFromInstructionRule
+    ),
+    "require-dockerfile-user": asRuleWithDocs(requireDockerfileUserRule),
+    "require-dockerfile-workdir": asRuleWithDocs(requireDockerfileWorkdirRule),
     "require-dockerignore-file": asRuleWithDocs(requireDockerignoreFileRule),
     "require-forgejo-actions-concurrency": asRuleWithDocs(
         requireForgejoActionsConcurrencyRule
@@ -240,18 +347,54 @@ export const repoComplianceRules: Readonly<
     "require-google-cloud-build-config-file": asRuleWithDocs(
         requireGoogleCloudBuildConfigFileRule
     ),
+    "require-google-cloud-build-step-name": asRuleWithDocs(
+        requireGoogleCloudBuildStepNameRule
+    ),
+    "require-google-cloud-build-steps": asRuleWithDocs(
+        requireGoogleCloudBuildStepsRule
+    ),
+    "require-google-cloud-build-steps-non-empty": asRuleWithDocs(
+        requireGoogleCloudBuildStepsNonEmptyRule
+    ),
     "require-google-cloud-build-timeout": asRuleWithDocs(
         requireGoogleCloudBuildTimeoutRule
+    ),
+    "require-google-cloud-build-timeout-format": asRuleWithDocs(
+        requireGoogleCloudBuildTimeoutFormatRule
+    ),
+    "require-google-cloud-build-timeout-max": asRuleWithDocs(
+        requireGoogleCloudBuildTimeoutMaxRule
+    ),
+    "require-google-cloud-build-timeout-positive": asRuleWithDocs(
+        requireGoogleCloudBuildTimeoutPositiveRule
     ),
     "require-issue-template-file": asRuleWithDocs(requireIssueTemplateFileRule),
     "require-license-file": asRuleWithDocs(requireLicenseFileRule),
     "require-license-spdx-identifier": asRuleWithDocs(
         requireLicenseSpdxIdentifierRule
     ),
+    "require-netlify-build-command": asRuleWithDocs(
+        requireNetlifyBuildCommandRule
+    ),
+    "require-netlify-build-command-non-empty": asRuleWithDocs(
+        requireNetlifyBuildCommandNonEmptyRule
+    ),
     "require-netlify-build-publish-directory": asRuleWithDocs(
         requireNetlifyBuildPublishDirectoryRule
     ),
+    "require-netlify-build-section": asRuleWithDocs(
+        requireNetlifyBuildSectionRule
+    ),
     "require-netlify-config-file": asRuleWithDocs(requireNetlifyConfigFileRule),
+    "require-netlify-publish-directory-no-trailing-slash": asRuleWithDocs(
+        requireNetlifyPublishDirectoryNoTrailingSlashRule
+    ),
+    "require-netlify-publish-directory-non-empty": asRuleWithDocs(
+        requireNetlifyPublishDirectoryNonEmptyRule
+    ),
+    "require-netlify-publish-relative-path": asRuleWithDocs(
+        requireNetlifyPublishRelativePathRule
+    ),
     "require-node-version-file": asRuleWithDocs(requireNodeVersionFileRule),
     "require-pr-template-checklist-items": asRuleWithDocs(
         requirePrTemplateChecklistItemsRule
@@ -273,7 +416,19 @@ export const repoComplianceRules: Readonly<
         requireSecurityPolicyFileRule
     ),
     "require-support-file": asRuleWithDocs(requireSupportFileRule),
+    "require-vercel-build-command": asRuleWithDocs(
+        requireVercelBuildCommandRule
+    ),
     "require-vercel-config-file": asRuleWithDocs(requireVercelConfigFileRule),
+    "require-vercel-config-object": asRuleWithDocs(
+        requireVercelConfigObjectRule
+    ),
+    "require-vercel-schema": asRuleWithDocs(requireVercelSchemaRule),
+    "require-vercel-schema-url": asRuleWithDocs(requireVercelSchemaUrlRule),
+    "require-vercel-valid-json": asRuleWithDocs(requireVercelValidJsonRule),
+    "require-vercel-version-value": asRuleWithDocs(
+        requireVercelVersionValueRule
+    ),
 };
 
 export default repoComplianceRules;

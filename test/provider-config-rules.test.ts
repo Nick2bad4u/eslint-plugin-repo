@@ -2228,3 +2228,2319 @@ ruleTester.run(
         ],
     }
 );
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-files",
+    getPluginRule("require-aws-amplify-artifacts-files"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAwsAmplifyArtifactsFiles" }],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files",
+                    "invalid-missing-artifacts-files",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: dist",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports Amplify specs that omit artifacts.files",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files",
+                    "valid-artifacts-files-present",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: dist",
+                                "    files:",
+                                "      - '**/*'",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Amplify specs with artifacts.files",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files",
+                    "valid-no-amplify-config",
+                    []
+                ),
+                name: "skips the rule when Amplify config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger",
+    getPluginRule("require-azure-pipelines-trigger"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesTrigger" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "invalid-trigger-none",
+                    [
+                        {
+                            content: [
+                                "trigger: none",
+                                "pr:",
+                                "  - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs that disable trigger",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesTrigger" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "invalid-no-trigger",
+                    [
+                        {
+                            content: ["pr:", "  - main"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs that omit trigger",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "valid-trigger-present",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                                "pr:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with trigger",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "valid-no-azure-config",
+                    []
+                ),
+                name: "skips the rule when azure-pipelines config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-steps",
+    getPluginRule("require-google-cloud-build-steps"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingGoogleCloudBuildSteps" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps",
+                    "invalid-no-steps",
+                    [
+                        {
+                            content: ["timeout: 1200s"].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports Cloud Build configs that omit root steps",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps",
+                    "valid-root-steps",
+                    [
+                        {
+                            content: [
+                                "timeout: 1200s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                                "    args: ['test']",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts Cloud Build configs with root steps",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips the rule when cloudbuild config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-base-image-tag",
+    getPluginRule("require-dockerfile-base-image-tag"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "unpinnedDockerBaseImageTag" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "invalid-latest-tag",
+                    [
+                        {
+                            content: ["FROM node:latest", "WORKDIR /app"].join(
+                                "\n"
+                            ),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfile base image refs using latest",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "unpinnedDockerBaseImageTag" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "invalid-missing-tag",
+                    [
+                        {
+                            content: ["FROM alpine", "RUN echo ok"].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfile base image refs without explicit tag",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "valid-non-latest-tag",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "RUN npm ci",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfile base image refs pinned to non-latest tags",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "valid-sha-digest",
+                    [
+                        {
+                            content: [
+                                "FROM node@sha256:3bd1a55f74be0d8a2fcb4a00e95e26ef9642f2f957f725622f4c5d6c73ab8cf8",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfile base image refs pinned by digest",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-build-command",
+    getPluginRule("require-vercel-build-command"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingVercelBuildCommand" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-build-command",
+                    "invalid-missing-build-command",
+                    [
+                        {
+                            content: JSON.stringify(
+                                { cleanUrls: true },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports Vercel config without buildCommand",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-build-command",
+                    "valid-build-command-present",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    buildCommand: "npm run build",
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts Vercel config with non-empty buildCommand",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-build-command",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips the rule when vercel config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-command",
+    getPluginRule("require-netlify-build-command"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingNetlifyBuildCommand" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command",
+                    "invalid-missing-command",
+                    [
+                        {
+                            content: ["[build]", '  publish = "dist"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports netlify config that omits build command",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command",
+                    "valid-command-present",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts netlify config with explicit build command",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips the rule when netlify config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region",
+    getPluginRule("require-digitalocean-app-spec-region"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDigitalOceanAppSpecRegion" }],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region",
+                    "invalid-missing-region",
+                    [
+                        {
+                            content: [
+                                "name: example-app",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports DigitalOcean app specs that omit root region",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region",
+                    "valid-region-present",
+                    [
+                        {
+                            content: [
+                                "name: example-app",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts DigitalOcean app specs with explicit region",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region",
+                    "valid-no-app-spec",
+                    []
+                ),
+                name: "skips the rule when DigitalOcean app spec is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-build-commands",
+    getPluginRule("require-aws-amplify-build-commands"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAwsAmplifyBuildCommands" }],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-build-commands",
+                    "invalid-missing-build-commands",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      cache:",
+                                "        paths:",
+                                "          - node_modules/**/*",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports Amplify specs that omit build.commands",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-build-commands",
+                    "valid-build-commands-present",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Amplify specs with build.commands",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-build-commands",
+                    "valid-no-amplify-config",
+                    []
+                ),
+                name: "skips the rule when Amplify config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-pr-branches",
+    getPluginRule("require-azure-pipelines-pr-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesPrBranches" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "invalid-pr-without-branches",
+                    [
+                        {
+                            content: ["pr:", "  autoCancel: true"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines pr blocks without branch filters",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "valid-pr-branches-block",
+                    [
+                        {
+                            content: [
+                                "pr:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines pr branch filters",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "valid-inline-pr-value",
+                    [
+                        {
+                            content: ["pr: [main]"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines inline PR trigger values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-step-name",
+    getPluginRule("require-google-cloud-build-step-name"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingGoogleCloudBuildStepName" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-step-name",
+                    "invalid-steps-without-name",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - id: test",
+                                "    args: ['test']",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports Cloud Build configs lacking named steps",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-step-name",
+                    "valid-step-name-present",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                                "    args: ['test']",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts Cloud Build configs with named steps",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-step-name",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips the rule when cloudbuild config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-user",
+    getPluginRule("require-dockerfile-user"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDockerfileUserInstruction" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-user",
+                    "invalid-missing-user",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfiles without explicit USER instruction",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-user",
+                    "valid-user-present",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "USER node",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles with explicit USER instruction",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-user",
+                    "valid-no-dockerfile",
+                    []
+                ),
+                name: "skips the rule when Dockerfile is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-schema",
+    getPluginRule("require-vercel-schema"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingVercelSchemaProperty" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-schema",
+                    "invalid-missing-schema",
+                    [
+                        {
+                            content: JSON.stringify(
+                                { cleanUrls: true },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports Vercel config without $schema",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema",
+                    "valid-schema-present",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    $schema:
+                                        "https://openapi.vercel.sh/vercel.json",
+                                    cleanUrls: true,
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts Vercel config with schema metadata",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips the rule when vercel config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-section",
+    getPluginRule("require-netlify-build-section"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingNetlifyBuildSection" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-build-section",
+                    "invalid-no-build-section",
+                    [
+                        {
+                            content: ["[redirects]", '  from = "/*"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports netlify config without [build] section",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-section",
+                    "valid-build-section-present",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts netlify config with [build] section",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-section",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips the rule when netlify config is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-component",
+    getPluginRule("require-digitalocean-app-spec-component"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDigitalOceanAppSpecComponent" }],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "invalid-no-components",
+                    [
+                        {
+                            content: ["name: demo", "region: nyc"].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports DigitalOcean app specs without component blocks",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-services-component",
+                    [
+                        {
+                            content: [
+                                "name: demo",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts DigitalOcean app specs with services block",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-no-app-spec",
+                    []
+                ),
+                name: "skips the rule when DigitalOcean app spec is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-version",
+    getPluginRule("require-aws-amplify-version"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAwsAmplifyVersion" }],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version",
+                    "invalid-no-version",
+                    [
+                        {
+                            content: [
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports Amplify configs missing top-level version",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version",
+                    "valid-version-present",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Amplify configs with explicit version",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-execution-plan",
+    getPluginRule("require-azure-pipelines-execution-plan"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesExecutionPlan" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "invalid-no-jobs-stages-steps",
+                    [
+                        {
+                            content: ["trigger:", "  - main"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs missing execution plan keys",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "valid-jobs-key-present",
+                    [
+                        {
+                            content: [
+                                "jobs:",
+                                "  - job: test",
+                                "    steps:",
+                                "      - script: npm test",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with jobs key",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-format",
+    getPluginRule("require-google-cloud-build-timeout-format"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "invalidGoogleCloudBuildTimeoutFormat" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-format",
+                    "invalid-timeout-format",
+                    [
+                        {
+                            content: [
+                                "timeout: 20m",
+                                "steps:",
+                                "  - name: test",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports Cloud Build timeout values that are not in seconds",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-format",
+                    "valid-timeout-format",
+                    [
+                        {
+                            content: [
+                                "timeout: 1200s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts Cloud Build timeout values in explicit seconds",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-format",
+                    "valid-no-timeout-key",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "passes when timeout key is absent (existence enforced by require-google-cloud-build-timeout)",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-workdir",
+    getPluginRule("require-dockerfile-workdir"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDockerfileWorkdir" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-workdir",
+                    "invalid-no-workdir",
+                    [
+                        {
+                            content: ["FROM node:22-alpine", "RUN npm ci"].join(
+                                "\n"
+                            ),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfiles missing WORKDIR instruction",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-workdir",
+                    "valid-workdir-present",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "RUN npm ci",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles with explicit WORKDIR",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-valid-json",
+    getPluginRule("require-vercel-valid-json"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "invalidVercelJson" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-valid-json",
+                    "invalid-json-syntax",
+                    [
+                        {
+                            content: '{"buildCommand": "npm run build",}',
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports vercel.json files with invalid JSON syntax",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-valid-json",
+                    "valid-json",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    buildCommand: "npm run build",
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts vercel.json files with valid JSON",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-relative-path",
+    getPluginRule("require-netlify-publish-relative-path"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "absoluteNetlifyPublishPath" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-relative-path",
+                    "invalid-absolute-publish-path",
+                    [
+                        {
+                            content: ["[build]", '  publish = "/dist"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports absolute Netlify publish directories",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-relative-path",
+                    "valid-relative-publish-path",
+                    [
+                        {
+                            content: ["[build]", '  publish = "dist"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts relative Netlify publish directories",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-name",
+    getPluginRule("require-digitalocean-app-spec-name"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDigitalOceanAppSpecName" }],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name",
+                    "invalid-missing-name",
+                    [
+                        {
+                            content: [
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports DigitalOcean app specs missing top-level name",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name",
+                    "valid-name-present",
+                    [
+                        {
+                            content: [
+                                "name: demo-app",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts DigitalOcean app specs with top-level name",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-base-directory-relative-path",
+    getPluginRule("require-aws-amplify-artifacts-base-directory-relative-path"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId:
+                            "absoluteAwsAmplifyArtifactsBaseDirectoryRelativePath",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory-relative-path",
+                    "invalid-absolute-base-directory",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: /dist",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports absolute Amplify artifacts base directory values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory-relative-path",
+                    "valid-relative-base-directory",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: dist",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts relative Amplify artifacts base directory values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-name",
+    getPluginRule("require-azure-pipelines-name"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesName" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-name",
+                    "invalid-missing-name",
+                    [
+                        {
+                            content: ["trigger:", "  - main"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines config without top-level name",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-name",
+                    "valid-name-present",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "trigger:",
+                                "  - main",
+                                "jobs:",
+                                "  - job: test",
+                                "    steps:",
+                                "      - script: npm test",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines config with top-level name",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-positive",
+    getPluginRule("require-google-cloud-build-timeout-positive"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "nonPositiveGoogleCloudBuildTimeout" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-positive",
+                    "invalid-zero-timeout",
+                    [
+                        {
+                            content: [
+                                "timeout: 0s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports non-positive Cloud Build timeout values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-positive",
+                    "valid-positive-timeout",
+                    [
+                        {
+                            content: [
+                                "timeout: 60s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts positive Cloud Build timeout values",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-positive",
+                    "valid-no-timeout-key",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "passes when timeout key is absent (existence enforced by require-google-cloud-build-timeout)",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-cmd-or-entrypoint",
+    getPluginRule("require-dockerfile-cmd-or-entrypoint"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDockerfileCmdOrEntrypoint" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-cmd-or-entrypoint",
+                    "invalid-missing-startup-instruction",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                "RUN npm ci",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfiles missing CMD and ENTRYPOINT",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-cmd-or-entrypoint",
+                    "valid-cmd-present",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                'CMD ["node", "server.js"]',
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles with CMD instruction",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-config-object",
+    getPluginRule("require-vercel-config-object"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "nonObjectVercelConfig" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-config-object",
+                    "invalid-array-config",
+                    [
+                        {
+                            content: "[]",
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports non-object vercel config documents",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-config-object",
+                    "valid-object-config",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    buildCommand: "npm run build",
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts object-based vercel config documents",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-command-non-empty",
+    getPluginRule("require-netlify-build-command-non-empty"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingOrEmptyNetlifyBuildCommand" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command-non-empty",
+                    "invalid-empty-command",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = ""',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports empty Netlify build command values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command-non-empty",
+                    "valid-non-empty-command",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts non-empty Netlify build command values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region-value",
+    getPluginRule("require-digitalocean-app-spec-region-value"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    { messageId: "missingDigitalOceanAppSpecRegionValue" },
+                ],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-value",
+                    "invalid-empty-region-value",
+                    [
+                        {
+                            content: [
+                                "name: demo-app",
+                                "region:",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports DigitalOcean app specs with empty region values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-value",
+                    "valid-region-value",
+                    [
+                        {
+                            content: [
+                                "name: demo-app",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts DigitalOcean app specs with non-empty region values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-version-value",
+    getPluginRule("require-aws-amplify-version-value"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "invalidAwsAmplifyVersionValue" }],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version-value",
+                    "invalid-version-2",
+                    [
+                        {
+                            content: [
+                                "version: 2",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports unsupported Amplify version values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version-value",
+                    "valid-version-1",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  phases:",
+                                "    build:",
+                                "      commands:",
+                                "        - npm run build",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts supported Amplify version values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger-branches",
+    getPluginRule("require-azure-pipelines-trigger-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesTriggerBranches" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "invalid-trigger-without-branches",
+                    [
+                        {
+                            content: ["trigger:", "  batch: true"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports trigger blocks without branch filters",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "valid-trigger-branches",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts trigger blocks with branches filters",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-max",
+    getPluginRule("require-google-cloud-build-timeout-max"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "invalidGoogleCloudBuildTimeoutMax" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-max",
+                    "invalid-timeout-too-large",
+                    [
+                        {
+                            content: [
+                                "timeout: 999999s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports Cloud Build timeout values above max bound",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-max",
+                    "valid-timeout-bound",
+                    [
+                        {
+                            content: [
+                                "timeout: 3600s",
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts Cloud Build timeout values within max bound",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-max",
+                    "valid-no-timeout-key",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "passes when timeout key is absent (existence enforced by require-google-cloud-build-timeout)",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-from-instruction",
+    getPluginRule("require-dockerfile-from-instruction"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDockerfileFromInstruction" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-from-instruction",
+                    "invalid-missing-from",
+                    [
+                        {
+                            content: [
+                                "WORKDIR /app",
+                                'CMD ["node", "server.js"]',
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfiles missing FROM instruction",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-from-instruction",
+                    "valid-from-present",
+                    [
+                        {
+                            content: [
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                                'CMD ["node", "server.js"]',
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles with FROM instruction",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-schema-url",
+    getPluginRule("require-vercel-schema-url"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingVercelSchemaUrl" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-schema-url",
+                    "invalid-non-vercel-schema-url",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    $schema: "https://example.com/schema.json",
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports schema URLs that are not vercel.json schemas",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema-url",
+                    "valid-vercel-schema-url",
+                    [
+                        {
+                            content: JSON.stringify(
+                                {
+                                    $schema:
+                                        "https://openapi.vercel.sh/vercel.json",
+                                },
+                                null,
+                                2
+                            ),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts vercel.json schema URLs",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-directory-non-empty",
+    getPluginRule("require-netlify-publish-directory-non-empty"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    { messageId: "missingOrEmptyNetlifyPublishDirectory" },
+                ],
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-non-empty",
+                    "invalid-empty-publish",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = ""',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports empty Netlify publish values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-non-empty",
+                    "valid-non-empty-publish",
+                    [
+                        {
+                            content: [
+                                "[build]",
+                                '  command = "npm run build"',
+                                '  publish = "dist"',
+                            ].join("\n"),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts non-empty Netlify publish values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-name-value",
+    getPluginRule("require-digitalocean-app-spec-name-value"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingDigitalOceanAppSpecNameValue" }],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name-value",
+                    "invalid-empty-name",
+                    [
+                        {
+                            content: [
+                                "name:",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports DigitalOcean app specs with empty name values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name-value",
+                    "valid-non-empty-name",
+                    [
+                        {
+                            content: [
+                                "name: demo-app",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts DigitalOcean app specs with non-empty name values",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-files-non-empty",
+    getPluginRule("require-aws-amplify-artifacts-files-non-empty"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    { messageId: "missingAwsAmplifyArtifactsFilesEntries" },
+                ],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files-non-empty",
+                    "invalid-empty-files-list",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    files:",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports empty Amplify artifacts files list",
+            },
+            {
+                code: lintTargetSource,
+                errors: [
+                    { messageId: "missingAwsAmplifyArtifactsFilesEntries" },
+                ],
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files-non-empty",
+                    "invalid-files-outside-artifacts-block",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "cache:",
+                                "  paths:",
+                                "    files:",
+                                "      - node_modules/**/*",
+                                "frontend:",
+                                "  artifacts:",
+                                "    baseDirectory: dist",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "reports files lists that are not under artifacts block",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files-non-empty",
+                    "valid-files-list",
+                    [
+                        {
+                            content: [
+                                "version: 1",
+                                "frontend:",
+                                "  artifacts:",
+                                "    files:",
+                                "      - '**/*'",
+                            ].join("\n"),
+                            relativePath: "amplify.yml",
+                        },
+                    ]
+                ),
+                name: "accepts non-empty Amplify artifacts files list",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger-include-branches",
+    getPluginRule("require-azure-pipelines-trigger-include-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId:
+                            "missingAzurePipelinesTriggerIncludeBranches",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "invalid-missing-include-entries",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports missing trigger include branch entries",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "valid-include-entries",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts trigger include branch entries",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-steps-non-empty",
+    getPluginRule("require-google-cloud-build-steps-non-empty"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingGoogleCloudBuildStepEntries" }],
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps-non-empty",
+                    "invalid-empty-steps",
+                    [
+                        {
+                            content: ["steps:", "timeout: 60s"].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "reports empty Cloud Build steps list",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps-non-empty",
+                    "valid-steps-list",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - name: gcr.io/cloud-builders/npm",
+                            ].join("\n"),
+                            relativePath: "cloudbuild.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts non-empty Cloud Build steps list",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-first-instruction-from",
+    getPluginRule("require-dockerfile-first-instruction-from"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "dockerfileFirstInstructionNotFrom" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-first-instruction-from",
+                    "invalid-first-instruction-not-from",
+                    [
+                        {
+                            content: [
+                                "WORKDIR /app",
+                                "FROM node:22-alpine",
+                                "CMD ['node','server.js']",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports Dockerfiles where first instruction is not FROM",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-first-instruction-from",
+                    "valid-first-instruction-from",
+                    [
+                        {
+                            content: [
+                                "# syntax=docker/dockerfile:1",
+                                "FROM node:22-alpine",
+                                "WORKDIR /app",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles starting with FROM after comments",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-first-instruction-from",
+                    "valid-arg-before-from",
+                    [
+                        {
+                            content: [
+                                "# syntax=docker/dockerfile:1",
+                                "ARG BASE_VERSION=lts-bookworm",
+                                "FROM node:lts-bookworm",
+                                "WORKDIR /app",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts Dockerfiles with ARG instructions before FROM",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-version-value",
+    getPluginRule("require-vercel-version-value"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "invalidVercelVersionValue" }],
+                filename: writeFixtureRepo(
+                    "require-vercel-version-value",
+                    "invalid-version-1",
+                    [
+                        {
+                            content: JSON.stringify({ version: 1 }, null, 2),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "reports invalid vercel version values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-version-value",
+                    "valid-version-2",
+                    [
+                        {
+                            content: JSON.stringify({ version: 2 }, null, 2),
+                            relativePath: "vercel.json",
+                        },
+                    ]
+                ),
+                name: "accepts vercel version value 2",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-directory-no-trailing-slash",
+    getPluginRule("require-netlify-publish-directory-no-trailing-slash"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "netlifyPublishDirectoryTrailingSlash" }],
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-no-trailing-slash",
+                    "invalid-trailing-slash",
+                    [
+                        {
+                            content: ["[build]", '  publish = "dist/"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "reports Netlify publish values with trailing slash",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-no-trailing-slash",
+                    "valid-no-trailing-slash",
+                    [
+                        {
+                            content: ["[build]", '  publish = "dist"'].join(
+                                "\n"
+                            ),
+                            relativePath: "netlify.toml",
+                        },
+                    ]
+                ),
+                name: "accepts Netlify publish values without trailing slash",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region-lowercase",
+    getPluginRule("require-digitalocean-app-spec-region-lowercase"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "nonLowercaseDigitalOceanRegion" }],
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-lowercase",
+                    "invalid-uppercase-region",
+                    [
+                        {
+                            content: [
+                                "name: demo",
+                                "region: NYC",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "reports non-lowercase DigitalOcean region values",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-lowercase",
+                    "valid-lowercase-region",
+                    [
+                        {
+                            content: [
+                                "name: demo",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "accepts lowercase DigitalOcean region values",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-lowercase",
+                    "valid-no-region-key",
+                    [
+                        {
+                            content: [
+                                "name: demo",
+                                "services:",
+                                "  - name: web",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "passes when region key is absent (existence enforced by require-digitalocean-app-spec-region)",
+            },
+        ],
+    }
+);

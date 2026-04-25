@@ -174,7 +174,7 @@ const presetConfigReferenceByName = {
     azure: "repo-compliance.configs.azure",
     bitbucket: "repo-compliance.configs.bitbucket",
     codeberg: "repo-compliance.configs.codeberg",
-    digitalOcean: "repo-compliance.configs.DigitalOcean",
+    digitalOcean: "repo-compliance.configs.digitalOcean",
     docker: "repo-compliance.configs.docker",
     github: "repo-compliance.configs.github",
     gitlab: "repo-compliance.configs.gitlab",
