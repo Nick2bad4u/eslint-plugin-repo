@@ -11,16 +11,16 @@ import requireBitbucketPipelinesPullRequestsRule from "../rules/require-bitbucke
 import requireBitbucketPipelinesStepNameRule from "../rules/require-bitbucket-pipelines-step-name.js";
 import requireChangelogFileRule from "../rules/require-changelog-file.js";
 import requireCodeOfConductFileRule from "../rules/require-code-of-conduct-file.js";
-import requireCodeScanningWorkflowRule from "../rules/require-code-scanning-workflow.js";
 import requireCodeownersFileRule from "../rules/require-codeowners-file.js";
 import requireCodeownersReviewablePatternsRule from "../rules/require-codeowners-reviewable-patterns.js";
 import requireContributingFileRule from "../rules/require-contributing-file.js";
 import requireCopilotInstructionsFileRule from "../rules/require-copilot-instructions-file.js";
 import requireDependabotConfigFileRule from "../rules/require-dependabot-config-file.js";
-import requireDependabotEcosystemCoverageRule from "../rules/require-dependabot-ecosystem-coverage.js";
 import requireDependabotGroupingRule from "../rules/require-dependabot-grouping.js";
 import requireDependabotReviewersRule from "../rules/require-dependabot-reviewers.js";
 import requireDependabotScheduleRule from "../rules/require-dependabot-schedule.js";
+import requireDependabotUpdateEntriesRule from "../rules/require-dependabot-update-entries.js";
+import requireDependencyUpdateConfigRule from "../rules/require-dependency-update-config.js";
 import requireForgejoActionsConcurrencyRule from "../rules/require-forgejo-actions-concurrency.js";
 import requireForgejoActionsJobTimeoutMinutesRule from "../rules/require-forgejo-actions-job-timeout-minutes.js";
 import requireForgejoActionsNoWriteAllPermissionsRule from "../rules/require-forgejo-actions-no-write-all-permissions.js";
@@ -33,6 +33,8 @@ import requireForgejoActionsWorkflowTriggerCoverageRule from "../rules/require-f
 import requireGitattributesFileRule from "../rules/require-gitattributes-file.js";
 import requireGitHubActionsWorkflowFileRule from "../rules/require-github-actions-workflow-file.js";
 import requireGitHubActionsWorkflowNameRule from "../rules/require-github-actions-workflow-name.js";
+import requireGitHubCodeScanningWorkflowRule from "../rules/require-github-code-scanning-workflow.js";
+import requireGitHubIssueTemplateLabelsRule from "../rules/require-github-issue-template-labels.js";
 import requireGitignoreFileRule from "../rules/require-gitignore-file.js";
 import requireGitLabCiCachePolicyRule from "../rules/require-gitlab-ci-cache-policy.js";
 import requireGitLabCiConfigFileRule from "../rules/require-gitlab-ci-config-file.js";
@@ -47,7 +49,6 @@ import requireGitLabCiWorkflowRulesRule from "../rules/require-gitlab-ci-workflo
 import requireGitLabIssueTemplateFileRule from "../rules/require-gitlab-issue-template-file.js";
 import requireGitLabMergeRequestTemplateFileRule from "../rules/require-gitlab-merge-request-template-file.js";
 import requireIssueTemplateFileRule from "../rules/require-issue-template-file.js";
-import requireIssueTemplateLabelsRule from "../rules/require-issue-template-labels.js";
 import requireLicenseFileRule from "../rules/require-license-file.js";
 import requireLicenseSpdxIdentifierRule from "../rules/require-license-spdx-identifier.js";
 import requireNodeVersionFileRule from "../rules/require-node-version-file.js";
@@ -57,7 +58,6 @@ import requireReadmeBadgesRule from "../rules/require-readme-badges.js";
 import requireReadmeFileRule from "../rules/require-readme-file.js";
 import requireReadmeSectionsRule from "../rules/require-readme-sections.js";
 import requireReleaseConfigFileRule from "../rules/require-release-config-file.js";
-import requireRenovateOrDependabotRule from "../rules/require-renovate-or-dependabot.js";
 import requireSecretScanningConfigRule from "../rules/require-secret-scanning-config.js";
 import requireSecurityPolicyContactChannelRule from "../rules/require-security-policy-contact-channel.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
@@ -109,9 +109,6 @@ export const repoComplianceRules: Readonly<
     "require-code-of-conduct-file": asRuleWithDocs(
         requireCodeOfConductFileRule
     ),
-    "require-code-scanning-workflow": asRuleWithDocs(
-        requireCodeScanningWorkflowRule
-    ),
     "require-codeowners-file": asRuleWithDocs(requireCodeownersFileRule),
     "require-codeowners-reviewable-patterns": asRuleWithDocs(
         requireCodeownersReviewablePatternsRule
@@ -123,9 +120,6 @@ export const repoComplianceRules: Readonly<
     "require-dependabot-config-file": asRuleWithDocs(
         requireDependabotConfigFileRule
     ),
-    "require-dependabot-ecosystem-coverage": asRuleWithDocs(
-        requireDependabotEcosystemCoverageRule
-    ),
     "require-dependabot-grouping": asRuleWithDocs(
         requireDependabotGroupingRule
     ),
@@ -134,6 +128,12 @@ export const repoComplianceRules: Readonly<
     ),
     "require-dependabot-schedule": asRuleWithDocs(
         requireDependabotScheduleRule
+    ),
+    "require-dependabot-update-entries": asRuleWithDocs(
+        requireDependabotUpdateEntriesRule
+    ),
+    "require-dependency-update-config": asRuleWithDocs(
+        requireDependencyUpdateConfigRule
     ),
     "require-forgejo-actions-concurrency": asRuleWithDocs(
         requireForgejoActionsConcurrencyRule
@@ -169,6 +169,12 @@ export const repoComplianceRules: Readonly<
     "require-github-actions-workflow-name": asRuleWithDocs(
         requireGitHubActionsWorkflowNameRule
     ),
+    "require-github-code-scanning-workflow": asRuleWithDocs(
+        requireGitHubCodeScanningWorkflowRule
+    ),
+    "require-github-issue-template-labels": asRuleWithDocs(
+        requireGitHubIssueTemplateLabelsRule
+    ),
     "require-gitignore-file": asRuleWithDocs(requireGitignoreFileRule),
     "require-gitlab-ci-cache-policy": asRuleWithDocs(
         requireGitLabCiCachePolicyRule
@@ -203,9 +209,6 @@ export const repoComplianceRules: Readonly<
         requireGitLabMergeRequestTemplateFileRule
     ),
     "require-issue-template-file": asRuleWithDocs(requireIssueTemplateFileRule),
-    "require-issue-template-labels": asRuleWithDocs(
-        requireIssueTemplateLabelsRule
-    ),
     "require-license-file": asRuleWithDocs(requireLicenseFileRule),
     "require-license-spdx-identifier": asRuleWithDocs(
         requireLicenseSpdxIdentifierRule
@@ -221,9 +224,6 @@ export const repoComplianceRules: Readonly<
     "require-readme-file": asRuleWithDocs(requireReadmeFileRule),
     "require-readme-sections": asRuleWithDocs(requireReadmeSectionsRule),
     "require-release-config-file": asRuleWithDocs(requireReleaseConfigFileRule),
-    "require-renovate-or-dependabot": asRuleWithDocs(
-        requireRenovateOrDependabotRule
-    ),
     "require-secret-scanning-config": asRuleWithDocs(
         requireSecretScanningConfigRule
     ),

@@ -101,8 +101,8 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
     },
     {
         messageId: "missingDependencyUpdateConfig",
-        name: "require-renovate-or-dependabot",
-        satisfyingFiles: [".dependabot/config.yml"],
+        name: "require-dependency-update-config",
+        satisfyingFiles: ["updatecli.yaml"],
     },
     {
         messageId: "missingSecretScanningConfig",

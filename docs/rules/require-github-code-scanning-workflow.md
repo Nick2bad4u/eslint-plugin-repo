@@ -1,25 +1,26 @@
-# require-code-scanning-workflow
+# require-github-code-scanning-workflow
 
 Require a GitHub Actions code scanning workflow file.
 
 ## Targeted pattern scope
 
 This rule checks `.github/workflows/` for the presence of at least one file matching
-common code scanning workflow naming conventions: `codeql.yml`, `codeql.yaml`,
-`codeql-analysis.yml`, `codeql-analysis.yaml`, `code-scanning.yml`,
-`code-scanning.yaml`, `sast.yml`, or `sast.yaml`.
+recognised GitHub code scanning workflow naming conventions: `codeql.yml`,
+`codeql.yaml`, `codeql-analysis.yml`, `codeql-analysis.yaml`,
+`code-scanning.yml`, `code-scanning.yaml`, `security-analysis.yml`, or
+`security-analysis.yaml`.
 
 ## What this rule reports
 
-This rule reports when none of the recognised code scanning workflow filenames is present
-in `.github/workflows/`.
+This rule reports when none of the recognised GitHub code scanning workflow
+filenames is present in `.github/workflows/`.
 
 ## Why this rule exists
 
-Static analysis tools like GitHub's CodeQL catch security vulnerabilities and code
-quality issues before they reach production. A dedicated code scanning workflow
-ensures these checks run automatically on every pull request and push to main branches.
-Without it, security regressions may go undetected until after merge.
+GitHub code scanning workflows such as CodeQL catch security vulnerabilities
+and code quality issues before they reach production. A dedicated workflow makes
+that automation visible in the repository and easier to audit. Without it,
+repositories often rely on ad-hoc or undocumented scanning.
 
 ## ❌ Incorrect
 
@@ -51,7 +52,7 @@ export default [
   {
     plugins: { "repo-compliance": repoPlugin },
     rules: {
-      "repo-compliance/require-code-scanning-workflow": "warn",
+      "repo-compliance/require-github-code-scanning-workflow": "warn",
     },
   },
 ];

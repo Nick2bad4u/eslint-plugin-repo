@@ -15,11 +15,11 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "repoPlugin.configs.all",
         ],
         description:
-            "require a code scanning workflow file (CodeQL or equivalent) to detect vulnerabilities in the repository.",
-        messageId: "missingCodeScanningWorkflow",
+            "require a GitHub code scanning workflow file to enable repository-level code scanning automation.",
+        messageId: "missingGitHubCodeScanningWorkflow",
         messageText:
-            "Repository is missing a code scanning workflow. Add a CodeQL analysis workflow at .github/workflows/codeql.yml (or equivalent) to automatically detect security vulnerabilities.",
-        name: "require-code-scanning-workflow",
+            "Repository is missing a recognised GitHub code scanning workflow. Add a CodeQL or equivalent workflow such as `.github/workflows/codeql.yml` to automate repository-level code scanning.",
+        name: "require-github-code-scanning-workflow",
         recommendation: false,
         requirement: {
             kind: "one-of",

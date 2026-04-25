@@ -16,7 +16,6 @@ Use epo-compliance.configs.github for GitHub-specific repository compliance req
 | Rule | Fix |
 | --- | :-: |
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — |
-| [`require-code-scanning-workflow`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-scanning-workflow) | — |
 | [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
 | [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
@@ -25,8 +24,9 @@ Use epo-compliance.configs.github for GitHub-specific repository compliance req
 | [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
 | [`require-github-actions-workflow-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-actions-workflow-file) | — |
 | [`require-github-actions-workflow-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-actions-workflow-name) | — |
+| [`require-github-code-scanning-workflow`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-code-scanning-workflow) | — |
+| [`require-github-issue-template-labels`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-issue-template-labels) | — |
 | [`require-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-file) | — |
-| [`require-issue-template-labels`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-labels) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |

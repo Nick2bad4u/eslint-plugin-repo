@@ -1,5 +1,5 @@
 import { basename, dirname, relative } from "node:path";
-import { arrayIncludes, isEmpty, setHas, stringSplit } from "ts-extras";
+import { isEmpty, setHas, stringSplit } from "ts-extras";
 
 import {
     getDependabotConfigPath,
@@ -15,12 +15,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "package.json",
 ]);
-
-/**
- * Default ecosystems to require when none are specified. An empty array means
- * "just require at least one update entry exists".
- */
-const defaultRequiredEcosystems: readonly string[] = [];
 
 const extractEcosystems = (yamlSource: string): readonly string[] => {
     const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
@@ -44,10 +38,7 @@ const extractEcosystems = (yamlSource: string): readonly string[] => {
     return ecosystems;
 };
 
-/**
- * Rule enforcing that the Dependabot configuration covers required package
- * ecosystems.
- */
+/** Rule enforcing that Dependabot declares at least one update entry. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
@@ -72,32 +63,14 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 }
 
                 const ecosystems = extractEcosystems(dependabotSource);
-                const requiredEcosystems = defaultRequiredEcosystems;
                 const relativeConfigPath = relative(repositoryRoot, configPath);
 
                 if (isEmpty(ecosystems)) {
                     context.report({
                         data: { configPath: relativeConfigPath },
-                        messageId: "noUpdateEntries",
+                        messageId: "missingDependabotUpdateEntries",
                         node,
                     });
-
-                    return;
-                }
-
-                for (const required of requiredEcosystems) {
-                    const lower = required.toLowerCase();
-
-                    if (!arrayIncludes(ecosystems, lower)) {
-                        context.report({
-                            data: {
-                                configPath: relativeConfigPath,
-                                ecosystem: required,
-                            },
-                            messageId: "missingEcosystem",
-                            node,
-                        });
-                    }
                 }
             },
         };
@@ -106,25 +79,23 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     meta: {
         docs: {
             description:
-                "require Dependabot to contain at least one update entry and cover any built-in required ecosystems",
+                "require Dependabot to contain at least one update entry",
             recommended: false,
             repoConfigs: [
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],
             requiresTypeChecking: false,
-            url: createRuleDocsUrl("require-dependabot-ecosystem-coverage"),
+            url: createRuleDocsUrl("require-dependabot-update-entries"),
         },
         messages: {
-            missingEcosystem:
-                "Dependabot config '{{ configPath }}' does not include an update entry for the '{{ ecosystem }}' ecosystem. Add a `- package-ecosystem: {{ ecosystem }}` block to keep those dependencies updated.",
-            noUpdateEntries:
+            missingDependabotUpdateEntries:
                 "Dependabot config '{{ configPath }}' does not contain any `updates` entries. Add at least one `- package-ecosystem:` block to enable automated dependency updates.",
         },
         schema: [],
         type: "problem",
     },
-    name: "require-dependabot-ecosystem-coverage",
+    name: "require-dependabot-update-entries",
 });
 
 export default rule;

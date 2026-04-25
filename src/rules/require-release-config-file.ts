@@ -3,10 +3,10 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 /**
  * Rule definition for this repository compliance requirement.
  *
- * This rule approximates a "semver tagging strategy" check by detecting the
- * presence of a release automation configuration file. It cannot verify actual
- * tag semantics (which require API access) but can enforce that release tooling
- * is configured.
+ * This rule checks for repository-local release tooling or release metadata
+ * configuration. It does not prove that releases are actually executed or that
+ * versioning policy is correct; it only enforces the presence of a supported
+ * configuration surface.
  */
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
@@ -15,10 +15,10 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "repoPlugin.configs.all",
         ],
         description:
-            "require a release configuration file to enforce a structured release and versioning strategy.",
+            "require a repository release tooling or release metadata configuration file.",
         messageId: "missingReleaseConfigFile",
         messageText:
-            "Repository is missing a release configuration file. Add .github/release.yml (GitHub release labels), release-please-config.json, or a similar release automation config to establish a structured versioning strategy.",
+            "Repository is missing a supported release tooling or release metadata configuration file. Add Release Please, Changesets, semantic-release, release-it, Release Drafter, or GitHub release metadata config so release behavior is documented in the repository.",
         name: "require-release-config-file",
         recommendation: false,
         requirement: {

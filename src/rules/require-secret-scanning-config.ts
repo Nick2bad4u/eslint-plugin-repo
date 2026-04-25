@@ -9,10 +9,10 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "repoPlugin.configs.all",
         ],
         description:
-            "require a GitHub secret scanning configuration file to define custom detection patterns.",
+            "require a GitHub secret scanning customization surface for repository-level patterns or tuning.",
         messageId: "missingSecretScanningConfig",
         messageText:
-            "Repository is missing a GitHub secret scanning configuration surface. Add `.github/secret_scanning.yml`, `.github/secret-scanning.yml`, or a `.github/secret-scanning/*.yml` custom-pattern file to define repository-specific secret detection patterns.",
+            "Repository is missing a GitHub secret scanning customization surface. Add `.github/secret_scanning.yml`, `.github/secret-scanning.yml`, or a `.github/secret-scanning/*.yml` custom-pattern file if you want repository-level secret scanning patterns or tuning committed to the repo.",
         name: "require-secret-scanning-config",
         recommendation: false,
         requirement: {

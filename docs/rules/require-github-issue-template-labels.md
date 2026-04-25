@@ -1,16 +1,18 @@
-# require-issue-template-labels
+# require-github-issue-template-labels
 
 Require `labels` in GitHub issue template YAML files.
 
 ## Targeted pattern scope
 
-This rule reads each `*.yml` / `*.yaml` file inside `.github/ISSUE_TEMPLATE/` and
-checks that the YAML frontmatter contains a non-empty `labels:` key.
+This rule reads each `*.yml` / `*.yaml` GitHub issue form file inside
+`.github/ISSUE_TEMPLATE/` and checks that the top-level YAML document contains a
+`labels:` key. It intentionally ignores `config.yml` / `config.yaml`, which are
+GitHub issue template settings files rather than issue forms.
 
 ## What this rule reports
 
-This rule reports issue template files that do not declare at least one label in
-their frontmatter.
+This rule reports GitHub issue form files that do not declare a top-level
+`labels:` field.
 
 ## Why this rule exists
 
@@ -59,7 +61,7 @@ export default [
   {
     plugins: { "repo-compliance": repoPlugin },
     rules: {
-      "repo-compliance/require-issue-template-labels": "warn",
+      "repo-compliance/require-github-issue-template-labels": "warn",
     },
   },
 ];

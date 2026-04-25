@@ -1,11 +1,11 @@
 # require-secret-scanning-config
 
-Require a GitHub secret scanning configuration surface.
+Require a GitHub secret scanning customization surface.
 
 ## Targeted pattern scope
 
 This rule checks for the presence of one of the following GitHub-native secret
-scanning configuration surfaces:
+scanning customization surfaces:
 
 - `.github/secret_scanning.yml`
 - `.github/secret_scanning.yaml`
@@ -15,22 +15,21 @@ scanning configuration surfaces:
 
 ## What this rule reports
 
-This rule reports when no supported GitHub secret scanning configuration
+This rule reports when no supported GitHub secret scanning customization
 surface is found.
 
 ## Why this rule exists
 
-GitHub's secret scanning feature automatically alerts on detected credentials in
-pushed commits. Repository-level secret scanning config files let teams define
-custom patterns and tune repository-specific scanning behavior. Without one of
-these config surfaces, secret scanning falls back to platform defaults and
-loses repository-specific tuning. Committing it to the repository documents the
-team's security monitoring posture and makes it version-controlled.
+GitHub's secret scanning feature can be customized with repository-level custom
+patterns and related configuration surfaces. This rule does not prove that
+secret scanning is enabled for the repository; it only checks whether the
+repository has committed a supported customization surface rather than relying
+entirely on platform defaults or external administration.
 
 ## ❌ Incorrect
 
 ```txt
-// .github directory has no secret scanning config surface
+// .github directory has no secret scanning customization surface
 .github/
   dependabot.yml
   CODEOWNERS
@@ -65,7 +64,8 @@ export default [
 ## When not to use it
 
 Disable this rule if your repository deliberately relies on organisation-level
-secret scanning defaults without a repository-level configuration override.
+secret scanning defaults and does not want repository-local custom patterns or
+configuration.
 
 > **Rule catalog ID:** R042
 

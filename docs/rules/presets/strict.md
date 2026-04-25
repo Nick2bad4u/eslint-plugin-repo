@@ -28,10 +28,11 @@ Use epo-compliance.configs.strict for stronger repository policy enforcement.
 | [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
 | [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — |
-| [`require-dependabot-ecosystem-coverage`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-ecosystem-coverage) | — |
 | [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — |
 | [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers) | — |
 | [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
+| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — |
+| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — |
 | [`require-forgejo-actions-concurrency`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-concurrency) | — |
 | [`require-forgejo-actions-job-timeout-minutes`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-job-timeout-minutes) | — |
 | [`require-forgejo-actions-no-write-all-permissions`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-forgejo-actions-no-write-all-permissions) | — |
@@ -43,6 +44,7 @@ Use epo-compliance.configs.strict for stronger repository policy enforcement.
 | [`require-gitattributes-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitattributes-file) | — |
 | [`require-github-actions-workflow-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-actions-workflow-file) | — |
 | [`require-github-actions-workflow-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-actions-workflow-name) | — |
+| [`require-github-issue-template-labels`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-github-issue-template-labels) | — |
 | [`require-gitignore-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitignore-file) | — |
 | [`require-gitlab-ci-cache-policy`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-cache-policy) | — |
 | [`require-gitlab-ci-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-ci-config-file) | — |
@@ -56,7 +58,6 @@ Use epo-compliance.configs.strict for stronger repository policy enforcement.
 | [`require-gitlab-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-issue-template-file) | — |
 | [`require-gitlab-merge-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitlab-merge-request-template-file) | — |
 | [`require-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-file) | — |
-| [`require-issue-template-labels`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-labels) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-license-spdx-identifier`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-spdx-identifier) | — |
 | [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
@@ -64,7 +65,6 @@ Use epo-compliance.configs.strict for stronger repository policy enforcement.
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-readme-sections`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-sections) | — |
-| [`require-renovate-or-dependabot`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-renovate-or-dependabot) | — |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |

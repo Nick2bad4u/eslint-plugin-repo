@@ -38,15 +38,15 @@ const writeFixtureRepo = (
 };
 
 ruleTester.run(
-    "require-issue-template-labels",
-    getPluginRule("require-issue-template-labels"),
+    "require-github-issue-template-labels",
+    getPluginRule("require-github-issue-template-labels"),
     {
         invalid: [
             {
                 code: lintTargetSource,
-                errors: [{ messageId: "missingIssueTemplateLabels" }],
+                errors: [{ messageId: "missingGitHubIssueTemplateLabels" }],
                 filename: writeFixtureRepo(
-                    "require-issue-template-labels",
+                    "require-github-issue-template-labels",
                     "invalid-yaml-issue-form-without-labels",
                     [
                         {
@@ -69,7 +69,7 @@ ruleTester.run(
             {
                 code: lintTargetSource,
                 filename: writeFixtureRepo(
-                    "require-issue-template-labels",
+                    "require-github-issue-template-labels",
                     "valid-yaml-issue-form-with-labels",
                     [
                         {
@@ -91,7 +91,7 @@ ruleTester.run(
             {
                 code: lintTargetSource,
                 filename: writeFixtureRepo(
-                    "require-issue-template-labels",
+                    "require-github-issue-template-labels",
                     "valid-config-only",
                     [
                         {

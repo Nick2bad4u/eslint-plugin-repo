@@ -8,11 +8,11 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "repoPlugin.configs.all",
         ],
         description:
-            "require either Renovate or Dependabot configuration for automated dependency updates.",
+            "require automated dependency update configuration such as Renovate, Dependabot, or Updatecli.",
         messageId: "missingDependencyUpdateConfig",
         messageText:
-            "Repository is missing automated dependency update configuration. Add either Renovate (for example `renovate.json`, `renovate.config.js`, or `.renovaterc.yml`) or Dependabot (`.github/dependabot.yml` or legacy `.dependabot/config.yml`) to keep dependencies up to date.",
-        name: "require-renovate-or-dependabot",
+            "Repository is missing automated dependency update configuration. Add Renovate (for example `renovate.json`, `renovate.config.js`, or `.renovaterc.yml`), Dependabot (`.github/dependabot.yml` or legacy `.dependabot/config.yml`), or Updatecli (`updatecli.yaml` or `updatecli.d/*.yaml`) to keep dependencies up to date.",
+        name: "require-dependency-update-config",
         recommendation: false,
         requirement: {
             kind: "any-of",
@@ -49,6 +49,15 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
                         ".dependabot/config.yml",
                         ".dependabot/config.yaml",
                     ],
+                },
+                {
+                    kind: "one-of",
+                    paths: ["updatecli.yml", "updatecli.yaml"],
+                },
+                {
+                    directory: "updatecli.d",
+                    extensions: [".yml", ".yaml"],
+                    kind: "directory-with-extension",
                 },
             ],
         },

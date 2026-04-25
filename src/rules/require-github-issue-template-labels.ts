@@ -108,7 +108,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                                     templatePath
                                 ),
                             },
-                            messageId: "missingIssueTemplateLabels",
+                            messageId: "missingGitHubIssueTemplateLabels",
                             node,
                         });
                     }
@@ -132,16 +132,16 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
             requiresTypeChecking: false,
             ruleId: "",
             ruleNumber: 0,
-            url: createRuleDocsUrl("require-issue-template-labels"),
+            url: createRuleDocsUrl("require-github-issue-template-labels"),
         },
         messages: {
-            missingIssueTemplateLabels:
+            missingGitHubIssueTemplateLabels:
                 "{{ templateFile }} does not define a `labels:` field. Add a labels list to automatically categorise issues created from this template.",
         },
         schema: [],
         type: "suggestion",
     },
-    name: "require-issue-template-labels",
+    name: "require-github-issue-template-labels",
 });
 
 export default rule;

@@ -1,11 +1,11 @@
 # require-release-config-file
 
-Require a release automation configuration file in the repository.
+Require repository-local release tooling or release metadata configuration.
 
 ## Targeted pattern scope
 
 This rule checks for the presence of one of the following recognised release
-configuration files:
+tooling or release metadata configuration files:
 
 - GitHub release metadata: `.github/release.yml`, `.github/release.yaml`,
   `.github/release-drafter.yml`, `.github/release-drafter.yaml`
@@ -20,20 +20,21 @@ configuration files:
 
 ## What this rule reports
 
-This rule reports when none of the recognised release configuration files is found.
+This rule reports when none of the recognised release tooling or release
+metadata configuration files is found.
 
 ## Why this rule exists
 
-Automated release tooling (such as Release Please, Changesets,
-semantic-release, release-it, or GitHub Release Drafter) ensures that version
-bumps, changelogs, and tags are created consistently. Without a release
-configuration, releases are often manual and error-prone, leading to skipped
-changelog entries, inconsistent version numbers, and deployment delays.
+Repository-local release tooling and release metadata make release behavior more
+discoverable and easier to review. This rule does not prove that releases are
+correctly automated or that semantic versioning is enforced; it only ensures the
+repository contains a supported release-related configuration surface instead of
+leaving release behavior implicit.
 
 ## ❌ Incorrect
 
 ```txt
-// No release configuration file found
+// No release tooling or release metadata configuration found
 .github/
   workflows/
     ci.yml
@@ -74,8 +75,8 @@ export default [
 ## When not to use it
 
 Disable this rule if your project uses a different release tool not listed
-above, or if releases are managed through a separate repository / CI system and
-no local configuration file is needed.
+above, or if releases are managed entirely outside this repository and no
+repository-local release configuration is expected.
 
 > **Rule catalog ID:** R044
 
