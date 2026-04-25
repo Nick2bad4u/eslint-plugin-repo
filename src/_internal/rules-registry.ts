@@ -58,7 +58,6 @@ import requireReadmeFileRule from "../rules/require-readme-file.js";
 import requireReadmeSectionsRule from "../rules/require-readme-sections.js";
 import requireReleaseConfigFileRule from "../rules/require-release-config-file.js";
 import requireRenovateOrDependabotRule from "../rules/require-renovate-or-dependabot.js";
-import requireRepositorySettingsFileRule from "../rules/require-repository-settings-file.js";
 import requireSecretScanningConfigRule from "../rules/require-secret-scanning-config.js";
 import requireSecurityPolicyContactChannelRule from "../rules/require-security-policy-contact-channel.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
@@ -224,9 +223,6 @@ export const repoComplianceRules: Readonly<
     "require-release-config-file": asRuleWithDocs(requireReleaseConfigFileRule),
     "require-renovate-or-dependabot": asRuleWithDocs(
         requireRenovateOrDependabotRule
-    ),
-    "require-repository-settings-file": asRuleWithDocs(
-        requireRepositorySettingsFileRule
     ),
     "require-secret-scanning-config": asRuleWithDocs(
         requireSecretScanningConfigRule

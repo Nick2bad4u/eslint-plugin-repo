@@ -1,7 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import {
+    getGitLabCiConfigPath,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -11,25 +15,8 @@ const triggerFileNames = new Set([
     "eslint.config.ts",
 ]);
 
-const gitlabCiPaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
 const isCommentLine = (line: string): boolean =>
     line.trimStart().startsWith("#");
-
-const getGitLabCiPath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of gitlabCiPaths) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
 
 /**
  * Returns true if the CI config explicitly supports merge-request pipelines via
@@ -78,19 +65,13 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node) {
-                const gitlabCiPath = getGitLabCiPath(rootDirectoryPath);
+                const gitlabCiPath = getGitLabCiConfigPath(rootDirectoryPath);
 
                 if (gitlabCiPath === null) {
                     return;
                 }
 
-                const gitlabCiSource = (() => {
-                    try {
-                        return readFileSync(gitlabCiPath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const gitlabCiSource = readTextFileIfExists(gitlabCiPath);
 
                 if (gitlabCiSource === null) {
                     return;

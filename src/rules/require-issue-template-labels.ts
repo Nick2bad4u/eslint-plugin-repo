@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayIncludes, setHas, stringSplit } from "ts-extras";
 
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -16,30 +17,30 @@ const ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE";
 const ignoredTemplateFileNames = ["config.yml", "config.yaml"] as const;
 
 /**
- * Check whether a YAML issue template file contains a `labels:` key in its YAML
- * frontmatter.
+ * Check whether a GitHub YAML issue template file contains a root-level
+ * `labels:` key. GitHub issue forms are YAML documents, not Markdown files with
+ * frontmatter, so this intentionally scans top-level YAML keys instead of
+ * looking for `---` fences.
  */
 const hasLabelsKey = (source: string): boolean => {
-    const lines = stringSplit(source.replaceAll(/\r\n?/gv, "\n"), "\n");
-
-    let inFrontmatter = false;
+    const lines = stringSplit(normalizeLineEndings(source), "\n");
 
     for (const line of lines) {
-        const trimmed = line.trim();
+        const trimmedLine = line.trim();
+        const trimmedStartLine = line.trimStart();
+        const indentation = line.length - trimmedStartLine.length;
 
-        if (!inFrontmatter) {
-            if (trimmed === "---") {
-                inFrontmatter = true;
-            }
-
+        if (
+            trimmedLine.length === 0 ||
+            trimmedLine === "---" ||
+            trimmedLine === "..." ||
+            trimmedLine.startsWith("#") ||
+            indentation > 0
+        ) {
             continue;
         }
 
-        if (trimmed === "---") {
-            break;
-        }
-
-        if (/^labels\s*:/u.test(trimmed)) {
+        if (trimmedStartLine.startsWith("labels:")) {
             return true;
         }
     }

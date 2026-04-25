@@ -29,7 +29,6 @@ Use epo-compliance.configs.all to enable every current rule.
 | [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
 | [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
-| [`require-copilot-instructions-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-copilot-instructions-file) | — |
 | [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — |
 | [`require-dependabot-ecosystem-coverage`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-ecosystem-coverage) | — |
 | [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — |
@@ -72,7 +71,6 @@ Use epo-compliance.configs.all to enable every current rule.
 | [`require-readme-sections`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-sections) | — |
 | [`require-release-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-release-config-file) | — |
 | [`require-renovate-or-dependabot`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-renovate-or-dependabot) | — |
-| [`require-repository-settings-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-repository-settings-file) | — |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |

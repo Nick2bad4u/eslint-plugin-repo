@@ -74,7 +74,6 @@ const orderedRuleNames = [
     "require-bitbucket-pipelines-clone-depth",
     "require-forgejo-actions-concurrency",
     "require-forgejo-actions-workflow-trigger-coverage",
-    "require-repository-settings-file",
 ] as const;
 
 const toRuleCatalogId = (ruleNumber: number): RuleCatalogId =>

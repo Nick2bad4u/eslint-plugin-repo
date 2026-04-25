@@ -12,14 +12,26 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "require a GitHub secret scanning configuration file to define custom detection patterns.",
         messageId: "missingSecretScanningConfig",
         messageText:
-            "Repository is missing a GitHub secret scanning configuration file (.github/secret_scanning.yml). Add it to define custom secret detection patterns and exclude paths from scanning.",
+            "Repository is missing a GitHub secret scanning configuration surface. Add `.github/secret_scanning.yml`, `.github/secret-scanning.yml`, or a `.github/secret-scanning/*.yml` custom-pattern file to define repository-specific secret detection patterns.",
         name: "require-secret-scanning-config",
         recommendation: false,
         requirement: {
-            kind: "one-of",
-            paths: [
-                ".github/secret_scanning.yml",
-                ".github/secret_scanning.yaml",
+            kind: "any-of",
+            requirements: [
+                {
+                    kind: "one-of",
+                    paths: [
+                        ".github/secret_scanning.yml",
+                        ".github/secret_scanning.yaml",
+                        ".github/secret-scanning.yml",
+                        ".github/secret-scanning.yaml",
+                    ],
+                },
+                {
+                    directory: ".github/secret-scanning",
+                    extensions: [".yml", ".yaml"],
+                    kind: "directory-with-extension",
+                },
             ],
         },
     });

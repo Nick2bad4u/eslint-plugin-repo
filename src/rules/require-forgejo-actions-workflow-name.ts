@@ -1,7 +1,11 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import {
+    getForgejoWorkflowPaths,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -10,11 +14,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
 
 const getIndentationWidth = (line: string): number => {
     let width = 0;
@@ -34,42 +33,6 @@ const isBlankOrCommentLine = (line: string): boolean => {
     const trimmed = line.trim();
 
     return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const collectForgejoWorkflowFiles = (
-    rootDirectoryPath: string
-): readonly string[] => {
-    const workflowsDirectoryPath = path.join(
-        rootDirectoryPath,
-        ".forgejo",
-        "workflows"
-    );
-
-    if (!existsSync(workflowsDirectoryPath)) {
-        return [];
-    }
-
-    const entries = readdirSync(workflowsDirectoryPath, {
-        withFileTypes: true,
-    });
-
-    const workflowPaths: string[] = [];
-
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (
-            !setHas(workflowExtensions, path.extname(entry.name).toLowerCase())
-        ) {
-            continue;
-        }
-
-        workflowPaths.push(path.join(workflowsDirectoryPath, entry.name));
-    }
-
-    return workflowPaths;
 };
 
 const hasRootWorkflowName = (workflowSource: string): boolean => {
@@ -110,7 +73,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         return {
             Program(node) {
                 const workflowPaths =
-                    collectForgejoWorkflowFiles(rootDirectoryPath);
+                    getForgejoWorkflowPaths(rootDirectoryPath);
 
                 if (isEmpty(workflowPaths)) {
                     return;
@@ -119,13 +82,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 const missingNames: string[] = [];
 
                 for (const workflowPath of workflowPaths) {
-                    const workflowSource = (() => {
-                        try {
-                            return readFileSync(workflowPath, "utf8");
-                        } catch {
-                            return null;
-                        }
-                    })();
+                    const workflowSource = readTextFileIfExists(workflowPath);
 
                     if (workflowSource === null) {
                         continue;

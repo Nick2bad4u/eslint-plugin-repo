@@ -149,6 +149,7 @@ export const normalizeRulesSectionMarkdown = (markdown) =>
 
 /** @type {Readonly<Record<PresetName, string>>} */
 const presetDocsSlugByName = {
+    ai: "ai",
     all: "all",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
@@ -160,6 +161,7 @@ const presetDocsSlugByName = {
 
 /** @type {Readonly<Record<PresetName, string>>} */
 const presetConfigReferenceByName = {
+    ai: "repo-compliance.configs.ai",
     all: "repo-compliance.configs.all",
     bitbucket: "repo-compliance.configs.bitbucket",
     codeberg: "repo-compliance.configs.codeberg",

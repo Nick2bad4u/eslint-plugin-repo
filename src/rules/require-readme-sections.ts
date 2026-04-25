@@ -1,7 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import {
+    getRepositoryReadmePath,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,38 +16,27 @@ const triggerFileNames = new Set([
     "package.json",
 ]);
 
-const README_PATHS = [
-    "README.md",
-    "README",
-    "README.txt",
-];
-
 /**
  * Default required sections that a well-maintained project README should have.
  */
 const defaultRequiredSections = ["Installation", "Usage"] as const;
 
-const getReadmePath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of README_PATHS) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll(/\r\n?/gv, "\n");
-
 const extractHeadings = (source: string): readonly string[] => {
     const lines = stringSplit(normalizeLineEndings(source), "\n");
     const headings: string[] = [];
+    let inFencedCodeBlock = false;
 
     for (const line of lines) {
         const trimmedLine = line.trim();
+
+        if (trimmedLine.startsWith("```") || trimmedLine.startsWith("~~~")) {
+            inFencedCodeBlock = !inFencedCodeBlock;
+            continue;
+        }
+
+        if (inFencedCodeBlock) {
+            continue;
+        }
 
         if (!trimmedLine.startsWith("#")) {
             continue;
@@ -82,7 +75,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         }
 
         const rootDirectoryPath = path.dirname(lintedFilePath);
-        const readmePath = getReadmePath(rootDirectoryPath);
+        const readmePath = getRepositoryReadmePath(rootDirectoryPath);
 
         if (readmePath === null) {
             return {};
@@ -92,13 +85,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node): void {
-                const readmeSource = (() => {
-                    try {
-                        return readFileSync(readmePath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const readmeSource = readTextFileIfExists(readmePath);
 
                 if (readmeSource === null || readmeSource.trim().length === 0) {
                     return;

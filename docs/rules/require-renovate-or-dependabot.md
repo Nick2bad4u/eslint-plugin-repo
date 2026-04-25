@@ -5,10 +5,15 @@ Require either a Renovate or Dependabot dependency-update configuration in the r
 ## Targeted pattern scope
 
 This rule checks the repository root for any recognised Renovate configuration file
-(`renovate.json`, `renovate.json5`, `.github/renovate.json`, `.github/renovate.json5`,
-`.renovaterc`, `.renovaterc.json`) **or** a Dependabot configuration file
-(`.github/dependabot.yml`, `.github/dependabot.yaml`). At least one file from
-either group must be present.
+(`renovate.json`, `renovate.json5`, `renovate.yml`, `renovate.yaml`,
+`renovate.config.js`, `renovate.config.cjs`, `renovate.config.mjs`,
+`.github/renovate.json`, `.github/renovate.json5`, `.github/renovate.yml`,
+`.github/renovate.yaml`, `.renovaterc`, `.renovaterc.json`,
+`.renovaterc.json5`, `.renovaterc.yml`, `.renovaterc.yaml`,
+`.renovaterc.js`, `.renovaterc.cjs`, `.renovaterc.mjs`) **or** a Dependabot
+configuration file (`.github/dependabot.yml`, `.github/dependabot.yaml`,
+legacy `.dependabot/config.yml`, `.dependabot/config.yaml`). At least one file
+from either group must be present.
 
 ## What this rule reports
 
@@ -16,16 +21,16 @@ This rule reports when neither a Renovate nor a Dependabot configuration is foun
 
 ## Why this rule exists
 
-Outdated dependencies are one of the most common sources of security vulnerabilities
-and compatibility issues. Automated dependency update tooling (Renovate or Dependabot)
-ensures updates are regularly proposed as pull requests and reviewed by humans rather
-than forgotten. A repository without either tool configured is likely accumulating
-technical debt silently.
+Outdated dependencies are one of the most common sources of security
+vulnerabilities and compatibility issues. Automated dependency update tooling
+(Renovate or Dependabot) ensures updates are regularly proposed as pull
+requests and reviewed by humans rather than forgotten. A repository without
+either tool configured is likely accumulating technical debt silently.
 
 ## ❌ Incorrect
 
 ```txt
-// No renovate.json, .renovaterc, or .github/dependabot.yml found
+// No Renovate or Dependabot configuration found
 .github/
   CODEOWNERS
 src/
@@ -76,7 +81,8 @@ export default [
 
 Disable this rule if your team manages dependency updates through a different
 automated process (e.g., a scheduled internal bot or manual monthly review
-with a documented policy) and you deliberately prefer not to use Renovate or Dependabot.
+with a documented policy) and you deliberately prefer not to use Renovate or
+Dependabot.
 
 > **Rule catalog ID:** R040
 

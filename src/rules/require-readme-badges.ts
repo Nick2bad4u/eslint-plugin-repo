@@ -1,7 +1,10 @@
-import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas } from "ts-extras";
 
+import {
+    getRepositoryReadmePath,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,26 +15,8 @@ const triggerFileNames = new Set([
     "package.json",
 ]);
 
-const README_PATHS = [
-    "README.md",
-    "README",
-    "README.txt",
-];
-
 /** Detects markdown image syntax used for badges: `![alt](url)` */
 const BADGE_PATTERN = /!\[.*?\]\(https?:\/\//iu;
-
-const getReadmePath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of README_PATHS) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
 
 /** Rule enforcing presence of at least one badge in the README. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
@@ -44,7 +29,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         }
 
         const rootDirectoryPath = path.dirname(lintedFilePath);
-        const readmePath = getReadmePath(rootDirectoryPath);
+        const readmePath = getRepositoryReadmePath(rootDirectoryPath);
 
         if (readmePath === null) {
             return {};
@@ -52,13 +37,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node): void {
-                const readmeSource = (() => {
-                    try {
-                        return readFileSync(readmePath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const readmeSource = readTextFileIfExists(readmePath);
 
                 if (readmeSource === null || readmeSource.trim().length === 0) {
                     return;

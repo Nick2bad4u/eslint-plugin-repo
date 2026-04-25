@@ -1,7 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import {
+    getGitLabCiConfigPath,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -10,23 +14,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const gitlabCiPaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const getGitLabCiPath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of gitlabCiPaths) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
 
 /**
  * Reserved top-level GitLab CI keys that are not job definitions.
@@ -64,7 +51,7 @@ const getRootLevelJobName = (trimmedLine: string): null | string => {
 
     const key = trimmedLine.slice(0, -1).trim();
 
-    if (key === "" || key.includes(" ") || setHas(GITLAB_RESERVED_KEYS, key)) {
+    if (key === "" || setHas(GITLAB_RESERVED_KEYS, key)) {
         return null;
     }
 
@@ -131,19 +118,13 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node): void {
-                const gitlabCiPath = getGitLabCiPath(rootDirectoryPath);
+                const gitlabCiPath = getGitLabCiConfigPath(rootDirectoryPath);
 
                 if (gitlabCiPath === null) {
                     return;
                 }
 
-                const source = (() => {
-                    try {
-                        return readFileSync(gitlabCiPath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const source = readTextFileIfExists(gitlabCiPath);
 
                 if (source === null) {
                     return;
@@ -154,7 +135,9 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 for (const jobName of missingJobs) {
                     context.report({
                         data: {
-                            configPath: ".gitlab-ci.yml",
+                            configPath: path
+                                .relative(rootDirectoryPath, gitlabCiPath)
+                                .replaceAll(path.sep, "/"),
                             jobName,
                         },
                         messageId: "missingInterruptible",

@@ -1,7 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
-import { basename, dirname, join } from "node:path";
-import { isDefined, setHas, stringSplit } from "ts-extras";
+import { basename, dirname, relative } from "node:path";
+import { setHas, stringSplit } from "ts-extras";
 
+import {
+    getDependabotConfigPath,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,8 +16,7 @@ const triggerFileNames = new Set([
 ]);
 
 const hasDependabotReviewers = (yamlSource: string): boolean => {
-    const normalizedSource = yamlSource.replaceAll(/\r\n?/gv, "\n");
-    const lines = stringSplit(normalizedSource, "\n");
+    const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
 
     return lines.some(
         (line) =>
@@ -32,32 +35,19 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         }
 
         const repositoryRoot = dirname(context.physicalFilename);
-        const dependabotYmlPath = join(
-            repositoryRoot,
-            ".github",
-            "dependabot.yml"
-        );
-        const dependabotYamlPath = join(
-            repositoryRoot,
-            ".github",
-            "dependabot.yaml"
-        );
+        const configPath = getDependabotConfigPath(repositoryRoot);
 
-        let configPath = "";
-
-        if (existsSync(dependabotYmlPath)) {
-            configPath = dependabotYmlPath;
-        } else if (existsSync(dependabotYamlPath)) {
-            configPath = dependabotYamlPath;
-        }
-
-        if (!isDefined(configPath) || configPath === "") {
+        if (configPath === null) {
             return {};
         }
 
         return {
             Program: (node): void => {
-                const dependabotSource = readFileSync(configPath, "utf8");
+                const dependabotSource = readTextFileIfExists(configPath);
+
+                if (dependabotSource === null) {
+                    return;
+                }
 
                 if (hasDependabotReviewers(dependabotSource)) {
                     return;
@@ -65,7 +55,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
                 context.report({
                     data: {
-                        configPath: ".github/dependabot.yml",
+                        configPath: relative(repositoryRoot, configPath),
                     },
                     messageId: "missingDependabotReviewers",
                     node,

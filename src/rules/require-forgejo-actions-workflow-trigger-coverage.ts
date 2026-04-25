@@ -1,64 +1,19 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
+import {
+    getForgejoWorkflowPaths,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
+import { hasWorkflowOnEvent } from "../_internal/workflow-on-events.js";
 
 const triggerFileNames = new Set([
     "eslint.config.js",
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const stripInlineComment = (line: string): string => {
-    const commentIndex = line.indexOf("#");
-
-    return commentIndex === -1
-        ? line.trim()
-        : line.slice(0, commentIndex).trim();
-};
-
-const collectForgejoWorkflowFiles = (
-    rootDirectoryPath: string
-): readonly string[] => {
-    const workflowsDirectoryPath = path.join(
-        rootDirectoryPath,
-        ".forgejo",
-        "workflows"
-    );
-
-    if (!existsSync(workflowsDirectoryPath)) {
-        return [];
-    }
-
-    const entries = readdirSync(workflowsDirectoryPath, {
-        withFileTypes: true,
-    });
-
-    const workflowPaths: string[] = [];
-
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (
-            !setHas(workflowExtensions, path.extname(entry.name).toLowerCase())
-        ) {
-            continue;
-        }
-
-        workflowPaths.push(path.join(workflowsDirectoryPath, entry.name));
-    }
-
-    return workflowPaths;
-};
 
 /**
  * Check whether a workflow file source has at least one `push:` or
@@ -68,11 +23,9 @@ const collectForgejoWorkflowFiles = (
  * direct children of the `on:` mapping).
  */
 const hasStandardTrigger = (source: string): boolean =>
-    stringSplit(normalizeLineEndings(source), "\n").some((line) => {
-        const trimmed = stripInlineComment(line);
-
-        return trimmed === "push:" || trimmed === "pull_request:";
-    });
+    ["pull_request", "push"].some((eventName) =>
+        hasWorkflowOnEvent(source, eventName)
+    );
 
 /** Rule enforcing standard workflow triggers in Forgejo Actions. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
@@ -89,16 +42,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         return {
             Program(node): void {
                 const workflowFiles =
-                    collectForgejoWorkflowFiles(rootDirectoryPath);
+                    getForgejoWorkflowPaths(rootDirectoryPath);
 
                 for (const workflowFilePath of workflowFiles) {
-                    const source = (() => {
-                        try {
-                            return readFileSync(workflowFilePath, "utf8");
-                        } catch {
-                            return null;
-                        }
-                    })();
+                    const source = readTextFileIfExists(workflowFilePath);
 
                     if (source === null) {
                         continue;
@@ -107,10 +54,12 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     if (!hasStandardTrigger(source)) {
                         context.report({
                             data: {
-                                workflowFile: path.relative(
-                                    rootDirectoryPath,
-                                    workflowFilePath
-                                ),
+                                workflowFile: path
+                                    .relative(
+                                        rootDirectoryPath,
+                                        workflowFilePath
+                                    )
+                                    .replaceAll(path.sep, "/"),
                             },
                             messageId: "missingStandardTrigger",
                             node,

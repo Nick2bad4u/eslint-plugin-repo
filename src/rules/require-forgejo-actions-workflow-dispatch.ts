@@ -1,9 +1,13 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
-import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
+import { arrayJoin, isEmpty, setHas } from "ts-extras";
 
+import {
+    getForgejoWorkflowPaths,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
+import { hasWorkflowOnEvent } from "../_internal/workflow-on-events.js";
 
 const triggerFileNames = new Set([
     "eslint.config.js",
@@ -11,81 +15,8 @@ const triggerFileNames = new Set([
     "eslint.config.ts",
 ]);
 
-const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const stripInlineComment = (line: string): string => {
-    const commentStartIndex = line.indexOf("#");
-
-    return commentStartIndex === -1 ? line : line.slice(0, commentStartIndex);
-};
-
-const collectForgejoWorkflowFiles = (
-    rootDirectoryPath: string
-): readonly string[] => {
-    const workflowsDirectoryPath = path.join(
-        rootDirectoryPath,
-        ".forgejo",
-        "workflows"
-    );
-
-    if (!existsSync(workflowsDirectoryPath)) {
-        return [];
-    }
-
-    const entries = readdirSync(workflowsDirectoryPath, {
-        withFileTypes: true,
-    });
-
-    const workflowPaths: string[] = [];
-
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (
-            !setHas(workflowExtensions, path.extname(entry.name).toLowerCase())
-        ) {
-            continue;
-        }
-
-        workflowPaths.push(path.join(workflowsDirectoryPath, entry.name));
-    }
-
-    return workflowPaths;
-};
-
-const hasWorkflowDispatchTrigger = (workflowSource: string): boolean => {
-    const lines = stringSplit(normalizeLineEndings(workflowSource), "\n");
-
-    for (const line of lines) {
-        const strippedLine = stripInlineComment(line).trim();
-
-        if (strippedLine.length === 0) {
-            continue;
-        }
-
-        if (
-            strippedLine === "workflow_dispatch" ||
-            strippedLine === "- workflow_dispatch" ||
-            strippedLine.startsWith("workflow_dispatch:")
-        ) {
-            return true;
-        }
-
-        if (
-            strippedLine.startsWith("on:") &&
-            strippedLine.includes("workflow_dispatch")
-        ) {
-            return true;
-        }
-    }
-
-    return false;
-};
+const hasWorkflowDispatchTrigger = (workflowSource: string): boolean =>
+    hasWorkflowOnEvent(workflowSource, "workflow_dispatch");
 
 /**
  * Rule definition for requiring manual workflow_dispatch triggers in Forgejo
@@ -105,7 +36,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         return {
             Program(node) {
                 const workflowPaths =
-                    collectForgejoWorkflowFiles(rootDirectoryPath);
+                    getForgejoWorkflowPaths(rootDirectoryPath);
 
                 if (isEmpty(workflowPaths)) {
                     return;
@@ -114,13 +45,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 const missingWorkflowDispatchPaths: string[] = [];
 
                 for (const workflowPath of workflowPaths) {
-                    let workflowSource: null | string = null;
-
-                    try {
-                        workflowSource = readFileSync(workflowPath, "utf8");
-                    } catch {
-                        // Ignore unreadable workflow files and keep scanning.
-                    }
+                    const workflowSource = readTextFileIfExists(workflowPath);
 
                     if (workflowSource === null) {
                         continue;

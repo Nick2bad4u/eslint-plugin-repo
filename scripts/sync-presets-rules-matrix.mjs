@@ -27,7 +27,8 @@ import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.m
 /** @typedef {Readonly<Record<string, RuleModule>>} RulesMap */
 
 /**
- * @typedef {"all"
+ * @typedef {"ai"
+ *     | "all"
  *     | "bitbucket"
  *     | "codeberg"
  *     | "github"
@@ -59,6 +60,7 @@ const normalizeMarkdownLineEndings = (markdown, lineEnding) =>
 
 /** @type {Readonly<Record<PresetConfigName, string>>} */
 const presetDocSlugByConfigName = {
+    ai: "ai",
     all: "all",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
@@ -70,6 +72,7 @@ const presetDocSlugByConfigName = {
 
 /** @type {readonly PresetConfigName[]} */
 const standardPresetConfigNames = [
+    "ai",
     "all",
     "recommended",
     "strict",

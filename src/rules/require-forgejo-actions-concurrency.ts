@@ -1,7 +1,11 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas } from "ts-extras";
 
+import {
+    getForgejoWorkflowPaths,
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -10,47 +14,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const collectForgejoWorkflowFiles = (
-    rootDirectoryPath: string
-): readonly string[] => {
-    const workflowsDirectoryPath = path.join(
-        rootDirectoryPath,
-        ".forgejo",
-        "workflows"
-    );
-
-    if (!existsSync(workflowsDirectoryPath)) {
-        return [];
-    }
-
-    const entries = readdirSync(workflowsDirectoryPath, {
-        withFileTypes: true,
-    });
-
-    const workflowPaths: string[] = [];
-
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (
-            !setHas(workflowExtensions, path.extname(entry.name).toLowerCase())
-        ) {
-            continue;
-        }
-
-        workflowPaths.push(path.join(workflowsDirectoryPath, entry.name));
-    }
-
-    return workflowPaths;
-};
 
 /**
  * Check whether a workflow file source contains a top-level `concurrency:` key.
@@ -73,16 +36,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         return {
             Program(node): void {
                 const workflowFiles =
-                    collectForgejoWorkflowFiles(rootDirectoryPath);
+                    getForgejoWorkflowPaths(rootDirectoryPath);
 
                 for (const workflowFilePath of workflowFiles) {
-                    const source = (() => {
-                        try {
-                            return readFileSync(workflowFilePath, "utf8");
-                        } catch {
-                            return null;
-                        }
-                    })();
+                    const source = readTextFileIfExists(workflowFilePath);
 
                     if (source === null) {
                         continue;
@@ -91,10 +48,12 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     if (!hasConcurrency(source)) {
                         context.report({
                             data: {
-                                workflowFile: path.relative(
-                                    rootDirectoryPath,
-                                    workflowFilePath
-                                ),
+                                workflowFile: path
+                                    .relative(
+                                        rootDirectoryPath,
+                                        workflowFilePath
+                                    )
+                                    .replaceAll(path.sep, "/"),
                             },
                             messageId: "missingConcurrency",
                             node,

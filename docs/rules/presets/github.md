@@ -31,7 +31,6 @@ Use epo-compliance.configs.github for GitHub-specific repository compliance req
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-release-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-release-config-file) | — |
-| [`require-repository-settings-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-repository-settings-file) | — |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |

@@ -53,6 +53,11 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         satisfyingFiles: ["CONTRIBUTING.md"],
     },
     {
+        messageId: "missingCopilotInstructionsFile",
+        name: "require-copilot-instructions-file",
+        satisfyingFiles: [".github/instructions/copilot-instructions.md"],
+    },
+    {
         messageId: "missingCodeOfConductFile",
         name: "require-code-of-conduct-file",
         satisfyingFiles: ["CODE_OF_CONDUCT.md"],
@@ -90,6 +95,21 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         satisfyingFiles: [".github/dependabot.yml"],
     },
     {
+        messageId: "missingReleaseConfigFile",
+        name: "require-release-config-file",
+        satisfyingFiles: [".changeset/config.json"],
+    },
+    {
+        messageId: "missingDependencyUpdateConfig",
+        name: "require-renovate-or-dependabot",
+        satisfyingFiles: [".dependabot/config.yml"],
+    },
+    {
+        messageId: "missingSecretScanningConfig",
+        name: "require-secret-scanning-config",
+        satisfyingFiles: [".github/secret-scanning/custom-patterns.yml"],
+    },
+    {
         messageId: "missingGitHubActionsWorkflowFile",
         name: "require-github-actions-workflow-file",
         satisfyingFiles: [".github/workflows/ci.yml"],
@@ -118,11 +138,6 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         messageId: "missingForgejoActionsWorkflowFile",
         name: "require-forgejo-actions-workflow-file",
         satisfyingFiles: [".forgejo/workflows/ci.yml"],
-    },
-    {
-        messageId: "missingRepositorySettingsFile",
-        name: "require-repository-settings-file",
-        satisfyingFiles: [".github/settings.yml"],
     },
 ];
 

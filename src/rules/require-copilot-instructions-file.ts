@@ -5,17 +5,17 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: ["repoPlugin.configs.ai", "repoPlugin.configs.all"],
         description:
-            "require a GitHub Copilot instructions file to guide AI-assisted development in the repository.",
+            "require repository AI guidance via `.github/instructions/copilot-instructions.md` or `.github/copilot-instructions.md`.",
         messageId: "missingCopilotInstructionsFile",
         messageText:
-            "Repository is missing a GitHub Copilot instructions file (.github/copilot-instructions.md). Add it to customise Copilot's suggestions and commit message behaviour for this repository.",
+            "Repository is missing a Copilot instructions file. Add `.github/instructions/copilot-instructions.md` (preferred for workspace instruction files) or `.github/copilot-instructions.md` to guide AI-assisted development for this repository.",
         name: "require-copilot-instructions-file",
         recommendation: false,
         requirement: {
             kind: "one-of",
             paths: [
+                ".github/instructions/copilot-instructions.md",
                 ".github/copilot-instructions.md",
-                ".github/copilot-commit-message-instructions.md",
             ],
         },
     });
