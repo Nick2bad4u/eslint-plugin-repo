@@ -1,40 +1,18 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+    providerRuleTriggerFileNames,
+    splitConfigLines,
+} from "../_internal/config-file-scanner.js";
+import {
     getAzurePipelinesConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
-
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
-        }
-
-        width += 1;
-    }
-
-    return width;
-};
 
 const isTopLevelTriggerLine = (line: string): boolean =>
     !isBlankOrCommentLine(line) &&
@@ -126,7 +104,7 @@ const hasIncludeEntryUnderBranches = (
 };
 
 const hasTriggerIncludeBranches = (yamlSource: string): boolean => {
-    const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
+    const lines = splitConfigLines(yamlSource);
     const triggerLineIndex = findTopLevelTriggerLineIndex(lines);
 
     if (triggerLineIndex === null) {
@@ -161,7 +139,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 

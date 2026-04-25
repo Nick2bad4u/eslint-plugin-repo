@@ -1,51 +1,23 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    getTopLevelYamlKeyValue,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getAwsAmplifyConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const getTopLevelVersionValue = (yamlSource: string): null | string => {
-    const versionLine = stringSplit(
-        normalizeLineEndings(yamlSource),
-        "\n"
-    ).find((line) => {
-        const trimmed = line.trim();
-
-        if (trimmed.length === 0 || trimmed.startsWith("#")) {
-            return false;
-        }
-
-        return !line.startsWith(" ") && trimmed.startsWith("version:");
-    });
-
-    if (typeof versionLine !== "string") {
-        return null;
-    }
-
-    return versionLine
-        .slice(versionLine.indexOf(":") + 1)
-        .trim()
-        .replaceAll(/["']/gv, "");
-};
 
 /** Rule enforcing supported top-level AWS Amplify spec version value. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -64,7 +36,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const versionValue = getTopLevelVersionValue(amplifySource);
+                const versionValue = getTopLevelYamlKeyValue(
+                    amplifySource,
+                    "version"
+                );
 
                 if (versionValue === "1") {
                     return;

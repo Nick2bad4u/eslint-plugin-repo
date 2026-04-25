@@ -1,43 +1,16 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    getTopLevelYamlKeyValue,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getDigitalOceanAppSpecPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const getTopLevelRegionValue = (yamlSource: string): null | string => {
-    const regionLine = stringSplit(normalizeLineEndings(yamlSource), "\n").find(
-        (line) => {
-            const trimmed = line.trim();
-
-            if (trimmed.length === 0 || trimmed.startsWith("#")) {
-                return false;
-            }
-
-            return !line.startsWith(" ") && trimmed.startsWith("region:");
-        }
-    );
-
-    if (typeof regionLine !== "string") {
-        return null;
-    }
-
-    return regionLine
-        .slice(regionLine.indexOf(":") + 1)
-        .trim()
-        .replaceAll(/["']/gv, "");
-};
 
 const isLowerCaseRegion = (value: string): boolean =>
     value.length > 0 && value === value.toLowerCase();
@@ -47,7 +20,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -66,7 +39,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const regionValue = getTopLevelRegionValue(appSpecSource);
+                const regionValue = getTopLevelYamlKeyValue(
+                    appSpecSource,
+                    "region"
+                );
 
                 // A missing region key is not a casing violation; the
                 // require-digitalocean-app-spec-region rule covers existence.

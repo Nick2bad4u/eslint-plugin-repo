@@ -1,50 +1,25 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    getTopLevelYamlKeyValue,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getGoogleCloudBuildConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
 const timeoutValuePattern = /^\d+s$/v;
-
-const getTopLevelTimeoutValue = (yamlSource: string): null | string => {
-    const lineWithTimeout = stringSplit(
-        normalizeLineEndings(yamlSource),
-        "\n"
-    ).find((line) => {
-        const trimmed = line.trim();
-
-        if (trimmed.length === 0 || trimmed.startsWith("#")) {
-            return false;
-        }
-
-        return !line.startsWith(" ") && trimmed.startsWith("timeout:");
-    });
-
-    if (typeof lineWithTimeout !== "string") {
-        return null;
-    }
-
-    return lineWithTimeout.slice(lineWithTimeout.indexOf(":") + 1).trim();
-};
 
 /** Rule enforcing valid Google Cloud Build timeout value format. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -63,7 +38,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const timeoutValue = getTopLevelTimeoutValue(cloudBuildSource);
+                const timeoutValue = getTopLevelYamlKeyValue(
+                    cloudBuildSource,
+                    "timeout"
+                );
 
                 // A missing timeout key is not a format violation; the
                 // require-google-cloud-build-timeout rule covers existence.

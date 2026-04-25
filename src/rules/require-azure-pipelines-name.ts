@@ -1,38 +1,23 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    hasTopLevelYamlKey,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getAzurePipelinesConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const hasTopLevelName = (yamlSource: string): boolean =>
-    stringSplit(normalizeLineEndings(yamlSource), "\n").some((line) => {
-        const trimmed = line.trim();
-
-        if (trimmed.length === 0 || trimmed.startsWith("#")) {
-            return false;
-        }
-
-        return !line.startsWith(" ") && trimmed.startsWith("name:");
-    });
 
 /** Rule enforcing explicit Azure Pipelines name metadata. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -51,7 +36,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                if (hasTopLevelName(pipelineSource)) {
+                if (hasTopLevelYamlKey(pipelineSource, "name")) {
                     return;
                 }
 

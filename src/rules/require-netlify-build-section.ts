@@ -1,38 +1,23 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    hasTomlTableSection,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getNetlifyConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const hasBuildSection = (tomlSource: string): boolean =>
-    stringSplit(normalizeLineEndings(tomlSource), "\n").some((line) => {
-        const trimmed = line.trim();
-
-        if (trimmed.length === 0 || trimmed.startsWith("#")) {
-            return false;
-        }
-
-        return trimmed === "[build]";
-    });
 
 /** Rule enforcing explicit [build] section in Netlify config. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -51,7 +36,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                if (hasBuildSection(netlifySource)) {
+                if (hasTomlTableSection(netlifySource, "build")) {
                     return;
                 }
 

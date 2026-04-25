@@ -2,19 +2,15 @@ import { basename, dirname, relative } from "node:path";
 import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
 import {
+    providerRuleTriggerFileNames,
+    splitConfigLines,
+} from "../_internal/config-file-scanner.js";
+import {
     getRepositoryDockerfilePath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 type UnpinnedBaseImageMatch = Readonly<{
     imageReference: string;
@@ -32,7 +28,9 @@ const extractBaseImageReference = (line: string): null | string => {
     }
 
     const fromBody = trimmed.replace(/^from\s+/iv, "");
-    const parts = fromBody.split(/\s+/v).filter((part) => part.length > 0);
+    const parts = stringSplit(fromBody, /\s+/v).filter(
+        (part) => part.length > 0
+    );
 
     if (isEmpty(parts)) {
         return null;
@@ -63,7 +61,7 @@ const hasExplicitTag = (imageReference: string): boolean => {
 const getFirstUnpinnedBaseImageMatch = (
     dockerfileSource: string
 ): null | UnpinnedBaseImageMatch => {
-    const lines = stringSplit(normalizeLineEndings(dockerfileSource), "\n");
+    const lines = splitConfigLines(dockerfileSource);
 
     for (const line of lines) {
         const imageReference = extractBaseImageReference(line);
@@ -97,7 +95,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 

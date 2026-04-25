@@ -1,44 +1,16 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    getTomlKeyValue,
+    providerRuleTriggerFileNames,
+} from "../_internal/config-file-scanner.js";
+import {
     getNetlifyConfigPath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
-const getPublishDirectoryValue = (tomlSource: string): null | string => {
-    const publishLine = stringSplit(
-        normalizeLineEndings(tomlSource),
-        "\n"
-    ).find((line) => {
-        const trimmed = line.trim();
-
-        if (trimmed.length === 0 || trimmed.startsWith("#")) {
-            return false;
-        }
-
-        return /^publish\s*=\s*\S/v.test(trimmed);
-    });
-
-    if (typeof publishLine !== "string") {
-        return null;
-    }
-
-    return publishLine
-        .slice(publishLine.indexOf("=") + 1)
-        .trim()
-        .replaceAll(/["']/gv, "");
-};
 
 const hasTrailingSlash = (publishValue: string): boolean =>
     publishValue.length > 1 && publishValue.endsWith("/");
@@ -48,7 +20,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -67,7 +39,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const publishValue = getPublishDirectoryValue(netlifySource);
+                const publishValue = getTomlKeyValue(netlifySource, "publish");
 
                 if (
                     typeof publishValue !== "string" ||

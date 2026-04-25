@@ -1,23 +1,19 @@
 import { basename, dirname, relative } from "node:path";
-import { setHas, stringSplit } from "ts-extras";
+import { setHas } from "ts-extras";
 
 import {
+    providerRuleTriggerFileNames,
+    splitConfigLines,
+} from "../_internal/config-file-scanner.js";
+import {
     getRepositoryDockerfilePath,
-    normalizeLineEndings,
     readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
-
 const hasCmdOrEntrypoint = (dockerfileSource: string): boolean =>
-    stringSplit(normalizeLineEndings(dockerfileSource), "\n").some((line) => {
+    splitConfigLines(dockerfileSource).some((line) => {
         const trimmed = line.trim();
 
         if (trimmed.length === 0 || trimmed.startsWith("#")) {
@@ -34,7 +30,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
