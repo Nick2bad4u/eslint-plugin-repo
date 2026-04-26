@@ -1,7 +1,15 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+} from "../_internal/config-file-scanner.js";
+import {
+    getForgejoWorkflowPaths,
+    normalizeLineEndings,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -11,67 +19,9 @@ const triggerFileNames = new Set([
     "eslint.config.ts",
 ]);
 
-const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const isCommentLine = (line: string): boolean =>
-    line.trimStart().startsWith("#");
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
-        }
-
-        width += 1;
-    }
-
-    return width;
-};
-
-const collectForgejoWorkflowFiles = (
-    rootDirectoryPath: string
-): readonly string[] => {
-    const workflowsDirectoryPath = path.join(
-        rootDirectoryPath,
-        ".forgejo",
-        "workflows"
-    );
-
-    if (!existsSync(workflowsDirectoryPath)) {
-        return [];
-    }
-
-    const entries = readdirSync(workflowsDirectoryPath, {
-        withFileTypes: true,
-    });
-
-    const workflowPaths: string[] = [];
-
-    for (const entry of entries) {
-        if (!entry.isFile()) {
-            continue;
-        }
-
-        if (
-            !setHas(workflowExtensions, path.extname(entry.name).toLowerCase())
-        ) {
-            continue;
-        }
-
-        workflowPaths.push(path.join(workflowsDirectoryPath, entry.name));
-    }
-
-    return workflowPaths;
-};
-
 const findJobsSectionStart = (lines: readonly string[]): null | number => {
     for (const [lineIndex, line] of lines.entries()) {
-        if (isCommentLine(line)) {
+        if (isBlankOrCommentLine(line)) {
             continue;
         }
 
@@ -87,9 +37,6 @@ type JobBlock = Readonly<{
     lines: readonly string[];
     name: string;
 }>;
-
-const isBlankOrCommentLine = (line: string): boolean =>
-    isCommentLine(line) || line.trim().length === 0;
 
 const isJobsSectionTerminator = (line: string, jobsIndent: number): boolean =>
     getIndentationWidth(line) <= jobsIndent;
@@ -148,13 +95,14 @@ const collectJobBlocks = (lines: readonly string[]): readonly JobBlock[] => {
 const hasTimeoutMinutes = (jobBlock: JobBlock): boolean =>
     jobBlock.lines.some(
         (line) =>
-            !isCommentLine(line) &&
+            !isBlankOrCommentLine(line) &&
             line.trimStart().startsWith("timeout-minutes:")
     );
 
 const isReusableWorkflowJob = (jobBlock: JobBlock): boolean =>
     jobBlock.lines.some(
-        (line) => !isCommentLine(line) && line.trimStart().startsWith("uses:")
+        (line) =>
+            !isBlankOrCommentLine(line) && line.trimStart().startsWith("uses:")
     );
 
 const collectMissingTimeoutJobs = (
@@ -200,7 +148,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         return {
             Program(node) {
                 const workflowPaths =
-                    collectForgejoWorkflowFiles(rootDirectoryPath);
+                    getForgejoWorkflowPaths(rootDirectoryPath);
 
                 if (isEmpty(workflowPaths)) {
                     return;

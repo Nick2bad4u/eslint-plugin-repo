@@ -168,21 +168,21 @@ const presetDocsSlugByName = {
 
 /** @type {Readonly<Record<PresetName, string>>} */
 const presetConfigReferenceByName = {
-    ai: "repo-compliance.configs.ai",
-    all: "repo-compliance.configs.all",
-    aws: "repo-compliance.configs.aws",
-    azure: "repo-compliance.configs.azure",
-    bitbucket: "repo-compliance.configs.bitbucket",
-    codeberg: "repo-compliance.configs.codeberg",
-    digitalOcean: "repo-compliance.configs.digitalOcean",
-    docker: "repo-compliance.configs.docker",
-    github: "repo-compliance.configs.github",
-    gitlab: "repo-compliance.configs.gitlab",
-    googleCloud: "repo-compliance.configs.googleCloud",
-    netlify: "repo-compliance.configs.netlify",
-    recommended: "repo-compliance.configs.recommended",
-    strict: "repo-compliance.configs.strict",
-    vercel: "repo-compliance.configs.vercel",
+    ai: "repoPlugin.configs.ai",
+    all: "repoPlugin.configs.all",
+    aws: "repoPlugin.configs.aws",
+    azure: "repoPlugin.configs.azure",
+    bitbucket: "repoPlugin.configs.bitbucket",
+    codeberg: "repoPlugin.configs.codeberg",
+    digitalOcean: "repoPlugin.configs.digitalOcean",
+    docker: "repoPlugin.configs.docker",
+    github: "repoPlugin.configs.github",
+    gitlab: "repoPlugin.configs.gitlab",
+    googleCloud: "repoPlugin.configs.googleCloud",
+    netlify: "repoPlugin.configs.netlify",
+    recommended: "repoPlugin.configs.recommended",
+    strict: "repoPlugin.configs.strict",
+    vercel: "repoPlugin.configs.vercel",
 };
 
 /**

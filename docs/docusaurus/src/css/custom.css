@@ -1,35 +1,43 @@
 :root {
-    --ifm-color-primary: #2f7cff;
-    --ifm-color-primary-dark: #2267ea;
-    --ifm-color-primary-darker: #195bd5;
-    --ifm-color-primary-darkest: #1248ac;
-    --ifm-color-primary-light: #4b8eff;
-    --ifm-color-primary-lighter: #63a0ff;
-    --ifm-color-primary-lightest: #8abcff;
-    --ifm-code-background: #edf4ff;
+    --ifm-color-primary: #2e6bff;
+    --ifm-color-primary-dark: #255be6;
+    --ifm-color-primary-darker: #1f52d2;
+    --ifm-color-primary-darkest: #1943ac;
+    --ifm-color-primary-light: #4e83ff;
+    --ifm-color-primary-lighter: #6596ff;
+    --ifm-color-primary-lightest: #90b7ff;
+    --ifm-code-background: #eef4ff;
     --repo-chip-text-dark: #081626;
-    --repo-sidebar-hover: rgb(47 124 255 / 8%);
-    --repo-sidebar-hover-dark: rgb(99 160 255 / 16%);
-    --repo-sidebar-active: rgb(47 124 255 / 12%);
-    --repo-sidebar-active-dark: rgb(99 160 255 / 22%);
-    --repo-sidebar-accent-overview: #5ce0b3;
-    --repo-sidebar-accent-started: #58c2ff;
-    --repo-sidebar-accent-developer: #8e89ff;
-    --repo-sidebar-accent-ops: #ff7ab8;
-    --repo-sidebar-accent-api: #7ea9ff;
-    --repo-sidebar-accent-types: #66e0d6;
-    --repo-sidebar-accent-runtime: #ffac7f;
-    --repo-sidebar-accent-presets: #8de37b;
-    --repo-sidebar-accent-rules: #d3b7ff;
-    --repo-sidebar-accent-adr: #ff9aba;
-    --repo-sidebar-accent-charts: #ffe07a;
-    --repo-sidebar-accent-links: #ffc58a;
-    --repo-sidebar-accent-repository: #ffe596;
-    --repo-sidebar-accent-github: #8cb3ff;
-    --repo-sidebar-accent-gitlab: #ff9fbb;
-    --repo-sidebar-accent-bitbucket: #78e7ff;
-    --repo-sidebar-accent-forgejo: #ffc68f;
-    --repo-sidebar-inline-prefix: #5e6b84;
+    --repo-sidebar-hover: rgb(46 107 255 / 9%);
+    --repo-sidebar-hover-dark: rgb(112 161 255 / 18%);
+    --repo-sidebar-active: rgb(46 107 255 / 14%);
+    --repo-sidebar-active-dark: rgb(112 161 255 / 24%);
+    --repo-sidebar-accent-overview: #4dd0ff;
+    --repo-sidebar-accent-started: #57a8ff;
+    --repo-sidebar-accent-developer: #8f7dff;
+    --repo-sidebar-accent-ops: #ff6ea7;
+    --repo-sidebar-accent-api: #74b6ff;
+    --repo-sidebar-accent-types: #54e2d3;
+    --repo-sidebar-accent-runtime: #ffab70;
+    --repo-sidebar-accent-presets: #71d1ff;
+    --repo-sidebar-accent-rules: #b59aff;
+    --repo-sidebar-accent-adr: #ffa7ca;
+    --repo-sidebar-accent-charts: #ffd76a;
+    --repo-sidebar-accent-links: #ffbe80;
+    --repo-sidebar-accent-repository: #78b7ff;
+    --repo-sidebar-accent-github: #88adff;
+    --repo-sidebar-accent-gitlab: #ff8faf;
+    --repo-sidebar-accent-bitbucket: #57dcff;
+    --repo-sidebar-accent-forgejo: #ffb274;
+    --repo-sidebar-accent-aws: #ffc76f;
+    --repo-sidebar-accent-azure: #78b7ff;
+    --repo-sidebar-accent-google-cloud: #75d1ff;
+    --repo-sidebar-accent-docker: #58e4c9;
+    --repo-sidebar-accent-vercel: #b79aff;
+    --repo-sidebar-accent-netlify: #53dfbe;
+    --repo-sidebar-accent-digitalocean: #88beff;
+    --repo-sidebar-accent-ai: #ff85cf;
+    --repo-sidebar-inline-prefix: #687997;
 }
 
 /* Prevent any element from creating horizontal page overflow on mobile.
@@ -40,38 +48,46 @@ html {
 }
 
 html[data-theme="dark"] {
-    --ifm-color-primary: #78aaff;
-    --ifm-color-primary-dark: #5f98ff;
-    --ifm-color-primary-darker: #4e8dff;
-    --ifm-color-primary-darkest: #2f71f6;
-    --ifm-color-primary-light: #95bbff;
-    --ifm-color-primary-lighter: #a9c8ff;
-    --ifm-color-primary-lightest: #c7dcff;
-    --ifm-navbar-background-color: rgb(8 14 29 / 78%);
-    --ifm-footer-background-color: rgb(8 14 27 / 98%);
+    --ifm-color-primary: #78a8ff;
+    --ifm-color-primary-dark: #6096ff;
+    --ifm-color-primary-darker: #4f8aff;
+    --ifm-color-primary-darkest: #2e6dff;
+    --ifm-color-primary-light: #95bcff;
+    --ifm-color-primary-lighter: #aac9ff;
+    --ifm-color-primary-lightest: #c8ddff;
+    --ifm-navbar-background-color: rgb(6 11 31 / 82%);
+    --ifm-footer-background-color: rgb(7 11 27 / 98%);
     --ifm-heading-color: #f5f8ff;
-    --ifm-code-background: rgb(8 14 27 / 94%);
-    --ifm-card-background-color: rgb(13 20 39 / 82%);
-    --ifm-background-surface-color: rgb(10 16 31 / 90%);
+    --ifm-code-background: rgb(8 13 31 / 94%);
+    --ifm-card-background-color: rgb(11 18 44 / 84%);
+    --ifm-background-surface-color: rgb(8 14 34 / 92%);
     --ifm-pagination-nav-border-radius: 20px;
-    --repo-sidebar-accent-overview: #75ecc4;
-    --repo-sidebar-accent-started: #7ad0ff;
-    --repo-sidebar-accent-developer: #aba6ff;
-    --repo-sidebar-accent-ops: #ff99c8;
-    --repo-sidebar-accent-api: #9cbeff;
-    --repo-sidebar-accent-types: #8beddf;
-    --repo-sidebar-accent-runtime: #ffc297;
-    --repo-sidebar-accent-presets: #acef99;
-    --repo-sidebar-accent-rules: #e2ccff;
-    --repo-sidebar-accent-adr: #ffb1cb;
-    --repo-sidebar-accent-charts: #ffe89d;
-    --repo-sidebar-accent-links: #ffd5a8;
-    --repo-sidebar-accent-repository: #ffebb2;
-    --repo-sidebar-accent-github: #aac8ff;
-    --repo-sidebar-accent-gitlab: #ffb6cb;
-    --repo-sidebar-accent-bitbucket: #99f0ff;
-    --repo-sidebar-accent-forgejo: #ffd8af;
-    --repo-sidebar-inline-prefix: #a1afc8;
+    --repo-sidebar-accent-overview: #80ddff;
+    --repo-sidebar-accent-started: #8ebfff;
+    --repo-sidebar-accent-developer: #b4a5ff;
+    --repo-sidebar-accent-ops: #ff9cc6;
+    --repo-sidebar-accent-api: #9cccff;
+    --repo-sidebar-accent-types: #8cf2e6;
+    --repo-sidebar-accent-runtime: #ffc291;
+    --repo-sidebar-accent-presets: #8edbff;
+    --repo-sidebar-accent-rules: #d6c1ff;
+    --repo-sidebar-accent-adr: #ffc0dc;
+    --repo-sidebar-accent-charts: #ffe79c;
+    --repo-sidebar-accent-links: #ffd4a8;
+    --repo-sidebar-accent-repository: #a7ccff;
+    --repo-sidebar-accent-github: #aec6ff;
+    --repo-sidebar-accent-gitlab: #ffbad1;
+    --repo-sidebar-accent-bitbucket: #a0efff;
+    --repo-sidebar-accent-forgejo: #ffd6aa;
+    --repo-sidebar-accent-aws: #ffe2a8;
+    --repo-sidebar-accent-azure: #bbd3ff;
+    --repo-sidebar-accent-google-cloud: #b5e7ff;
+    --repo-sidebar-accent-docker: #a2f6e2;
+    --repo-sidebar-accent-vercel: #dfd1ff;
+    --repo-sidebar-accent-netlify: #a6f5d8;
+    --repo-sidebar-accent-digitalocean: #c6dcff;
+    --repo-sidebar-accent-ai: #ffc5eb;
+    --repo-sidebar-inline-prefix: #9facc8;
 }
 
 .navbar .dropdown__menu .navbar-dropdown-divider {
@@ -161,6 +177,40 @@ html[data-theme="dark"]
 
 .theme-doc-sidebar-container
     :is(
+        .theme-doc-sidebar-item-category.sb-cat-rules-aws
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-azure
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-docker
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-category.sb-cat-rules-ai
+            > .menu__list-item-collapsible,
+        .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-google-cloud > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-digitalocean > .menu__link,
+        .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link
+    ) {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    border-inline-start: 4px solid transparent;
+    padding-inline-start: calc(var(--ifm-menu-link-padding-horizontal) - 4px);
+}
+
+.theme-doc-sidebar-container
+    :is(
         .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link::after,
         .theme-doc-sidebar-item-link.sb-doc-getting-started
             > .menu__link::after,
@@ -217,6 +267,47 @@ html[data-theme="dark"]
 
 .theme-doc-sidebar-container
     :is(
+        .theme-doc-sidebar-item-category.sb-cat-rules-aws
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-azure
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-docker
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-ai
+            > .menu__list-item-collapsible::after,
+        .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-google-cloud
+            > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-digitalocean
+            > .menu__link::after,
+        .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link::after
+    ) {
+    margin-inline-start: auto;
+    padding: 0.08rem 0.46rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    color: var(--repo-chip-text-dark);
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.theme-doc-sidebar-container
+    :is(
         .theme-doc-sidebar-item-link.sb-doc-overview > .menu__link,
         .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link,
         .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket
@@ -228,10 +319,7 @@ html[data-theme="dark"]
 .theme-doc-sidebar-container
     .theme-doc-sidebar-item-link.sb-doc-overview
     > .menu__link::after {
-    content: "Start";
-    background-color: rgb(120 231 255 / 22%);
-    border-color: rgb(120 231 255 / 42%);
-    color: var(--repo-sidebar-accent-bitbucket);
+    content: none;
 }
 
 .theme-doc-sidebar-container
@@ -405,10 +493,136 @@ html[data-theme="dark"]
 .theme-doc-sidebar-container
     .theme-doc-sidebar-item-link.sb-preset-strict
     > .menu__link::after {
-    content: "Strict";
-    background-color: rgb(255 159 187 / 18%);
-    border-color: rgb(255 159 187 / 40%);
-    color: var(--repo-sidebar-accent-gitlab);
+    content: none;
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-category.sb-cat-rules-repository,
+        .theme-doc-sidebar-item-category.sb-cat-rules-github,
+        .theme-doc-sidebar-item-category.sb-cat-rules-gitlab,
+        .theme-doc-sidebar-item-category.sb-cat-rules-bitbucket,
+        .theme-doc-sidebar-item-category.sb-cat-rules-forgejo,
+        .theme-doc-sidebar-item-category.sb-cat-rules-aws,
+        .theme-doc-sidebar-item-category.sb-cat-rules-azure,
+        .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud,
+        .theme-doc-sidebar-item-category.sb-cat-rules-docker,
+        .theme-doc-sidebar-item-category.sb-cat-rules-vercel,
+        .theme-doc-sidebar-item-category.sb-cat-rules-netlify,
+        .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean,
+        .theme-doc-sidebar-item-category.sb-cat-rules-ai
+    )
+    > .menu__list {
+    counter-reset: sb-rule-index;
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-item
+    > .menu__link {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+    border-inline-start: 4px solid transparent;
+    padding-inline-start: calc(var(--ifm-menu-link-padding-horizontal) - 4px);
+}
+
+.theme-doc-sidebar-container .sb-rule-item > .menu__link {
+    border-inline-start: 4px solid transparent;
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-item
+    > .menu__link::before {
+    content: counter(sb-rule-index, decimal-leading-zero);
+    counter-increment: sb-rule-index;
+    color: color-mix(
+        in srgb,
+        var(--repo-sidebar-inline-prefix) 86%,
+        #ffffff 14%
+    );
+    font-size: 0.66em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+    min-inline-size: 1.9em;
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-repository
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-repository);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-github
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-github);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-gitlab
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-gitlab);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-bitbucket
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-bitbucket);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-forgejo
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-forgejo);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-aws
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-aws);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-azure
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-azure);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-google-cloud
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-google-cloud);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-docker
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-docker);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-vercel
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-vercel);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-netlify
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-netlify);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-digitalocean
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-digitalocean);
+}
+
+.theme-doc-sidebar-container
+    .theme-doc-sidebar-item-link.sb-rule-ai
+    > .menu__link {
+    border-inline-start-color: var(--repo-sidebar-accent-ai);
 }
 
 .theme-doc-sidebar-container
@@ -451,10 +665,7 @@ html[data-theme="dark"]
 .theme-doc-sidebar-container
     .theme-doc-sidebar-item-category.sb-cat-rules-repository
     > .menu__list-item-collapsible::after {
-    content: "Repo";
-    background-color: rgb(255 229 150 / 18%);
-    border-color: rgb(255 229 150 / 40%);
-    color: var(--repo-sidebar-accent-repository);
+    content: none;
 }
 
 .theme-doc-sidebar-container
@@ -499,6 +710,176 @@ html[data-theme="dark"]
     background-color: rgb(120 231 255 / 18%);
     border-color: rgb(120 231 255 / 40%);
     color: var(--repo-sidebar-accent-bitbucket);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-aws
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-aws);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-aws
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "AWS";
+    background-color: rgb(255 213 142 / 20%);
+    border-color: rgb(255 213 142 / 44%);
+    color: var(--repo-sidebar-accent-aws);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-azure
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-azure);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-azure
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Azure";
+    background-color: rgb(140 184 255 / 20%);
+    border-color: rgb(140 184 255 / 42%);
+    color: var(--repo-sidebar-accent-azure);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-google-cloud > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-google-cloud);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-google-cloud
+            > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "GCP";
+    background-color: rgb(143 208 255 / 20%);
+    border-color: rgb(143 208 255 / 42%);
+    color: var(--repo-sidebar-accent-google-cloud);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-docker
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-docker);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-docker
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Docker";
+    background-color: rgb(127 232 216 / 20%);
+    border-color: rgb(127 232 216 / 42%);
+    color: var(--repo-sidebar-accent-docker);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-vercel);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Vercel";
+    background-color: rgb(202 180 255 / 20%);
+    border-color: rgb(202 180 255 / 42%);
+    color: var(--repo-sidebar-accent-vercel);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-netlify);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "Netlify";
+    background-color: rgb(124 235 192 / 20%);
+    border-color: rgb(124 235 192 / 42%);
+    color: var(--repo-sidebar-accent-netlify);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-digitalocean > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-digitalocean);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-digitalocean
+            > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "DigitalOcean";
+    background-color: rgb(158 201 255 / 20%);
+    border-color: rgb(158 201 255 / 42%);
+    color: var(--repo-sidebar-accent-digitalocean);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link,
+        .theme-doc-sidebar-item-category.sb-cat-rules-ai
+            > .menu__list-item-collapsible
+    ) {
+    border-inline-start-color: var(--repo-sidebar-accent-ai);
+}
+
+.theme-doc-sidebar-container
+    :is(
+        .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link::after,
+        .theme-doc-sidebar-item-category.sb-cat-rules-ai
+            > .menu__list-item-collapsible::after
+    ) {
+    content: "AI";
+    background-color: rgb(255 159 217 / 20%);
+    border-color: rgb(255 159 217 / 42%);
+    color: var(--repo-sidebar-accent-ai);
 }
 
 .theme-doc-sidebar-menu
@@ -586,12 +967,36 @@ html[data-theme="dark"]
                 > .menu__list-item-collapsible,
             .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
                 > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-aws
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-azure
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-docker
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+                > .menu__list-item-collapsible,
+            .theme-doc-sidebar-item-category.sb-cat-rules-ai
+                > .menu__list-item-collapsible,
             .theme-doc-sidebar-item-link.sb-preset-recommended > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-github > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-gitlab > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-codeberg > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-bitbucket > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-google-cloud > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-digitalocean > .menu__link,
+            .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link,
             .theme-doc-sidebar-item-link.sb-preset-all > .menu__link
         ) {
         padding-inline-end: 1rem;
@@ -636,6 +1041,22 @@ html[data-theme="dark"]
                 > .menu__list-item-collapsible::after,
             .theme-doc-sidebar-item-category.sb-cat-rules-forgejo
                 > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-aws
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-azure
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-google-cloud
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-docker
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-vercel
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-netlify
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-digitalocean
+                > .menu__list-item-collapsible::after,
+            .theme-doc-sidebar-item-category.sb-cat-rules-ai
+                > .menu__list-item-collapsible::after,
             .theme-doc-sidebar-item-link.sb-preset-recommended
                 > .menu__link::after,
             .theme-doc-sidebar-item-link.sb-preset-strict > .menu__link::after,
@@ -645,6 +1066,16 @@ html[data-theme="dark"]
                 > .menu__link::after,
             .theme-doc-sidebar-item-link.sb-preset-bitbucket
                 > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-aws > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-azure > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-google-cloud
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-docker > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-vercel > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-netlify > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-digitalocean
+                > .menu__link::after,
+            .theme-doc-sidebar-item-link.sb-preset-ai > .menu__link::after,
             .theme-doc-sidebar-item-link.sb-preset-all > .menu__link::after
         ) {
         display: none;

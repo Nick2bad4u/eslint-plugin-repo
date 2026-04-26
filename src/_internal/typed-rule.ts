@@ -8,9 +8,14 @@ import { getRuleCatalogEntryForRuleNameOrNull } from "./rule-catalog.js";
 import { createRuleDocsUrl } from "./rule-docs-url.js";
 
 /**
+ * Canonical typed rule creator signature for plugin rules.
+ */
+export type RuleCreator = ReturnType<typeof ESLintUtils.RuleCreator<RuleDocs>>;
+
+/**
  * Additional docs metadata supported by plugin rules.
  */
-export type RuleDocs = {
+type RuleDocs = {
     recommended?: boolean;
     repoConfigs?: readonly string[] | string;
     requiresTypeChecking?: boolean;
@@ -19,18 +24,19 @@ export type RuleDocs = {
 };
 
 /**
- * Typed services exposed to rules that require type information.
+ * Shared rule context type used by typed helper utilities.
  */
-export type TypedRuleServices = {
-    checker: ts.TypeChecker;
-    parserServices: ReturnType<typeof ESLintUtils.getParserServices>;
-};
-
-type RuleCreator = ReturnType<typeof ESLintUtils.RuleCreator<RuleDocs>>;
-
 type TypedRuleContext = Readonly<
     TSESLint.RuleContext<string, Readonly<UnknownArray>>
 >;
+
+/**
+ * Typed services exposed to rules that require type information.
+ */
+type TypedRuleServices = {
+    checker: ts.TypeChecker;
+    parserServices: ReturnType<typeof ESLintUtils.getParserServices>;
+};
 
 /**
  * Creates a typed rule with enforced canonical docs metadata.

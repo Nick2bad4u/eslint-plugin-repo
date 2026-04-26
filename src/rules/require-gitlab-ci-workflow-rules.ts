@@ -2,6 +2,10 @@ import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+} from "../_internal/config-file-scanner.js";
+import {
     getGitLabCiConfigPath,
     normalizeLineEndings,
     readTextFileIfExists,
@@ -14,26 +18,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
-
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
-        }
-
-        width += 1;
-    }
-
-    return width;
-};
 
 const findRootWorkflowHeader = (lines: readonly string[]): null | number => {
     for (const [lineIndex, line] of lines.entries()) {

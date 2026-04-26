@@ -51,21 +51,21 @@ This plugin (`eslint-plugin-repo`) focuses on cross-provider repository complian
   - 💡 = suggestions available
   - — = report only
 - Preset key legend:
-  - [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) — [`repo-compliance.configs.recommended`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended)
-  - [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) — [`repo-compliance.configs.strict`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict)
-  - [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) — [`repo-compliance.configs.github`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github)
-  - [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) — [`repo-compliance.configs.gitlab`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab)
-  - [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) — [`repo-compliance.configs.codeberg`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg)
-  - [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) — [`repo-compliance.configs.bitbucket`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket)
-  - [☁️](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/aws) — [`repo-compliance.configs.aws`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/aws)
-  - [🔷](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/azure) — [`repo-compliance.configs.azure`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/azure)
-  - [🌤️](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/google-cloud) — [`repo-compliance.configs.googleCloud`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/google-cloud)
-  - [🐳](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/docker) — [`repo-compliance.configs.docker`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/docker)
-  - [▲](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel) — [`repo-compliance.configs.vercel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel)
-  - [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) — [`repo-compliance.configs.netlify`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify)
-  - [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) — [`repo-compliance.configs.digitalOcean`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean)
-  - [🤖](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai) — [`repo-compliance.configs.ai`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai)
-  - [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) — [`repo-compliance.configs.all`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all)
+  - [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) — [`repoPlugin.configs.recommended`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended)
+  - [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) — [`repoPlugin.configs.strict`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict)
+  - [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) — [`repoPlugin.configs.github`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github)
+  - [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) — [`repoPlugin.configs.gitlab`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab)
+  - [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) — [`repoPlugin.configs.codeberg`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg)
+  - [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) — [`repoPlugin.configs.bitbucket`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket)
+  - [☁️](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/aws) — [`repoPlugin.configs.aws`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/aws)
+  - [🔷](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/azure) — [`repoPlugin.configs.azure`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/azure)
+  - [🌤️](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/google-cloud) — [`repoPlugin.configs.googleCloud`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/google-cloud)
+  - [🐳](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/docker) — [`repoPlugin.configs.docker`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/docker)
+  - [▲](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel) — [`repoPlugin.configs.vercel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel)
+  - [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) — [`repoPlugin.configs.netlify`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify)
+  - [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) — [`repoPlugin.configs.digitalOcean`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean)
+  - [🤖](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai) — [`repoPlugin.configs.ai`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai)
+  - [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) — [`repoPlugin.configs.all`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all)
 
 | Rule | Fix | Preset key |
 | --- | :-: | :-: |

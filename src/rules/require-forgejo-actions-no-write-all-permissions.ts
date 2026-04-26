@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import { stripInlineComment } from "../_internal/config-file-scanner.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,12 +13,6 @@ const triggerFileNames = new Set([
 ]);
 
 const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const stripInlineComment = (line: string): string => {
-    const commentStartIndex = line.indexOf("#");
-
-    return commentStartIndex === -1 ? line : line.slice(0, commentStartIndex);
-};
 
 const normalizeScalar = (value: string): string => {
     const trimmedValue = value.trim();

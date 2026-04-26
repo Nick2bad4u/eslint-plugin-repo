@@ -1,14 +1,7 @@
 import { arrayIncludes, stringSplit } from "ts-extras";
 
+import { stripInlineComment } from "./config-file-scanner.js";
 import { normalizeLineEndings } from "./repository-text-files.js";
-
-const stripInlineComment = (line: string): string => {
-    const commentIndex = line.indexOf("#");
-
-    return commentIndex === -1
-        ? line.trim()
-        : line.slice(0, commentIndex).trim();
-};
 
 const normalizeInlineEventNames = (inlineEvents: string): readonly string[] =>
     stringSplit(inlineEvents, ",")

@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 type SidebarDocItem = {
+    readonly className?: string;
     readonly label: string;
     readonly id: string;
     readonly type: "doc";
@@ -31,19 +32,74 @@ const allRequireRuleDocIds = allRuleDocIds.filter((ruleDocId) =>
     ruleDocId.startsWith("require-")
 );
 
-const toNumberedRuleLabel = (ruleNumber: number, ruleDocId: string): string =>
-    `${String(ruleNumber).padStart(2, "0")} ${ruleDocId}`;
+const isAiRuleDocId = (ruleDocId: string): boolean =>
+    ruleDocId.includes("copilot") || /(?:^|-)ai(?:-|$)/u.test(ruleDocId);
 
-const ruleItems: SidebarDocItem[] = allRequireRuleDocIds.map(
-    (ruleDocId, index) => ({
-        id: ruleDocId,
-        label: toNumberedRuleLabel(index + 1, ruleDocId),
-        type: "doc",
-    })
-);
+const deriveRuleSidebarClassName = (ruleDocId: string): string => {
+    if (ruleDocId.includes("github")) {
+        return "sb-rule-item sb-rule-github";
+    }
+
+    if (ruleDocId.includes("gitlab")) {
+        return "sb-rule-item sb-rule-gitlab";
+    }
+
+    if (ruleDocId.includes("bitbucket")) {
+        return "sb-rule-item sb-rule-bitbucket";
+    }
+
+    if (ruleDocId.includes("forgejo")) {
+        return "sb-rule-item sb-rule-forgejo";
+    }
+
+    if (ruleDocId.includes("aws")) {
+        return "sb-rule-item sb-rule-aws";
+    }
+
+    if (ruleDocId.includes("azure")) {
+        return "sb-rule-item sb-rule-azure";
+    }
+
+    if (ruleDocId.includes("google-cloud")) {
+        return "sb-rule-item sb-rule-google-cloud";
+    }
+
+    if (ruleDocId.includes("docker")) {
+        return "sb-rule-item sb-rule-docker";
+    }
+
+    if (ruleDocId.includes("vercel")) {
+        return "sb-rule-item sb-rule-vercel";
+    }
+
+    if (ruleDocId.includes("netlify")) {
+        return "sb-rule-item sb-rule-netlify";
+    }
+
+    if (ruleDocId.includes("digitalocean")) {
+        return "sb-rule-item sb-rule-digitalocean";
+    }
+
+    if (isAiRuleDocId(ruleDocId)) {
+        return "sb-rule-item sb-rule-ai";
+    }
+
+    return "sb-rule-item sb-rule-repository";
+};
+
+const ruleItems: SidebarDocItem[] = allRequireRuleDocIds.map((ruleDocId) => ({
+    className: deriveRuleSidebarClassName(ruleDocId),
+    id: ruleDocId,
+    label: ruleDocId,
+    type: "doc",
+}));
 
 const createRuleItemsByKeyword = (keyword: string): SidebarDocItem[] =>
     ruleItems.filter((item) => item.id.includes(keyword));
+
+const createRuleItemsByPredicate = (
+    predicate: (item: SidebarDocItem) => boolean
+): SidebarDocItem[] => ruleItems.filter(predicate);
 
 const sidebars = {
     rules: [
@@ -104,6 +160,54 @@ const sidebars = {
                     type: "doc",
                 },
                 {
+                    className: "sb-preset-aws",
+                    id: "presets/aws",
+                    label: "☁️ AWS",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-azure",
+                    id: "presets/azure",
+                    label: "🔷 Azure",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-google-cloud",
+                    id: "presets/google-cloud",
+                    label: "🌤️ Google Cloud",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-docker",
+                    id: "presets/docker",
+                    label: "🐳 Docker",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-vercel",
+                    id: "presets/vercel",
+                    label: "▲ Vercel",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-netlify",
+                    id: "presets/netlify",
+                    label: "🌐 Netlify",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-digitalocean",
+                    id: "presets/digitalocean",
+                    label: "🌊 DigitalOcean",
+                    type: "doc",
+                },
+                {
+                    className: "sb-preset-ai",
+                    id: "presets/ai",
+                    label: "🤖 AI",
+                    type: "doc",
+                },
+                {
                     className: "sb-preset-all",
                     id: "presets/all",
                     label: "🧩 All",
@@ -127,12 +231,22 @@ const sidebars = {
             items: [
                 {
                     className: "sb-cat-rules-repository",
+                    collapsed: true,
+                    collapsible: true,
                     items: createRuleItemsByKeyword("require-").filter(
                         (item) =>
                             !item.id.includes("github") &&
                             !item.id.includes("gitlab") &&
                             !item.id.includes("bitbucket") &&
-                            !item.id.includes("forgejo")
+                            !item.id.includes("forgejo") &&
+                            !item.id.includes("aws") &&
+                            !item.id.includes("azure") &&
+                            !item.id.includes("google-cloud") &&
+                            !item.id.includes("docker") &&
+                            !item.id.includes("vercel") &&
+                            !item.id.includes("netlify") &&
+                            !item.id.includes("digitalocean") &&
+                            !isAiRuleDocId(item.id)
                     ),
                     label: "📁 Repository baseline",
                     link: {
@@ -146,6 +260,8 @@ const sidebars = {
                 },
                 {
                     className: "sb-cat-rules-github",
+                    collapsed: true,
+                    collapsible: true,
                     items: createRuleItemsByKeyword("github"),
                     label: "🐙 GitHub",
                     link: {
@@ -159,6 +275,8 @@ const sidebars = {
                 },
                 {
                     className: "sb-cat-rules-gitlab",
+                    collapsed: true,
+                    collapsible: true,
                     items: createRuleItemsByKeyword("gitlab"),
                     label: "🦊 GitLab",
                     link: {
@@ -172,6 +290,8 @@ const sidebars = {
                 },
                 {
                     className: "sb-cat-rules-bitbucket",
+                    collapsed: true,
+                    collapsible: true,
                     items: createRuleItemsByKeyword("bitbucket"),
                     label: "🪣 Bitbucket",
                     link: {
@@ -185,6 +305,8 @@ const sidebars = {
                 },
                 {
                     className: "sb-cat-rules-forgejo",
+                    collapsed: true,
+                    collapsible: true,
                     items: createRuleItemsByKeyword("forgejo"),
                     label: "🗻 Codeberg / Forgejo",
                     link: {
@@ -192,6 +314,128 @@ const sidebars = {
                             "Rules for Codeberg and Forgejo workflow requirements.",
                         slug: "/category/codeberg--forgejo",
                         title: "Codeberg and Forgejo compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-aws",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("aws"),
+                    label: "☁️ AWS",
+                    link: {
+                        description:
+                            "Rules for AWS Amplify repository requirements.",
+                        slug: "/category/aws",
+                        title: "AWS compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-azure",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("azure"),
+                    label: "🔷 Azure",
+                    link: {
+                        description:
+                            "Rules for Azure Pipelines-specific repository requirements.",
+                        slug: "/category/azure",
+                        title: "Azure compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-google-cloud",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("google-cloud"),
+                    label: "🌤️ Google Cloud",
+                    link: {
+                        description:
+                            "Rules for Google Cloud Build repository requirements.",
+                        slug: "/category/google-cloud",
+                        title: "Google Cloud compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-docker",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("docker"),
+                    label: "🐳 Docker",
+                    link: {
+                        description:
+                            "Rules for Docker repository packaging requirements.",
+                        slug: "/category/docker",
+                        title: "Docker compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-vercel",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("vercel"),
+                    label: "▲ Vercel",
+                    link: {
+                        description:
+                            "Rules for Vercel deployment configuration.",
+                        slug: "/category/vercel",
+                        title: "Vercel compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-netlify",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("netlify"),
+                    label: "🌐 Netlify",
+                    link: {
+                        description:
+                            "Rules for Netlify deployment configuration.",
+                        slug: "/category/netlify",
+                        title: "Netlify compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-digitalocean",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByKeyword("digitalocean"),
+                    label: "🌊 DigitalOcean",
+                    link: {
+                        description:
+                            "Rules for DigitalOcean App Platform repository requirements.",
+                        slug: "/category/digitalocean",
+                        title: "DigitalOcean compliance rules",
+                        type: "generated-index",
+                    },
+                    type: "category",
+                },
+                {
+                    className: "sb-cat-rules-ai",
+                    collapsed: true,
+                    collapsible: true,
+                    items: createRuleItemsByPredicate((item) =>
+                        isAiRuleDocId(item.id)
+                    ),
+                    label: "🤖 AI",
+                    link: {
+                        description:
+                            "Rules for AI-assistance repository guidance files.",
+                        slug: "/category/ai",
+                        title: "AI guidance rules",
                         type: "generated-index",
                     },
                     type: "category",

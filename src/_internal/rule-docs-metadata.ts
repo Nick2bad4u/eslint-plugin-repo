@@ -1,13 +1,7 @@
 import type { TSESLint } from "@typescript-eslint/utils";
 import type { UnknownArray, UnknownRecord } from "type-fest";
 
-import {
-    arrayIncludes,
-    isEmpty,
-    isInteger,
-    objectEntries,
-    safeCastTo,
-} from "ts-extras";
+import { arrayIncludes, isEmpty, isInteger, objectEntries } from "ts-extras";
 
 import {
     type ConfigName,
@@ -35,11 +29,6 @@ export type RuleDocsMetadataByName = Readonly<
     Record<RuleNamePattern, RuleDocsMetadata>
 >;
 
-/**
- * Rule-name pattern used by this plugin.
- */
-export type RuleNamePattern = `require-${string}`;
-
 type RuleDocsContract = Readonly<{
     description: string;
     recommended: boolean;
@@ -50,9 +39,17 @@ type RuleDocsContract = Readonly<{
     url: string;
 }>;
 
+/**
+ * Rule-module map keyed by plugin rule name.
+ */
 type RuleMap = Readonly<
     Record<RuleNamePattern, TSESLint.RuleModule<string, Readonly<UnknownArray>>>
 >;
+
+/**
+ * Rule-name pattern used by this plugin.
+ */
+type RuleNamePattern = `require-${string}`;
 
 const isRuleNamePattern = (value: string): value is RuleNamePattern =>
     value.startsWith("require-");
@@ -188,34 +185,3 @@ export const deriveRuleDocsMetadataByName = (
 
     return metadataByRuleName;
 };
-
-/**
- * Derives preset membership keyed by rule name.
- */
-export const deriveRulePresetMembershipByRuleName = (
-    metadataByRuleName: RuleDocsMetadataByName
-): Readonly<Record<RuleNamePattern, readonly ConfigName[]>> => {
-    const membership: Record<RuleNamePattern, readonly ConfigName[]> = {};
-
-    for (const [ruleName, metadata] of objectEntries(metadataByRuleName)) {
-        if (!isRuleNamePattern(ruleName)) {
-            throw new TypeError(`Unexpected rule name '${ruleName}'.`);
-        }
-
-        membership[ruleName] = metadata.configNames;
-    }
-
-    return membership;
-};
-
-/**
- * Derives the set of rules requiring type checking.
- */
-export const deriveTypeCheckedRuleNameSet = (
-    metadataByRuleName: RuleDocsMetadataByName
-): ReadonlySet<RuleNamePattern> =>
-    new Set(
-        objectEntries(metadataByRuleName)
-            .filter(([, metadata]) => metadata.requiresTypeChecking)
-            .map(([ruleName]) => safeCastTo<RuleNamePattern>(ruleName))
-    );

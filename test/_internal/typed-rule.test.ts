@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { createTypedRule } from "../../src/_internal/typed-rule";
+import {
+    createTypedRule,
+    getTypedRuleServices,
+} from "../../src/_internal/typed-rule";
 
 type FixtureRuleDefinition = Parameters<typeof createTypedRule>[0];
 
@@ -71,5 +74,65 @@ describe(createTypedRule, () => {
                 })
             )
         ).toThrow("non-canonical docs.url");
+    });
+
+    it("returns checker and parserServices when program exists", () => {
+        expect.hasAssertions();
+
+        const checker = { kind: "fixture-checker" };
+        const parserServices = {
+            esTreeNodeToTSNodeMap: new WeakMap<object, object>(),
+            program: {
+                getTypeChecker: () => checker,
+            },
+            tsNodeToESTreeNodeMap: new WeakMap<object, object>(),
+        };
+
+        const context = {
+            languageOptions: {
+                parser: {
+                    meta: {
+                        name: "@typescript-eslint/parser",
+                    },
+                },
+            },
+            sourceCode: {
+                parserServices,
+            },
+        } as unknown as Parameters<typeof getTypedRuleServices>[0];
+
+        const services = getTypedRuleServices(context);
+
+        expect(services).toStrictEqual({
+            checker,
+            parserServices,
+        });
+    });
+
+    it("throws when parserServices.program is null", () => {
+        expect.hasAssertions();
+
+        const parserServices = {
+            esTreeNodeToTSNodeMap: new WeakMap<object, object>(),
+            program: null,
+            tsNodeToESTreeNodeMap: new WeakMap<object, object>(),
+        };
+
+        const context = {
+            languageOptions: {
+                parser: {
+                    meta: {
+                        name: "@typescript-eslint/parser",
+                    },
+                },
+            },
+            sourceCode: {
+                parserServices,
+            },
+        } as unknown as Parameters<typeof getTypedRuleServices>[0];
+
+        expect(() => getTypedRuleServices(context)).toThrow(
+            "Typed rule requires parserServices.program"
+        );
     });
 });

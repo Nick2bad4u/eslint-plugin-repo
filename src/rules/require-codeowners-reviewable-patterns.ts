@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -30,9 +31,6 @@ const getCODEOWNERSPath = (rootDirectoryPath: string): null | string => {
 
     return null;
 };
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll(/\r\n?/gv, "\n");
 
 type PatternIssue = Readonly<{
     lineNumber: number;

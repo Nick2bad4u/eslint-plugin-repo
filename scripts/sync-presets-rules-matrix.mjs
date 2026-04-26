@@ -45,6 +45,7 @@ import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.m
  */
 
 const matrixSectionHeading = "## Rule matrix";
+const groupedSectionHeading = "## Rules grouped by preset";
 const presetRulesSectionHeading = "## Rules in this preset";
 const presetsDocsDirectoryPath = "docs/rules/presets";
 
@@ -86,8 +87,6 @@ const presetDocSlugByConfigName = {
 
 /** @type {readonly PresetConfigName[]} */
 const standardPresetConfigNames = [
-    "ai",
-    "all",
     "recommended",
     "strict",
     "github",
@@ -101,7 +100,47 @@ const standardPresetConfigNames = [
     "vercel",
     "netlify",
     "digitalOcean",
+    "ai",
+    "all",
 ];
+
+/** @type {Readonly<Record<PresetConfigName, string>>} */
+const presetConfigReferenceByName = {
+    ai: "repoPlugin.configs.ai",
+    all: "repoPlugin.configs.all",
+    aws: "repoPlugin.configs.aws",
+    azure: "repoPlugin.configs.azure",
+    bitbucket: "repoPlugin.configs.bitbucket",
+    codeberg: "repoPlugin.configs.codeberg",
+    digitalOcean: "repoPlugin.configs.digitalOcean",
+    docker: "repoPlugin.configs.docker",
+    github: "repoPlugin.configs.github",
+    gitlab: "repoPlugin.configs.gitlab",
+    googleCloud: "repoPlugin.configs.googleCloud",
+    netlify: "repoPlugin.configs.netlify",
+    recommended: "repoPlugin.configs.recommended",
+    strict: "repoPlugin.configs.strict",
+    vercel: "repoPlugin.configs.vercel",
+};
+
+/** @type {Readonly<Record<PresetConfigName, string>>} */
+const presetTitleByConfigName = {
+    ai: "🤖 AI",
+    all: "🧩 All",
+    aws: "☁️ AWS",
+    azure: "🔷 Azure",
+    bitbucket: "🪣 Bitbucket",
+    codeberg: "🗻 Codeberg / Forgejo",
+    digitalOcean: "🌊 DigitalOcean",
+    docker: "🐳 Docker",
+    github: "🐙 GitHub",
+    gitlab: "🦊 GitLab",
+    googleCloud: "🌤️ Google Cloud",
+    netlify: "🌐 Netlify",
+    recommended: "✅ Recommended",
+    strict: "🔒 Strict",
+    vercel: "▲ Vercel",
+};
 
 /**
  * @param {unknown} value
@@ -261,6 +300,50 @@ const generatePresetRulesSection = (presetConfigName) => {
 };
 
 /**
+ * @param {PresetConfigName} presetConfigName
+ *
+ * @returns {string}
+ */
+const generatePresetGroupedSubsection = (presetConfigName) => {
+    const ruleNames = collectPresetRuleNames(presetConfigName);
+    const presetDocSlug = presetDocSlugByConfigName[presetConfigName];
+    const presetConfigReference = presetConfigReferenceByName[presetConfigName];
+    const presetTitle = presetTitleByConfigName[presetConfigName];
+    const presetDocsLink = `./${presetDocSlug}.md`;
+
+    return [
+        `### ${presetTitle}`,
+        "",
+        `- Preset key: [\`${presetConfigReference}\`](${presetDocsLink})`,
+        "",
+        createPresetRulesTable(ruleNames),
+        "",
+    ].join("\n");
+};
+
+/**
+ * @returns {string}
+ */
+const generateGroupedRulesSection = () => {
+    const groupedSubsections = standardPresetConfigNames.map(
+        generatePresetGroupedSubsection
+    );
+
+    return [
+        groupedSectionHeading,
+        "",
+        "Rules are listed below by preset so you can scan exactly what each config enables.",
+        "",
+        "- `Fix` legend:",
+        "  - `🔧` = autofixable",
+        "  - `💡` = suggestions available",
+        "  - `—` = report only",
+        "",
+        ...groupedSubsections,
+    ].join("\n");
+};
+
+/**
  * @param {string} markdown
  * @param {string} heading
  * @param {string} replacement
@@ -366,11 +449,18 @@ export const syncPresetsRulesMatrix = async ({ writeChanges }) => {
     const generatedRulesSection = generateReadmeRulesSectionFromRules(
         /** @type {RulesMap} */ (builtPlugin.rules)
     ).replace(/^## Rules$/mv, matrixSectionHeading);
+    const generatedGroupedRulesSection = generateGroupedRulesSection();
 
     const indexWithRulesSection = replaceSection(
         currentIndexMarkdown,
         matrixSectionHeading,
         normalizeMarkdownLineEndings(generatedRulesSection, lineEnding)
+    );
+
+    const indexWithGroupedRulesSection = replaceSection(
+        indexWithRulesSection,
+        groupedSectionHeading,
+        normalizeMarkdownLineEndings(generatedGroupedRulesSection, lineEnding)
     );
 
     const changedPresetDocs = await Promise.all(
@@ -379,7 +469,7 @@ export const syncPresetsRulesMatrix = async ({ writeChanges }) => {
         )
     );
 
-    const changedIndex = indexWithRulesSection !== currentIndexMarkdown;
+    const changedIndex = indexWithGroupedRulesSection !== currentIndexMarkdown;
     const changed = changedIndex || changedPresetDocs.some(Boolean);
 
     if (!changed) {
@@ -394,7 +484,7 @@ export const syncPresetsRulesMatrix = async ({ writeChanges }) => {
         };
     }
 
-    await writeFile(indexPath, indexWithRulesSection, "utf8");
+    await writeFile(indexPath, indexWithGroupedRulesSection, "utf8");
 
     return {
         changed: true,

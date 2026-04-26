@@ -2,6 +2,10 @@ import { basename, dirname, relative } from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+} from "../_internal/config-file-scanner.js";
+import {
     getGoogleCloudBuildConfigPath,
     normalizeLineEndings,
     readTextFileIfExists,
@@ -15,26 +19,6 @@ const triggerFileNames = new Set([
     "eslint.config.ts",
     "package.json",
 ]);
-
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
-
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
-        }
-
-        width += 1;
-    }
-
-    return width;
-};
 
 const hasRootSteps = (yamlSource: string): boolean =>
     stringSplit(normalizeLineEndings(yamlSource), "\n").some((line) => {

@@ -40,11 +40,11 @@ const modernEnhancementsClientModule = fileURLToPath(
 );
 
 /** PWA theme-color meta value for Chromium-based browsers. */
-const pwaThemeColor = "#2E2A33";
+const pwaThemeColor = "#0E1A46";
 /** Windows tile color for pinned-site metadata. */
-const pwaTileColor = "#2E2A33";
+const pwaTileColor = "#0E1A46";
 /** Safari pinned-tab mask icon color. */
-const pwaMaskIconColor = "#71B041";
+const pwaMaskIconColor = "#2E6BFF";
 /** Footer copyright HTML used by the site theme config. */
 const footerCopyright =
     `© ${new Date().getFullYear()} ` +
@@ -505,8 +505,8 @@ const config = {
                 alt: `${projectName} logo`,
                 href: `https://github.com/${organizationName}/${projectName}`,
                 src: "img/logo.svg",
-                width: 60,
-                height: 60,
+                width: 128,
+                height: 128,
             },
             style: "dark",
         },
@@ -547,6 +547,50 @@ const config = {
                             label: "🐙 GitHub rules",
                             to: "/docs/rules/category/github",
                         },
+                        {
+                            label: "🦊 GitLab rules",
+                            to: "/docs/rules/category/gitlab",
+                        },
+                        {
+                            label: "🪣 Bitbucket rules",
+                            to: "/docs/rules/category/bitbucket",
+                        },
+                        {
+                            label: "🗻 Codeberg / Forgejo rules",
+                            to: "/docs/rules/category/codeberg--forgejo",
+                        },
+                        {
+                            label: "☁️ AWS rules",
+                            to: "/docs/rules/category/aws",
+                        },
+                        {
+                            label: "🔷 Azure rules",
+                            to: "/docs/rules/category/azure",
+                        },
+                        {
+                            label: "🌤️ Google Cloud rules",
+                            to: "/docs/rules/category/google-cloud",
+                        },
+                        {
+                            label: "🐳 Docker rules",
+                            to: "/docs/rules/category/docker",
+                        },
+                        {
+                            label: "▲ Vercel rules",
+                            to: "/docs/rules/category/vercel",
+                        },
+                        {
+                            label: "🌐 Netlify rules",
+                            to: "/docs/rules/category/netlify",
+                        },
+                        {
+                            label: "🌊 DigitalOcean rules",
+                            to: "/docs/rules/category/digitalocean",
+                        },
+                        {
+                            label: "🤖 AI guidance rules",
+                            to: "/docs/rules/category/ai",
+                        },
                     ],
                 },
                 {
@@ -583,6 +627,38 @@ const config = {
                         {
                             label: "🪣 Bitbucket",
                             to: "/docs/rules/presets/bitbucket",
+                        },
+                        {
+                            label: "☁️ AWS",
+                            to: "/docs/rules/presets/aws",
+                        },
+                        {
+                            label: "🔷 Azure",
+                            to: "/docs/rules/presets/azure",
+                        },
+                        {
+                            label: "🌤️ Google Cloud",
+                            to: "/docs/rules/presets/google-cloud",
+                        },
+                        {
+                            label: "🐳 Docker",
+                            to: "/docs/rules/presets/docker",
+                        },
+                        {
+                            label: "▲ Vercel",
+                            to: "/docs/rules/presets/vercel",
+                        },
+                        {
+                            label: "🌐 Netlify",
+                            to: "/docs/rules/presets/netlify",
+                        },
+                        {
+                            label: "🌊 DigitalOcean",
+                            to: "/docs/rules/presets/digitalocean",
+                        },
+                        {
+                            label: "🤖 AI",
+                            to: "/docs/rules/presets/ai",
                         },
                         {
                             label: "🧩 All",

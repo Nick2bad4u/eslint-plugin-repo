@@ -65,8 +65,8 @@ const sidebars = {
                         },
                         {
                             className: "sb-api-overview-item",
-                            id: "developer/api/plugin/type-aliases/RepoCompliancePluginContract",
-                            label: "🧠 Type aliases · RepoCompliancePluginContract",
+                            id: "developer/api/plugin/type-aliases/RepoComplianceConfigName",
+                            label: "🧠 Type aliases · RepoComplianceConfigName",
                             type: "doc",
                         },
                         {

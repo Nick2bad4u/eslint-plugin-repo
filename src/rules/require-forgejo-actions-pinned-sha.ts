@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,9 +13,6 @@ const triggerFileNames = new Set([
 ]);
 
 const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
 
 const isCommentLine = (line: string): boolean =>
     line.trimStart().startsWith("#");

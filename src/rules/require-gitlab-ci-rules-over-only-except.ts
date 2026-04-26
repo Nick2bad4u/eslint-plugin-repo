@@ -1,7 +1,12 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import { isBlankOrCommentLine } from "../_internal/config-file-scanner.js";
+import {
+    getGitLabCiConfigPath,
+    normalizeLineEndings,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -10,29 +15,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const gitlabCiPaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
-
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const getGitLabCiPath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of gitlabCiPaths) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
 
 const collectOnlyExceptUsages = (yamlSource: string): readonly string[] => {
     const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
@@ -67,7 +49,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node) {
-                const gitlabCiPath = getGitLabCiPath(rootDirectoryPath);
+                const gitlabCiPath = getGitLabCiConfigPath(rootDirectoryPath);
 
                 if (gitlabCiPath === null) {
                     return;

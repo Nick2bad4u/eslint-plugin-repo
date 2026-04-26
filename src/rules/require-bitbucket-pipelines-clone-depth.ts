@@ -2,6 +2,8 @@ import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { stripInlineComment } from "../_internal/config-file-scanner.js";
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -22,17 +24,6 @@ const getBitbucketPipelinesPath = (
     );
 
     return existsSync(candidatePath) ? candidatePath : null;
-};
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const stripInlineComment = (line: string): string => {
-    const commentIndex = line.indexOf("#");
-
-    return commentIndex === -1
-        ? line.trim()
-        : line.slice(0, commentIndex).trim();
 };
 
 /**

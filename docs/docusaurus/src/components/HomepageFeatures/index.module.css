@@ -17,8 +17,8 @@
     border-radius: 1.15rem;
     background: linear-gradient(
         180deg,
-        rgb(22 28 45 / 96%),
-        rgb(16 20 34 / 98%)
+        rgb(11 18 42 / 96%),
+        rgb(7 12 30 / 98%)
     );
     box-shadow: 0 18px 48px rgb(6 11 24 / 18%);
 }
@@ -28,7 +28,7 @@
     inset-block-start: 0;
     inset-inline: 0;
     block-size: 3px;
-    background: linear-gradient(90deg, #aba6ff, #58c2ff, #8beddf);
+    background: linear-gradient(90deg, #8e7aff, #46a3ff, #33d6d8, #ff8bad);
     content: "";
 }
 
@@ -39,7 +39,7 @@
     inline-size: 2.25rem;
     block-size: 2.25rem;
     border-radius: 0.8rem;
-    background: rgb(8 12 26 / 68%);
+    background: rgb(27 48 107 / 52%);
     color: #ffffff;
     font-size: 1rem;
 }
@@ -61,7 +61,7 @@
     gap: 0.35rem;
     align-items: center;
     margin-block-start: 1rem;
-    color: #9cbeff;
+    color: #8fc6ff;
     font-size: 0.92rem;
     font-weight: 700;
     text-decoration: none;
@@ -73,7 +73,7 @@
 
 .link:hover,
 .link:focus-visible {
-    color: #d3e3ff;
+    color: #dff0ff;
     text-decoration: none;
 }
 

@@ -16,6 +16,8 @@ type FixtureDocs = Readonly<{
 
 type FixtureRule = TSESLint.RuleModule<"fixtureMessage", readonly []>;
 
+type RulesParameter = Parameters<typeof deriveRuleDocsMetadataByName>[0];
+
 const createFixtureRule = (docs: FixtureDocs): FixtureRule => ({
     create() {
         return {};
@@ -110,5 +112,79 @@ describe(deriveRuleDocsMetadataByName, () => {
                 }),
             })
         ).toThrow("must define docs.description");
+    });
+
+    it("throws when docs.url is missing", () => {
+        expect.hasAssertions();
+
+        expect(() =>
+            deriveRuleDocsMetadataByName({
+                "require-fixture-missing-url": createFixtureRule({
+                    description: "fixture docs description",
+                    recommended: false,
+                    repoConfigs: "repoPlugin.configs.recommended",
+                    requiresTypeChecking: false,
+                    ruleId: "R995",
+                    ruleNumber: 995,
+                    url: "",
+                }),
+            })
+        ).toThrow("must define docs.url");
+    });
+
+    it("throws when docs.repoConfigs has an invalid type", () => {
+        expect.hasAssertions();
+
+        expect(() =>
+            deriveRuleDocsMetadataByName({
+                "require-fixture-invalid-repo-configs-type": createFixtureRule({
+                    description: "fixture docs description",
+                    recommended: false,
+                    repoConfigs: 123 as unknown as FixtureDocs["repoConfigs"],
+                    requiresTypeChecking: false,
+                    ruleId: "R994",
+                    ruleNumber: 994,
+                    url: "https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-fixture-invalid-repo-configs-type",
+                }),
+            })
+        ).toThrow("must define docs.repoConfigs as a string or string array");
+    });
+
+    it("throws when docs.repoConfigs resolves to no presets", () => {
+        expect.hasAssertions();
+
+        expect(() =>
+            deriveRuleDocsMetadataByName({
+                "require-fixture-empty-repo-configs": createFixtureRule({
+                    description: "fixture docs description",
+                    recommended: false,
+                    repoConfigs: [],
+                    requiresTypeChecking: false,
+                    ruleId: "R993",
+                    ruleNumber: 993,
+                    url: "https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-fixture-empty-repo-configs",
+                }),
+            })
+        ).toThrow("must belong to at least one preset");
+    });
+
+    it("throws when a rule key does not match the require-* contract", () => {
+        expect.hasAssertions();
+
+        const invalidRuleMap = {
+            "fixture-invalid-rule-name": createFixtureRule({
+                description: "fixture docs description",
+                recommended: false,
+                repoConfigs: "repoPlugin.configs.recommended",
+                requiresTypeChecking: false,
+                ruleId: "R992",
+                ruleNumber: 992,
+                url: "https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/fixture-invalid-rule-name",
+            }),
+        } as unknown as RulesParameter;
+
+        expect(() => deriveRuleDocsMetadataByName(invalidRuleMap)).toThrow(
+            "Unexpected rule name"
+        );
     });
 });

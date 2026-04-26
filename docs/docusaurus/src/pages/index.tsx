@@ -190,11 +190,11 @@ export default function HomePage() {
                             </div>
 
                             <pre className={styles.codeBlock}>
-                                <code>{`import plugin from "eslint-plugin-repo";
+                                <code>{`import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  plugin.configs.recommended,
-  plugin.configs.github,
+    repoPlugin.configs.recommended,
+    repoPlugin.configs.github,
 ];`}</code>
                             </pre>
 

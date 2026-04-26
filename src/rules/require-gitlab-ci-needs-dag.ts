@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { stripInlineComment } from "../_internal/config-file-scanner.js";
 import {
     getGitLabCiConfigPath,
     normalizeLineEndings,
@@ -34,14 +35,6 @@ const GITLAB_RESERVED_KEYS = new Set([
 type NeedsParserState = {
     currentJobName: null | string;
     hasNeeds: boolean;
-};
-
-const stripInlineComment = (line: string): string => {
-    const commentIndex = line.indexOf("#");
-
-    return commentIndex === -1
-        ? line.trim()
-        : line.slice(0, commentIndex).trim();
 };
 
 const getRootLevelJobName = (trimmedLine: string): null | string => {

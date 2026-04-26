@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -23,9 +24,6 @@ const getBitbucketPipelinesPath = (
 
     return existsSync(candidatePath) ? candidatePath : null;
 };
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
 
 /**
  * Detect image: entries that lack a pinned tag (i.e. no `:version`), or use

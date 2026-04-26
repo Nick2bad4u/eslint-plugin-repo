@@ -136,8 +136,8 @@ const toRuleCatalogId = (ruleNumber: number): RuleCatalogId =>
 /**
  * Ordered catalog entries for all plugin rules.
  */
-export const ruleCatalogEntries: readonly RuleCatalogEntry[] =
-    orderedRuleNames.map((ruleName, index) => {
+const ruleCatalogEntries: readonly RuleCatalogEntry[] = orderedRuleNames.map(
+    (ruleName, index) => {
         const ruleNumber = index + 1;
 
         return {
@@ -145,7 +145,8 @@ export const ruleCatalogEntries: readonly RuleCatalogEntry[] =
             ruleName,
             ruleNumber,
         };
-    });
+    }
+);
 
 const ruleCatalogByRuleName = new Map(
     ruleCatalogEntries.map((entry) => [entry.ruleName, entry])

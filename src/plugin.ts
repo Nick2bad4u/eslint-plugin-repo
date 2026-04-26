@@ -11,12 +11,12 @@ import {
 } from "./_internal/config-references.js";
 import {
     deriveRuleDocsMetadataByName,
-    deriveRulePresetMembershipByRuleName,
-    deriveTypeCheckedRuleNameSet,
     type RuleDocsMetadataByName,
-    type RuleNamePattern,
 } from "./_internal/rule-docs-metadata.js";
-import { repoComplianceRules } from "./_internal/rules-registry.js";
+import {
+    repoComplianceRules,
+    type RuleNamePattern,
+} from "./_internal/rules-registry.js";
 
 const ERROR_SEVERITY = "error" as const;
 const DEFAULT_PRESET_FILES = ["**/*.{js,cjs,mjs,ts,cts,mts}"] as const;
@@ -67,6 +67,41 @@ const defaultParserOptions = {
     ecmaVersion: "latest",
     sourceType: "module",
 } satisfies FlatParserOptions;
+
+const isRuleNamePattern = (value: string): value is RuleNamePattern =>
+    value.startsWith("require-");
+
+const deriveRulePresetMembershipByRuleName = (
+    metadataByRuleName: RuleDocsMetadataByName
+): Readonly<Record<RuleNamePattern, readonly InternalConfigName[]>> => {
+    const membership: Record<RuleNamePattern, readonly InternalConfigName[]> =
+        {};
+
+    for (const [ruleName, metadata] of objectEntries(metadataByRuleName)) {
+        if (!isRuleNamePattern(ruleName)) {
+            throw new TypeError(`Unexpected rule name '${ruleName}'.`);
+        }
+
+        membership[ruleName] = metadata.configNames;
+    }
+
+    return membership;
+};
+
+const deriveTypeCheckedRuleNameSet = (
+    metadataByRuleName: RuleDocsMetadataByName
+): ReadonlySet<RuleNamePattern> =>
+    new Set(
+        objectEntries(metadataByRuleName)
+            .filter(([, metadata]) => metadata.requiresTypeChecking)
+            .map(([ruleName]) => {
+                if (!isRuleNamePattern(ruleName)) {
+                    throw new TypeError(`Unexpected rule name '${ruleName}'.`);
+                }
+
+                return ruleName;
+            })
+    );
 
 const ruleDocsMetadataByRuleName: RuleDocsMetadataByName =
     deriveRuleDocsMetadataByName(repoComplianceRules);

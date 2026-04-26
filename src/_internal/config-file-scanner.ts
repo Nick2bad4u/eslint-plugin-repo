@@ -81,6 +81,22 @@ export const getIndentationWidth = (line: string): number => {
     return width;
 };
 
+/**
+ * Strips any trailing inline comment from a YAML line and returns the trimmed
+ * content before the first `#` character.
+ *
+ * When no `#` is present the entire trimmed line is returned. This helper is
+ * used by rules that scan for specific keys or values without a full YAML
+ * parser.
+ */
+export const stripInlineComment = (line: string): string => {
+    const commentIndex = line.indexOf("#");
+
+    return commentIndex === -1
+        ? line.trim()
+        : line.slice(0, commentIndex).trim();
+};
+
 // ---------------------------------------------------------------------------
 // YAML helpers
 // ---------------------------------------------------------------------------

@@ -2,6 +2,10 @@ import { basename, dirname, relative } from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+} from "../_internal/config-file-scanner.js";
+import {
     getGoogleCloudBuildConfigPath,
     normalizeLineEndings,
     readTextFileIfExists,
@@ -16,60 +20,49 @@ const triggerFileNames = new Set([
     "package.json",
 ]);
 
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
+/**
+ * Returns the index of the root-level `steps:` key in `lines`, or -1 if not
+ * found.
+ */
+const findRootStepsIndex = (lines: readonly string[]): number =>
+    lines.findIndex(
+        (line) =>
+            !isBlankOrCommentLine(line) &&
+            getIndentationWidth(line) === 0 &&
+            line.trimStart() === "steps:"
+    );
 
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
+/**
+ * Returns true when at least one list item (`-`) exists directly inside the
+ * block starting after `afterIndex`. Stops scanning as soon as a non-indented
+ * line is encountered (i.e., leaves the block).
+ */
+const hasNestedListItem = (
+    lines: readonly string[],
+    afterIndex: number
+): boolean => {
+    for (const nestedLine of lines.slice(afterIndex + 1)) {
+        if (isBlankOrCommentLine(nestedLine)) {
+            continue;
         }
 
-        width += 1;
+        if (getIndentationWidth(nestedLine) === 0) {
+            return false;
+        }
+
+        if (nestedLine.trimStart().startsWith("-")) {
+            return true;
+        }
     }
 
-    return width;
+    return false;
 };
 
 const hasNonEmptyStepsList = (yamlSource: string): boolean => {
     const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
+    const stepsIndex = findRootStepsIndex(lines);
 
-    for (const [lineIndex, line] of lines.entries()) {
-        if (isBlankOrCommentLine(line)) {
-            continue;
-        }
-
-        if (getIndentationWidth(line) !== 0 || line.trimStart() !== "steps:") {
-            continue;
-        }
-
-        const stepsIndentation = getIndentationWidth(line);
-
-        for (const nestedLine of lines.slice(lineIndex + 1)) {
-            if (isBlankOrCommentLine(nestedLine)) {
-                continue;
-            }
-
-            const nestedIndentation = getIndentationWidth(nestedLine);
-
-            if (nestedIndentation <= stepsIndentation) {
-                return false;
-            }
-
-            if (nestedLine.trimStart().startsWith("-")) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    return false;
+    return stepsIndex !== -1 && hasNestedListItem(lines, stepsIndex);
 };
 
 /** Rule enforcing non-empty Google Cloud Build steps lists. */

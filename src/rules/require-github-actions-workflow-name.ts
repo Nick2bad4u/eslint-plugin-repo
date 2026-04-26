@@ -2,6 +2,11 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
+import {
+    getIndentationWidth,
+    isBlankOrCommentLine,
+} from "../_internal/config-file-scanner.js";
+import { normalizeLineEndings } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -12,29 +17,6 @@ const triggerFileNames = new Set([
 ]);
 
 const workflowExtensions = new Set([".yaml", ".yml"]);
-
-const normalizeLineEndings = (source: string): string =>
-    source.replaceAll("\r\n", "\n");
-
-const getIndentationWidth = (line: string): number => {
-    let width = 0;
-
-    for (const character of line) {
-        if (character !== " ") {
-            break;
-        }
-
-        width += 1;
-    }
-
-    return width;
-};
-
-const isBlankOrCommentLine = (line: string): boolean => {
-    const trimmed = line.trim();
-
-    return trimmed.length === 0 || trimmed.startsWith("#");
-};
 
 const collectGitHubWorkflowFiles = (
     rootDirectoryPath: string

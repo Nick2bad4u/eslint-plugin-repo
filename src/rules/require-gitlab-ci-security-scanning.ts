@@ -1,7 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import {
+    getGitLabCiConfigPath,
+    normalizeLineEndings,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -10,8 +14,6 @@ const triggerFileNames = new Set([
     "eslint.config.mjs",
     "eslint.config.ts",
 ]);
-
-const gitlabCiPaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
 
 /**
  * GitLab security scanning template name fragments checked via
@@ -43,7 +45,7 @@ const isCommentLine = (line: string): boolean =>
 
 /** Returns true if the YAML source includes a recognizable security scan. */
 const hasSecurityScanning = (yamlSource: string): boolean => {
-    const lines = stringSplit(yamlSource.replaceAll("\r\n", "\n"), "\n");
+    const lines = stringSplit(normalizeLineEndings(yamlSource), "\n");
 
     for (const line of lines) {
         if (isCommentLine(line)) {
@@ -68,18 +70,6 @@ const hasSecurityScanning = (yamlSource: string): boolean => {
     return false;
 };
 
-const getGitLabCiPath = (rootDirectoryPath: string): null | string => {
-    for (const relativePath of gitlabCiPaths) {
-        const absolutePath = path.join(rootDirectoryPath, relativePath);
-
-        if (existsSync(absolutePath)) {
-            return absolutePath;
-        }
-    }
-
-    return null;
-};
-
 /** Rule definition for enforcing GitLab security scanning in CI configuration. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
@@ -94,7 +84,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node) {
-                const gitlabCiPath = getGitLabCiPath(rootDirectoryPath);
+                const gitlabCiPath = getGitLabCiConfigPath(rootDirectoryPath);
 
                 if (gitlabCiPath === null) {
                     return;
