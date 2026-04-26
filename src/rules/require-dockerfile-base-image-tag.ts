@@ -1,5 +1,5 @@
 import { basename, dirname, relative } from "node:path";
-import { arrayFirst, isEmpty, setHas } from "ts-extras";
+import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
 import {
     providerRuleTriggerFileNames,
@@ -27,8 +27,11 @@ const extractBaseImageReference = (line: string): null | string => {
         return null;
     }
 
-    const fromBody = trimmed.replace(/^from\s+/iv, "");
-    const parts = fromBody.split(/\s+/v).filter((part) => part.length > 0);
+    const fromBody = trimmed
+        .replace(/^from\s+/iv, "")
+        .replaceAll(/\s+/gv, " ")
+        .trim();
+    const parts = stringSplit(fromBody, " ").filter((part) => part.length > 0);
 
     if (isEmpty(parts)) {
         return null;

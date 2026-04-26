@@ -2458,6 +2458,24 @@ ruleTester.run(
                 ),
                 name: "reports Dockerfile base image refs without explicit tag",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "unpinnedDockerBaseImageTag" }],
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "invalid-platform-latest-tag",
+                    [
+                        {
+                            content: [
+                                "FROM --platform=linux/amd64 node:latest",
+                                "RUN node --version",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "reports latest tags even when FROM includes a platform prefix",
+            },
         ],
         valid: [
             {
@@ -2493,6 +2511,41 @@ ruleTester.run(
                     ]
                 ),
                 name: "accepts Dockerfile base image refs pinned by digest",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "valid-scratch-base-image",
+                    [
+                        {
+                            content: ["FROM scratch", "ADD hello /hello"].join(
+                                "\n"
+                            ),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts scratch base images",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-base-image-tag",
+                    "valid-variable-base-image",
+                    [
+                        {
+                            content: [
+                                "ARG BASE_IMAGE=node:22-alpine",
+                                // eslint-disable-next-line no-template-curly-in-string
+                                "FROM ${BASE_IMAGE}",
+                                "RUN node --version",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "accepts variable-driven base image references",
             },
         ],
     }
@@ -4540,6 +4593,1966 @@ ruleTester.run(
                     ]
                 ),
                 name: "passes when region key is absent (existence enforced by require-digitalocean-app-spec-region)",
+            },
+        ],
+    }
+);
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Additional branch-coverage tests appended below
+// ──────────────────────────────────────────────────────────────────────────────
+
+ruleTester.run(
+    "require-aws-amplify-version",
+    getPluginRule("require-aws-amplify-version"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version",
+                    "valid-no-amplify-config-file",
+                    []
+                ),
+                name: "skips when no Amplify config file exists in the repository",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-version-value",
+    getPluginRule("require-aws-amplify-version-value"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version-value",
+                    "valid-no-amplify-config-file",
+                    []
+                ),
+                name: "skips when no Amplify config file exists in the repository",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-name",
+    getPluginRule("require-digitalocean-app-spec-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name",
+                    "valid-no-do-app-spec-file",
+                    []
+                ),
+                name: "skips when no DigitalOcean app spec exists in the repository",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-name-value",
+    getPluginRule("require-digitalocean-app-spec-name-value"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name-value",
+                    "valid-no-do-app-spec-file",
+                    []
+                ),
+                name: "skips when no DigitalOcean app spec exists in the repository",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region-value",
+    getPluginRule("require-digitalocean-app-spec-region-value"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-value",
+                    "valid-no-do-app-spec-file",
+                    []
+                ),
+                name: "skips when no DigitalOcean app spec exists in the repository",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-execution-plan",
+    getPluginRule("require-azure-pipelines-execution-plan"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "valid-no-azure-config-file",
+                    []
+                ),
+                name: "skips when no Azure Pipelines config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "valid-stages-key",
+                    [
+                        {
+                            content: [
+                                "stages:",
+                                "  - stage: Build",
+                                "    jobs:",
+                                "      - job: BuildJob",
+                                "        steps:",
+                                "          - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with top-level stages key",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "valid-steps-key",
+                    [
+                        {
+                            content: [
+                                "steps:",
+                                "  - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with top-level steps key",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger-branches",
+    getPluginRule("require-azure-pipelines-trigger-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesTriggerBranches" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "invalid-no-trigger-key",
+                    [
+                        {
+                            content: [
+                                "jobs:",
+                                "  - job: build",
+                                "    steps:",
+                                "      - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs that have no trigger key at all",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesTriggerBranches" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "invalid-trigger-none",
+                    [
+                        {
+                            content: ["trigger: none"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs with trigger: none and no branches block",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "valid-no-azure-config-file",
+                    []
+                ),
+                name: "skips when no Azure Pipelines config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-branches",
+                    "valid-inline-trigger-branch",
+                    [
+                        {
+                            content: [
+                                "trigger: main",
+                                "jobs:",
+                                "  - job: build",
+                                "    steps:",
+                                "      - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with inline trigger branch value",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-pr-branches",
+    getPluginRule("require-azure-pipelines-pr-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "missingAzurePipelinesPrBranches" }],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "invalid-no-pr-key",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports Azure Pipelines configs without a pr: key",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "valid-no-azure-config-file",
+                    []
+                ),
+                name: "skips when no Azure Pipelines config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-branches",
+                    "valid-inline-pr-branch",
+                    [
+                        {
+                            content: ["pr: main"].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Azure Pipelines configs with inline pr branch value",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger-include-branches",
+    getPluginRule("require-azure-pipelines-trigger-include-branches"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId:
+                            "missingAzurePipelinesTriggerIncludeBranches",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "invalid-trigger-no-branches-key",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  batch: true",
+                                "jobs:",
+                                "  - job: build",
+                                "    steps:",
+                                "      - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports when trigger: block has no branches key",
+            },
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId:
+                            "missingAzurePipelinesTriggerIncludeBranches",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "invalid-trigger-branches-no-include",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "    exclude:",
+                                "      - feature/*",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports when trigger.branches has only exclude with no include key",
+            },
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        messageId:
+                            "missingAzurePipelinesTriggerIncludeBranches",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "invalid-no-trigger-key",
+                    [
+                        {
+                            content: [
+                                "jobs:",
+                                "  - job: build",
+                                "    steps:",
+                                "      - script: npm run build",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "reports when there is no trigger key in the config",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "valid-no-azure-config-file",
+                    []
+                ),
+                name: "skips when no Azure Pipelines config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger-include-branches",
+                    "valid-trigger-with-blank-line-before-include",
+                    [
+                        {
+                            content: [
+                                "trigger:",
+                                "  branches:",
+                                "",
+                                "    # Filter branches",
+                                "    include:",
+                                "      - main",
+                            ].join("\n"),
+                            relativePath: "azure-pipelines.yml",
+                        },
+                    ]
+                ),
+                name: "accepts trigger include branches with blank lines and comments",
+            },
+        ],
+    }
+);
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Additional branch-coverage tests: missing "no config" and "non-trigger" cases
+// ──────────────────────────────────────────────────────────────────────────────
+
+ruleTester.run(
+    "require-azure-pipelines-name",
+    getPluginRule("require-azure-pipelines-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-name",
+                    "valid-no-azure-config-extra",
+                    []
+                ),
+                name: "skips when no azure-pipelines.yml is present in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-name",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-no-write-all-permissions",
+    getPluginRule("require-forgejo-actions-no-write-all-permissions"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "noWriteAllPermissions" }],
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-no-write-all-permissions",
+                    "invalid-single-quoted-write-all",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "permissions: 'write-all'",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: docker",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports workflows with single-quoted write-all permissions",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "noWriteAllPermissions" }],
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-no-write-all-permissions",
+                    "invalid-double-quoted-write-all",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                'permissions: "write-all"',
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: docker",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports workflows with double-quoted write-all permissions",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-no-write-all-permissions",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-no-write-all-permissions",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-no-write-all-permissions",
+                    "valid-non-yaml-file-in-workflows",
+                    [
+                        {
+                            content: "#!/bin/sh\necho hello",
+                            relativePath: ".forgejo/workflows/helper.sh",
+                        },
+                    ]
+                ),
+                name: "skips non-YAML files found inside the workflows directory",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-workdir",
+    getPluginRule("require-dockerfile-workdir"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-workdir",
+                    "valid-no-dockerfile-extra",
+                    []
+                ),
+                name: "skips when no Dockerfile is present in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-workdir",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-workdir",
+                    "valid-blank-and-comment-lines",
+                    [
+                        {
+                            content: [
+                                "# syntax=docker/dockerfile:1",
+                                "",
+                                "FROM node:20",
+                                "WORKDIR /app",
+                                "COPY . .",
+                            ].join("\n"),
+                            relativePath: "Dockerfile",
+                        },
+                    ]
+                ),
+                name: "handles blank lines and comments in Dockerfile correctly",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-from-instruction",
+    getPluginRule("require-dockerfile-from-instruction"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-from-instruction",
+                    "valid-no-dockerfile-extra",
+                    []
+                ),
+                name: "skips when no Dockerfile is present in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-from-instruction",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-dockerfile-user",
+    getPluginRule("require-dockerfile-user"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-user",
+                    "valid-no-dockerfile-extra",
+                    []
+                ),
+                name: "skips when no Dockerfile is present in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dockerfile-user",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-workflow-trigger-coverage",
+    getPluginRule("require-forgejo-actions-workflow-trigger-coverage"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-trigger-coverage",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-trigger-coverage",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-pinned-sha",
+    getPluginRule("require-forgejo-actions-pinned-sha"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-pinned-sha",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-pinned-sha",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-pinned-sha",
+                    "valid-workflow-no-uses-steps",
+                    [
+                        {
+                            content: [
+                                "name: CI",
+                                "on:",
+                                "  push:",
+                                "jobs:",
+                                "  test:",
+                                "    runs-on: docker",
+                                "    steps:",
+                                "      - run: npm test",
+                            ].join("\n"),
+                            relativePath: ".forgejo/workflows/ci.yml",
+                        },
+                    ]
+                ),
+                name: "passes workflow files that have no 'uses:' references at all",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-component",
+    getPluginRule("require-digitalocean-app-spec-component"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-no-app-spec-extra",
+                    []
+                ),
+                name: "skips when no DigitalOcean app spec is present in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-blank-and-comment-lines",
+                    [
+                        {
+                            content: [
+                                "# DigitalOcean App Spec",
+                                "",
+                                "name: my-app",
+                                "region: nyc",
+                                "services:",
+                                "  - name: web",
+                                "    image:",
+                                "      registry_type: DOCKER_HUB",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "handles blank and comment lines in the app spec",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-component",
+                    "valid-indented-component-key",
+                    [
+                        {
+                            content: [
+                                "name: my-app",
+                                "# nested spec is valid but the component key must be top-level",
+                                "",
+                                "services:",
+                                "  - name: web",
+                                "    image:",
+                                "      registry_type: DOCKER_HUB",
+                                "      nested_services:",
+                                "        - name: ignored",
+                            ].join("\n"),
+                            relativePath: ".do/app.yaml",
+                        },
+                    ]
+                ),
+                name: "passes when a valid top-level component key is present alongside other keys",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-version",
+    getPluginRule("require-aws-amplify-version"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-version-value",
+    getPluginRule("require-aws-amplify-version-value"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-version-value",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-build-commands",
+    getPluginRule("require-aws-amplify-build-commands"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-build-commands",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-files",
+    getPluginRule("require-aws-amplify-artifacts-files"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-files",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-aws-amplify-artifacts-base-directory",
+    getPluginRule("require-aws-amplify-artifacts-base-directory"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-aws-amplify-artifacts-base-directory",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-command",
+    getPluginRule("require-netlify-build-command"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-command-non-empty",
+    getPluginRule("require-netlify-build-command-non-empty"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command-non-empty",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-command-non-empty",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-publish-directory",
+    getPluginRule("require-netlify-build-publish-directory"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-publish-directory",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-publish-directory",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-build-section",
+    getPluginRule("require-netlify-build-section"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-section",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-build-section",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-directory-no-trailing-slash",
+    getPluginRule("require-netlify-publish-directory-no-trailing-slash"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-no-trailing-slash",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-no-trailing-slash",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-directory-non-empty",
+    getPluginRule("require-netlify-publish-directory-non-empty"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-non-empty",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-directory-non-empty",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-netlify-publish-relative-path",
+    getPluginRule("require-netlify-publish-relative-path"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-relative-path",
+                    "valid-no-netlify-config",
+                    []
+                ),
+                name: "skips when no Netlify config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-netlify-publish-relative-path",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-build-command",
+    getPluginRule("require-vercel-build-command"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-build-command",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-build-command",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-config-object",
+    getPluginRule("require-vercel-config-object"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-config-object",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-config-object",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-schema-url",
+    getPluginRule("require-vercel-schema-url"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema-url",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema-url",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-schema",
+    getPluginRule("require-vercel-schema"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-schema",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-valid-json",
+    getPluginRule("require-vercel-valid-json"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-valid-json",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-valid-json",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-vercel-version-value",
+    getPluginRule("require-vercel-version-value"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-version-value",
+                    "valid-no-vercel-config",
+                    []
+                ),
+                name: "skips when no Vercel config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-vercel-version-value",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-step-name",
+    getPluginRule("require-google-cloud-build-step-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-step-name",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-step-name",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-steps-non-empty",
+    getPluginRule("require-google-cloud-build-steps-non-empty"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps-non-empty",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps-non-empty",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-steps",
+    getPluginRule("require-google-cloud-build-steps"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-steps",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout",
+    getPluginRule("require-google-cloud-build-timeout"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-format",
+    getPluginRule("require-google-cloud-build-timeout-format"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-format",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-format",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-max",
+    getPluginRule("require-google-cloud-build-timeout-max"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-max",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-max",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-google-cloud-build-timeout-positive",
+    getPluginRule("require-google-cloud-build-timeout-positive"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-positive",
+                    "valid-no-cloudbuild-config",
+                    []
+                ),
+                name: "skips when no Cloud Build config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-google-cloud-build-timeout-positive",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-bitbucket-pipelines-max-time",
+    getPluginRule("require-bitbucket-pipelines-max-time"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-max-time",
+                    "valid-no-bitbucket-config",
+                    []
+                ),
+                name: "skips when no Bitbucket Pipelines config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-max-time",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-bitbucket-pipelines-step-name",
+    getPluginRule("require-bitbucket-pipelines-step-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-no-bitbucket-config",
+                    []
+                ),
+                name: "skips when no Bitbucket Pipelines config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-step-name",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-bitbucket-pipelines-pull-requests",
+    getPluginRule("require-bitbucket-pipelines-pull-requests"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests",
+                    "valid-no-bitbucket-config",
+                    []
+                ),
+                name: "skips when no Bitbucket Pipelines config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-bitbucket-pipelines-pull-requests-target-branches",
+    getPluginRule("require-bitbucket-pipelines-pull-requests-target-branches"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests-target-branches",
+                    "valid-no-bitbucket-config",
+                    []
+                ),
+                name: "skips when no Bitbucket Pipelines config is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-bitbucket-pipelines-pull-requests-target-branches",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-trigger",
+    getPluginRule("require-azure-pipelines-trigger"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "valid-no-azure-config",
+                    []
+                ),
+                name: "skips when no azure-pipelines.yml is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-trigger",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-pr-trigger",
+    getPluginRule("require-azure-pipelines-pr-trigger"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "valid-no-azure-config",
+                    []
+                ),
+                name: "skips when no azure-pipelines.yml is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-pr-trigger",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-azure-pipelines-execution-plan",
+    getPluginRule("require-azure-pipelines-execution-plan"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-azure-pipelines-execution-plan",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region",
+    getPluginRule("require-digitalocean-app-spec-region"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-name",
+    getPluginRule("require-digitalocean-app-spec-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-name",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-digitalocean-app-spec-region-lowercase",
+    getPluginRule("require-digitalocean-app-spec-region-lowercase"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-digitalocean-app-spec-region-lowercase",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-workflow-dispatch",
+    getPluginRule("require-forgejo-actions-workflow-dispatch"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-dispatch",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-job-timeout-minutes",
+    getPluginRule("require-forgejo-actions-job-timeout-minutes"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-job-timeout-minutes",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-job-timeout-minutes",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-workflow-permissions",
+    getPluginRule("require-forgejo-actions-workflow-permissions"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "valid-no-workflows-dir-extra",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory is present",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-permissions",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-security-scanning",
+    getPluginRule("require-gitlab-ci-security-scanning"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-security-scanning",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-security-scanning",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-stages",
+    getPluginRule("require-gitlab-ci-stages"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-stages",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-stages",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-workflow-rules",
+    getPluginRule("require-gitlab-ci-workflow-rules"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-workflow-rules",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-workflow-rules",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-merge-request-pipelines",
+    getPluginRule("require-gitlab-ci-merge-request-pipelines"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-merge-request-pipelines",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-merge-request-pipelines",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-default-timeout",
+    getPluginRule("require-gitlab-ci-default-timeout"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-default-timeout",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-default-timeout",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
             },
         ],
     }

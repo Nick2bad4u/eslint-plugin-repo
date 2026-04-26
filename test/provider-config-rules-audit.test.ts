@@ -527,3 +527,427 @@ ruleTester.run(
         ],
     }
 );
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Additional branch-coverage tests for GitLab CI and Forgejo rules
+// ──────────────────────────────────────────────────────────────────────────────
+
+ruleTester.run(
+    "require-gitlab-ci-interruptible",
+    getPluginRule("require-gitlab-ci-interruptible"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        data: {
+                            configPath: ".gitlab-ci.yml",
+                            jobName: "build",
+                        },
+                        messageId: "missingInterruptible",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-interruptible",
+                    "invalid-multiple-jobs-first-missing",
+                    [
+                        {
+                            content: [
+                                "build:",
+                                "  stage: build",
+                                "  script:",
+                                "    - npm run build",
+                                "test:",
+                                "  interruptible: true",
+                                "  script:",
+                                "    - npm test",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports the first job when multiple jobs exist and only the first lacks interruptible",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-interruptible",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-interruptible",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-interruptible",
+                    "valid-reserved-keys-only",
+                    [
+                        {
+                            content: [
+                                "stages:",
+                                "  - build",
+                                "default:",
+                                "  image: node:20",
+                                "variables:",
+                                "  NODE_ENV: test",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "passes when the config has only reserved top-level keys and no job definitions",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-interruptible",
+                    "valid-job-with-inline-comment",
+                    [
+                        {
+                            content: [
+                                "build:",
+                                "  interruptible: true  # cancel on newer commits",
+                                "  script:",
+                                "    - npm run build",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "accepts interruptible: true even when followed by an inline comment",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-needs-dag",
+    getPluginRule("require-gitlab-ci-needs-dag"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        data: {
+                            configPath: ".gitlab-ci.yml",
+                            jobName: "build",
+                        },
+                        messageId: "missingNeeds",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-needs-dag",
+                    "invalid-multiple-jobs-first-missing",
+                    [
+                        {
+                            content: [
+                                "build:",
+                                "  stage: build",
+                                "  script:",
+                                "    - npm run build",
+                                "test:",
+                                "  needs: [build]",
+                                "  script:",
+                                "    - npm test",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports the first job when multiple jobs exist and only the first lacks needs",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-needs-dag",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-needs-dag",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-needs-dag",
+                    "valid-reserved-keys-only",
+                    [
+                        {
+                            content: [
+                                "stages:",
+                                "  - build",
+                                "default:",
+                                "  image: node:20",
+                                "cache:",
+                                "  key: node-cache",
+                                "  paths:",
+                                "    - node_modules/",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "passes when the config has only reserved top-level keys and no job definitions",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-needs-dag",
+                    "valid-job-with-inline-needs-comment",
+                    [
+                        {
+                            content: [
+                                "build:",
+                                "  needs: [] # explicit empty needs for DAG",
+                                "  script:",
+                                "    - npm run build",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "accepts needs: declared with an inline comment",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-cache-policy",
+    getPluginRule("require-gitlab-ci-cache-policy"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        data: {
+                            configPath: ".gitlab-ci.yml",
+                            lineNumber: "1",
+                        },
+                        messageId: "missingCachePolicy",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-cache-policy",
+                    "invalid-cache-block-followed-by-job",
+                    [
+                        {
+                            content: [
+                                "cache:",
+                                "  key: node-cache",
+                                "  paths:",
+                                "    - node_modules/",
+                                "build:",
+                                "  script:",
+                                "    - npm run build",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports a cache block that exits due to a sibling key before finding policy",
+            },
+            {
+                code: lintTargetSource,
+                errors: [
+                    {
+                        data: {
+                            configPath: ".gitlab-ci.yml",
+                            lineNumber: "1",
+                        },
+                        messageId: "missingCachePolicy",
+                    },
+                ],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-cache-policy",
+                    "invalid-cache-block-with-blank-comment-lines",
+                    [
+                        {
+                            content: [
+                                "cache:",
+                                "  # cache config below",
+                                "",
+                                "  key: node-cache",
+                                "  paths:",
+                                "    - node_modules/",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports a cache block that contains blank and comment lines inside but no policy",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-cache-policy",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-cache-policy",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-gitlab-ci-rules-over-only-except",
+    getPluginRule("require-gitlab-ci-rules-over-only-except"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "foundOnlyExceptUsage" }],
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-rules-over-only-except",
+                    "invalid-audit-except-usage",
+                    [
+                        {
+                            content: [
+                                "test:",
+                                "  script:",
+                                "    - npm test",
+                                "  except:",
+                                "    - branches",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "reports legacy except filter (audit variant)",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-rules-over-only-except",
+                    "valid-no-gitlab-ci-config",
+                    []
+                ),
+                name: "skips when no GitLab CI config exists in the repository",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-rules-over-only-except",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-gitlab-ci-rules-over-only-except",
+                    "valid-only-comment-lines",
+                    [
+                        {
+                            content: [
+                                "# Only a comment here",
+                                "",
+                                "test:",
+                                "  # only test",
+                                "  script:",
+                                "    - npm test",
+                                "  rules:",
+                                "    - if: $CI_COMMIT_BRANCH",
+                            ].join("\n"),
+                            relativePath: ".gitlab-ci.yml",
+                        },
+                    ]
+                ),
+                name: "does not flag comment lines containing only or except keywords",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-concurrency",
+    getPluginRule("require-forgejo-actions-concurrency"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-concurrency",
+                    "valid-no-workflows-directory",
+                    []
+                ),
+                name: "skips when no Forgejo workflows directory exists",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-concurrency",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-forgejo-actions-workflow-name",
+    getPluginRule("require-forgejo-actions-workflow-name"),
+    {
+        invalid: [],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-forgejo-actions-workflow-name",
+                    "valid-non-trigger-filename",
+                    [],
+                    "vite.config.ts"
+                ),
+                name: "skips when the linted file is not a recognised trigger filename",
+            },
+        ],
+    }
+);
