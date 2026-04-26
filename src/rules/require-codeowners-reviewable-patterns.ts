@@ -1,17 +1,14 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import * as path from "node:path";
 import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
-import { normalizeLineEndings } from "../_internal/repository-text-files.js";
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
+import {
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 const CODEOWNERS_PATHS = [
     "CODEOWNERS",
@@ -77,7 +74,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -90,13 +87,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node): void {
-                const codeownersSource = (() => {
-                    try {
-                        return readFileSync(codeownersPath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const codeownersSource = readTextFileIfExists(codeownersPath);
 
                 if (
                     codeownersSource === null ||
@@ -132,9 +123,8 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
             description:
                 "require all CODEOWNERS patterns to have at least one owner assigned",
             frozen: false,
-            recommended: true,
+            recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.recommended",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.github",
                 "repoPlugin.configs.all",

@@ -1,6 +1,7 @@
 import { basename, dirname, relative } from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import {
     getDependabotConfigPath,
     normalizeLineEndings,
@@ -8,13 +9,6 @@ import {
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.cjs",
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "package.json",
-]);
 
 /**
  * Check whether a dependabot.yml has at least one `groups:` section inside an
@@ -30,7 +24,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 

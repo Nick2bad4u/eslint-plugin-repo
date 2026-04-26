@@ -17,9 +17,7 @@ Use `repoPlugin.configs.recommended` for baseline repository governance checks.
 | --- | :-: |
 | [`require-changelog-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-changelog-file) | — |
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — |
-| [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
-| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
 | [`require-gitattributes-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitattributes-file) | — |
 | [`require-gitignore-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitignore-file) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |

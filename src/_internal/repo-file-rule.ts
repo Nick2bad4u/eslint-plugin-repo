@@ -4,6 +4,7 @@ import { setHas } from "ts-extras";
 
 import type { ConfigReference } from "./config-references.js";
 
+import { providerRuleTriggerFileNames } from "./config-file-scanner.js";
 import { createTypedRule } from "./typed-rule.js";
 
 /**
@@ -32,12 +33,6 @@ type FileRequirement =
       }>
     | Readonly<{ kind: "file"; path: string }>
     | Readonly<{ kind: "one-of"; paths: readonly string[] }>;
-
-const defaultTriggerFileNames = [
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "package.json",
-] as const;
 
 const hasAnyMatchingFileInDirectory = (
     rootDirectoryPath: string,
@@ -116,7 +111,7 @@ export const createRepositoryFilePresenceRule = (
     options: RepositoryFilePresenceRuleOptions
 ): ReturnType<typeof createTypedRule> => {
     const triggerFileNames = new Set(
-        options.triggerFileNames ?? defaultTriggerFileNames
+        options.triggerFileNames ?? providerRuleTriggerFileNames
     );
 
     return createTypedRule({

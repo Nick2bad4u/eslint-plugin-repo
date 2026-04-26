@@ -1,16 +1,14 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
-import { stripInlineComment } from "../_internal/config-file-scanner.js";
+import {
+    providerRuleTriggerFileNames,
+    stripInlineComment,
+} from "../_internal/config-file-scanner.js";
+import { readTextFileIfExists } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 const workflowExtensions = new Set([".yaml", ".yml"]);
 
@@ -89,7 +87,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -107,13 +105,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 const violatingWorkflowPaths: string[] = [];
 
                 for (const workflowPath of workflowPaths) {
-                    let workflowSource: null | string = null;
-
-                    try {
-                        workflowSource = readFileSync(workflowPath, "utf8");
-                    } catch {
-                        // Ignore unreadable workflow files and keep scanning.
-                    }
+                    const workflowSource = readTextFileIfExists(workflowPath);
 
                     if (workflowSource === null) {
                         continue;

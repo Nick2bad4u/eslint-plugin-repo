@@ -2,6 +2,10 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { extname, join, resolve } from "node:path";
 import { setHas } from "ts-extras";
 
+// File content cache to avoid repeated disk reads for the same file.
+// This is safe because ESLint rules are ephemeral and run on snapshot data.
+const fileContentCache = new Map<string, null | string>();
+
 const dependabotRelativePaths = [
     ".github/dependabot.yml",
     ".github/dependabot.yaml",
@@ -173,11 +177,36 @@ export const normalizeLineEndings = (source: string): string =>
 
 /**
  * Reads a UTF-8 text file and returns `null` when the file cannot be read.
+ * Results are cached to avoid repeated disk I/O for the same file path.
+ *
+ * @param filePath - Absolute path to the file to read
+ *
+ * @returns File contents or null if file cannot be read
  */
 export const readTextFileIfExists = (filePath: string): null | string => {
-    try {
-        return readFileSync(filePath, "utf8");
-    } catch {
-        return null;
+    // Return cached result if available (including null for non-existent files)
+    if (fileContentCache.has(filePath)) {
+        return fileContentCache.get(filePath) ?? null;
     }
+
+    let content: null | string = null;
+    try {
+        content = readFileSync(filePath, "utf8");
+    } catch {
+        // Intentionally silent: file may not exist, may lack permissions,
+        // or may have encoding issues. ESLint rules should handle null gracefully.
+    }
+
+    fileContentCache.set(filePath, content);
+    return content;
+};
+
+/**
+ * Clears the file content cache. Used for testing purposes to ensure a fresh
+ * state when re-running tests or when fixtures are modified between test runs.
+ *
+ * @internal
+ */
+export const clearFileContentCache = (): void => {
+    fileContentCache.clear();
 };

@@ -2,23 +2,17 @@ import { existsSync } from "node:fs";
 import { basename, dirname, join, relative } from "node:path";
 import { setHas } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import { getRepositoryDockerfilePath } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 /** Rule enforcing a .dockerignore when a Dockerfile is committed. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 

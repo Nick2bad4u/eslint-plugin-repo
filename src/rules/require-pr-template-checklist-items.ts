@@ -1,16 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import * as path from "node:path";
 import { setHas } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
+import { readTextFileIfExists } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 /** Known PR/MR template locations across providers. */
 const PR_TEMPLATE_PATHS = [
@@ -45,7 +40,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -58,13 +53,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program(node): void {
-                const templateSource = (() => {
-                    try {
-                        return readFileSync(templatePath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const templateSource = readTextFileIfExists(templatePath);
 
                 if (
                     templateSource === null ||

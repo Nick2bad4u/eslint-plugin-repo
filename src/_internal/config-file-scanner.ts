@@ -31,6 +31,7 @@ import { normalizeLineEndings } from "./repository-text-files.js";
  * plugin) or `package.json` (a common alternative plugin-config entry point).
  */
 export const providerRuleTriggerFileNames: ReadonlySet<string> = new Set([
+    "eslint.config.cjs",
     "eslint.config.js",
     "eslint.config.mjs",
     "eslint.config.ts",

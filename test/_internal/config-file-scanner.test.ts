@@ -18,6 +18,7 @@ describe("config-file-scanner helpers", () => {
 
         expect(providerRuleTriggerFileNames).toStrictEqual(
             new Set([
+                "eslint.config.cjs",
                 "eslint.config.js",
                 "eslint.config.mjs",
                 "eslint.config.ts",

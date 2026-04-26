@@ -4,6 +4,7 @@ import { setHas, stringSplit } from "ts-extras";
 import {
     getIndentationWidth,
     isBlankOrCommentLine,
+    providerRuleTriggerFileNames,
 } from "../_internal/config-file-scanner.js";
 import {
     getGitLabCiConfigPath,
@@ -12,12 +13,6 @@ import {
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 const findRootWorkflowHeader = (lines: readonly string[]): null | number => {
     for (const [lineIndex, line] of lines.entries()) {
@@ -68,7 +63,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 

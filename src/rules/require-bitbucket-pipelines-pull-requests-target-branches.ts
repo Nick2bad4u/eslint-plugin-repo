@@ -1,7 +1,9 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
+import { readTextFileIfExists } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
@@ -18,12 +20,6 @@ const isPullRequestTargetBranchKeyLine = (line: string): boolean => {
 
     return colonOffset > 0;
 };
-
-const triggerFileNames = new Set([
-    "eslint.config.cjs",
-    "eslint.config.js",
-    "eslint.config.mjs",
-]);
 
 /**
  * Check whether a `pull-requests:` block declares at least one target-branch
@@ -80,7 +76,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
@@ -96,10 +92,12 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
         return {
             Program: (node): void => {
-                const pipelinesSource = readFileSync(
-                    pipelinesConfigPath,
-                    "utf8"
-                );
+                const pipelinesSource =
+                    readTextFileIfExists(pipelinesConfigPath);
+
+                if (pipelinesSource === null) {
+                    return;
+                }
 
                 const hasPullRequestHeading = stringSplit(
                     pipelinesSource.replaceAll(/\r\n?/gv, "\n"),

@@ -1,19 +1,14 @@
-import { readFileSync } from "node:fs";
 import * as path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import {
     getGitLabCiConfigPath,
     normalizeLineEndings,
+    readTextFileIfExists,
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 /**
  * GitLab security scanning template name fragments checked via
@@ -76,7 +71,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -90,13 +85,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const gitlabCiSource = (() => {
-                    try {
-                        return readFileSync(gitlabCiPath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const gitlabCiSource = readTextFileIfExists(gitlabCiPath);
 
                 if (gitlabCiSource === null) {
                     return;

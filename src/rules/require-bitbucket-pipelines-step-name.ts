@@ -1,20 +1,16 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas } from "ts-extras";
 
 import {
     getIndentationWidth,
     isBlankOrCommentLine,
+    providerRuleTriggerFileNames,
     splitConfigLines,
 } from "../_internal/config-file-scanner.js";
+import { readTextFileIfExists } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 const bitbucketPipelinePaths = [
     "bitbucket-pipelines.yml",
@@ -136,7 +132,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -151,13 +147,9 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const bitbucketPipelinesSource = (() => {
-                    try {
-                        return readFileSync(bitbucketPipelinesPath, "utf8");
-                    } catch {
-                        return null;
-                    }
-                })();
+                const bitbucketPipelinesSource = readTextFileIfExists(
+                    bitbucketPipelinesPath
+                );
 
                 if (bitbucketPipelinesSource === null) {
                     return;

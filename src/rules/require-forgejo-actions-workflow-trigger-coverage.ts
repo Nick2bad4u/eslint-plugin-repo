@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import { setHas } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import {
     getForgejoWorkflowPaths,
     readTextFileIfExists,
@@ -8,12 +9,6 @@ import {
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 import { hasWorkflowOnEvent } from "../_internal/workflow-on-events.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 /**
  * Check whether a workflow file source has at least one `push:` or
@@ -33,7 +28,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 

@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import { arrayJoin, isEmpty, setHas } from "ts-extras";
 
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import {
     getForgejoWorkflowPaths,
     readTextFileIfExists,
@@ -8,12 +9,6 @@ import {
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 import { hasWorkflowOnEvent } from "../_internal/workflow-on-events.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-]);
 
 const hasWorkflowDispatchTrigger = (workflowSource: string): boolean =>
     hasWorkflowOnEvent(workflowSource, "workflow_dispatch");
@@ -27,7 +22,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 

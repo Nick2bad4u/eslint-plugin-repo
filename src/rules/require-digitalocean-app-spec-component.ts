@@ -4,6 +4,7 @@ import { setHas, stringSplit } from "ts-extras";
 import {
     getIndentationWidth,
     isBlankOrCommentLine,
+    providerRuleTriggerFileNames,
 } from "../_internal/config-file-scanner.js";
 import {
     getDigitalOceanAppSpecPath,
@@ -12,13 +13,6 @@ import {
 } from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 const appSpecComponentKeys = new Set([
     "databases:",
@@ -47,7 +41,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
         const triggerFileName = basename(context.physicalFilename);
 
-        if (!setHas(triggerFileNames, triggerFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 

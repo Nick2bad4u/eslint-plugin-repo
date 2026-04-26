@@ -1,17 +1,14 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import * as path from "node:path";
 import { arrayIncludes, setHas, stringSplit } from "ts-extras";
 
-import { normalizeLineEndings } from "../_internal/repository-text-files.js";
+import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
+import {
+    normalizeLineEndings,
+    readTextFileIfExists,
+} from "../_internal/repository-text-files.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
-
-const triggerFileNames = new Set([
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.ts",
-    "package.json",
-]);
 
 const ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE";
 const ignoredTemplateFileNames = ["config.yml", "config.yaml"] as const;
@@ -54,7 +51,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         const lintedFilePath = context.physicalFilename;
         const lintedFileName = path.basename(lintedFilePath);
 
-        if (!setHas(triggerFileNames, lintedFileName)) {
+        if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
@@ -89,13 +86,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     }
 
                     const templatePath = path.join(templateDir, entry);
-                    const templateSource = (() => {
-                        try {
-                            return readFileSync(templatePath, "utf8");
-                        } catch {
-                            return null;
-                        }
-                    })();
+                    const templateSource = readTextFileIfExists(templatePath);
 
                     if (
                         templateSource === null ||
