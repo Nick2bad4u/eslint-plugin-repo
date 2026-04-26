@@ -36,6 +36,21 @@ const liveBadges = [
         href: `https://github.com/${repositorySlug}/stargazers`,
         src: `https://flat.badgen.net/github/stars/${repositorySlug}?color=yellow`,
     },
+    {
+        alt: "GitHub forks",
+        href: `https://github.com/${repositorySlug}/forks`,
+        src: `https://flat.badgen.net/github/forks/${repositorySlug}?color=green`,
+    },
+    {
+        alt: "GitHub open issues",
+        href: `https://github.com/${repositorySlug}/issues`,
+        src: `https://flat.badgen.net/github/open-issues/${repositorySlug}?color=red`,
+    },
+    {
+        alt: "Codecov",
+        href: `https://app.codecov.io/gh/${repositorySlug}`,
+        src: `https://flat.badgen.net/codecov/github/${repositorySlug}?color=blue`,
+    },
 ] as const satisfies readonly LiveBadge[];
 
 /**

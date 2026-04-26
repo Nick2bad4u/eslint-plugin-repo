@@ -77,6 +77,7 @@
     text-decoration: none;
 }
 
+/* Tablet and smaller: collapse feature grid to a single column. */
 @media (width <= 62rem) {
     .grid {
         grid-template-columns: 1fr;

@@ -32,6 +32,13 @@
     --repo-sidebar-inline-prefix: #5e6b84;
 }
 
+/* Prevent any element from creating horizontal page overflow on mobile.
+   clip (not hidden) avoids creating a scroll container that can break sticky
+   positioning or iOS momentum scrolling. */
+html {
+    overflow-inline: clip;
+}
+
 html[data-theme="dark"] {
     --ifm-color-primary: #78aaff;
     --ifm-color-primary-dark: #5f98ff;

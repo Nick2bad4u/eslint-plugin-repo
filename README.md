@@ -1,5 +1,7 @@
 # eslint-plugin-repo
 
+[![npm license.](https://flat.badgen.net/npm/license/eslint-plugin-repo?color=purple)](https://github.com/Nick2bad4u/eslint-plugin-repo/blob/main/LICENSE) [![npm total downloads.](https://flat.badgen.net/npm/dt/eslint-plugin-repo?color=pink)](https://www.npmjs.com/package/eslint-plugin-repo) [![latest GitHub release.](https://flat.badgen.net/github/release/Nick2bad4u/eslint-plugin-repo?color=cyan)](https://github.com/Nick2bad4u/eslint-plugin-repo/releases) [![GitHub stars.](https://flat.badgen.net/github/stars/Nick2bad4u/eslint-plugin-repo?color=yellow)](https://github.com/Nick2bad4u/eslint-plugin-repo/stargazers) [![GitHub forks.](https://flat.badgen.net/github/forks/Nick2bad4u/eslint-plugin-repo?color=green)](https://github.com/Nick2bad4u/eslint-plugin-repo/forks) [![GitHub open issues.](https://flat.badgen.net/github/open-issues/Nick2bad4u/eslint-plugin-repo?color=red)](https://github.com/Nick2bad4u/eslint-plugin-repo/issues)
+
 ESLint plugin for enforcing repository-compliance standards across hosting providers such as GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean.
 
 ## Installation
