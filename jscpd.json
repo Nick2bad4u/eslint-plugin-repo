@@ -4,6 +4,8 @@
     "exitCode": 0,
     "gitignore": true,
     "ignore": [
+        "test/**",
+        "tests/**",
         "**/node_modules/**",
         "**/.git/**",
         "**/.github/**",

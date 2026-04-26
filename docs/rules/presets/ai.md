@@ -14,6 +14,6 @@ development workflows.
   - `💡` = suggestions available
   - `—` = report only
 
-| Rule                                                                                                                                | Fix |
-| ----------------------------------------------------------------------------------------------------------------------------------- | :-: |
-| [`require-copilot-instructions-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-copilot-instructions-file) |  —  |
+| Rule | Fix |
+| --- | :-: |
+| [`require-copilot-instructions-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-copilot-instructions-file) | — |
