@@ -107,8 +107,8 @@ import requireReadmeSectionsRule from "../rules/require-readme-sections.js";
 import requireReleaseConfigFileRule from "../rules/require-release-config-file.js";
 import requireSecretScanningConfigRule from "../rules/require-secret-scanning-config.js";
 import requireSecurityPolicyContactChannelRule from "../rules/require-security-policy-contact-channel.js";
-import requireSingleCodeownersFileRule from "../rules/require-single-codeowners-file.js";
 import requireSecurityPolicyFileRule from "../rules/require-security-policy-file.js";
+import requireSingleCodeownersFileRule from "../rules/require-single-codeowners-file.js";
 import requireSupportFileRule from "../rules/require-support-file.js";
 import requireVercelBuildCommandRule from "../rules/require-vercel-build-command.js";
 import requireVercelConfigFileRule from "../rules/require-vercel-config-file.js";
@@ -413,11 +413,11 @@ export const repoComplianceRules: Readonly<
     "require-security-policy-contact-channel": asRuleWithDocs(
         requireSecurityPolicyContactChannelRule
     ),
-    "require-single-codeowners-file": asRuleWithDocs(
-        requireSingleCodeownersFileRule
-    ),
     "require-security-policy-file": asRuleWithDocs(
         requireSecurityPolicyFileRule
+    ),
+    "require-single-codeowners-file": asRuleWithDocs(
+        requireSingleCodeownersFileRule
     ),
     "require-support-file": asRuleWithDocs(requireSupportFileRule),
     "require-vercel-build-command": asRuleWithDocs(

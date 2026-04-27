@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
-import { arrayJoin, setHas } from "ts-extras";
+import { arrayFirst, arrayJoin, isDefined, setHas } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
 import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
@@ -41,9 +41,9 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                const primaryPath = existingCodeownersPaths[0];
+                const primaryPath = arrayFirst(existingCodeownersPaths);
 
-                if (primaryPath === undefined) {
+                if (!isDefined(primaryPath)) {
                     return;
                 }
 
