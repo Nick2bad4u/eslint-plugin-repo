@@ -681,22 +681,53 @@ const config = {
                             label: "• \ue616 NPM",
                         },
                         {
-                            href: "https://docs.github.com/",
+                            href: "https://docs.github.com/en/repositories",
                             className: "navbar-dropdown-divider-before",
                             label: "🐙 GitHub Docs",
                         },
                         {
-                            href: "https://docs.gitlab.com/",
+                            href: "https://docs.gitlab.com/user/project/repository/",
                             label: "🦊 GitLab Docs",
                         },
                         {
-                            href: "https://support.atlassian.com/bitbucket-cloud/docs/",
-                            className: "navbar-dropdown-divider-before",
+                            href: "https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-cloud/",
                             label: "🪣 Bitbucket Docs",
                         },
                         {
-                            href: "https://docs.codeberg.org/",
+                            href: "https://docs.codeberg.org/getting-started/what-is-codeberg/",
                             label: "🗻 Codeberg Docs",
+                        },
+                        {
+                            href: "https://forgejo.org/docs/latest/user/actions/",
+                            label: "⚒️ Forgejo Docs",
+                        },
+                        {
+                            href: "https://docs.aws.amazon.com/amplify/latest/userguide/edit-build-settings.html",
+                            label: "☁️ AWS Amplify Docs",
+                        },
+                        {
+                            href: "https://learn.microsoft.com/azure/devops/pipelines/?view=azure-devops",
+                            label: "🔷 Azure Pipelines Docs",
+                        },
+                        {
+                            href: "https://cloud.google.com/build/docs/build-config-file-schema",
+                            label: "🌤️ Google Cloud Build Docs",
+                        },
+                        {
+                            href: "https://docs.docker.com/reference/dockerfile/",
+                            label: "🐳 Docker Docs",
+                        },
+                        {
+                            href: "https://vercel.com/docs/project-configuration",
+                            label: "▲ Vercel Docs",
+                        },
+                        {
+                            href: "https://docs.netlify.com/configure-builds/file-based-configuration/",
+                            label: "🌐 Netlify Docs",
+                        },
+                        {
+                            href: "https://docs.digitalocean.com/products/app-platform/reference/app-spec/",
+                            label: "🌊 DigitalOcean Docs",
                         },
                     ],
                 },
