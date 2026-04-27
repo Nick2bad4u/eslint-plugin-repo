@@ -74,8 +74,8 @@ description: Provider and policy presets for repository compliance.
 | [`require-bitbucket-pipelines-step-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-step-name) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-changelog-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-changelog-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-copilot-instructions-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-copilot-instructions-file) | — | [🤖](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
@@ -155,6 +155,7 @@ description: Provider and policy presets for repository compliance.
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-vercel-build-command`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-build-command) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [▲](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-vercel-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [▲](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
@@ -214,6 +215,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-readme-sections`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-sections) | — |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 
 ### 🐙 GitHub
@@ -240,6 +242,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-release-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-release-config-file) | — |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 
 ### 🦊 GitLab
@@ -268,6 +271,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 
 ### 🗻 Codeberg / Forgejo
@@ -293,6 +297,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 
 ### 🪣 Bitbucket
@@ -310,10 +315,13 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-bitbucket-pipelines-pull-requests-target-branches`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-pull-requests-target-branches) | — |
 | [`require-bitbucket-pipelines-step-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-step-name) | — |
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — |
+| [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
+| [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 
 ### ☁️ AWS
@@ -540,6 +548,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 | [`require-vercel-build-command`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-build-command) | — |
 | [`require-vercel-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-config-file) | — |

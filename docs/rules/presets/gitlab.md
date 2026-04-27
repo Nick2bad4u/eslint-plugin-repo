@@ -40,4 +40,5 @@ Use `repoPlugin.configs.gitlab` for GitLab-specific repository compliance requir
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |

@@ -29,8 +29,11 @@ Use `repoPlugin.configs.bitbucket` for Bitbucket repository compliance requireme
 | [`require-bitbucket-pipelines-pull-requests-target-branches`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-pull-requests-target-branches) | — |
 | [`require-bitbucket-pipelines-step-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-bitbucket-pipelines-step-name) | — |
 | [`require-code-of-conduct-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-code-of-conduct-file) | — |
+| [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
+| [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |

@@ -122,6 +122,7 @@ Use `repoPlugin.configs.all` to enable every current rule.
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
 | [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
+| [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
 | [`require-vercel-build-command`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-build-command) | — |
 | [`require-vercel-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-vercel-config-file) | — |
