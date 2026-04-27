@@ -5,7 +5,7 @@ Require a Google Cloud Build configuration file in repositories using the Google
 ## Targeted pattern scope
 
 - Repositories that opt into the Google Cloud preset without committing
-  `cloudbuild.yaml` or `cloudbuild.yml`.
+  `cloudbuild.yaml`, `cloudbuild.yml`, or `cloudbuild.json`.
 
 ## What this rule reports
 

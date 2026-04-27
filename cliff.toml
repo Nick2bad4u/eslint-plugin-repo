@@ -6,10 +6,12 @@
 # See documentation for more information on available options.
 # yaml-language-server: $schema=https://www.schemastore.org/any.json
 
-"$schema" = "https://raw.githubusercontent.com/Nick2bad4u/Uptime-Watcher/refs/heads/main/config/schemas/generic.schema.json"
+"$schema" = "https://gist.githubusercontent.com/Nick2bad4u/5a39907931f3dc6d11ed1149ad4ac549/raw/9ee6a46909c466d15568cde15aa0c132d377655d/generic.schema.json"
 description = "Configuration file for git-cliff to generate changelogs based on conventional commits."
-name = "eslint-plugin-repo Changelog Configuration"
-version = "1.0.0"
+name = "Repository Changelog Configuration"
+
+# Optional: specify the version of the configuration format (not the project version)
+version = "1.0.1"
 
 [changelog]
 # template for the changelog header
@@ -28,12 +30,20 @@ body = """
   ## [Unreleased]
 {% endif %}
 {% if commit_range and commit_range.from and commit_range.to %}
-  [{{ commit_range.from | truncate(length=7, end="") }}...{{ commit_range.to | truncate(length=7, end="") }}](https://github.com/Nick2bad4u/eslint-plugin-repo/compare/{{ commit_range.from }}...{{ commit_range.to }})
+  - <b>Commit Range: ➡️</b> \
+  [`{{ commit_range.from | truncate(length=7, end="") }}...{{ commit_range.to | truncate(length=7, end="") }}`](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ commit_range.from }}...{{ commit_range.to }} "View full commit range on GitHub")
+{% endif %}
+{% if bump_type == "major" %}
+  > ⚠️ **Major release:** this version may contain breaking changes. Review upgrade notes carefully.
+{% elif bump_type == "minor" %}
+  > ✨ **Minor release:** this version adds backwards-compatible features and improvements.
+{% elif bump_type == "patch" %}
+  > 🩹 **Patch release:** this version focuses on fixes, maintenance, and smaller improvements.
 {% endif %}
 {% for group, commits in commits | group_by(attribute="group") %}
   ### {{ group | striptags | trim | upper_first }}
   {% for commit in commits %}
-    - [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/Nick2bad4u/eslint-plugin-repo/commit/{{ commit.id }}) — {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
+    - [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }} "📝 Diff: {{ commit.statistics.files_changed }} file{% if commit.statistics.files_changed != 1 %}s{% endif %}, ++{{ commit.statistics.additions }} | --{{ commit.statistics.deletions }}") — {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
       {% if commit.breaking %}[**breaking**] {% endif %}\
       {{ commit.message
           | upper_first
@@ -48,7 +58,7 @@ body = """
     {% for group, commits in commits | group_by(attribute="group") %}
         #### {{ group | upper_first }}
         {% for commit in commits %}
-            - {{ commit.message | upper_first }}\
+          - {{ commit.message | upper_first }}\
         {% endfor %}
     {% endfor %}
 {% endfor %}\n
@@ -59,17 +69,17 @@ body = """
 """
 # template for the changelog footer
 footer = """
-## Contributors
-Thanks to all the [contributors](https://github.com/Nick2bad4u/eslint-plugin-repo/graphs/contributors) for their hard work!
-## License
-This project is licensed under the [UnLicense](https://github.com/Nick2bad4u/eslint-plugin-repo/blob/main/LICENSE)
+## ⭐ Contributors
+Thanks to all the [contributors](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/graphs/contributors) for their hard work!
+## 📜 License
+This project is licensed under the [UnLicense](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/blob/main/LICENSE)
 *This changelog was automatically generated with [git-cliff](https://github.com/orhun/git-cliff).*
 """
 # Remove leading and trailing whitespace from the changelog content
 trim = true
 # postprocessors
 postprocessors = [
-  # { pattern = 'eslint-plugin-repo', replace = "[eslint-plugin-repo](https://github.com/Nick2bad4u/eslint-plugin-repo)" }, # replace repository URL
+  # { pattern = 'your-package-name', replace = "[your-package-name](https://github.com/${remote.github.owner}/${remote.github.repo})" }, # example repository URL replacement
   { pattern = 'Merge branch', replace = "[chore] Merge Branch" }, # replace merge branch commit messages
   { pattern = '\[dependency\]', replace = 'test' },
   { pattern = 'merge branch', replace = "[chore] Merge Branch" }, # replace merge branch commit messages
@@ -86,6 +96,8 @@ postprocessors = [
   { pattern = 'Bumps \[([^\]]+)\].*?from.*?to.*?(\n\n.*?)*', replace = "[dependency] Update $1" },
   # Generic bump message cleanup
   { pattern = 'Bump', replace = "[dependency] Update" },
+  # Remove git trailers that look noisy in rendered changelog entries
+  { pattern = '\n\nSigned-off-by:.*', replace = "" },
 
 ]
 protect_breaking_commits = false
@@ -110,8 +122,9 @@ recurse_submodules = true
 # commit_preprocessors = [
 #   # Replace issue numbers
 #   # This regex pattern matches issue references in the format "(optional text #123)"
-#   # and replaces them with a markdown link to the issue, e.g., "[#123](<REPO>/issues/123)".
-#   { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](<REPO>/issues/${2}))"},
+#   # and replaces them with a markdown link to the issue, e.g.,
+#   # "[#123](https://github.com/${remote.github.owner}/${remote.github.repo}/issues/123)".
+#   { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](https://github.com/${remote.github.owner}/${remote.github.repo}/issues/${2}))"},
 #   # Example: Check spelling of the commit with the `typos` tool.
 #   # For more information, visit: https://github.com/crate-ci/typos
 #   { pattern = '.*', replace_command = 'typos --write-changes -' },
@@ -205,9 +218,14 @@ topo_order = true
 # possible values: "oldest" (chronological order) or "newest" (reverse chronological order)
 sort_commits = "newest"
 
-# GitHub integration for better changelog links
-# [remote.github]
-# owner = "Nick2bad4u"
-# repo = "eslint-plugin-repo"
+[remote]
+# Keep remote metadata lookups disabled by default while still exposing
+# owner/repo values to the changelog template for reusable link generation.
+offline = true
+
+# GitHub repository metadata used by the changelog template.
+[remote.github]
+owner = "Nick2bad4u"
+repo = "eslint-plugin-repo"
 # api_url = "https://api.github.com"
 # native_tls = false

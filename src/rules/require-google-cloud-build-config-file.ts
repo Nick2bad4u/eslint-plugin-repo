@@ -11,12 +11,16 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
         description: "require a Google Cloud Build configuration file.",
         messageId: "missingGoogleCloudBuildConfigFile",
         messageText:
-            "Google Cloud preset requires cloudbuild.yaml (or cloudbuild.yml). Commit the build config so CI and deployment behavior stays reviewable.",
+            "Google Cloud preset requires cloudbuild.yaml, cloudbuild.yml, or cloudbuild.json. Commit the build config so CI and deployment behavior stays reviewable.",
         name: "require-google-cloud-build-config-file",
         recommendation: false,
         requirement: {
             kind: "one-of",
-            paths: ["cloudbuild.yaml", "cloudbuild.yml"],
+            paths: [
+                "cloudbuild.yaml",
+                "cloudbuild.yml",
+                "cloudbuild.json",
+            ],
         },
     });
 

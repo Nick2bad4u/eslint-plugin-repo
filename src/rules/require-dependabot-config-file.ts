@@ -12,12 +12,12 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "require a Dependabot configuration for automated dependency updates on GitHub.",
         messageId: "missingDependabotConfigFile",
         messageText:
-            "GitHub preset requires .github/dependabot.yml. Add Dependabot configuration to keep dependencies and security patches current.",
+            "GitHub preset requires .github/dependabot.yml (or .github/dependabot.yaml). Add Dependabot configuration to keep dependencies and security patches current.",
         name: "require-dependabot-config-file",
         recommendation: false,
         requirement: {
-            kind: "file",
-            path: ".github/dependabot.yml",
+            kind: "one-of",
+            paths: [".github/dependabot.yml", ".github/dependabot.yaml"],
         },
     });
 

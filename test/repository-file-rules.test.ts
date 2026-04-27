@@ -18,7 +18,7 @@ mkdirSync(fixtureRoot, { recursive: true });
 
 const ensureFixtureRepo = (
     ruleName: string,
-    variant: "invalid" | "valid",
+    variant: string,
     filesToCreate: readonly string[]
 ): string => {
     const rootDirectory = path.join(fixtureRoot, `${ruleName}-${variant}`);
@@ -102,12 +102,12 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
     {
         messageId: "missingDependabotConfigFile",
         name: "require-dependabot-config-file",
-        satisfyingFiles: [".github/dependabot.yml"],
+        satisfyingFiles: [".github/dependabot.yaml"],
     },
     {
         messageId: "missingReleaseConfigFile",
         name: "require-release-config-file",
-        satisfyingFiles: [".changeset/config.json"],
+        satisfyingFiles: ["cliff.toml"],
     },
     {
         messageId: "missingDependencyUpdateConfig",
@@ -132,7 +132,7 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
     {
         messageId: "missingGoogleCloudBuildConfigFile",
         name: "require-google-cloud-build-config-file",
-        satisfyingFiles: ["cloudbuild.yaml"],
+        satisfyingFiles: ["cloudbuild.json"],
     },
     {
         messageId: "missingGitLabCiConfigFile",
@@ -201,4 +201,56 @@ for (const descriptor of descriptors) {
             },
         ],
     });
+}
+
+const releaseConfigRuleName = "require-release-config-file";
+const releaseConfigMessageId = "missingReleaseConfigFile";
+const additionalReleaseConfigPaths: readonly string[] = [
+    ".release-please-config.yaml",
+    ".changeset/config.mjs",
+    ".releaserc.ts",
+    "release-it.config.yml",
+    ".cliff.yml",
+    ".github/workflows/release.yml",
+    ".release.mjs",
+];
+
+for (const [index, satisfyingFile] of additionalReleaseConfigPaths.entries()) {
+    const fixtureSuffix = satisfyingFile
+        .replaceAll(".", "-")
+        .replaceAll("/", "-")
+        .replaceAll("\\", "-");
+    const validFilename = ensureFixtureRepo(
+        releaseConfigRuleName,
+        `valid-${fixtureSuffix}`,
+        [satisfyingFile]
+    );
+
+    const invalidFilename = ensureFixtureRepo(
+        releaseConfigRuleName,
+        `invalid-${fixtureSuffix}`,
+        []
+    );
+
+    ruleTester.run(
+        `${releaseConfigRuleName}-variant-${index + 1}`,
+        getPluginRule(releaseConfigRuleName),
+        {
+            invalid: [
+                {
+                    code: moduleSource,
+                    errors: [{ messageId: releaseConfigMessageId }],
+                    filename: invalidFilename,
+                    name: `${releaseConfigRuleName} reports when ${satisfyingFile} is missing`,
+                },
+            ],
+            valid: [
+                {
+                    code: moduleSource,
+                    filename: validFilename,
+                    name: `${releaseConfigRuleName} passes when ${satisfyingFile} exists`,
+                },
+            ],
+        }
+    );
 }

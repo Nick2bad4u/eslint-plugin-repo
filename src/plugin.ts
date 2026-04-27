@@ -1,7 +1,7 @@
 import type { ESLint, Linter } from "eslint";
 
 import typeScriptParser from "@typescript-eslint/parser";
-import { isDefined, isEmpty, objectEntries, safeCastTo } from "ts-extras";
+import { isDefined, isEmpty, not, objectEntries, safeCastTo } from "ts-extras";
 
 import packageJson from "../package.json" with { type: "json" };
 import {
@@ -52,6 +52,38 @@ type RepoCompliancePluginContract = ESLint.Plugin & {
 };
 
 type RulesConfig = RepoCompliancePresetConfig["rules"];
+
+const hostingProviderRuleNamePrefixes = [
+    "require-aws-amplify-",
+    "require-azure-pipelines-",
+    "require-bitbucket-pipelines-",
+    "require-dependabot-",
+    "require-digitalocean-app-spec-",
+    "require-dockerfile",
+    "require-dockerignore-file",
+    "require-forgejo-actions-",
+    "require-github-actions-",
+    "require-github-issue-template-",
+    "require-gitlab-ci-",
+    "require-gitlab-issue-template-",
+    "require-gitlab-merge-request-template-",
+    "require-google-cloud-build-",
+    "require-netlify-",
+    "require-secret-scanning-config",
+    "require-vercel-",
+] as const;
+
+const isHostingProviderSpecificRuleName = (
+    ruleName: unknown
+): ruleName is RepoComplianceRuleName =>
+    typeof ruleName === "string" &&
+    hostingProviderRuleNamePrefixes.some((prefix) =>
+        ruleName.startsWith(prefix)
+    );
+
+const deduplicateRuleNames = (
+    ruleNames: readonly RepoComplianceRuleName[]
+): readonly RepoComplianceRuleName[] => [...new Set(ruleNames)];
 
 const getPackageVersion = (pkg: unknown): string => {
     if (typeof pkg !== "object" || pkg === null) {
@@ -162,22 +194,49 @@ const derivePresetRuleNamesByConfig = (): Readonly<
         }
     }
 
+    const presetRuleMapWithUniqueRuleNames = {
+        ai: deduplicateRuleNames(presetRuleMap.ai),
+        all: deduplicateRuleNames(presetRuleMap.all),
+        aws: deduplicateRuleNames(presetRuleMap.aws),
+        azure: deduplicateRuleNames(presetRuleMap.azure),
+        bitbucket: deduplicateRuleNames(presetRuleMap.bitbucket),
+        codeberg: deduplicateRuleNames(presetRuleMap.codeberg),
+        digitalOcean: deduplicateRuleNames(presetRuleMap.digitalOcean),
+        docker: deduplicateRuleNames(presetRuleMap.docker),
+        github: deduplicateRuleNames(presetRuleMap.github),
+        gitlab: deduplicateRuleNames(presetRuleMap.gitlab),
+        googleCloud: deduplicateRuleNames(presetRuleMap.googleCloud),
+        netlify: deduplicateRuleNames(presetRuleMap.netlify),
+        recommended: deduplicateRuleNames(presetRuleMap.recommended),
+        strict: deduplicateRuleNames(presetRuleMap.strict),
+        vercel: deduplicateRuleNames(presetRuleMap.vercel),
+    } as const;
+
+    const recommendedRules =
+        presetRuleMapWithUniqueRuleNames.recommended.filter(
+            not(isHostingProviderSpecificRuleName)
+        );
+
+    const strictRules = presetRuleMapWithUniqueRuleNames.strict.filter(
+        not(isHostingProviderSpecificRuleName)
+    );
+
     return {
-        ai: [...new Set(presetRuleMap.ai)],
-        all: [...new Set(presetRuleMap.all)],
-        aws: [...new Set(presetRuleMap.aws)],
-        azure: [...new Set(presetRuleMap.azure)],
-        bitbucket: [...new Set(presetRuleMap.bitbucket)],
-        codeberg: [...new Set(presetRuleMap.codeberg)],
-        digitalOcean: [...new Set(presetRuleMap.digitalOcean)],
-        docker: [...new Set(presetRuleMap.docker)],
-        github: [...new Set(presetRuleMap.github)],
-        gitlab: [...new Set(presetRuleMap.gitlab)],
-        googleCloud: [...new Set(presetRuleMap.googleCloud)],
-        netlify: [...new Set(presetRuleMap.netlify)],
-        recommended: [...new Set(presetRuleMap.recommended)],
-        strict: [...new Set(presetRuleMap.strict)],
-        vercel: [...new Set(presetRuleMap.vercel)],
+        ai: presetRuleMapWithUniqueRuleNames.ai,
+        all: presetRuleMapWithUniqueRuleNames.all,
+        aws: presetRuleMapWithUniqueRuleNames.aws,
+        azure: presetRuleMapWithUniqueRuleNames.azure,
+        bitbucket: presetRuleMapWithUniqueRuleNames.bitbucket,
+        codeberg: presetRuleMapWithUniqueRuleNames.codeberg,
+        digitalOcean: presetRuleMapWithUniqueRuleNames.digitalOcean,
+        docker: presetRuleMapWithUniqueRuleNames.docker,
+        github: presetRuleMapWithUniqueRuleNames.github,
+        gitlab: presetRuleMapWithUniqueRuleNames.gitlab,
+        googleCloud: presetRuleMapWithUniqueRuleNames.googleCloud,
+        netlify: presetRuleMapWithUniqueRuleNames.netlify,
+        recommended: recommendedRules,
+        strict: strictRules,
+        vercel: presetRuleMapWithUniqueRuleNames.vercel,
     };
 };
 

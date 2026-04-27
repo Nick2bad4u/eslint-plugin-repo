@@ -1,10 +1,10 @@
 # require-dependabot-config-file
 
-Require `.github/dependabot.yml` for automated dependency updates on GitHub.
+Require `.github/dependabot.yml` or `.github/dependabot.yaml` for automated dependency updates on GitHub.
 
 ## Targeted pattern scope
 
-This rule checks for `.github/dependabot.yml`.
+This rule checks for `.github/dependabot.yml` or `.github/dependabot.yaml`.
 
 ## What this rule reports
 
@@ -16,8 +16,8 @@ Dependabot configuration file.
 Dependabot cannot manage dependency update cadence or security patch pull
 requests unless the repository declares update policy explicitly.
 
-That makes `.github/dependabot.yml` the baseline contract for predictable
-dependency maintenance on GitHub.
+That makes `.github/dependabot.yml` (or `.github/dependabot.yaml`) the baseline
+contract for predictable dependency maintenance on GitHub.
 
 ## ❌ Incorrect
 
@@ -29,7 +29,7 @@ dependency maintenance on GitHub.
 // ├── README.md
 // └── package.json
 //
-// Missing: .github/dependabot.yml
+// Missing: .github/dependabot.yml or .github/dependabot.yaml
 ```
 
 ## ✅ Correct
@@ -38,7 +38,7 @@ dependency maintenance on GitHub.
 // Repository files
 // .
 // └── .github/
-//     ├── dependabot.yml
+//     ├── dependabot.yaml
 //     └── workflows/
 ```
 
