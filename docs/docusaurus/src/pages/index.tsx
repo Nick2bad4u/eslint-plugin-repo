@@ -202,10 +202,15 @@ export default [
                                 <li className={styles.chip}>🐙 GitHub</li>
                                 <li className={styles.chip}>🦊 GitLab</li>
                                 <li className={styles.chip}>🪣 Bitbucket</li>
-                                <li className={styles.chip}>🗻 Forgejo</li>
+                                <li className={styles.chip}>🗻 Codeberg</li>
+                                <li className={styles.chip}>⚒️ Forgejo</li>
                                 <li className={styles.chip}>☁️ AWS</li>
                                 <li className={styles.chip}>🔷 Azure</li>
+                                <li className={styles.chip}>🌤️ Google Cloud</li>
                                 <li className={styles.chip}>🐳 Docker</li>
+                                <li className={styles.chip}>▲ Vercel</li>
+                                <li className={styles.chip}>🌐 Netlify</li>
+                                <li className={styles.chip}>🌊 DigitalOcean</li>
                             </ul>
 
                             <ul className={styles.visualList}>

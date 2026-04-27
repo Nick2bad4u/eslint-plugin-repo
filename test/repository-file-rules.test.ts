@@ -254,3 +254,52 @@ for (const [index, satisfyingFile] of additionalReleaseConfigPaths.entries()) {
         }
     );
 }
+
+const codeownersRuleName = "require-codeowners-file";
+const codeownersMessageId = "missingCodeownersFile";
+const additionalCodeownersPaths: readonly string[] = [
+    ".github/CODEOWNERS",
+    ".gitlab/CODEOWNERS",
+    ".bitbucket/CODEOWNERS",
+    "docs/CODEOWNERS",
+];
+
+for (const [index, satisfyingFile] of additionalCodeownersPaths.entries()) {
+    const fixtureSuffix = satisfyingFile
+        .replaceAll(".", "-")
+        .replaceAll("/", "-")
+        .replaceAll("\\", "-");
+    const validFilename = ensureFixtureRepo(
+        codeownersRuleName,
+        `valid-${fixtureSuffix}`,
+        [satisfyingFile]
+    );
+
+    const invalidFilename = ensureFixtureRepo(
+        codeownersRuleName,
+        `invalid-${fixtureSuffix}`,
+        []
+    );
+
+    ruleTester.run(
+        `${codeownersRuleName}-variant-${index + 1}`,
+        getPluginRule(codeownersRuleName),
+        {
+            invalid: [
+                {
+                    code: moduleSource,
+                    errors: [{ messageId: codeownersMessageId }],
+                    filename: invalidFilename,
+                    name: `${codeownersRuleName} reports when ${satisfyingFile} is missing`,
+                },
+            ],
+            valid: [
+                {
+                    code: moduleSource,
+                    filename: validFilename,
+                    name: `${codeownersRuleName} passes when ${satisfyingFile} exists`,
+                },
+            ],
+        }
+    );
+}

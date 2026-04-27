@@ -4,9 +4,10 @@ Require all CODEOWNERS patterns to have at least one owner assigned.
 
 ## Targeted pattern scope
 
-This rule reads the `CODEOWNERS` file (checked in `CODEOWNERS`, `.github/CODEOWNERS`,
-or `docs/CODEOWNERS`) and parses each non-comment line, reporting any pattern
-that is followed by no owner entries.
+This rule reads the `CODEOWNERS` file (checked in `.github/CODEOWNERS`,
+`.gitlab/CODEOWNERS`, `.bitbucket/CODEOWNERS`, `CODEOWNERS`, or
+`docs/CODEOWNERS`) and parses each non-comment line, reporting any pattern that
+is followed by no owner entries.
 
 ## What this rule reports
 
@@ -67,3 +68,4 @@ them in before merging.
 
 - [GitHub Docs: About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 - [GitLab Docs: Code Owners](https://docs.gitlab.com/ee/user/project/codeowners/)
+- [Bitbucket Cloud Docs: Set up and use code owners](https://support.atlassian.com/bitbucket-cloud/docs/set-up-and-use-code-owners/)

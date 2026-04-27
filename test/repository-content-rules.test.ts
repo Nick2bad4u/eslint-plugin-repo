@@ -494,6 +494,21 @@ ruleTester.run(
                 ),
                 name: "reports CODEOWNERS patterns that do not have any owners",
             },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "unownedPattern" }],
+                filename: writeFixtureRepo(
+                    "require-codeowners-reviewable-patterns",
+                    "invalid-unowned-pattern-bitbucket-location",
+                    [
+                        {
+                            content: ["src/**"].join("\n"),
+                            relativePath: ".bitbucket/CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "reports unowned patterns in .bitbucket/CODEOWNERS",
+            },
         ],
         valid: [
             {
@@ -531,10 +546,113 @@ ruleTester.run(
                 code: lintTargetSource,
                 filename: writeFixtureRepo(
                     "require-codeowners-reviewable-patterns",
+                    "valid-owned-patterns-bitbucket-location",
+                    [
+                        {
+                            content: [
+                                "src/** @org/backend-team",
+                                "docs/** @org/docs-team",
+                            ].join("\n"),
+                            relativePath: ".bitbucket/CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "accepts owned patterns in .bitbucket/CODEOWNERS",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-codeowners-reviewable-patterns",
                     "valid-no-codeowners-file",
                     []
                 ),
                 name: "skips the rule when CODEOWNERS is absent",
+            },
+        ],
+    }
+);
+
+ruleTester.run(
+    "require-single-codeowners-file",
+    getPluginRule("require-single-codeowners-file"),
+    {
+        invalid: [
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "multipleCodeownersFiles" }],
+                filename: writeFixtureRepo(
+                    "require-single-codeowners-file",
+                    "invalid-root-and-github",
+                    [
+                        {
+                            content: "* @org/platform\n",
+                            relativePath: "CODEOWNERS",
+                        },
+                        {
+                            content: "* @org/security\n",
+                            relativePath: ".github/CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "reports when CODEOWNERS exists in multiple precedence locations",
+            },
+            {
+                code: lintTargetSource,
+                errors: [{ messageId: "multipleCodeownersFiles" }],
+                filename: writeFixtureRepo(
+                    "require-single-codeowners-file",
+                    "invalid-bitbucket-and-root",
+                    [
+                        {
+                            content: "* @org/platform\n",
+                            relativePath: ".bitbucket/CODEOWNERS",
+                        },
+                        {
+                            content: "* @org/security\n",
+                            relativePath: "CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "reports when .bitbucket/CODEOWNERS coexists with root CODEOWNERS",
+            },
+        ],
+        valid: [
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-single-codeowners-file",
+                    "valid-single-location",
+                    [
+                        {
+                            content: "* @org/maintainers\n",
+                            relativePath: ".github/CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "accepts repositories with a single CODEOWNERS file",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-single-codeowners-file",
+                    "valid-no-codeowners",
+                    []
+                ),
+                name: "skips repositories that do not define CODEOWNERS",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-single-codeowners-file",
+                    "valid-bitbucket-single-location",
+                    [
+                        {
+                            content: "* @org/maintainers\n",
+                            relativePath: ".bitbucket/CODEOWNERS",
+                        },
+                    ]
+                ),
+                name: "accepts repositories with only .bitbucket/CODEOWNERS",
             },
         ],
     }

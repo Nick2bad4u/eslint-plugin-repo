@@ -6,6 +6,7 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
         configReferences: [
             "repoPlugin.configs.strict",
             "repoPlugin.configs.github",
+            "repoPlugin.configs.bitbucket",
             "repoPlugin.configs.gitlab",
             "repoPlugin.configs.codeberg",
             "repoPlugin.configs.all",
@@ -14,7 +15,7 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             "require a CODEOWNERS file for deterministic review ownership.",
         messageId: "missingCodeownersFile",
         messageText:
-            "Repository is missing CODEOWNERS. Add CODEOWNERS (root, .github, or docs) so review ownership is explicit and enforceable.",
+            "Repository is missing CODEOWNERS. Add CODEOWNERS (root, .github/, .gitlab/, .bitbucket/, or docs/) so review ownership is explicit and enforceable.",
         name: "require-codeowners-file",
         recommendation: false,
         requirement: {
@@ -22,6 +23,8 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
             paths: [
                 "CODEOWNERS",
                 ".github/CODEOWNERS",
+                ".gitlab/CODEOWNERS",
+                ".bitbucket/CODEOWNERS",
                 "docs/CODEOWNERS",
             ],
         },

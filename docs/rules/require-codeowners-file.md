@@ -8,6 +8,8 @@ This rule checks for a `CODEOWNERS` file in any accepted location:
 
 - `CODEOWNERS`
 - `.github/CODEOWNERS`
+- `.gitlab/CODEOWNERS`
+- `.bitbucket/CODEOWNERS`
 - `docs/CODEOWNERS`
 
 ## What this rule reports
@@ -32,7 +34,7 @@ people or groups responsible for reviewing them.
 // └── .github/
 //     └── workflows/
 //
-// Missing: CODEOWNERS in root, .github, or docs
+// Missing: CODEOWNERS in root, .github/, .gitlab/, .bitbucket/, or docs/
 ```
 
 ## ✅ Correct
@@ -50,6 +52,22 @@ people or groups responsible for reviewing them.
 // .
 // ├── README.md
 // └── .github/
+//     └── CODEOWNERS
+```
+
+```ts
+// Repository files
+// .
+// ├── README.md
+// └── .gitlab/
+//     └── CODEOWNERS
+```
+
+```ts
+// Repository files
+// .
+// ├── README.md
+// └── .bitbucket/
 //     └── CODEOWNERS
 ```
 
@@ -80,3 +98,4 @@ managed through a platform feature that does not rely on `CODEOWNERS`.
 
 - [GitHub Docs: About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 - [GitLab Docs: Code Owners](https://docs.gitlab.com/user/project/codeowners/)
+- [Bitbucket Cloud Docs: Set up and use code owners](https://support.atlassian.com/bitbucket-cloud/docs/set-up-and-use-code-owners/)

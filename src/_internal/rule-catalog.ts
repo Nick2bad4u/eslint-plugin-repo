@@ -128,6 +128,7 @@ const orderedRuleNames = [
     "require-vercel-version-value",
     "require-netlify-publish-directory-no-trailing-slash",
     "require-digitalocean-app-spec-region-lowercase",
+    "require-single-codeowners-file",
 ] as const;
 
 const toRuleCatalogId = (ruleNumber: number): RuleCatalogId =>

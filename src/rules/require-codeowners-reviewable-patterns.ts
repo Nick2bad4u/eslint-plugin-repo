@@ -11,9 +11,10 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 const CODEOWNERS_PATHS = [
-    "CODEOWNERS",
     ".github/CODEOWNERS",
     ".gitlab/CODEOWNERS",
+    ".bitbucket/CODEOWNERS",
+    "CODEOWNERS",
     "docs/CODEOWNERS",
 ];
 
@@ -127,6 +128,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
             repoConfigs: [
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.github",
+                "repoPlugin.configs.bitbucket",
                 "repoPlugin.configs.all",
             ],
             requiresTypeChecking: false,
