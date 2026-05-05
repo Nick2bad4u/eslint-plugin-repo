@@ -201,7 +201,7 @@ const derivePresetRuleNamesByConfig = (): Readonly<
         azure: deduplicateRuleNames(presetRuleMap.azure),
         bitbucket: deduplicateRuleNames(presetRuleMap.bitbucket),
         codeberg: deduplicateRuleNames(presetRuleMap.codeberg),
-        digitalOcean: deduplicateRuleNames(presetRuleMap.digitalOcean),
+        DigitalOcean: deduplicateRuleNames(presetRuleMap.DigitalOcean),
         docker: deduplicateRuleNames(presetRuleMap.docker),
         github: deduplicateRuleNames(presetRuleMap.github),
         gitlab: deduplicateRuleNames(presetRuleMap.gitlab),
@@ -228,7 +228,7 @@ const derivePresetRuleNamesByConfig = (): Readonly<
         azure: presetRuleMapWithUniqueRuleNames.azure,
         bitbucket: presetRuleMapWithUniqueRuleNames.bitbucket,
         codeberg: presetRuleMapWithUniqueRuleNames.codeberg,
-        digitalOcean: presetRuleMapWithUniqueRuleNames.digitalOcean,
+        DigitalOcean: presetRuleMapWithUniqueRuleNames.DigitalOcean,
         docker: presetRuleMapWithUniqueRuleNames.docker,
         github: presetRuleMapWithUniqueRuleNames.github,
         gitlab: presetRuleMapWithUniqueRuleNames.gitlab,
@@ -308,10 +308,10 @@ const configs: RepoComplianceConfigsContract = {
         "codeberg",
         presetRuleNamesByConfig.codeberg
     ),
-    digitalOcean: buildPresetConfig(
+    DigitalOcean: buildPresetConfig(
         plugin,
-        "digitalOcean",
-        presetRuleNamesByConfig.digitalOcean
+        "DigitalOcean",
+        presetRuleNamesByConfig.DigitalOcean
     ),
     docker: buildPresetConfig(plugin, "docker", presetRuleNamesByConfig.docker),
     github: buildPresetConfig(plugin, "github", presetRuleNamesByConfig.github),

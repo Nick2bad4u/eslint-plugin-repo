@@ -10,7 +10,7 @@ export const configNames = [
     "azure",
     "bitbucket",
     "codeberg",
-    "digitalOcean",
+    "DigitalOcean",
     "docker",
     "github",
     "gitlab",
@@ -78,9 +78,9 @@ export const configMetadataByName: Readonly<
         readmeOrder: 6,
         requiresTypeChecking: false,
     },
-    digitalOcean: {
+    DigitalOcean: {
         icon: "🌊",
-        presetName: "repo-compliance:digitalOcean",
+        presetName: "repo-compliance:DigitalOcean",
         readmeOrder: 14,
         requiresTypeChecking: false,
     },
@@ -150,7 +150,7 @@ export const configNamesByReadmeOrder: readonly ConfigName[] = [
     "docker",
     "vercel",
     "netlify",
-    "digitalOcean",
+    "DigitalOcean",
     "ai",
     "all",
 ];
@@ -167,7 +167,7 @@ export const configReferenceToName: Readonly<
     "repoPlugin.configs.azure": "azure",
     "repoPlugin.configs.bitbucket": "bitbucket",
     "repoPlugin.configs.codeberg": "codeberg",
-    "repoPlugin.configs.digitalOcean": "digitalOcean",
+    "repoPlugin.configs.DigitalOcean": "DigitalOcean",
     "repoPlugin.configs.docker": "docker",
     "repoPlugin.configs.github": "github",
     "repoPlugin.configs.gitlab": "gitlab",

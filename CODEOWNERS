@@ -1,0 +1,10 @@
+# Default ownership for the entire repository.
+* @Nick2bad4u
+
+# GitHub metadata and workflows.
+.github/ @Nick2bad4u
+
+# Source and tests.
+src/   @Nick2bad4u
+test/  @Nick2bad4u
+tests/ @Nick2bad4u

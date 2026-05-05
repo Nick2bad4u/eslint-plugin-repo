@@ -57,7 +57,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require a top-level `name` in DigitalOcean App Platform specs so deploy identity is explicit",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.digitalOcean",
+                "repoPlugin.configs.DigitalOcean",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

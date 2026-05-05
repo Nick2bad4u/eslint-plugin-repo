@@ -72,7 +72,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require DigitalOcean app spec `region` values to use lowercase canonical form",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.digitalOcean",
+                "repoPlugin.configs.DigitalOcean",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

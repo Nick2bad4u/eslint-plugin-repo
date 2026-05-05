@@ -33,7 +33,7 @@ import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.m
  *     | "azure"
  *     | "bitbucket"
  *     | "codeberg"
- *     | "digitalOcean"
+ *     | "DigitalOcean"
  *     | "docker"
  *     | "github"
  *     | "gitlab"
@@ -74,7 +74,7 @@ const presetDocSlugByConfigName = {
     azure: "azure",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
-    digitalOcean: "digitalocean",
+    DigitalOcean: "digitalocean",
     docker: "docker",
     github: "github",
     gitlab: "gitlab",
@@ -99,7 +99,7 @@ const standardPresetConfigNames = [
     "docker",
     "vercel",
     "netlify",
-    "digitalOcean",
+    "DigitalOcean",
     "ai",
     "all",
 ];
@@ -112,7 +112,7 @@ const presetConfigReferenceByName = {
     azure: "repoPlugin.configs.azure",
     bitbucket: "repoPlugin.configs.bitbucket",
     codeberg: "repoPlugin.configs.codeberg",
-    digitalOcean: "repoPlugin.configs.digitalOcean",
+    DigitalOcean: "repoPlugin.configs.DigitalOcean",
     docker: "repoPlugin.configs.docker",
     github: "repoPlugin.configs.github",
     gitlab: "repoPlugin.configs.gitlab",
@@ -131,7 +131,7 @@ const presetTitleByConfigName = {
     azure: "🔷 Azure",
     bitbucket: "🪣 Bitbucket",
     codeberg: "🗻 Codeberg / Forgejo",
-    digitalOcean: "🌊 DigitalOcean",
+    DigitalOcean: "🌊 DigitalOcean",
     docker: "🐳 Docker",
     github: "🐙 GitHub",
     gitlab: "🦊 GitLab",

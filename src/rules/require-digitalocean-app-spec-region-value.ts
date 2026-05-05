@@ -62,7 +62,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require DigitalOcean app spec `region` keys to contain non-empty values",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.digitalOcean",
+                "repoPlugin.configs.DigitalOcean",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

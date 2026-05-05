@@ -57,7 +57,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require a root `region` in DigitalOcean App Platform specs so deployment geography is explicit in version control",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.digitalOcean",
+                "repoPlugin.configs.DigitalOcean",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

@@ -81,7 +81,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require at least one deployable component block in DigitalOcean App Platform specs",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.digitalOcean",
+                "repoPlugin.configs.DigitalOcean",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

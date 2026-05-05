@@ -31,7 +31,7 @@ const providerPresetNames = [
     "azure",
     "bitbucket",
     "codeberg",
-    "digitalOcean",
+    "DigitalOcean",
     "docker",
     "github",
     "gitlab",

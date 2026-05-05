@@ -48,7 +48,7 @@ Common first rules you will see from this baseline include
 - [Docker](./presets/docker.md): `repoPlugin.configs.docker`
 - [Vercel](./presets/vercel.md): `repoPlugin.configs.vercel`
 - [Netlify](./presets/netlify.md): `repoPlugin.configs.netlify`
-- [DigitalOcean](./presets/digitalocean.md): `repoPlugin.configs.digitalOcean`
+- [DigitalOcean](./presets/digitalocean.md): `repoPlugin.configs.DigitalOcean`
 - [AI guidance](./presets/ai.md): `repoPlugin.configs.ai`
 
 Example layering:
