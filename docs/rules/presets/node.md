@@ -19,7 +19,7 @@ Use `repoPlugin.configs.node` for Node.js runtime version pinning repository com
   - `💡` = suggestions available
   - `—` = report only
 
-| Rule | Fix |
-| --- | :-: |
-| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
-| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file) | — |
+| Rule                                                                                                                | Fix |
+| ------------------------------------------------------------------------------------------------------------------- | :-: |
+| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) |  —  |
+| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file)               |  —  |
