@@ -5,7 +5,7 @@ const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
             "repoPlugin.configs.github",
-            "repoPlugin.configs.strict",
+            "repoPlugin.configs.dependabot",
             "repoPlugin.configs.all",
         ],
         description:

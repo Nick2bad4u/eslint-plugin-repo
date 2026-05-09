@@ -4,16 +4,15 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: ["repoPlugin.configs.node", "repoPlugin.configs.all"],
-        description:
-            "require a .node-version file when package.json is present.",
-        messageId: "missingNodeVersionFile",
+        description: "require a .nvmrc file.",
+        messageId: "missingNvmrcFile",
         messageText:
-            "Repository has a package.json but is missing .node-version. Add .node-version at the root so contributors and CI pipelines use a consistent Node.js version.",
-        name: "require-node-version-file",
+            "Repository is missing .nvmrc. Add .nvmrc at the root so contributors and CI pipelines use a consistent Node.js version.",
+        name: "require-nvmrc-file",
         recommendation: false,
         requirement: {
             kind: "file",
-            path: ".node-version",
+            path: ".nvmrc",
         },
     });
 

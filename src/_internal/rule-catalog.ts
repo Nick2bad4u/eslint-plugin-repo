@@ -52,6 +52,7 @@ const orderedRuleNames = [
     "require-gitattributes-file",
     "require-gitignore-file",
     "require-node-version-file",
+    "require-nvmrc-file",
     "require-dependency-update-config",
     "require-copilot-instructions-file",
     "require-secret-scanning-config",

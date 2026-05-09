@@ -124,6 +124,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
             frozen: false,
             recommended: false,
             repoConfigs: [
+                "repoPlugin.configs.github",
                 "repoPlugin.configs.strict",
                 "repoPlugin.configs.all",
             ],

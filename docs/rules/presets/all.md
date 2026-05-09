@@ -113,6 +113,7 @@ Use `repoPlugin.configs.all` to enable every current rule.
 | [`require-netlify-publish-directory-non-empty`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-directory-non-empty) | — |
 | [`require-netlify-publish-relative-path`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-relative-path) | — |
 | [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
+| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file) | — |
 | [`require-pr-template-checklist-items`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pr-template-checklist-items) | — |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-badges`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-badges) | — |

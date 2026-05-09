@@ -4,7 +4,7 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
         configReferences: [
-            "repoPlugin.configs.strict",
+            "repoPlugin.configs.dependabot",
             "repoPlugin.configs.all",
         ],
         description:

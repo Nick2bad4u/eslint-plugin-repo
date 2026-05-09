@@ -38,6 +38,7 @@ Common first rules you will see from this baseline include
 
 ## 3) Add the provider preset you actually use
 
+- [Dependabot](./presets/dependabot.md): `repoPlugin.configs.dependabot`
 - [GitHub](./presets/github.md): `repoPlugin.configs.github`
 - [GitLab](./presets/gitlab.md): `repoPlugin.configs.gitlab`
 - [Bitbucket](./presets/bitbucket.md): `repoPlugin.configs.bitbucket`
@@ -49,6 +50,7 @@ Common first rules you will see from this baseline include
 - [Vercel](./presets/vercel.md): `repoPlugin.configs.vercel`
 - [Netlify](./presets/netlify.md): `repoPlugin.configs.netlify`
 - [DigitalOcean](./presets/digitalocean.md): `repoPlugin.configs.DigitalOcean`
+- [Node](./presets/node.md): `repoPlugin.configs.node`
 - [AI guidance](./presets/ai.md): `repoPlugin.configs.ai`
 
 Example layering:

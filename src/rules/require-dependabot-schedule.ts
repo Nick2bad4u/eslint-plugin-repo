@@ -93,8 +93,8 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require a schedule interval in Dependabot update configurations to control update frequency",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.strict",
                 "repoPlugin.configs.github",
+                "repoPlugin.configs.dependabot",
                 "repoPlugin.configs.all",
             ],
             requiresTypeChecking: false,

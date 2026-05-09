@@ -45,7 +45,7 @@ sidebar_position: 1
 
 - Open the [Developer Guide](./developer/index.md).
 - Review the [docs and API pipeline chart](./developer/charts/docs-and-api-pipeline.md).
-- Use the [API guide](./developer/api/index.md) when changing plugin exports or TypeDoc output.
+- Use the [API guide](./developer/api/plugin/index.md) when changing plugin exports or TypeDoc output.
 
 ## Documentation map
 

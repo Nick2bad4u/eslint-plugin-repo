@@ -1,7 +1,14 @@
 import type { ESLint, Linter } from "eslint";
 
 import typeScriptParser from "@typescript-eslint/parser";
-import { isDefined, isEmpty, not, objectEntries, safeCastTo } from "ts-extras";
+import {
+    isDefined,
+    isEmpty,
+    not,
+    objectEntries,
+    safeCastTo,
+    setHas,
+} from "ts-extras";
 
 import packageJson from "../package.json" with { type: "json" };
 import {
@@ -73,6 +80,12 @@ const hostingProviderRuleNamePrefixes = [
     "require-vercel-",
 ] as const;
 
+const strictExcludedRuleNames = new Set<RepoComplianceRuleName>([
+    "require-dependency-update-config",
+    "require-node-version-file",
+    "require-nvmrc-file",
+]);
+
 const isHostingProviderSpecificRuleName = (
     ruleName: unknown
 ): ruleName is RepoComplianceRuleName =>
@@ -80,6 +93,12 @@ const isHostingProviderSpecificRuleName = (
     hostingProviderRuleNamePrefixes.some((prefix) =>
         ruleName.startsWith(prefix)
     );
+
+const isStrictExcludedRuleName = (
+    ruleName: unknown
+): ruleName is RepoComplianceRuleName =>
+    typeof ruleName === "string" &&
+    setHas(strictExcludedRuleNames, ruleName as RepoComplianceRuleName);
 
 const deduplicateRuleNames = (
     ruleNames: readonly RepoComplianceRuleName[]
@@ -201,12 +220,14 @@ const derivePresetRuleNamesByConfig = (): Readonly<
         azure: deduplicateRuleNames(presetRuleMap.azure),
         bitbucket: deduplicateRuleNames(presetRuleMap.bitbucket),
         codeberg: deduplicateRuleNames(presetRuleMap.codeberg),
+        dependabot: deduplicateRuleNames(presetRuleMap.dependabot),
         DigitalOcean: deduplicateRuleNames(presetRuleMap.DigitalOcean),
         docker: deduplicateRuleNames(presetRuleMap.docker),
         github: deduplicateRuleNames(presetRuleMap.github),
         gitlab: deduplicateRuleNames(presetRuleMap.gitlab),
         googleCloud: deduplicateRuleNames(presetRuleMap.googleCloud),
         netlify: deduplicateRuleNames(presetRuleMap.netlify),
+        node: deduplicateRuleNames(presetRuleMap.node),
         recommended: deduplicateRuleNames(presetRuleMap.recommended),
         strict: deduplicateRuleNames(presetRuleMap.strict),
         vercel: deduplicateRuleNames(presetRuleMap.vercel),
@@ -217,9 +238,9 @@ const derivePresetRuleNamesByConfig = (): Readonly<
             not(isHostingProviderSpecificRuleName)
         );
 
-    const strictRules = presetRuleMapWithUniqueRuleNames.strict.filter(
-        not(isHostingProviderSpecificRuleName)
-    );
+    const strictRules = presetRuleMapWithUniqueRuleNames.strict
+        .filter(not(isHostingProviderSpecificRuleName))
+        .filter(not(isStrictExcludedRuleName));
 
     return {
         ai: presetRuleMapWithUniqueRuleNames.ai,
@@ -228,12 +249,14 @@ const derivePresetRuleNamesByConfig = (): Readonly<
         azure: presetRuleMapWithUniqueRuleNames.azure,
         bitbucket: presetRuleMapWithUniqueRuleNames.bitbucket,
         codeberg: presetRuleMapWithUniqueRuleNames.codeberg,
+        dependabot: presetRuleMapWithUniqueRuleNames.dependabot,
         DigitalOcean: presetRuleMapWithUniqueRuleNames.DigitalOcean,
         docker: presetRuleMapWithUniqueRuleNames.docker,
         github: presetRuleMapWithUniqueRuleNames.github,
         gitlab: presetRuleMapWithUniqueRuleNames.gitlab,
         googleCloud: presetRuleMapWithUniqueRuleNames.googleCloud,
         netlify: presetRuleMapWithUniqueRuleNames.netlify,
+        node: presetRuleMapWithUniqueRuleNames.node,
         recommended: recommendedRules,
         strict: strictRules,
         vercel: presetRuleMapWithUniqueRuleNames.vercel,
@@ -308,6 +331,11 @@ const configs: RepoComplianceConfigsContract = {
         "codeberg",
         presetRuleNamesByConfig.codeberg
     ),
+    dependabot: buildPresetConfig(
+        plugin,
+        "dependabot",
+        presetRuleNamesByConfig.dependabot
+    ),
     DigitalOcean: buildPresetConfig(
         plugin,
         "DigitalOcean",
@@ -326,6 +354,7 @@ const configs: RepoComplianceConfigsContract = {
         "netlify",
         presetRuleNamesByConfig.netlify
     ),
+    node: buildPresetConfig(plugin, "node", presetRuleNamesByConfig.node),
     recommended: buildPresetConfig(
         plugin,
         "recommended",

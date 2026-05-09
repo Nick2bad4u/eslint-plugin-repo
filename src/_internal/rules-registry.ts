@@ -99,6 +99,7 @@ import requireNetlifyPublishDirectoryNoTrailingSlashRule from "../rules/require-
 import requireNetlifyPublishDirectoryNonEmptyRule from "../rules/require-netlify-publish-directory-non-empty.js";
 import requireNetlifyPublishRelativePathRule from "../rules/require-netlify-publish-relative-path.js";
 import requireNodeVersionFileRule from "../rules/require-node-version-file.js";
+import requireNvmrcFileRule from "../rules/require-nvmrc-file.js";
 import requirePrTemplateChecklistItemsRule from "../rules/require-pr-template-checklist-items.js";
 import requirePullRequestTemplateFileRule from "../rules/require-pull-request-template-file.js";
 import requireReadmeBadgesRule from "../rules/require-readme-badges.js";
@@ -397,6 +398,7 @@ export const repoComplianceRules: Readonly<
         requireNetlifyPublishRelativePathRule
     ),
     "require-node-version-file": asRuleWithDocs(requireNodeVersionFileRule),
+    "require-nvmrc-file": asRuleWithDocs(requireNvmrcFileRule),
     "require-pr-template-checklist-items": asRuleWithDocs(
         requirePrTemplateChecklistItemsRule
     ),

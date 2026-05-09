@@ -1,43 +1,29 @@
 # require-node-version-file
 
-Require a Node.js version pin file (`.nvmrc` or `.node-version`) in Node.js projects.
+Require a `.node-version` file in Node.js projects.
 
 ## Targeted pattern scope
 
-This rule is triggered only when a `package.json` file is present, confirming the
-repository is a Node.js project. It then checks the root for either `.nvmrc`
-or `.node-version`.
+This rule checks the repository root for `.node-version`.
 
 ## What this rule reports
 
-This rule reports when a `package.json` is present but no Node.js version pin file
-(`.nvmrc` or `.node-version`) is found in the repository root.
+This rule reports when `.node-version` is missing from the repository root.
 
 ## Why this rule exists
 
-Different Node.js versions can silently change runtime behaviour. Without a version
-pin file, developers, CI runners, and containerised builds may each use a different
-Node.js version, leading to hard-to-reproduce bugs. Tools like `nvm`, `fnm`, `asdf`,
-`volta`, and CI version-setup actions all respect `.nvmrc` or `.node-version` to
-guarantee consistent execution environments.
+Different Node.js versions can silently change runtime behaviour. Without a pinned
+version file, developers, CI runners, and containerised builds may each use a
+different Node.js version, leading to hard-to-reproduce bugs. `.node-version` is
+widely supported by version managers and CI setup tooling.
 
 ## ❌ Incorrect
 
 ```json
-// package.json present but no .nvmrc or .node-version at root
-{
-  "name": "my-project"
-}
+// .node-version is missing from the repository root
 ```
 
 ## ✅ Correct
-
-```txt
-// .nvmrc contains the pinned version
-20.11.1
-```
-
-Or alternatively:
 
 ```txt
 // .node-version contains the pinned version
@@ -50,7 +36,7 @@ Or alternatively:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
+  repoPlugin.configs.node,
   {
     plugins: { "repo-compliance": repoPlugin },
     rules: {
@@ -62,9 +48,9 @@ export default [
 
 ## When not to use it
 
-Disable this rule if your project manages Node.js versions through another mechanism
-(e.g. `engines` field in `package.json` combined with enforced tooling like `volta`),
-or if the project deliberately supports a wide range of Node.js versions without pinning.
+Disable this rule if your project intentionally standardizes on `.nvmrc` only and
+you enforce that in a separate check (for example
+[`require-nvmrc-file`](./require-nvmrc-file.md)).
 
 > **Rule catalog ID:** R039
 

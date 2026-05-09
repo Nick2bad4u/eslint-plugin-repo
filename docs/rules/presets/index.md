@@ -9,6 +9,7 @@ description: Provider and policy presets for repository compliance.
 | ------------------------------------- | --------------------------------- | ----------------------------------------------------- |
 | [✅ Recommended](./recommended.md)     | `repoPlugin.configs.recommended`  | Baseline repository policy checks                     |
 | [🔒 Strict](./strict.md)              | `repoPlugin.configs.strict`       | Recommended plus stronger policy requirements         |
+| [📦 Dependabot](./dependabot.md)      | `repoPlugin.configs.dependabot`   | Dependabot update policy checks                       |
 | [🐙 GitHub](./github.md)              | `repoPlugin.configs.github`       | GitHub repository hygiene and automation              |
 | [🦊 GitLab](./gitlab.md)              | `repoPlugin.configs.gitlab`       | GitLab merge-request and CI hygiene                   |
 | [🗻 Codeberg](./codeberg.md)          | `repoPlugin.configs.codeberg`     | Forgejo/Codeberg workflow hygiene                     |
@@ -20,6 +21,7 @@ description: Provider and policy presets for repository compliance.
 | [▲ Vercel](./vercel.md)               | `repoPlugin.configs.vercel`       | Vercel project configuration requirements             |
 | [🌐 Netlify](./netlify.md)            | `repoPlugin.configs.netlify`      | Netlify build configuration requirements              |
 | [🌊 DigitalOcean](./digitalocean.md)  | `repoPlugin.configs.DigitalOcean` | DigitalOcean App Platform spec requirements           |
+| [🟢 Node](./node.md)                  | `repoPlugin.configs.node`         | Node.js runtime version pinning requirements          |
 | [🤖 AI](./ai.md)                      | `repoPlugin.configs.ai`           | Repository guidance files for AI-assisted development |
 | [🧩 All](./all.md)                    | `repoPlugin.configs.all`          | All available rules                                   |
 
@@ -32,6 +34,7 @@ description: Provider and policy presets for repository compliance.
 - Preset key legend:
   - [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) — [`repoPlugin.configs.recommended`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended)
   - [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) — [`repoPlugin.configs.strict`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict)
+  - [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) — [`repoPlugin.configs.dependabot`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot)
   - [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) — [`repoPlugin.configs.github`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github)
   - [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) — [`repoPlugin.configs.gitlab`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab)
   - [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) — [`repoPlugin.configs.codeberg`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg)
@@ -43,6 +46,7 @@ description: Provider and policy presets for repository compliance.
   - [▲](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel) — [`repoPlugin.configs.vercel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/vercel)
   - [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) — [`repoPlugin.configs.netlify`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify)
   - [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) — [`repoPlugin.configs.DigitalOcean`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean)
+  - [🟢](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/node) — [`repoPlugin.configs.node`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/node)
   - [🤖](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai) — [`repoPlugin.configs.ai`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai)
   - [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) — [`repoPlugin.configs.all`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all)
 
@@ -78,12 +82,12 @@ description: Provider and policy presets for repository compliance.
 | [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-copilot-instructions-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-copilot-instructions-file) | — | [🤖](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/ai) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — | [📦](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/dependabot) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-digitalocean-app-spec-component`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-component) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-digitalocean-app-spec-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-digitalocean-app-spec-name`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-name) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/digitalocean) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
@@ -145,7 +149,8 @@ description: Provider and policy presets for repository compliance.
 | [`require-netlify-publish-directory-no-trailing-slash`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-directory-no-trailing-slash) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-netlify-publish-directory-non-empty`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-directory-non-empty) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-netlify-publish-relative-path`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-relative-path) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🌐](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/netlify) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — | [🟢](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/node) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file) | — | [🟢](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/node) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-pr-template-checklist-items`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pr-template-checklist-items) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-readme-badges`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-badges) | — | [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
@@ -153,7 +158,7 @@ description: Provider and policy presets for repository compliance.
 | [`require-readme-sections`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-sections) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-release-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-release-config-file) | — | [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
-| [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
+| [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — | [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — | [✅](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/recommended) [🔒](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/strict) [🐙](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/github) [🦊](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/gitlab) [🗻](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/codeberg) [🪣](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/bitbucket) [🧩](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/presets/all) |
@@ -202,13 +207,11 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-file) | — |
 | [`require-codeowners-reviewable-patterns`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-codeowners-reviewable-patterns) | — |
 | [`require-contributing-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-contributing-file) | — |
-| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — |
 | [`require-gitattributes-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitattributes-file) | — |
 | [`require-gitignore-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-gitignore-file) | — |
 | [`require-issue-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-issue-template-file) | — |
 | [`require-license-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-file) | — |
 | [`require-license-spdx-identifier`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-license-spdx-identifier) | — |
-| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
 | [`require-pr-template-checklist-items`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pr-template-checklist-items) | — |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
@@ -217,6 +220,19 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
 | [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
+
+### 📦 Dependabot
+
+- Preset key: [`repoPlugin.configs.dependabot`](./dependabot.md)
+
+| Rule | Fix |
+| --- | :-: |
+| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — |
+| [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — |
+| [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers) | — |
+| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
+| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — |
+| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — |
 
 ### 🐙 GitHub
 
@@ -241,6 +257,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-readme-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file) | — |
 | [`require-release-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-release-config-file) | — |
 | [`require-secret-scanning-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-secret-scanning-config) | — |
+| [`require-security-policy-contact-channel`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-contact-channel) | — |
 | [`require-security-policy-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-security-policy-file) | — |
 | [`require-single-codeowners-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-single-codeowners-file) | — |
 | [`require-support-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-support-file) | — |
@@ -427,6 +444,15 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-digitalocean-app-spec-region-lowercase`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-region-lowercase) | — |
 | [`require-digitalocean-app-spec-region-value`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-digitalocean-app-spec-region-value) | — |
 
+### 🟢 Node
+
+- Preset key: [`repoPlugin.configs.node`](./node.md)
+
+| Rule | Fix |
+| --- | :-: |
+| [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
+| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file) | — |
+
 ### 🤖 AI
 
 - Preset key: [`repoPlugin.configs.ai`](./ai.md)
@@ -539,6 +565,7 @@ Rules are listed below by preset so you can scan exactly what each config enable
 | [`require-netlify-publish-directory-non-empty`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-directory-non-empty) | — |
 | [`require-netlify-publish-relative-path`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-netlify-publish-relative-path) | — |
 | [`require-node-version-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-node-version-file) | — |
+| [`require-nvmrc-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-nvmrc-file) | — |
 | [`require-pr-template-checklist-items`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pr-template-checklist-items) | — |
 | [`require-pull-request-template-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-pull-request-template-file) | — |
 | [`require-readme-badges`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-badges) | — |

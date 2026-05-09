@@ -34,7 +34,7 @@ Treat the docs site as a real application surface, not a folder of loose markdow
 | If you need to...                         | Start here                                |
 | ----------------------------------------- | ----------------------------------------- |
 | Understand the docs architecture          | [Charts](./charts/index.md)               |
-| Change TypeDoc or generated API behavior  | [API guide](./api/index.md)               |
+| Change TypeDoc or generated API behavior  | [API guide](./api/plugin/index.md)        |
 | Review long-lived design choices          | [ADRs](./adr/index.md)                    |
 | Understand path aliases and typed imports | [Typed paths inventory](./typed-paths.md) |
 
@@ -61,7 +61,7 @@ Treat the docs site as a real application surface, not a folder of loose markdow
 ## Key navigation
 
 - [Pages SEO & IndexNow](./deploy-pages-seo-and-indexnow.md)
-- [API guide](./api/index.md)
+- [API guide](./api/plugin/index.md)
 - [Typed paths inventory](./typed-paths.md)
 - [ADRs](./adr/index.md)
 - [Architecture charts](./charts/index.md)

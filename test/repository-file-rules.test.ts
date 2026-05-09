@@ -115,6 +115,16 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
         satisfyingFiles: ["updatecli.yaml"],
     },
     {
+        messageId: "missingNodeVersionFile",
+        name: "require-node-version-file",
+        satisfyingFiles: [".node-version"],
+    },
+    {
+        messageId: "missingNvmrcFile",
+        name: "require-nvmrc-file",
+        satisfyingFiles: [".nvmrc"],
+    },
+    {
         messageId: "missingSecretScanningConfig",
         name: "require-secret-scanning-config",
         satisfyingFiles: [".github/secret-scanning/custom-patterns.yml"],

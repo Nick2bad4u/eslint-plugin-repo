@@ -33,12 +33,14 @@ import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.m
  *     | "azure"
  *     | "bitbucket"
  *     | "codeberg"
+ *     | "dependabot"
  *     | "DigitalOcean"
  *     | "docker"
  *     | "github"
  *     | "gitlab"
  *     | "googleCloud"
  *     | "netlify"
+ *     | "node"
  *     | "recommended"
  *     | "strict"
  *     | "vercel"} PresetConfigName
@@ -74,12 +76,14 @@ const presetDocSlugByConfigName = {
     azure: "azure",
     bitbucket: "bitbucket",
     codeberg: "codeberg",
+    dependabot: "dependabot",
     DigitalOcean: "digitalocean",
     docker: "docker",
     github: "github",
     gitlab: "gitlab",
     googleCloud: "google-cloud",
     netlify: "netlify",
+    node: "node",
     recommended: "recommended",
     strict: "strict",
     vercel: "vercel",
@@ -89,6 +93,7 @@ const presetDocSlugByConfigName = {
 const standardPresetConfigNames = [
     "recommended",
     "strict",
+    "dependabot",
     "github",
     "gitlab",
     "codeberg",
@@ -100,6 +105,7 @@ const standardPresetConfigNames = [
     "vercel",
     "netlify",
     "DigitalOcean",
+    "node",
     "ai",
     "all",
 ];
@@ -112,12 +118,14 @@ const presetConfigReferenceByName = {
     azure: "repoPlugin.configs.azure",
     bitbucket: "repoPlugin.configs.bitbucket",
     codeberg: "repoPlugin.configs.codeberg",
+    dependabot: "repoPlugin.configs.dependabot",
     DigitalOcean: "repoPlugin.configs.DigitalOcean",
     docker: "repoPlugin.configs.docker",
     github: "repoPlugin.configs.github",
     gitlab: "repoPlugin.configs.gitlab",
     googleCloud: "repoPlugin.configs.googleCloud",
     netlify: "repoPlugin.configs.netlify",
+    node: "repoPlugin.configs.node",
     recommended: "repoPlugin.configs.recommended",
     strict: "repoPlugin.configs.strict",
     vercel: "repoPlugin.configs.vercel",
@@ -131,12 +139,14 @@ const presetTitleByConfigName = {
     azure: "🔷 Azure",
     bitbucket: "🪣 Bitbucket",
     codeberg: "🗻 Codeberg / Forgejo",
+    dependabot: "📦 Dependabot",
     DigitalOcean: "🌊 DigitalOcean",
     docker: "🐳 Docker",
     github: "🐙 GitHub",
     gitlab: "🦊 GitLab",
     googleCloud: "🌤️ Google Cloud",
     netlify: "🌐 Netlify",
+    node: "🟢 Node",
     recommended: "✅ Recommended",
     strict: "🔒 Strict",
     vercel: "▲ Vercel",

@@ -6,7 +6,7 @@ import {
 } from "../src/_internal/config-references";
 import plugin from "../src/plugin";
 
-const hostingProviderRuleIdPrefixes = [
+const strictExcludedRuleIdPrefixes = [
     "repo-compliance/require-aws-amplify-",
     "repo-compliance/require-azure-pipelines-",
     "repo-compliance/require-bitbucket-pipelines-",
@@ -26,7 +26,14 @@ const hostingProviderRuleIdPrefixes = [
     "repo-compliance/require-vercel-",
 ] as const;
 
+const strictExcludedRuleIds = [
+    "repo-compliance/require-dependency-update-config",
+    "repo-compliance/require-node-version-file",
+    "repo-compliance/require-nvmrc-file",
+] as const;
+
 const providerPresetNames = [
+    "dependabot",
     "aws",
     "azure",
     "bitbucket",
@@ -37,6 +44,7 @@ const providerPresetNames = [
     "gitlab",
     "googleCloud",
     "netlify",
+    "node",
     "vercel",
 ] as const;
 
@@ -78,17 +86,19 @@ describe("repo compliance preset contracts", () => {
         }
     });
 
-    it("keeps strict provider-agnostic", () => {
+    it("keeps strict free of provider/language/platform-specific rules", () => {
         expect.hasAssertions();
 
         const strictRuleIds = Object.keys(plugin.configs?.strict?.rules ?? {});
 
         for (const ruleId of strictRuleIds) {
             expect(
-                hostingProviderRuleIdPrefixes.some((prefix) =>
+                strictExcludedRuleIdPrefixes.some((prefix) =>
                     ruleId.startsWith(prefix)
                 )
             ).toBeFalsy();
+
+            expect(strictExcludedRuleIds).not.toContain(ruleId);
         }
     });
 

@@ -64,7 +64,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require dependency grouping in Dependabot configurations to reduce pull request noise",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.strict",
+                "repoPlugin.configs.dependabot",
                 "repoPlugin.configs.all",
             ],
             requiresTypeChecking: false,

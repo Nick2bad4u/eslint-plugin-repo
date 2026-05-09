@@ -76,7 +76,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 "require Dependabot to contain at least one update entry",
             recommended: false,
             repoConfigs: [
-                "repoPlugin.configs.strict",
+                "repoPlugin.configs.dependabot",
                 "repoPlugin.configs.all",
             ],
             requiresTypeChecking: false,
