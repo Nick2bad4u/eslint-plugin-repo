@@ -11,13 +11,19 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 /**
- * Check whether a dependabot.yml has at least one `groups:` section inside an
- * update entry.
+ * Check whether a dependabot.yml uses at least one supported grouping strategy:
+ * - `groups:` inside updates entries
+ * - `multi-ecosystem-groups:` at the top level
  */
-const dependabotHasGroups = (yamlSource: string): boolean =>
-    stringSplit(normalizeLineEndings(yamlSource), "\n").some((line) =>
-        line.trimStart().startsWith("groups:")
-    );
+const dependabotHasGroupingStrategy = (yamlSource: string): boolean =>
+    stringSplit(normalizeLineEndings(yamlSource), "\n").some((line) => {
+        const trimmed = line.trimStart();
+
+        return (
+            trimmed.startsWith("groups:") ||
+            trimmed.startsWith("multi-ecosystem-groups:")
+        );
+    });
 
 /** Rule enforcing the use of dependency grouping in Dependabot configurations. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
@@ -43,7 +49,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                     return;
                 }
 
-                if (dependabotHasGroups(dependabotSource)) {
+                if (dependabotHasGroupingStrategy(dependabotSource)) {
                     return;
                 }
 
@@ -72,7 +78,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
         },
         messages: {
             missingDependabotGrouping:
-                "Dependabot config '{{ configPath }}' does not use `groups` to batch dependency updates. Add a `groups:` section to at least one update entry to reduce the number of individual dependency PRs.",
+                "Dependabot config '{{ configPath }}' does not use a supported grouping strategy. Add `groups:` in an update entry, or define `multi-ecosystem-groups:` at the top level to reduce the number of individual dependency PRs.",
         },
         schema: [],
         type: "suggestion",

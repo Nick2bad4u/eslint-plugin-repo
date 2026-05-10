@@ -716,6 +716,32 @@ ruleTester.run(
                 code: lintTargetSource,
                 filename: writeFixtureRepo(
                     "require-dependabot-grouping",
+                    "valid-multi-ecosystem-groups-present",
+                    [
+                        {
+                            content: [
+                                "version: 2",
+                                "multi-ecosystem-groups:",
+                                "  infrastructure:",
+                                "    schedule:",
+                                "      interval: weekly",
+                                "updates:",
+                                "  - package-ecosystem: npm",
+                                "    directory: /",
+                                "    patterns:",
+                                "      - '*'",
+                                "    multi-ecosystem-group: infrastructure",
+                            ].join("\n"),
+                            relativePath: ".github/dependabot.yml",
+                        },
+                    ]
+                ),
+                name: "accepts Dependabot configs using multi-ecosystem-groups",
+            },
+            {
+                code: lintTargetSource,
+                filename: writeFixtureRepo(
+                    "require-dependabot-grouping",
                     "valid-no-dependabot-config",
                     []
                 ),
