@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -11,8 +11,8 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 const bitbucketPipelinesPaths = [
-    "bitbucket-pipelines.yml",
     "bitbucket-pipelines.yaml",
+    "bitbucket-pipelines.yml",
 ] as const;
 
 const isCommentLine = (line: string): boolean =>

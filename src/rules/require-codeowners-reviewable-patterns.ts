@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";

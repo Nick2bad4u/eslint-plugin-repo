@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -20,7 +20,7 @@ const PR_TEMPLATE_PATHS = [
 ];
 
 /** Matches a markdown task-list checkbox: `- [ ] ` or `* [ ] `. */
-const CHECKBOX_PATTERN = /^[*-]\s+\[\s\]/mu;
+const CHECKBOX_PATTERN = /^[*\-]\s+\[\s\]/mv;
 
 const getPRTemplatePath = (rootDirectoryPath: string): null | string => {
     for (const relativePath of PR_TEMPLATE_PATHS) {

@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -55,7 +55,7 @@ const spdxIdentifiers = [
     "PolyForm-Small-Business-1.0.0",
 ];
 
-const SPDX_EXPRESSION_PATTERN = /\bspdx-license-identifier:\s*[\w+\-.]+\b/iu;
+const SPDX_EXPRESSION_PATTERN = /\bspdx-license-identifier:\s*[\w+\-.]+\b/iv;
 
 const lowerCasedIdentifiers = new Set(
     spdxIdentifiers.map((id) => id.toLowerCase())

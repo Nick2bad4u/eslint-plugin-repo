@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import {
@@ -15,13 +15,13 @@ import { createTypedRule } from "../_internal/typed-rule.js";
 /** Rule enforcing explicit DigitalOcean App Platform region settings. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const appSpecPath = getDigitalOceanAppSpecPath(repositoryRoot);
 
         if (appSpecPath === null) {
@@ -42,7 +42,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
                 context.report({
                     data: {
-                        configPath: relative(repositoryRoot, appSpecPath),
+                        configPath: path.relative(repositoryRoot, appSpecPath),
                     },
                     messageId: "missingDigitalOceanAppSpecRegion",
                     node,

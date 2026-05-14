@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -15,12 +15,12 @@ import { createTypedRule } from "../_internal/typed-rule.js";
  * `String.prototype.includes` (no regex — avoids super-linear issues).
  */
 const securityTemplateFragments = [
+    "Jobs/SAST",
+    "Security/Container-Scanning",
+    "Security/DAST",
+    "Security/Dependency-Scanning",
     "Security/SAST",
     "Security/Secret-Detection",
-    "Security/Dependency-Scanning",
-    "Security/DAST",
-    "Security/Container-Scanning",
-    "Jobs/SAST",
 ] as const;
 
 /**
@@ -28,11 +28,11 @@ const securityTemplateFragments = [
  * via `String.prototype.startsWith` on the trimmed line.
  */
 const securityJobPrefixes = [
+    "container_scanning:",
+    "dast:",
+    "dependency_scanning:",
     "sast:",
     "secret_detection:",
-    "dependency_scanning:",
-    "dast:",
-    "container_scanning:",
 ] as const;
 
 const isCommentLine = (line: string): boolean =>

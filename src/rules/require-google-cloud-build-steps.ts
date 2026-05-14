@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import {
@@ -30,13 +30,13 @@ const hasRootSteps = (yamlSource: string): boolean =>
 /** Rule enforcing explicit Cloud Build step definitions. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const configPath = getGoogleCloudBuildConfigPath(repositoryRoot);
 
         if (configPath === null) {
@@ -57,7 +57,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
                 context.report({
                     data: {
-                        configPath: relative(repositoryRoot, configPath),
+                        configPath: path.relative(repositoryRoot, configPath),
                     },
                     messageId: "missingGoogleCloudBuildSteps",
                     node,

@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { arrayFirst, isEmpty, setHas, stringSplit } from "ts-extras";
 
 import {
@@ -94,13 +94,13 @@ const getFirstUnpinnedBaseImageMatch = (
 /** Rule enforcing pinned Docker base image references. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const dockerfilePath = getRepositoryDockerfilePath(repositoryRoot);
 
         if (dockerfilePath === null) {
@@ -124,7 +124,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
                 context.report({
                     data: {
-                        configPath: relative(repositoryRoot, dockerfilePath),
+                        configPath: path.relative(
+                            repositoryRoot,
+                            dockerfilePath
+                        ),
                         imageReference: unpinnedMatch.imageReference,
                     },
                     messageId: "unpinnedDockerBaseImageTag",

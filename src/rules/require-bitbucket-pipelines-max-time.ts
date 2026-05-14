@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { isDefined, setHas, stringSplit } from "ts-extras";
 
 import {

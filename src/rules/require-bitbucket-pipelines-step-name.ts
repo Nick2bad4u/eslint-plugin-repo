@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { arrayJoin, isEmpty, setHas } from "ts-extras";
 
 import {
@@ -13,8 +13,8 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 const bitbucketPipelinePaths = [
-    "bitbucket-pipelines.yml",
     "bitbucket-pipelines.yaml",
+    "bitbucket-pipelines.yml",
 ] as const;
 
 const findBitbucketPipelinesPath = (

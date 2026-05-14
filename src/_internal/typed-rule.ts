@@ -15,13 +15,13 @@ export type RuleCreator = ReturnType<typeof ESLintUtils.RuleCreator<RuleDocs>>;
 /**
  * Additional docs metadata supported by plugin rules.
  */
-type RuleDocs = {
+interface RuleDocs {
     recommended?: boolean;
     repoConfigs?: readonly string[] | string;
     requiresTypeChecking?: boolean;
     ruleId?: string;
     ruleNumber?: number;
-};
+}
 
 /**
  * Shared rule context type used by typed helper utilities.
@@ -33,10 +33,10 @@ type TypedRuleContext = Readonly<
 /**
  * Typed services exposed to rules that require type information.
  */
-type TypedRuleServices = {
+interface TypedRuleServices {
     checker: ts.TypeChecker;
     parserServices: ReturnType<typeof ESLintUtils.getParserServices>;
-};
+}
 
 /**
  * Creates a typed rule with enforced canonical docs metadata.

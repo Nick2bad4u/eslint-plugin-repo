@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { extname, join, resolve } from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 // File content cache to avoid repeated disk reads for the same file.
@@ -7,20 +7,20 @@ import { setHas } from "ts-extras";
 const fileContentCache = new Map<string, null | string>();
 
 const dependabotRelativePaths = [
-    ".github/dependabot.yml",
     ".github/dependabot.yaml",
+    ".github/dependabot.yml",
 ] as const;
 
 const readmeRelativePaths = [
-    "README.md",
     "README",
+    "README.md",
     "README.txt",
 ] as const;
 
-const amplifyRelativePaths = ["amplify.yml", "amplify.yaml"] as const;
+const amplifyRelativePaths = ["amplify.yaml", "amplify.yml"] as const;
 const azurePipelinesRelativePaths = [
-    "azure-pipelines.yml",
     "azure-pipelines.yaml",
+    "azure-pipelines.yml",
 ] as const;
 const cloudBuildRelativePaths = ["cloudbuild.yaml", "cloudbuild.yml"] as const;
 const digitalOceanAppSpecRelativePaths = [
@@ -28,7 +28,7 @@ const digitalOceanAppSpecRelativePaths = [
     ".do/app.yml",
 ] as const;
 const dockerfileRelativePaths = ["Dockerfile"] as const;
-const gitlabCiRelativePaths = [".gitlab-ci.yml", ".gitlab-ci.yaml"] as const;
+const gitlabCiRelativePaths = [".gitlab-ci.yaml", ".gitlab-ci.yml"] as const;
 const netlifyRelativePaths = ["netlify.toml"] as const;
 const vercelRelativePaths = ["vercel.json"] as const;
 const workflowExtensions = new Set([".yaml", ".yml"]);
@@ -38,7 +38,7 @@ const findFirstExistingRepositoryFile = (
     relativePaths: readonly string[]
 ): null | string => {
     for (const relativePath of relativePaths) {
-        const absolutePath = resolve(rootDirectoryPath, relativePath);
+        const absolutePath = path.resolve(rootDirectoryPath, relativePath);
 
         if (existsSync(absolutePath)) {
             return absolutePath;
@@ -145,7 +145,7 @@ export const getDigitalOceanAppSpecPath = (
 export const getForgejoWorkflowPaths = (
     rootDirectoryPath: string
 ): readonly string[] => {
-    const workflowsDirectoryPath = join(
+    const workflowsDirectoryPath = path.join(
         rootDirectoryPath,
         ".forgejo",
         "workflows"
@@ -163,9 +163,12 @@ export const getForgejoWorkflowPaths = (
         .filter(
             (entry) =>
                 entry.isFile() &&
-                setHas(workflowExtensions, extname(entry.name).toLowerCase())
+                setHas(
+                    workflowExtensions,
+                    path.extname(entry.name).toLowerCase()
+                )
         )
-        .map((entry) => join(workflowsDirectoryPath, entry.name));
+        .map((entry) => path.join(workflowsDirectoryPath, entry.name));
 };
 
 /**

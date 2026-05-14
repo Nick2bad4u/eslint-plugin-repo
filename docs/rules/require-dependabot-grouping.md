@@ -18,7 +18,7 @@ This rule reports when the Dependabot configuration has neither `groups:` in
 ## Why this rule exists
 
 Without grouping, Dependabot can open a separate pull request for every dependency update.
-In repositories with many dependencies, this can produce high PR noise and increase review and CI cost.
+In repositories with large dependency graphs, this can produce high PR noise and increase review and CI cost.
 `groups` and `multi-ecosystem-groups` both reduce update churn by batching related updates.
 
 ## ❌ Incorrect

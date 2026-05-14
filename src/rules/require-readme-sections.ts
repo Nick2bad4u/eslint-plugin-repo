@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -36,7 +36,7 @@ const extractHeadings = (source: string): readonly string[] => {
             continue;
         }
 
-        const headingText = trimmedLine.replace(/^#{1,6}\s*/u, "").trim();
+        const headingText = trimmedLine.replace(/^#{1,6}\s*/v, "").trim();
 
         if (headingText.length > 0) {
             headings.push(headingText);
