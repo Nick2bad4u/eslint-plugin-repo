@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -10,7 +10,7 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 /** Detects markdown image syntax used for badges: `![alt](url)` */
-const BADGE_PATTERN = /!\[.*?\]\(https?:\/\//iu;
+const BADGE_PATTERN = /!\[[^\n\r\]]*\]\(https?:\/\//iv;
 
 /** Rule enforcing presence of at least one badge in the README. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({

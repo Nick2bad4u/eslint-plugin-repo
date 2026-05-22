@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { isEmpty, setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -35,13 +35,13 @@ const extractEcosystems = (yamlSource: string): readonly string[] => {
 /** Rule enforcing that Dependabot declares at least one update entry. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const configPath = getDependabotConfigPath(repositoryRoot);
 
         if (configPath === null) {
@@ -57,7 +57,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 }
 
                 const ecosystems = extractEcosystems(dependabotSource);
-                const relativeConfigPath = relative(repositoryRoot, configPath);
+                const relativeConfigPath = path.relative(
+                    repositoryRoot,
+                    configPath
+                );
 
                 if (isEmpty(ecosystems)) {
                     context.report({

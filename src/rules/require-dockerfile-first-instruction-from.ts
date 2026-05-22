@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import {
@@ -36,13 +36,13 @@ const hasFromAsFirstInstruction = (dockerfileSource: string): boolean => {
 /** Rule enforcing Dockerfile first meaningful instruction to be FROM. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const dockerfilePath = getRepositoryDockerfilePath(repositoryRoot);
 
         if (dockerfilePath === null) {
@@ -63,7 +63,10 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
 
                 context.report({
                     data: {
-                        configPath: relative(repositoryRoot, dockerfilePath),
+                        configPath: path.relative(
+                            repositoryRoot,
+                            dockerfilePath
+                        ),
                     },
                     messageId: "dockerfileFirstInstructionNotFrom",
                     node,

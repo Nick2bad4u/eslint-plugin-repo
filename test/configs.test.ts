@@ -33,11 +33,11 @@ const strictExcludedRuleIds = [
 ] as const;
 
 const providerPresetNames = [
-    "dependabot",
     "aws",
     "azure",
     "bitbucket",
     "codeberg",
+    "dependabot",
     "DigitalOcean",
     "docker",
     "github",

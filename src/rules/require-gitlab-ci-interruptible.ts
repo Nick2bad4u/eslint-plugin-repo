@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { setHas, stringSplit } from "ts-extras";
 
 import {
@@ -29,10 +29,10 @@ const GITLAB_RESERVED_KEYS = new Set([
     "workflow",
 ]);
 
-type ParserState = {
+interface ParserState {
     currentJobName: null | string;
     hasInterruptible: boolean;
-};
+}
 
 const getRootLevelJobName = (trimmedLine: string): null | string => {
     if (!trimmedLine.endsWith(":")) {

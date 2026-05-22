@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { arrayJoin, isEmpty, setHas, stringSplit } from "ts-extras";
 
 import {

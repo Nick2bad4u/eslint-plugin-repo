@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { getRuleCatalogEntryForRuleNameOrNull } from "../../src/_internal/rule-catalog";
 import {
     createTypedRule,
     getTypedRuleServices,
@@ -36,14 +37,19 @@ describe(createTypedRule, () => {
     it("injects canonical catalog metadata for known rules", () => {
         expect.hasAssertions();
 
+        const ruleName = "require-readme-file";
+        const catalogEntry = getRuleCatalogEntryForRuleNameOrNull(ruleName);
+
+        expect(catalogEntry).not.toBeNull();
+
         const rule = createTypedRule(
-            createFixtureRuleDefinition("require-readme-file")
+            createFixtureRuleDefinition(ruleName)
         );
 
         expect(rule.meta.docs).toStrictEqual(
             expect.objectContaining({
-                ruleId: "R001",
-                ruleNumber: 1,
+                ruleId: catalogEntry?.ruleId,
+                ruleNumber: catalogEntry?.ruleNumber,
                 url: "https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-readme-file",
             })
         );

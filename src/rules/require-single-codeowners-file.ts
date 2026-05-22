@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { basename, dirname, join } from "node:path";
+import path from "node:path";
 import { arrayFirst, arrayJoin, isDefined, setHas } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -7,9 +7,9 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 const CODEOWNERS_PRECEDENCE_PATHS = [
+    ".bitbucket/CODEOWNERS", // Bitbucket Cloud: supported CODEOWNERS location
     ".github/CODEOWNERS", // GitHub: highest priority
     ".gitlab/CODEOWNERS", // GitLab: highest priority
-    ".bitbucket/CODEOWNERS", // Bitbucket Cloud: supported CODEOWNERS location
     "CODEOWNERS", // Both platforms: root (lower priority than platform-specific dirs)
     "docs/CODEOWNERS", // GitHub only: lowest priority
 ] as const;
@@ -18,19 +18,19 @@ const findExistingCodeownersPaths = (
     repositoryRootPath: string
 ): readonly string[] =>
     CODEOWNERS_PRECEDENCE_PATHS.filter((relativePath) =>
-        existsSync(join(repositoryRootPath, relativePath))
+        existsSync(path.join(repositoryRootPath, relativePath))
     );
 
 /** Rule enforcing a single authoritative CODEOWNERS file location. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const lintedFileName = basename(context.physicalFilename);
+        const lintedFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, lintedFileName)) {
             return {};
         }
 
-        const repositoryRootPath = dirname(context.physicalFilename);
+        const repositoryRootPath = path.dirname(context.physicalFilename);
 
         return {
             Program(node): void {

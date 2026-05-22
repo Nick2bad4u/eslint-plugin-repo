@@ -1,4 +1,4 @@
-import { basename, dirname, relative } from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import {
@@ -18,13 +18,13 @@ const isLowerCaseRegion = (value: string): boolean =>
 /** Rule enforcing lowercase DigitalOcean region values. */
 const rule: ReturnType<typeof createTypedRule> = createTypedRule({
     create: (context) => {
-        const triggerFileName = basename(context.physicalFilename);
+        const triggerFileName = path.basename(context.physicalFilename);
 
         if (!setHas(providerRuleTriggerFileNames, triggerFileName)) {
             return {};
         }
 
-        const repositoryRoot = dirname(context.physicalFilename);
+        const repositoryRoot = path.dirname(context.physicalFilename);
         const appSpecPath = getDigitalOceanAppSpecPath(repositoryRoot);
 
         if (appSpecPath === null) {
@@ -58,7 +58,9 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                 }
 
                 context.report({
-                    data: { configPath: relative(repositoryRoot, appSpecPath) },
+                    data: {
+                        configPath: path.relative(repositoryRoot, appSpecPath),
+                    },
                     messageId: "nonLowercaseDigitalOceanRegion",
                     node,
                 });

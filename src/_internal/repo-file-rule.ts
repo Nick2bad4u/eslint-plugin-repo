@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, statSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { setHas } from "ts-extras";
 
 import type { ConfigReference } from "./config-references.js";

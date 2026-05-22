@@ -11,8 +11,8 @@ const normalizeInlineEventNames = (inlineEvents: string): readonly string[] =>
 
 const normalizeNestedEventName = (line: string): string =>
     line
-        .replace(/^-/u, "")
-        .replace(/:$/u, "")
+        .replace(/^-/v, "")
+        .replace(/:$/v, "")
         .trim()
         .replaceAll('"', "")
         .replaceAll("'", "");

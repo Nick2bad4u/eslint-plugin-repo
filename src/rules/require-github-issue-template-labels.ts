@@ -1,5 +1,5 @@
 import { existsSync, readdirSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { arrayIncludes, setHas, stringSplit } from "ts-extras";
 
 import { providerRuleTriggerFileNames } from "../_internal/config-file-scanner.js";
@@ -11,7 +11,7 @@ import { createRuleDocsUrl } from "../_internal/rule-docs-url.js";
 import { createTypedRule } from "../_internal/typed-rule.js";
 
 const ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE";
-const ignoredTemplateFileNames = ["config.yml", "config.yaml"] as const;
+const ignoredTemplateFileNames = ["config.yaml", "config.yml"] as const;
 
 /**
  * Check whether a GitHub YAML issue template file contains a root-level
@@ -81,7 +81,7 @@ const rule: ReturnType<typeof createTypedRule> = createTypedRule({
                         continue;
                     }
 
-                    if (!/\.ya?ml$/iu.test(entry)) {
+                    if (!/\.ya?ml$/iv.test(entry)) {
                         continue;
                     }
 
