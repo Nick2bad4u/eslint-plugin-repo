@@ -5,7 +5,8 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
  * Sidebar generation for repository-compliance rule documentation.
  */
 import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 interface SidebarDocItem {
     readonly className?: string;
@@ -14,7 +15,7 @@ interface SidebarDocItem {
     readonly type: "doc";
 }
 
-const sidebarDirectoryPath = import.meta.dirname;
+const sidebarDirectoryPath = dirname(fileURLToPath(import.meta.url));
 const rulesDirectoryPath = join(sidebarDirectoryPath, "..", "rules");
 
 const isMarkdownFile = (fileName: string): boolean => fileName.endsWith(".md");

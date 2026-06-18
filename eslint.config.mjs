@@ -76,6 +76,7 @@ const config = [
             "unicorn/no-unnecessary-global-this": "off",
             "unicorn/no-unreadable-new-expression": "off",
             "unicorn/prefer-global-this": "off",
+            "unicorn/prefer-import-meta-properties": "off",
             "unicorn/prefer-short-arrow-method": "off",
             "unicorn/prefer-single-call": "off",
             "unicorn/prefer-temporal": "off",
