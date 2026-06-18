@@ -48,13 +48,13 @@ repositories often rely on ad-hoc or undocumented scanning.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-github-code-scanning-workflow": "warn",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-github-code-scanning-workflow": "warn",
   },
+ },
 ];
 ```
 

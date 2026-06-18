@@ -49,13 +49,13 @@ A useful library.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.all,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-readme-badges": "warn",
-    },
+ repoPlugin.configs.all,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-readme-badges": "warn",
   },
+ },
 ];
 ```
 

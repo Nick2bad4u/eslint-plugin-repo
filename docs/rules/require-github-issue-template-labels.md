@@ -29,10 +29,10 @@ label drift.
 name: Bug Report
 description: Report a bug
 body:
-  - type: input
-    id: title
-    attributes:
-      label: Summary
+ - type: input
+   id: title
+   attributes:
+    label: Summary
 ```
 
 ## ✅ Correct
@@ -42,13 +42,13 @@ body:
 name: Bug Report
 description: Report a bug
 labels:
-  - "type: bug"
-  - "status: triage"
+ - "type: bug"
+ - "status: triage"
 body:
-  - type: input
-    id: title
-    attributes:
-      label: Summary
+ - type: input
+   id: title
+   attributes:
+    label: Summary
 ```
 
 ## ESLint flat config example
@@ -57,13 +57,13 @@ body:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-github-issue-template-labels": "warn",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-github-issue-template-labels": "warn",
   },
+ },
 ];
 ```
 

@@ -67,13 +67,13 @@ Templates help teams standardize:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-pull-request-template-file": "error",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-pull-request-template-file": "error",
   },
+ },
 ];
 ```
 

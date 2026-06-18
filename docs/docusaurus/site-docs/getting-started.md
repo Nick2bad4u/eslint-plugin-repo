@@ -48,9 +48,9 @@ Use presets as a progression rather than enabling everything at once:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-    repoPlugin.configs.recommended,
-    repoPlugin.configs.github,
-    // Add `repoPlugin.configs.strict` once the baseline is stable.
+ repoPlugin.configs.recommended,
+ repoPlugin.configs.github,
+ // Add `repoPlugin.configs.strict` once the baseline is stable.
 ];
 ```
 
@@ -99,6 +99,6 @@ Use the sidebar **Rules** section for the full list of rule docs.
 
 ## Troubleshooting
 
-- If typed rules are unexpectedly disabled, verify your project’s `typescript-eslint` parser setup.
+- If typed rules are unexpectedly disabled, verify your project's `typescript-eslint` parser setup.
 - If your team uses multiple repository hosts, combine provider presets in separate config blocks and scope them with `files` patterns where needed.
 - If migration feels noisy, start in warning mode and ratchet critical rules to error over time.

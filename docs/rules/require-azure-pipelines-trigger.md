@@ -22,28 +22,28 @@ coverage visible in code review and prevents silent trigger drift.
 
 ```yaml
 pr:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ```yaml
 trigger: none
 pr:
-  - main
+ - main
 ```
 
 ## ✅ Correct
 
 ```yaml
 trigger:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 pr:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ## When not to use it

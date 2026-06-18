@@ -22,16 +22,16 @@ control improves reviewability.
 
 ```yaml
 pr:
-  autoCancel: true
+ autoCancel: true
 ```
 
 ## ✅ Correct
 
 ```yaml
 pr:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ## When not to use it

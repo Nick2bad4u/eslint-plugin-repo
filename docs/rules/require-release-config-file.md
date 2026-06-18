@@ -62,12 +62,12 @@ package.json
 ```json
 // release-please-config.json
 {
-  "$schema": "https://docs.renovatebot.com/release-please-config.json",
-  "packages": {
-    ".": {
-      "release-type": "node"
-    }
+ "$schema": "https://docs.renovatebot.com/release-please-config.json",
+ "packages": {
+  ".": {
+   "release-type": "node"
   }
+ }
 }
 ```
 
@@ -77,13 +77,13 @@ package.json
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-release-config-file": "warn",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-release-config-file": "warn",
   },
+ },
 ];
 ```
 

@@ -26,13 +26,13 @@ repository has basic CI coverage for every contribution.
 # Workflow only runs on schedule — no push/PR trigger
 name: Weekly audit
 on:
-  schedule:
-    - cron: "0 0 * * 1"
+ schedule:
+  - cron: "0 0 * * 1"
 jobs:
-  audit:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm audit
+ audit:
+  runs-on: ubuntu-latest
+  steps:
+   - run: npm audit
 ```
 
 ## ✅ Correct
@@ -41,16 +41,16 @@ jobs:
 # Workflow runs on both push and manual trigger
 name: CI
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-  workflow_dispatch:
+ push:
+  branches:
+   - main
+ pull_request:
+ workflow_dispatch:
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm test
+ test:
+  runs-on: ubuntu-latest
+  steps:
+   - run: npm test
 ```
 
 ## ESLint flat config example
@@ -59,13 +59,13 @@ jobs:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.codeberg,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-forgejo-actions-workflow-trigger-coverage": "warn",
-    },
+ repoPlugin.configs.codeberg,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-forgejo-actions-workflow-trigger-coverage": "warn",
   },
+ },
 ];
 ```
 

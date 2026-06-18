@@ -53,13 +53,13 @@ review cycles spent pulling basic context out of authors.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-merge-request-template-file": "error",
-    },
+ repoPlugin.configs.gitlab,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-merge-request-template-file": "error",
   },
+ },
 ];
 ```
 

@@ -27,10 +27,10 @@ value.
 ```yaml
 # bitbucket-pipelines.yml — no clone depth configured
 pipelines:
-  default:
-    - step:
-        script:
-          - npm test
+ default:
+  - step:
+     script:
+      - npm test
 ```
 
 ## ✅ Correct
@@ -38,13 +38,13 @@ pipelines:
 ```yaml
 # bitbucket-pipelines.yml
 clone:
-  depth: 1
+ depth: 1
 
 pipelines:
-  default:
-    - step:
-        script:
-          - npm test
+ default:
+  - step:
+     script:
+      - npm test
 ```
 
 ## ESLint flat config example
@@ -53,13 +53,13 @@ pipelines:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.bitbucket,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-bitbucket-pipelines-clone-depth": "warn",
-    },
+ repoPlugin.configs.bitbucket,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-bitbucket-pipelines-clone-depth": "warn",
   },
+ },
 ];
 ```
 

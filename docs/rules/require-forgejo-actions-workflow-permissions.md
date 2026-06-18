@@ -70,14 +70,14 @@ jobs:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.codeberg,
-  // or individually:
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-forgejo-actions-workflow-permissions": "error",
-    },
+ repoPlugin.configs.codeberg,
+ // or individually:
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-forgejo-actions-workflow-permissions": "error",
   },
+ },
 ];
 ```
 
@@ -90,7 +90,7 @@ Disable this rule only if workflow token permissions are guaranteed by an extern
 ## Further reading
 
 - [Forgejo Docs: Actions](https://forgejo.org/docs/latest/user/actions/)
-- [GitHub Docs: Use GITHUB\_TOKEN for authentication in workflows](https://docs.github.com/actions/reference/authentication-in-a-workflow) (Forgejo uses the same permissions model)
+- [GitHub Docs: Use GITHUB_TOKEN for authentication in workflows](https://docs.github.com/actions/reference/authentication-in-a-workflow) (Forgejo uses the same permissions model)
 - [GitHub Docs: Assigning permissions to jobs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/assigning-permissions-to-jobs)
 
 ## Adoption resources

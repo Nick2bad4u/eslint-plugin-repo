@@ -35,13 +35,13 @@ on different Node.js versions and produce inconsistent behavior.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.node,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-nvmrc-file": "warn",
-    },
+ repoPlugin.configs.node,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-nvmrc-file": "warn",
   },
+ },
 ];
 ```
 

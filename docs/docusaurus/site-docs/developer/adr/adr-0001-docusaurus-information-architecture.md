@@ -10,7 +10,7 @@ Accepted
 
 ## Context
 
-The docs app had navigation entries for many pages that were absent in `site-docs/**`. This produced brittle routes and made contributor onboarding harder.
+The docs app had navigation entries for pages absent in `site-docs/**`. This produced brittle routes and made contributor onboarding harder.
 
 ## Decision
 

@@ -19,9 +19,7 @@ type FixtureRule = TSESLint.RuleModule<"fixtureMessage", readonly []>;
 type RulesParameter = Parameters<typeof deriveRuleDocsMetadataByName>[0];
 
 const createFixtureRule = (docs: FixtureDocs): FixtureRule => ({
-    create() {
-        return {};
-    },
+    create: () => ({}),
     defaultOptions: [],
     meta: {
         docs,

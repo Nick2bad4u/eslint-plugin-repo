@@ -36,13 +36,13 @@ widely supported by version managers and CI setup tooling.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.node,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-node-version-file": "warn",
-    },
+ repoPlugin.configs.node,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-node-version-file": "warn",
   },
+ },
 ];
 ```
 

@@ -2,11 +2,11 @@
 slug: type-aware-linting-without-surprises
 title: Type-Aware Linting Without Surprises
 authors:
-  - nick
+ - nick
 tags:
-  - typescript
-  - typed-rules
-  - performance
+ - typescript
+ - typed-rules
+ - performance
 ---
 
 # Type-Aware Linting Without Surprises

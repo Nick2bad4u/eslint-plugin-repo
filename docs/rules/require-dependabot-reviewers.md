@@ -47,13 +47,13 @@ updates:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependabot-reviewers": "warn",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependabot-reviewers": "warn",
   },
+ },
 ];
 ```
 

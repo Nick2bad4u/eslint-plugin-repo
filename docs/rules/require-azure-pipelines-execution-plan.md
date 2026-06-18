@@ -20,16 +20,16 @@ accidental drift from expected CI behavior.
 
 ```yaml
 trigger:
-  - main
+ - main
 ```
 
 ## ✅ Correct
 
 ```yaml
 jobs:
-  - job: test
-    steps:
-      - script: npm test
+ - job: test
+   steps:
+    - script: npm test
 ```
 
 ## When not to use it

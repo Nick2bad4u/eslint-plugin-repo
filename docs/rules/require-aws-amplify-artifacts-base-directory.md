@@ -23,13 +23,13 @@ review.
 ```yaml
 version: 1
 frontend:
-  phases:
-    build:
-      commands:
-        - npm run build
-  artifacts:
-    files:
-      - "**/*"
+ phases:
+  build:
+   commands:
+    - npm run build
+ artifacts:
+  files:
+   - "**/*"
 ```
 
 ## ✅ Correct
@@ -37,14 +37,14 @@ frontend:
 ```yaml
 version: 1
 frontend:
-  phases:
-    build:
-      commands:
-        - npm run build
-  artifacts:
-    baseDirectory: dist
-    files:
-      - "**/*"
+ phases:
+  build:
+   commands:
+    - npm run build
+ artifacts:
+  baseDirectory: dist
+  files:
+   - "**/*"
 ```
 
 ## When not to use it

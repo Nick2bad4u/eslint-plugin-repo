@@ -24,14 +24,14 @@ the latest run continues when a new commit supersedes a prior one.
 ```yaml
 name: CI
 on:
-  push:
-    branches:
-      - main
+ push:
+  branches:
+   - main
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm test
+ test:
+  runs-on: ubuntu-latest
+  steps:
+   - run: npm test
 ```
 
 ## ✅ Correct
@@ -39,17 +39,17 @@ jobs:
 ```yaml
 name: CI
 on:
-  push:
-    branches:
-      - main
+ push:
+  branches:
+   - main
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+ group: ${{ github.workflow }}-${{ github.ref }}
+ cancel-in-progress: true
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm test
+ test:
+  runs-on: ubuntu-latest
+  steps:
+   - run: npm test
 ```
 
 ## ESLint flat config example
@@ -58,13 +58,13 @@ jobs:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.codeberg,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-forgejo-actions-concurrency": "warn",
-    },
+ repoPlugin.configs.codeberg,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-forgejo-actions-concurrency": "warn",
   },
+ },
 ];
 ```
 

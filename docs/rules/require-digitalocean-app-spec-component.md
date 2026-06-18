@@ -35,7 +35,7 @@ region: nyc
 name: demo
 region: nyc
 services:
-  - name: web
+ - name: web
 ```
 
 ## When not to use it

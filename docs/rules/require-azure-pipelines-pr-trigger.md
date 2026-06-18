@@ -22,12 +22,12 @@ feedback becomes more expensive.
 
 ```yaml
 trigger:
-  - main
+ - main
 ```
 
 ```yaml
 trigger:
-  - main
+ - main
 pr: none
 ```
 
@@ -35,11 +35,11 @@ pr: none
 
 ```yaml
 trigger:
-  - main
+ - main
 pr:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ## When not to use it

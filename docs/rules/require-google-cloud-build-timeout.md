@@ -19,8 +19,8 @@ builds from quietly consuming CI minutes until the platform default is hit.
 
 ```yaml
 steps:
-  - name: gcr.io/cloud-builders/npm
-    args: ["test"]
+ - name: gcr.io/cloud-builders/npm
+   args: ["test"]
 ```
 
 ## ✅ Correct
@@ -28,8 +28,8 @@ steps:
 ```yaml
 timeout: 1200s
 steps:
-  - name: gcr.io/cloud-builders/npm
-    args: ["test"]
+ - name: gcr.io/cloud-builders/npm
+   args: ["test"]
 ```
 
 ## When not to use it

@@ -1,18 +1,18 @@
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
+import Layout from "@theme/Layout";
 
 import GitHubStats from "../components/GitHubStats";
 import HomepageFeatures from "../components/HomepageFeatures";
 import styles from "./index.module.css";
 
-type HeroBadge = {
+interface HeroBadge {
     readonly description: string;
     readonly icon: string;
     readonly title: string;
-};
+}
 
 const homepageDescription =
     "Repository compliance docs, presets, and rule references for GitHub, GitLab, Bitbucket, Codeberg/Forgejo, AWS, Azure, Google Cloud, Docker, Vercel, Netlify, and DigitalOcean teams.";
@@ -82,7 +82,7 @@ export default function HomePage() {
     const socialCardUrl = useBaseUrl("img/social-card.png");
 
     return (
-        <Layout title="eslint-plugin-repo" description={homepageDescription}>
+        <Layout description={homepageDescription} title="eslint-plugin-repo">
             <Head>
                 <meta content={homepageKeywords} name="keywords" />
                 <meta content={socialCardUrl} property="og:image" />
@@ -112,13 +112,13 @@ export default function HomePage() {
                             <div className={styles.infoGrid}>
                                 {heroBadges.map((badge) => (
                                     <article
-                                        key={badge.title}
                                         className={styles.infoCard}
+                                        key={badge.title}
                                     >
                                         <p className={styles.infoTitle}>
                                             <span
-                                                className={styles.infoIcon}
                                                 aria-hidden="true"
+                                                className={styles.infoIcon}
                                             >
                                                 {badge.icon}
                                             </span>
@@ -151,8 +151,8 @@ export default function HomePage() {
                             <div className={styles.statGrid}>
                                 {heroStats.map((stat) => (
                                     <article
-                                        key={stat.label}
                                         className={styles.statCard}
+                                        key={stat.label}
                                     >
                                         <span className={styles.statValue}>
                                             {stat.value}
@@ -166,8 +166,8 @@ export default function HomePage() {
                         </div>
 
                         <aside
-                            className={styles.visualPanel}
                             aria-label="Project summary"
+                            className={styles.visualPanel}
                         >
                             <div className={styles.visualHeader}>
                                 <div className={styles.logoFrame}>

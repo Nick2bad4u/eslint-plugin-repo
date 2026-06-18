@@ -22,7 +22,7 @@ reduces dashboard-only or framework-default drift.
 
 ```json
 {
-  "cleanUrls": true
+ "cleanUrls": true
 }
 ```
 
@@ -30,8 +30,8 @@ reduces dashboard-only or framework-default drift.
 
 ```json
 {
-  "buildCommand": "npm run build",
-  "cleanUrls": true
+ "buildCommand": "npm run build",
+ "cleanUrls": true
 }
 ```
 

@@ -45,13 +45,13 @@ package.json
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.recommended,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitattributes-file": "warn",
-    },
+ repoPlugin.configs.recommended,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitattributes-file": "warn",
   },
+ },
 ];
 ```
 

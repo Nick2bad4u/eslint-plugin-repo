@@ -19,16 +19,16 @@ build output conventions harder to enforce.
 
 ```yaml
 frontend:
-  artifacts:
-    baseDirectory: /dist
+ artifacts:
+  baseDirectory: /dist
 ```
 
 ## ✅ Correct
 
 ```yaml
 frontend:
-  artifacts:
-    baseDirectory: dist
+ artifacts:
+  baseDirectory: dist
 ```
 
 ## When not to use it

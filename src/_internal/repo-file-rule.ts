@@ -115,8 +115,7 @@ export const createRepositoryFilePresenceRule = (
     );
 
     return createTypedRule({
-        create(context) {
-            return {
+        create: (context) => ({
                 Program(node) {
                     const filename = context.physicalFilename;
                     if (filename === "<input>") {
@@ -143,8 +142,7 @@ export const createRepositoryFilePresenceRule = (
                         node,
                     });
                 },
-            };
-        },
+            }),
         defaultOptions: [],
         meta: {
             deprecated: false,

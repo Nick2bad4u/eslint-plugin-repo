@@ -26,7 +26,7 @@ timeout: 60s
 
 ```yaml
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## When not to use it

@@ -64,13 +64,13 @@ Describe the changes in this PR.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-pr-template-checklist-items": "warn",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-pr-template-checklist-items": "warn",
   },
+ },
 ];
 ```
 

@@ -25,11 +25,11 @@ cache behaviour intentional, reduces network overhead, and speeds up pipelines.
 ```yaml
 # .gitlab-ci.yml — no policy declared
 test:
-  script: npm test
-  cache:
-    key: node-modules
-    paths:
-      - node_modules/
+ script: npm test
+ cache:
+  key: node-modules
+  paths:
+   - node_modules/
 ```
 
 ## ✅ Correct
@@ -37,20 +37,20 @@ test:
 ```yaml
 # .gitlab-ci.yml
 install:
-  script: npm ci
-  cache:
-    key: node-modules
-    paths:
-      - node_modules/
-    policy: push
+ script: npm ci
+ cache:
+  key: node-modules
+  paths:
+   - node_modules/
+  policy: push
 
 test:
-  script: npm test
-  cache:
-    key: node-modules
-    paths:
-      - node_modules/
-    policy: pull
+ script: npm test
+ cache:
+  key: node-modules
+  paths:
+   - node_modules/
+  policy: pull
 ```
 
 ## ESLint flat config example
@@ -59,13 +59,13 @@ test:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-ci-cache-policy": "warn",
-    },
+ repoPlugin.configs.gitlab,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-ci-cache-policy": "warn",
   },
+ },
 ];
 ```
 

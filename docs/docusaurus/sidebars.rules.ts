@@ -1,21 +1,20 @@
+import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
+
 /**
  * @packageDocumentation
  * Sidebar generation for repository-compliance rule documentation.
  */
 import { readdirSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
-import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
-
-type SidebarDocItem = {
+interface SidebarDocItem {
     readonly className?: string;
-    readonly label: string;
     readonly id: string;
+    readonly label: string;
     readonly type: "doc";
-};
+}
 
-const sidebarDirectoryPath = dirname(fileURLToPath(import.meta.url));
+const sidebarDirectoryPath = import.meta.dirname;
 const rulesDirectoryPath = join(sidebarDirectoryPath, "..", "rules");
 
 const isMarkdownFile = (fileName: string): boolean => fileName.endsWith(".md");

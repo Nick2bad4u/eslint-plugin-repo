@@ -40,6 +40,7 @@ src/
 
 ```markdown
 <!-- .github/instructions/copilot-instructions.md -->
+
 ## Repository conventions
 
 - Use `const` for all variable declarations unless mutation is required.
@@ -53,13 +54,13 @@ src/
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.ai,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-copilot-instructions-file": "warn",
-    },
+ repoPlugin.configs.ai,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-copilot-instructions-file": "warn",
   },
+ },
 ];
 ```
 

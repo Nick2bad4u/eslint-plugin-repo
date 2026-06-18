@@ -48,13 +48,13 @@ contract for predictable dependency maintenance on GitHub.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependabot-config-file": "error",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependabot-config-file": "error",
   },
+ },
 ];
 ```
 

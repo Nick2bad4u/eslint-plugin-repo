@@ -18,14 +18,14 @@ runtime/deploy time. Catching it in lint keeps config quality gates local.
 ## ❌ Incorrect
 
 ```json
-{"buildCommand": "npm run build",}
+{ "buildCommand": "npm run build" }
 ```
 
 ## ✅ Correct
 
 ```json
 {
-  "buildCommand": "npm run build"
+ "buildCommand": "npm run build"
 }
 ```
 

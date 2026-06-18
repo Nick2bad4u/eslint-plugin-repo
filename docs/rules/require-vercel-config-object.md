@@ -25,7 +25,7 @@ misconfigurations that break tooling expectations.
 
 ```json
 {
-  "buildCommand": "npm run build"
+ "buildCommand": "npm run build"
 }
 ```
 

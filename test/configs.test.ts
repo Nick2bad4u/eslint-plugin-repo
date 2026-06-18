@@ -96,7 +96,7 @@ describe("repo compliance preset contracts", () => {
                 strictExcludedRuleIdPrefixes.some((prefix) =>
                     ruleId.startsWith(prefix)
                 )
-            ).toBeFalsy();
+            ).toBe(false);
 
             expect(strictExcludedRuleIds).not.toContain(ruleId);
         }

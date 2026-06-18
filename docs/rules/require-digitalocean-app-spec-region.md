@@ -22,7 +22,7 @@ clear in version control.
 ```yaml
 name: example-app
 services:
-  - name: web
+ - name: web
 ```
 
 ## ✅ Correct
@@ -31,7 +31,7 @@ services:
 name: example-app
 region: nyc
 services:
-  - name: web
+ - name: web
 ```
 
 ## When not to use it

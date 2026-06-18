@@ -46,13 +46,13 @@ into the wrong channel, increasing exposure and slowing triage.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.recommended,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-security-policy-file": "error",
-    },
+ repoPlugin.configs.recommended,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-security-policy-file": "error",
   },
+ },
 ];
 ```
 

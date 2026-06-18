@@ -19,17 +19,17 @@ ambiguous trigger behavior.
 
 ```yaml
 trigger:
-  branches:
-    include:
+ branches:
+  include:
 ```
 
 ## ✅ Correct
 
 ```yaml
 trigger:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ## When not to use it

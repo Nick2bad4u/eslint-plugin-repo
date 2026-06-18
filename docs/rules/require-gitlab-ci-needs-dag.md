@@ -28,12 +28,12 @@ and can start immediately.
 ```yaml
 # .gitlab-ci.yml — no needs: declared; all jobs wait for their stage
 build:
-  stage: build
-  script: npm run build
+ stage: build
+ script: npm run build
 
 test:
-  stage: test
-  script: npm test
+ stage: test
+ script: npm test
 ```
 
 ## ✅ Correct
@@ -41,15 +41,15 @@ test:
 ```yaml
 # .gitlab-ci.yml
 build:
-  stage: build
-  script: npm run build
-  needs: []
+ stage: build
+ script: npm run build
+ needs: []
 
 test:
-  stage: test
-  script: npm test
-  needs:
-    - build
+ stage: test
+ script: npm test
+ needs:
+  - build
 ```
 
 ## ESLint flat config example
@@ -58,13 +58,13 @@ test:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-ci-needs-dag": "warn",
-    },
+ repoPlugin.configs.gitlab,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-ci-needs-dag": "warn",
   },
+ },
 ];
 ```
 

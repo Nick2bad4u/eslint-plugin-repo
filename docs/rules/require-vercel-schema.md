@@ -19,7 +19,7 @@ invalid or deprecated keys earlier in development.
 
 ```json
 {
-  "cleanUrls": true
+ "cleanUrls": true
 }
 ```
 
@@ -27,8 +27,8 @@ invalid or deprecated keys earlier in development.
 
 ```json
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true
+ "$schema": "https://openapi.vercel.sh/vercel.json",
+ "cleanUrls": true
 }
 ```
 

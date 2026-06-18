@@ -24,7 +24,7 @@ and make execution limits consistent across environments.
 ```yaml
 timeout: 20m
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## ✅ Correct
@@ -32,7 +32,7 @@ steps:
 ```yaml
 timeout: 1200s
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## When not to use it

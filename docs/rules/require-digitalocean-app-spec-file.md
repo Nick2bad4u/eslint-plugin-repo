@@ -31,10 +31,10 @@ export default [];
 # .do/app.yaml
 name: example-app
 services:
-  - name: web
-    github:
-      repo: example/repo
-      branch: main
+ - name: web
+   github:
+    repo: example/repo
+    branch: main
 ```
 
 ## When not to use it

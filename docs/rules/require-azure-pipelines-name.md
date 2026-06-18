@@ -19,9 +19,9 @@ repositories and CI dashboards.
 
 ```yaml
 trigger:
-  - main
+ - main
 jobs:
-  - job: test
+ - job: test
 ```
 
 ## ✅ Correct
@@ -29,9 +29,9 @@ jobs:
 ```yaml
 name: CI
 trigger:
-  - main
+ - main
 jobs:
-  - job: test
+ - job: test
 ```
 
 ## When not to use it

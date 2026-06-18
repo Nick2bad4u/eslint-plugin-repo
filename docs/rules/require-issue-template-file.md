@@ -63,13 +63,13 @@ someone can act on an issue.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-issue-template-file": "error",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-issue-template-file": "error",
   },
+ },
 ];
 ```
 

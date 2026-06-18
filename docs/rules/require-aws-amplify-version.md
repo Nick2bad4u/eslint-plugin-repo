@@ -19,10 +19,10 @@ explicit during review.
 
 ```yaml
 frontend:
-  phases:
-    build:
-      commands:
-        - npm run build
+ phases:
+  build:
+   commands:
+    - npm run build
 ```
 
 ## ✅ Correct
@@ -30,10 +30,10 @@ frontend:
 ```yaml
 version: 1
 frontend:
-  phases:
-    build:
-      commands:
-        - npm run build
+ phases:
+  build:
+   commands:
+    - npm run build
 ```
 
 ## When not to use it

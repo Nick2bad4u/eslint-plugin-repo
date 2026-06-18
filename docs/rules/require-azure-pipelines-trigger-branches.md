@@ -21,16 +21,16 @@ trigger config drifts.
 
 ```yaml
 trigger:
-  batch: true
+ batch: true
 ```
 
 ## ✅ Correct
 
 ```yaml
 trigger:
-  branches:
-    include:
-      - main
+ branches:
+  include:
+   - main
 ```
 
 ## When not to use it

@@ -528,9 +528,7 @@ ruleTester.run(
     }
 );
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Additional branch-coverage tests for GitLab CI and Forgejo rules
-// ──────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────── Additional branch-coverage tests for GitLab CI and Forgejo rules ──────────────────────────────────────────────────────────────────────────────
 
 ruleTester.run(
     "require-gitlab-ci-interruptible",

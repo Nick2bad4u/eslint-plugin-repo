@@ -41,10 +41,10 @@ describe("config-file-scanner helpers", () => {
     it("identifies blank/comment lines", () => {
         expect.hasAssertions();
 
-        expect(isBlankOrCommentLine("")).toBeTruthy();
-        expect(isBlankOrCommentLine("    ")).toBeTruthy();
-        expect(isBlankOrCommentLine("   # comment")).toBeTruthy();
-        expect(isBlankOrCommentLine("key: value")).toBeFalsy();
+        expect(isBlankOrCommentLine("")).toBe(true);
+        expect(isBlankOrCommentLine(' '.repeat(4))).toBe(true);
+        expect(isBlankOrCommentLine("   # comment")).toBe(true);
+        expect(isBlankOrCommentLine("key: value")).toBe(false);
     });
 
     it("computes indentation width from leading spaces only", () => {
@@ -92,8 +92,8 @@ describe("config-file-scanner helpers", () => {
             "# version: comment",
         ].join("\n");
 
-        expect(hasTopLevelYamlKey(source, "version")).toBeTruthy();
-        expect(hasTopLevelYamlKey(source, "name")).toBeFalsy();
+        expect(hasTopLevelYamlKey(source, "version")).toBe(true);
+        expect(hasTopLevelYamlKey(source, "name")).toBe(false);
     });
 
     it("reads TOML key values while avoiding prefix collisions", () => {
@@ -118,8 +118,8 @@ describe("config-file-scanner helpers", () => {
 
         expect(getTomlKeyValue(source, "command")).toBeNull();
         expect(getTomlKeyValue(source, "publish")).toBe("");
-        expect(hasTomlKey(source, "command")).toBeFalsy();
-        expect(hasTomlKey(source, "publish")).toBeTruthy();
+        expect(hasTomlKey(source, "command")).toBe(false);
+        expect(hasTomlKey(source, "publish")).toBe(true);
     });
 
     it("detects TOML table sections", () => {
@@ -131,7 +131,7 @@ describe("config-file-scanner helpers", () => {
             'command = "npm run build"',
         ].join("\n");
 
-        expect(hasTomlTableSection(source, "build")).toBeTruthy();
-        expect(hasTomlTableSection(source, "deploy")).toBeFalsy();
+        expect(hasTomlTableSection(source, "build")).toBe(true);
+        expect(hasTomlTableSection(source, "deploy")).toBe(false);
     });
 });

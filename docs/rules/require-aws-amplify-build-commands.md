@@ -20,11 +20,11 @@ build behavior can drift to hidden defaults and become harder to review.
 ```yaml
 version: 1
 frontend:
-  phases:
-    build:
-      cache:
-        paths:
-          - node_modules/**/*
+ phases:
+  build:
+   cache:
+    paths:
+     - node_modules/**/*
 ```
 
 ## ✅ Correct
@@ -32,10 +32,10 @@ frontend:
 ```yaml
 version: 1
 frontend:
-  phases:
-    build:
-      commands:
-        - npm run build
+ phases:
+  build:
+   commands:
+    - npm run build
 ```
 
 ## When not to use it

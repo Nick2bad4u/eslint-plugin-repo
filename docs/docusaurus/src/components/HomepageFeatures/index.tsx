@@ -3,12 +3,12 @@ import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
 
-type FeatureCard = {
+interface FeatureCard {
     readonly description: string;
     readonly href: string;
     readonly icon: string;
     readonly title: string;
-};
+}
 
 const featureCards = [
     {
@@ -45,7 +45,7 @@ export default function HomepageFeatures() {
             <div className="container">
                 <div className={styles.grid}>
                     {featureCards.map((feature) => (
-                        <article key={feature.title} className={styles.card}>
+                        <article className={styles.card} key={feature.title}>
                             <span className={styles.iconBadge}>
                                 {feature.icon}
                             </span>

@@ -27,10 +27,10 @@ exact same environment is used every time, making failures consistent and tracea
 image: node
 
 pipelines:
-  default:
-    - step:
-        script:
-          - npm test
+ default:
+  - step:
+     script:
+      - npm test
 ```
 
 ```yaml
@@ -45,10 +45,10 @@ image: node:latest
 image: node:20.11-alpine
 
 pipelines:
-  default:
-    - step:
-        script:
-          - npm test
+ default:
+  - step:
+     script:
+      - npm test
 ```
 
 ## ESLint flat config example
@@ -57,13 +57,13 @@ pipelines:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.bitbucket,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-bitbucket-pipelines-image-pinned-tag": "error",
-    },
+ repoPlugin.configs.bitbucket,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-bitbucket-pipelines-image-pinned-tag": "error",
   },
+ },
 ];
 ```
 

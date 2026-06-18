@@ -24,8 +24,8 @@ reducing resource consumption and improving feedback loop speed.
 ```yaml
 # .gitlab-ci.yml — job is not marked interruptible
 test:
-  script: npm test
-  stage: test
+ script: npm test
+ stage: test
 ```
 
 ## ✅ Correct
@@ -33,9 +33,9 @@ test:
 ```yaml
 # .gitlab-ci.yml
 test:
-  script: npm test
-  stage: test
-  interruptible: true
+ script: npm test
+ stage: test
+ interruptible: true
 ```
 
 ## ESLint flat config example
@@ -44,13 +44,13 @@ test:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-ci-interruptible": "warn",
-    },
+ repoPlugin.configs.gitlab,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-ci-interruptible": "warn",
   },
+ },
 ];
 ```
 

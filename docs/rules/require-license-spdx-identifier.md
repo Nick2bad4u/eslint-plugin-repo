@@ -55,13 +55,13 @@ Copyright (c) 2024 My Organisation
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.recommended,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-license-spdx-identifier": "warn",
-    },
+ repoPlugin.configs.recommended,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-license-spdx-identifier": "warn",
   },
+ },
 ];
 ```
 

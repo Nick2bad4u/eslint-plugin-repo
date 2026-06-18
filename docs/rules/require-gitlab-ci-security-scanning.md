@@ -69,13 +69,10 @@ stages:
 
 ```ts
 // .gitlab-ci.yml — explicit sast job
-stages:
-  - test
+stages: -test;
 
-sast:
-  stage: test
-  script:
-    - run-custom-sast
+sast: stage: test;
+script: -run - custom - sast;
 ```
 
 ## ESLint flat config example
@@ -85,14 +82,14 @@ sast:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  // or individually:
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-ci-security-scanning": "error",
-    },
+ repoPlugin.configs.gitlab,
+ // or individually:
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-ci-security-scanning": "error",
   },
+ },
 ];
 ```
 

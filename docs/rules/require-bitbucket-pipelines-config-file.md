@@ -46,13 +46,13 @@ branch handling, or step naming have nothing real to validate.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.bitbucket,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-bitbucket-pipelines-config-file": "error",
-    },
+ repoPlugin.configs.bitbucket,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-bitbucket-pipelines-config-file": "error",
   },
+ },
 ];
 ```
 

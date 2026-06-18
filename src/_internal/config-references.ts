@@ -1,3 +1,5 @@
+import type { ArrayValues } from "type-fest";
+
 import { objectHasOwn } from "ts-extras";
 
 /**
@@ -36,7 +38,7 @@ export type ConfigMetadata = Readonly<{
 /**
  * Union of supported preset names.
  */
-export type ConfigName = (typeof configNames)[number];
+export type ConfigName = ArrayValues<typeof configNames>;
 
 /**
  * Lookup table of preset metadata keyed by preset name.

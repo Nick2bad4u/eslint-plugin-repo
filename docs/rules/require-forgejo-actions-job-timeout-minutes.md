@@ -49,13 +49,13 @@ jobs:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.codeberg,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-forgejo-actions-job-timeout-minutes": "error",
-    },
+ repoPlugin.configs.codeberg,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-forgejo-actions-job-timeout-minutes": "error",
   },
+ },
 ];
 ```
 

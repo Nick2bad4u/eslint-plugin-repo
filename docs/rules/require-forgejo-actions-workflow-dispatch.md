@@ -51,13 +51,13 @@ jobs:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.codeberg,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-forgejo-actions-workflow-dispatch": "warn",
-    },
+ repoPlugin.configs.codeberg,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-forgejo-actions-workflow-dispatch": "warn",
   },
+ },
 ];
 ```
 

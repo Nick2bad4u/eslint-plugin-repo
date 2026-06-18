@@ -41,8 +41,8 @@ entirely on platform defaults or external administration.
 # .github/secret-scanning/custom-patterns.yml
 name: Internal token patterns
 patterns:
-  - name: Example Internal Token
-    regex: 'example_[A-Za-z0-9]{32}'
+ - name: Example Internal Token
+   regex: "example_[A-Za-z0-9]{32}"
 ```
 
 ## ESLint flat config example
@@ -51,13 +51,13 @@ patterns:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-secret-scanning-config": "warn",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-secret-scanning-config": "warn",
   },
+ },
 ];
 ```
 

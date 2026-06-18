@@ -23,7 +23,7 @@ execution policy drift.
 ```yaml
 timeout: 0s
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## ✅ Correct
@@ -31,7 +31,7 @@ steps:
 ```yaml
 timeout: 60s
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## When not to use it

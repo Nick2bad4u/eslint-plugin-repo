@@ -45,13 +45,13 @@ src/
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.recommended,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-changelog-file": "warn",
-    },
+ repoPlugin.configs.recommended,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-changelog-file": "warn",
   },
+ },
 ];
 ```
 

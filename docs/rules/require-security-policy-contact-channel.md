@@ -49,13 +49,13 @@ We aim to respond within 72 hours.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-security-policy-contact-channel": "warn",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-security-policy-contact-channel": "warn",
   },
+ },
 ];
 ```
 

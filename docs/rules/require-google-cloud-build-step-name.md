@@ -19,16 +19,16 @@ ambiguity about which builder image each step runs.
 
 ```yaml
 steps:
-  - id: test
-    args: ["test"]
+ - id: test
+   args: ["test"]
 ```
 
 ## ✅ Correct
 
 ```yaml
 steps:
-  - name: gcr.io/cloud-builders/npm
-    args: ["test"]
+ - name: gcr.io/cloud-builders/npm
+   args: ["test"]
 ```
 
 ## When not to use it

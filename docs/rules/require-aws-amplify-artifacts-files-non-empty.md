@@ -19,17 +19,17 @@ usually accidental and hard to spot during review.
 
 ```yaml
 frontend:
-  artifacts:
-    files:
+ artifacts:
+  files:
 ```
 
 ## ✅ Correct
 
 ```yaml
 frontend:
-  artifacts:
-    files:
-      - "**/*"
+ artifacts:
+  files:
+   - "**/*"
 ```
 
 ## When not to use it

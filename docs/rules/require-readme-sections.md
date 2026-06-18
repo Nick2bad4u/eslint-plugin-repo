@@ -58,7 +58,7 @@ are `["Installation", "Usage"]`.
 
 ```ts
 interface Options {
-  requiredSections?: string[]; // default: ["Installation", "Usage"]
+ requiredSections?: string[]; // default: ["Installation", "Usage"]
 }
 ```
 
@@ -68,16 +68,16 @@ interface Options {
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-readme-sections": [
-        "warn",
-        { requiredSections: ["Installation", "Usage", "Contributing"] },
-      ],
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-readme-sections": [
+    "warn",
+    { requiredSections: ["Installation", "Usage", "Contributing"] },
+   ],
   },
+ },
 ];
 ```
 

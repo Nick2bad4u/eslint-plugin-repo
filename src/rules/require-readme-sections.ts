@@ -18,17 +18,17 @@ const defaultRequiredSections = ["Installation", "Usage"] as const;
 const extractHeadings = (source: string): readonly string[] => {
     const lines = stringSplit(normalizeLineEndings(source), "\n");
     const headings: string[] = [];
-    let inFencedCodeBlock = false;
+    let isInFencedCodeBlock = false;
 
     for (const line of lines) {
         const trimmedLine = line.trim();
 
         if (trimmedLine.startsWith("```") || trimmedLine.startsWith("~~~")) {
-            inFencedCodeBlock = !inFencedCodeBlock;
+            isInFencedCodeBlock = !isInFencedCodeBlock;
             continue;
         }
 
-        if (inFencedCodeBlock) {
+        if (isInFencedCodeBlock) {
             continue;
         }
 
@@ -54,7 +54,7 @@ const findMissingSections = (
 
     return requiredSections.filter(
         (section) =>
-            !lowerHeadings.some((h) => h.includes(section.toLowerCase()))
+            lowerHeadings.every((h) => !h.includes(section.toLowerCase()))
     );
 };
 

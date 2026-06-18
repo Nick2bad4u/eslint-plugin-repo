@@ -66,7 +66,7 @@ const hasIncludeEntryUnderBranches = (
     nestedLines: readonly string[],
     branchesIndentation: number
 ): boolean => {
-    let inIncludeBlock = false;
+    let isInIncludeBlock = false;
     let includeIndentation = 0;
 
     for (const nestedLine of nestedLines) {
@@ -82,9 +82,9 @@ const hasIncludeEntryUnderBranches = (
 
         const nestedTrimmed = nestedLine.trimStart();
 
-        if (!inIncludeBlock) {
+        if (!isInIncludeBlock) {
             if (nestedTrimmed === "include:") {
-                inIncludeBlock = true;
+                isInIncludeBlock = true;
                 includeIndentation = nestedIndentation;
             }
 

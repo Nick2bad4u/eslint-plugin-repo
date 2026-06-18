@@ -56,13 +56,13 @@ test:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.gitlab,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-gitlab-ci-merge-request-pipelines": "error",
-    },
+ repoPlugin.configs.gitlab,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-gitlab-ci-merge-request-pipelines": "error",
   },
+ },
 ];
 ```
 

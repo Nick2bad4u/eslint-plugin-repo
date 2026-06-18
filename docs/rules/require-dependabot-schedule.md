@@ -24,8 +24,8 @@ catches misconfigured entries before they silently fail in production.
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+ - package-ecosystem: npm
+   directory: /
 ```
 
 ## ✅ Correct
@@ -34,10 +34,10 @@ updates:
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
+ - package-ecosystem: npm
+   directory: /
+   schedule:
+    interval: weekly
 ```
 
 ## ESLint flat config example
@@ -46,13 +46,13 @@ updates:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.recommended,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependabot-schedule": "error",
-    },
+ repoPlugin.configs.recommended,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependabot-schedule": "error",
   },
+ },
 ];
 ```
 

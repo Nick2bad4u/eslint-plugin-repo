@@ -27,8 +27,8 @@ timeout: 1200s
 ```yaml
 timeout: 1200s
 steps:
-  - name: gcr.io/cloud-builders/npm
-    args: ["test"]
+ - name: gcr.io/cloud-builders/npm
+   args: ["test"]
 ```
 
 ## When not to use it

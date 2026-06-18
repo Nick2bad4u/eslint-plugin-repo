@@ -30,13 +30,13 @@ export default [];
 ```yaml
 # azure-pipelines.yml
 trigger:
-  - main
+ - main
 
 pool:
-  vmImage: ubuntu-latest
+ vmImage: ubuntu-latest
 
 steps:
-  - script: npm test
+ - script: npm test
 ```
 
 ## When not to use it

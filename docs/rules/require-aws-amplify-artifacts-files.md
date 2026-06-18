@@ -23,8 +23,8 @@ reduces accidental artifact drift.
 ```yaml
 version: 1
 frontend:
-  artifacts:
-    baseDirectory: dist
+ artifacts:
+  baseDirectory: dist
 ```
 
 ## ✅ Correct
@@ -32,10 +32,10 @@ frontend:
 ```yaml
 version: 1
 frontend:
-  artifacts:
-    baseDirectory: dist
-    files:
-      - "**/*"
+ artifacts:
+  baseDirectory: dist
+  files:
+   - "**/*"
 ```
 
 ## When not to use it

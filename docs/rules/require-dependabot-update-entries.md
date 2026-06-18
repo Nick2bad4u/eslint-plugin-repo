@@ -34,10 +34,10 @@ updates:
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
+ - package-ecosystem: npm
+   directory: /
+   schedule:
+    interval: weekly
 ```
 
 ## ESLint flat config example
@@ -46,13 +46,13 @@ updates:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependabot-update-entries": "warn",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependabot-update-entries": "warn",
   },
+ },
 ];
 ```
 

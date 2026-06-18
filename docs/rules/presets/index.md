@@ -5,25 +5,25 @@ description: Provider and policy presets for repository compliance.
 
 # Presets
 
-| Preset                                | Key                               | Purpose                                               |
-| ------------------------------------- | --------------------------------- | ----------------------------------------------------- |
-| [✅ Recommended](./recommended.md)     | `repoPlugin.configs.recommended`  | Baseline repository policy checks                     |
-| [🔒 Strict](./strict.md)              | `repoPlugin.configs.strict`       | Recommended plus stronger policy requirements         |
-| [📦 Dependabot](./dependabot.md)      | `repoPlugin.configs.dependabot`   | Dependabot update policy checks                       |
-| [🐙 GitHub](./github.md)              | `repoPlugin.configs.github`       | GitHub repository hygiene and automation              |
-| [🦊 GitLab](./gitlab.md)              | `repoPlugin.configs.gitlab`       | GitLab merge-request and CI hygiene                   |
-| [🗻 Codeberg](./codeberg.md)          | `repoPlugin.configs.codeberg`     | Forgejo/Codeberg workflow hygiene                     |
-| [🪣 Bitbucket](./bitbucket.md)        | `repoPlugin.configs.bitbucket`    | Bitbucket pipelines policy checks                     |
-| [☁️ AWS](./aws.md)                    | `repoPlugin.configs.aws`          | AWS Amplify build-spec requirements                   |
-| [🔷 Azure](./azure.md)                | `repoPlugin.configs.azure`        | Azure Pipelines policy checks                         |
+| Preset                               | Key                               | Purpose                                               |
+| ------------------------------------ | --------------------------------- | ----------------------------------------------------- |
+| [✅ Recommended](./recommended.md)   | `repoPlugin.configs.recommended`  | Baseline repository policy checks                     |
+| [🔒 Strict](./strict.md)             | `repoPlugin.configs.strict`       | Recommended plus stronger policy requirements         |
+| [📦 Dependabot](./dependabot.md)     | `repoPlugin.configs.dependabot`   | Dependabot update policy checks                       |
+| [🐙 GitHub](./github.md)             | `repoPlugin.configs.github`       | GitHub repository hygiene and automation              |
+| [🦊 GitLab](./gitlab.md)             | `repoPlugin.configs.gitlab`       | GitLab merge-request and CI hygiene                   |
+| [🗻 Codeberg](./codeberg.md)         | `repoPlugin.configs.codeberg`     | Forgejo/Codeberg workflow hygiene                     |
+| [🪣 Bitbucket](./bitbucket.md)       | `repoPlugin.configs.bitbucket`    | Bitbucket pipelines policy checks                     |
+| [☁️ AWS](./aws.md)                   | `repoPlugin.configs.aws`          | AWS Amplify build-spec requirements                   |
+| [🔷 Azure](./azure.md)               | `repoPlugin.configs.azure`        | Azure Pipelines policy checks                         |
 | [🌤️ Google Cloud](./google-cloud.md) | `repoPlugin.configs.googleCloud`  | Google Cloud Build policy checks                      |
-| [🐳 Docker](./docker.md)              | `repoPlugin.configs.docker`       | Docker packaging repository checks                    |
-| [▲ Vercel](./vercel.md)               | `repoPlugin.configs.vercel`       | Vercel project configuration requirements             |
-| [🌐 Netlify](./netlify.md)            | `repoPlugin.configs.netlify`      | Netlify build configuration requirements              |
-| [🌊 DigitalOcean](./digitalocean.md)  | `repoPlugin.configs.DigitalOcean` | DigitalOcean App Platform spec requirements           |
-| [🟢 Node](./node.md)                  | `repoPlugin.configs.node`         | Node.js runtime version pinning requirements          |
-| [🤖 AI](./ai.md)                      | `repoPlugin.configs.ai`           | Repository guidance files for AI-assisted development |
-| [🧩 All](./all.md)                    | `repoPlugin.configs.all`          | All available rules                                   |
+| [🐳 Docker](./docker.md)             | `repoPlugin.configs.docker`       | Docker packaging repository checks                    |
+| [▲ Vercel](./vercel.md)              | `repoPlugin.configs.vercel`       | Vercel project configuration requirements             |
+| [🌐 Netlify](./netlify.md)           | `repoPlugin.configs.netlify`      | Netlify build configuration requirements              |
+| [🌊 DigitalOcean](./digitalocean.md) | `repoPlugin.configs.DigitalOcean` | DigitalOcean App Platform spec requirements           |
+| [🟢 Node](./node.md)                 | `repoPlugin.configs.node`         | Node.js runtime version pinning requirements          |
+| [🤖 AI](./ai.md)                     | `repoPlugin.configs.ai`           | Repository guidance files for AI-assisted development |
+| [🧩 All](./all.md)                   | `repoPlugin.configs.all`          | All available rules                                   |
 
 ## Rule matrix
 

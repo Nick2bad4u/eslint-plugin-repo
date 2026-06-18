@@ -75,14 +75,14 @@ pipelines:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.bitbucket,
-  // or individually:
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-bitbucket-pipelines-default-pipeline": "error",
-    },
+ repoPlugin.configs.bitbucket,
+ // or individually:
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-bitbucket-pipelines-default-pipeline": "error",
   },
+ },
 ];
 ```
 

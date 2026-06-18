@@ -31,15 +31,15 @@ export default [];
 # amplify.yml
 version: 1
 frontend:
-  phases:
-    build:
-      commands:
-        - npm ci
-        - npm run build
-  artifacts:
-    baseDirectory: dist
-    files:
-      - "**/*"
+ phases:
+  build:
+   commands:
+    - npm ci
+    - npm run build
+ artifacts:
+  baseDirectory: dist
+  files:
+   - "**/*"
 ```
 
 ## When not to use it

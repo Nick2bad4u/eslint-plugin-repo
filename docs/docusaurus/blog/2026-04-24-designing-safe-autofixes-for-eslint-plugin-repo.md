@@ -2,11 +2,11 @@
 slug: designing-safe-autofixes-for-eslint-plugin-repo
 title: Designing Safe Autofixes for eslint-plugin-repo
 authors:
-  - nick
+ - nick
 tags:
-  - autofix
-  - eslint
-  - rule-authoring
+ - autofix
+ - eslint
+ - rule-authoring
 ---
 
 # Designing Safe Autofixes for eslint-plugin-repo

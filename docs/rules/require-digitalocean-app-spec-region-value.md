@@ -21,7 +21,7 @@ Explicit values improve infrastructure reviewability.
 name: demo-app
 region:
 services:
-  - name: web
+ - name: web
 ```
 
 ## ✅ Correct
@@ -30,7 +30,7 @@ services:
 name: demo-app
 region: nyc
 services:
-  - name: web
+ - name: web
 ```
 
 ## When not to use it

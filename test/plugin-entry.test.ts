@@ -57,6 +57,6 @@ describe("plugin entry module", () => {
 
         expect(
             ruleIds.every((ruleId) => ruleId.startsWith("repo-compliance/"))
-        ).toBeTruthy();
+        ).toBe(true);
     });
 });

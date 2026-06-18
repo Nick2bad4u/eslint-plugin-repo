@@ -23,7 +23,7 @@ config values.
 ```yaml
 timeout: 999999s
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## ✅ Correct
@@ -31,7 +31,7 @@ steps:
 ```yaml
 timeout: 3600s
 steps:
-  - name: gcr.io/cloud-builders/npm
+ - name: gcr.io/cloud-builders/npm
 ```
 
 ## When not to use it

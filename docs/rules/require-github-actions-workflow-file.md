@@ -52,13 +52,13 @@ workflow entry point.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.github,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-github-actions-workflow-file": "error",
-    },
+ repoPlugin.configs.github,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-github-actions-workflow-file": "error",
   },
+ },
 ];
 ```
 

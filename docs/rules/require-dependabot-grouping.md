@@ -27,10 +27,10 @@ In repositories with large dependency graphs, this can produce high PR noise and
 # .github/dependabot.yml — no supported grouping strategy configured
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
+ - package-ecosystem: npm
+   directory: /
+   schedule:
+    interval: weekly
 ```
 
 ## ✅ Correct
@@ -39,14 +39,14 @@ updates:
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    groups:
-      all-dependencies:
-        patterns:
-          - "*"
+ - package-ecosystem: npm
+   directory: /
+   schedule:
+    interval: weekly
+   groups:
+    all-dependencies:
+     patterns:
+      - "*"
 ```
 
 Or, for multi-ecosystem batching:
@@ -54,15 +54,15 @@ Or, for multi-ecosystem batching:
 ```yaml
 version: 2
 multi-ecosystem-groups:
-  infrastructure:
-    schedule:
-      interval: weekly
+ infrastructure:
+  schedule:
+   interval: weekly
 updates:
-  - package-ecosystem: npm
-    directory: /
-    patterns:
-      - "*"
-    multi-ecosystem-group: infrastructure
+ - package-ecosystem: npm
+   directory: /
+   patterns:
+    - "*"
+   multi-ecosystem-group: infrastructure
 ```
 
 ## ESLint flat config example
@@ -71,13 +71,13 @@ updates:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.dependabot,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependabot-grouping": "warn",
-    },
+ repoPlugin.configs.dependabot,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependabot-grouping": "warn",
   },
+ },
 ];
 ```
 

@@ -13,6 +13,9 @@ dist/
 docs/docusaurus/docs/
 docs/docusaurus/build/
 docs/docusaurus/.docusaurus/
+docs/docusaurus/site-docs/developer/api/
+docs/docusaurus/static/eslint-inspector/
+docs/docusaurus/static/stylelint-inspector/
 docs/packages/
 docs/TSDoc/
 docs/Guides/

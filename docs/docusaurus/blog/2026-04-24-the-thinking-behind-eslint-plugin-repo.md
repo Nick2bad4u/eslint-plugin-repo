@@ -2,11 +2,11 @@
 slug: the-thinking-behind-eslint-plugin-repo
 title: The Thinking Behind eslint-plugin-repo
 authors:
-  - nick
+ - nick
 tags:
-  - architecture
-  - linting
-  - governance
+ - architecture
+ - linting
+ - governance
 ---
 
 # The Thinking Behind eslint-plugin-repo

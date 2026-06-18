@@ -41,13 +41,13 @@ pipelines:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.bitbucket,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-bitbucket-pipelines-step-name": "warn",
-    },
+ repoPlugin.configs.bitbucket,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-bitbucket-pipelines-step-name": "warn",
   },
+ },
 ];
 ```
 

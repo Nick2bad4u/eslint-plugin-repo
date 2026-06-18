@@ -114,13 +114,13 @@ incorrect review routing and surprise ownership gaps.
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-single-codeowners-file": "error",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-single-codeowners-file": "error",
   },
+ },
 ];
 ```
 

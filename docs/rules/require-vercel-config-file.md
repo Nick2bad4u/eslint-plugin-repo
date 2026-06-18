@@ -27,8 +27,8 @@ export default [];
 
 ```json
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true
+ "$schema": "https://openapi.vercel.sh/vercel.json",
+ "cleanUrls": true
 }
 ```
 

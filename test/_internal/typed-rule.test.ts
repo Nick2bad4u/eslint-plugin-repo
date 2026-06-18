@@ -12,9 +12,7 @@ const createFixtureRuleDefinition = (
     name: string,
     docsOverrides: Readonly<Record<string, unknown>> = {}
 ): FixtureRuleDefinition => ({
-    create() {
-        return {};
-    },
+    create: () => ({}),
     defaultOptions: [],
     meta: {
         docs: {
@@ -42,9 +40,7 @@ describe(createTypedRule, () => {
 
         expect(catalogEntry).not.toBeNull();
 
-        const rule = createTypedRule(
-            createFixtureRuleDefinition(ruleName)
-        );
+        const rule = createTypedRule(createFixtureRuleDefinition(ruleName));
 
         expect(rule.meta.docs).toStrictEqual(
             expect.objectContaining({

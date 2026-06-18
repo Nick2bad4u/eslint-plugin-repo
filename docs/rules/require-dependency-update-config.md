@@ -53,10 +53,10 @@ Using Dependabot:
 # .github/dependabot.yml
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
+ - package-ecosystem: npm
+   directory: /
+   schedule:
+    interval: weekly
 ```
 
 ### Alternative: using Renovate
@@ -64,8 +64,8 @@ updates:
 ```json
 // renovate.json
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"]
+ "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+ "extends": ["config:recommended"]
 }
 ```
 
@@ -83,13 +83,13 @@ targets: {}
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
-  repoPlugin.configs.strict,
-  {
-    plugins: { "repo-compliance": repoPlugin },
-    rules: {
-      "repo-compliance/require-dependency-update-config": "error",
-    },
+ repoPlugin.configs.strict,
+ {
+  plugins: { "repo-compliance": repoPlugin },
+  rules: {
+   "repo-compliance/require-dependency-update-config": "error",
   },
+ },
 ];
 ```
 

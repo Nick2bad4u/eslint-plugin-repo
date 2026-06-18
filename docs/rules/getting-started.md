@@ -58,10 +58,7 @@ Example layering:
 ```js
 import repoPlugin from "eslint-plugin-repo";
 
-export default [
-  repoPlugin.configs.recommended,
-  repoPlugin.configs.github,
-];
+export default [repoPlugin.configs.recommended, repoPlugin.configs.github];
 ```
 
 ## 4) Optional stricter profile

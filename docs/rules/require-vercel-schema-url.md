@@ -19,7 +19,7 @@ reduces config drift.
 
 ```json
 {
-  "$schema": "https://example.com/schema.json"
+ "$schema": "https://example.com/schema.json"
 }
 ```
 
@@ -27,7 +27,7 @@ reduces config drift.
 
 ```json
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json"
+ "$schema": "https://openapi.vercel.sh/vercel.json"
 }
 ```
 
