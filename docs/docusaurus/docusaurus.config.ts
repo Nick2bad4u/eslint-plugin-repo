@@ -96,61 +96,60 @@ const vscodeLanguageServerTypesEsmEntry = resolveOptionalModule(
  * packages are actually installed in the current workspace.
  */
 const suppressKnownWebpackWarningsPlugin: PluginModule = () => ({
-        configureWebpack() {
-            return {
-                ignoreWarnings: [
-                    /**
-                     * Suppress the known webpack critical-dependency warning
-                     * emitted by the UMD build of vscode-languageserver-types.
-                     *
-                     * We already alias to the ESM entry when available, but
-                     * some transitive resolution paths still surface the UMD
-                     * warning during docs builds. This is third-party noise,
-                     * not a site-level problem.
-                     */
-                    (warning: unknown) => {
-                        const warningRecord = warning as
-                            | Readonly<Record<string, unknown>>
-                            | undefined;
-                        const warningMessage = warningRecord?.["message"];
+    configureWebpack() {
+        return {
+            ignoreWarnings: [
+                /**
+                 * Suppress the known webpack critical-dependency warning
+                 * emitted by the UMD build of vscode-languageserver-types.
+                 *
+                 * We already alias to the ESM entry when available, but some
+                 * transitive resolution paths still surface the UMD warning
+                 * during docs builds. This is third-party noise, not a
+                 * site-level problem.
+                 */
+                (warning: unknown) => {
+                    const warningRecord = warning as
+                        Readonly<Record<string, unknown>> | undefined;
+                    const warningMessage = warningRecord?.["message"];
 
-                        return (
-                            typeof warningMessage === "string" &&
-                            warningMessage.includes(
-                                "Critical dependency: require function is used in a way in which dependencies cannot be statically extracted"
-                            )
-                        );
-                    },
-                ],
-                resolve: {
-                    alias: {
-                        ...(vscodeCssLanguageServiceEsmEntry !== undefined && {
-                                  "vscode-css-languageservice$":
-                                      vscodeCssLanguageServiceEsmEntry,
-                              }),
-                        ...(vscodeLanguageServerTypesEsmEntry !== undefined && {
-                                  "vscode-languageserver-types$":
-                                      vscodeLanguageServerTypesEsmEntry,
-                                  "vscode-languageserver-types/lib/umd/main.js$":
-                                      vscodeLanguageServerTypesEsmEntry,
-                              }),
-                    },
+                    return (
+                        typeof warningMessage === "string" &&
+                        warningMessage.includes(
+                            "Critical dependency: require function is used in a way in which dependencies cannot be statically extracted"
+                        )
+                    );
                 },
-            };
-        },
-        name: "suppress-known-webpack-warnings",
-    });
+            ],
+            resolve: {
+                alias: {
+                    ...(vscodeCssLanguageServiceEsmEntry !== undefined && {
+                        "vscode-css-languageservice$":
+                            vscodeCssLanguageServiceEsmEntry,
+                    }),
+                    ...(vscodeLanguageServerTypesEsmEntry !== undefined && {
+                        "vscode-languageserver-types$":
+                            vscodeLanguageServerTypesEsmEntry,
+                        "vscode-languageserver-types/lib/umd/main.js$":
+                            vscodeLanguageServerTypesEsmEntry,
+                    }),
+                },
+            },
+        };
+    },
+    name: "suppress-known-webpack-warnings",
+});
 
 /** Docusaurus future flags, including optional experimental fast path. */
 const futureConfig = {
     ...(enableExperimentalFaster && {
-              faster: {
-                  mdxCrossCompilerCache: true,
-                  rspackBundler: true,
-                  rspackPersistentCache: true,
-                  ssgWorkerThreads: true,
-              },
-          }),
+        faster: {
+            mdxCrossCompilerCache: true,
+            rspackBundler: true,
+            rspackPersistentCache: true,
+            ssgWorkerThreads: true,
+        },
+    }),
     v4: {
         fasterByDefault: true,
         mdx1CompatDisabledByDefault: true,
@@ -198,7 +197,7 @@ const config = {
                 "@type": "WebSite",
                 description: siteDescription,
                 image: socialCardImageUrl,
-                name: `${projectName  } Documentation`,
+                name: `${projectName} Documentation`,
                 publisher: {
                     "@type": "Person",
                     name: "Nick2bad4u",
@@ -783,12 +782,7 @@ const config = {
             title: projectName,
         },
         prism: {
-            additionalLanguages: [
-                "bash",
-                "json",
-                "yaml",
-                "typescript",
-            ],
+            additionalLanguages: ["bash", "json", "yaml", "typescript"],
             darkTheme: prismThemes.dracula,
             defaultLanguage: "typescript",
             theme: prismThemes.github,

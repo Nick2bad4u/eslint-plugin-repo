@@ -226,10 +226,7 @@ const additionalReleaseConfigPaths: readonly string[] = [
 ];
 
 for (const [index, satisfyingFile] of additionalReleaseConfigPaths.entries()) {
-    const fixtureSuffix = satisfyingFile
-        .replaceAll(".", "-")
-        .replaceAll("/", "-")
-        .replaceAll("\\", "-");
+    const fixtureSuffix = satisfyingFile.replaceAll(/[.\/\\]/gv, "-");
     const validFilename = ensureFixtureRepo(
         releaseConfigRuleName,
         `valid-${fixtureSuffix}`,
@@ -275,10 +272,7 @@ const additionalCodeownersPaths: readonly string[] = [
 ];
 
 for (const [index, satisfyingFile] of additionalCodeownersPaths.entries()) {
-    const fixtureSuffix = satisfyingFile
-        .replaceAll(".", "-")
-        .replaceAll("/", "-")
-        .replaceAll("\\", "-");
+    const fixtureSuffix = satisfyingFile.replaceAll(/[.\/\\]/gv, "-");
     const validFilename = ensureFixtureRepo(
         codeownersRuleName,
         `valid-${fixtureSuffix}`,

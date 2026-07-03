@@ -42,7 +42,7 @@ describe("config-file-scanner helpers", () => {
         expect.hasAssertions();
 
         expect(isBlankOrCommentLine("")).toBe(true);
-        expect(isBlankOrCommentLine(' '.repeat(4))).toBe(true);
+        expect(isBlankOrCommentLine(" ".repeat(4))).toBe(true);
         expect(isBlankOrCommentLine("   # comment")).toBe(true);
         expect(isBlankOrCommentLine("key: value")).toBe(false);
     });

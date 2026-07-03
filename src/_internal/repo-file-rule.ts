@@ -116,33 +116,30 @@ export const createRepositoryFilePresenceRule = (
 
     return createTypedRule({
         create: (context) => ({
-                Program(node) {
-                    const filename = context.physicalFilename;
-                    if (filename === "<input>") {
-                        return;
-                    }
+            Program(node) {
+                const filename = context.physicalFilename;
+                if (filename === "<input>") {
+                    return;
+                }
 
-                    if (!setHas(triggerFileNames, path.basename(filename))) {
-                        return;
-                    }
+                if (!setHas(triggerFileNames, path.basename(filename))) {
+                    return;
+                }
 
-                    const rootDirectoryPath = path.dirname(filename);
+                const rootDirectoryPath = path.dirname(filename);
 
-                    if (
-                        doesRequirementExist(
-                            rootDirectoryPath,
-                            options.requirement
-                        )
-                    ) {
-                        return;
-                    }
+                if (
+                    doesRequirementExist(rootDirectoryPath, options.requirement)
+                ) {
+                    return;
+                }
 
-                    context.report({
-                        messageId: options.messageId,
-                        node,
-                    });
-                },
-            }),
+                context.report({
+                    messageId: options.messageId,
+                    node,
+                });
+            },
+        }),
         defaultOptions: [],
         meta: {
             deprecated: false,

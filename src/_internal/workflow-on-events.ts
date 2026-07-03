@@ -10,12 +10,7 @@ const normalizeInlineEventNames = (inlineEvents: string): readonly string[] =>
         .filter((segment) => segment.length > 0);
 
 const normalizeNestedEventName = (line: string): string =>
-    line
-        .replace(/^-/v, "")
-        .replace(/:$/v, "")
-        .trim()
-        .replaceAll('"', "")
-        .replaceAll("'", "");
+    line.replace(/^-/v, "").replace(/:$/v, "").trim().replaceAll(/["']/gv, "");
 
 const hasNestedOnEvent = (
     lines: readonly string[],
@@ -63,12 +58,7 @@ export const hasWorkflowOnEvent = (
 
         const inlineEvents = trimmedLine
             .slice("on:".length)
-            .replaceAll("[", " ")
-            .replaceAll("]", " ")
-            .replaceAll("{", " ")
-            .replaceAll("}", " ")
-            .replaceAll('"', " ")
-            .replaceAll("'", " ");
+            .replaceAll(/["'\[\]\{\}]/gv, " ");
 
         const normalizedInlineEvents = normalizeInlineEventNames(inlineEvents);
 

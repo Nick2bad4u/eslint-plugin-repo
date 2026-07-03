@@ -52,9 +52,8 @@ const findMissingSections = (
 ): readonly string[] => {
     const lowerHeadings = headings.map((h) => h.toLowerCase());
 
-    return requiredSections.filter(
-        (section) =>
-            lowerHeadings.every((h) => !h.includes(section.toLowerCase()))
+    return requiredSections.filter((section) =>
+        lowerHeadings.every((h) => !h.includes(section.toLowerCase()))
     );
 };
 
