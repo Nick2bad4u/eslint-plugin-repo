@@ -77,6 +77,8 @@ const config = [
             "unicorn/no-unreadable-new-expression": "off",
             "unicorn/prefer-global-this": "off",
             "unicorn/prefer-import-meta-properties": "off",
+            // Scroll progress requires continuous layout-derived updates.
+            "unicorn/prefer-observer-apis": "off",
             "unicorn/prefer-short-arrow-method": "off",
             "unicorn/prefer-single-call": "off",
             "unicorn/prefer-temporal": "off",
@@ -119,9 +121,11 @@ const config = [
         name: "Legacy Test Conventions",
         rules: {
             "test-signal/require-negative-path": "off",
+            "unicorn/consistent-boolean-name": "off",
             "unicorn/no-computed-property-existence-check": "off",
             "unicorn/no-top-level-side-effects": "off",
             "unicorn/no-unreadable-for-of-expression": "off",
+            "unicorn/prefer-set-methods": "off",
             "unicorn/prefer-short-arrow-method": "off",
         },
     },
@@ -182,6 +186,17 @@ const config = [
             "@typescript-eslint/no-unsafe-call": "off",
             "@typescript-eslint/no-unsafe-member-access": "off",
             "unicorn/prefer-number-coercion": "off",
+        },
+    },
+    {
+        files: [
+            "docs/docusaurus/site-docs/developer/index.md",
+            "docs/docusaurus/site-docs/intro.md",
+        ],
+        name: "Generated API Link Validation Boundary",
+        rules: {
+            // The dedicated Remark gate runs after TypeDoc generates these targets.
+            "remark/remark": "off",
         },
     },
     // Add repository-specific config entries below as needed.

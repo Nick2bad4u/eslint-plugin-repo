@@ -4,7 +4,9 @@ export interface ReadmeRuleModule {
               readonly docs?:
                   | {
                         readonly repoConfigs?:
-                            readonly string[] | string | undefined;
+                            | readonly string[]
+                            | string
+                            | undefined;
                         readonly url?: string | undefined;
                     }
                   | undefined;

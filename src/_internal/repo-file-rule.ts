@@ -23,14 +23,14 @@ export type RepositoryFilePresenceRuleOptions = Readonly<{
 
 type FileRequirement =
     | Readonly<{
-          directory: string;
-          extensions: readonly string[];
-          kind: "directory-with-extension";
-      }>
+        directory: string;
+        extensions: readonly string[];
+        kind: "directory-with-extension";
+    }>
     | Readonly<{
-          kind: "any-of";
-          requirements: readonly Exclude<FileRequirement, { kind: "any-of" }>[];
-      }>
+        kind: "any-of";
+        requirements: readonly Exclude<FileRequirement, { kind: "any-of" }>[];
+    }>
     | Readonly<{ kind: "file"; path: string }>
     | Readonly<{ kind: "one-of"; paths: readonly string[] }>;
 
