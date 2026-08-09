@@ -76,7 +76,7 @@ jobs:
               run: "npm run build"
 
             - name: "Run tests with coverage and emit JUnit report"
-              run: "npx vitest run --coverage --reporter=github-actions --reporter=dot --reporter=junit --outputFile=test-report.junit.xml --silent"
+              run: "npm run test:coverage:ci"
               env:
                   CI: "true"
                   MAX_THREADS: "1"
