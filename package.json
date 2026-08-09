@@ -211,6 +211,7 @@
         "test:autofix:fixtures:typed": "npx cross-env REPO_COMPLIANCE_AUTOFIX_SMOKE=1 REPO_COMPLIANCE_AUTOFIX_FIXTURE_DIR=test/fixtures/typed vitest run test/autofix-fixtures-all-rules-smoke.test.ts",
         "test:ci": "npx cross-env CI=true npx vitest run --reporter=default",
         "test:coverage": "npx vitest run --coverage --reporter=default",
+        "test:coverage:ci": "vitest run --coverage --reporter=github-actions --reporter=dot --reporter=junit --outputFile=test-report.junit.xml --silent",
         "test:coverage:detailed": "npx vitest run --coverage --reporter=verbose",
         "test:coverage:minimal": "npx vitest run --coverage --reporter=dot",
         "test:coverage:open": "npm run test:coverage && npm run open:coverage",
@@ -310,6 +311,9 @@
     "peerDependencies": {
         "eslint": "^9.0.0 || ^10.5.0",
         "typescript": "^5.0.0 || ^6.0.2"
+    },
+    "optionalDependencies": {
+        "@codecov/bundle-analyzer": "^2.0.1"
     },
     "packageManager": "npm@12.0.2",
     "engines": {
