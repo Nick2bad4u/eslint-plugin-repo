@@ -112,6 +112,7 @@ dist
 
 # Gatsby files
 .cache/
+temp/
 # Comment in the public line in if your project uses Gatsby and not Next.js
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
@@ -795,6 +796,7 @@ coverage/
 **/auto-generated/**
 **/build/**
 **/dist/**
+.lychee.report.md
 
 # Version-specific ignores
 **/node_modules/**

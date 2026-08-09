@@ -1,3 +1,5 @@
+import type { ReactElement } from "react";
+
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -77,7 +79,7 @@ const homepageStructuredData = {
  *
  * @returns Homepage route element.
  */
-export default function HomePage() {
+export default function HomePage(): ReactElement {
     const logoUrl = useBaseUrl("img/logo.svg");
     const socialCardUrl = useBaseUrl("img/social-card.png");
 

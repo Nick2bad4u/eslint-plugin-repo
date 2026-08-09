@@ -1,0 +1,28 @@
+{
+    "exceptions": {
+        "src/_internal/rule-docs-metadata.ts::getRuleDocsContract": 13,
+        "src/rules/require-aws-amplify-build-commands.ts::hasBuildCommands": 15,
+        "src/rules/require-azure-pipelines-trigger-include-branches.ts::hasIncludeEntryUnderBranches": 14,
+        "src/rules/require-bitbucket-pipelines-pull-requests-target-branches.ts::hasPullRequestTargetBranch": 18,
+        "src/rules/require-bitbucket-pipelines-step-name.ts::collectStepBlocksMissingNameLineNumbers": 14,
+        "src/rules/require-dockerfile-base-image-tag.ts::getFirstUnpinnedBaseImageMatch": 11,
+        "src/rules/require-forgejo-actions-job-timeout-minutes.ts::Program": 12,
+        "src/rules/require-forgejo-actions-job-timeout-minutes.ts::create": 13,
+        "src/rules/require-forgejo-actions-no-write-all-permissions.ts::Program": 12,
+        "src/rules/require-forgejo-actions-no-write-all-permissions.ts::create": 13,
+        "src/rules/require-forgejo-actions-pinned-sha.ts::Program": 12,
+        "src/rules/require-forgejo-actions-pinned-sha.ts::create": 13,
+        "src/rules/require-forgejo-actions-workflow-dispatch.ts::Program": 12,
+        "src/rules/require-forgejo-actions-workflow-dispatch.ts::create": 13,
+        "src/rules/require-forgejo-actions-workflow-name.ts::Program": 12,
+        "src/rules/require-forgejo-actions-workflow-name.ts::create": 13,
+        "src/rules/require-github-actions-workflow-name.ts::Program": 12,
+        "src/rules/require-github-actions-workflow-name.ts::create": 13,
+        "src/rules/require-github-issue-template-labels.ts::Program": 17,
+        "src/rules/require-github-issue-template-labels.ts::create": 19,
+        "src/rules/require-gitlab-ci-interruptible.ts::jobsMissingInterruptible": 15,
+        "src/rules/require-gitlab-ci-needs-dag.ts::jobsMissingNeeds": 15,
+        "src/rules/require-gitlab-ci-security-scanning.ts::hasSecurityScanning": 13
+    },
+    "threshold": 10
+}

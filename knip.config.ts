@@ -10,75 +10,56 @@ import type { KnipConfig } from "knip";
  * repository layout.
  */
 const knipConfig: KnipConfig = {
-    $schema: "https://unpkg.com/knip@5/schema.json",
-    entry: [],
-    ignore: [
-        "docs/docusaurus/src/css/custom.css.d.ts",
-        "docs/docusaurus/typedoc-plugins/hashToBangLinks.mjs",
-        "docs/docusaurus/typedoc-plugins/hashToBangLinksCore.d.mts",
-        "docs/docusaurus/typedoc-plugins/hashToBangLinksCore.mjs",
-        "docs/docusaurus/typedoc-plugins/prefixDocLinks.mjs",
-        "docs/docusaurus/typedoc-plugins/prefixDocLinksCore.d.mts",
-        "docs/docusaurus/typedoc-plugins/prefixDocLinksCore.mjs",
-    ],
+    $schema: "https://unpkg.com/knip@6/schema.json",
     ignoreBinaries: [
-        "git-cz",
+        "actionlint",
+        "detect-secrets-hook",
+        "gitleaks",
         "grype",
-        "open-cli",
-        // False-positve Knip thinks knip.config.ts is a binary entry point, but it's actually just a config file.
+        "lychee",
+        // Knip treats its config path as a binary when it appears after `-c`.
         "knip.config.ts",
     ],
     ignoreDependencies: [
-        ".*prettier.*",
-        "@docusaurus/faster",
+        // Docusaurus resolves the configured search plugin and theme by name.
         "@easyops-cn/docusaurus-search-local",
         "@easyops-cn/docusaurus-theme-docusaurus-search-local",
-        "@eslint.*",
-        "@microsoft/tsdoc-config",
-        "@secretlint/secretlint-rule-anthropic",
-        "@secretlint/secretlint-rule-aws",
-        "@secretlint/secretlint-rule-database-connection-string",
-        "@secretlint/secretlint-rule-gcp",
-        "@secretlint/secretlint-rule-github",
-        "@secretlint/secretlint-rule-no-dotenv",
-        "@secretlint/secretlint-rule-no-homedir",
-        "@secretlint/secretlint-rule-npm",
-        "@secretlint/secretlint-rule-openai",
-        "@secretlint/secretlint-rule-pattern",
-        "@secretlint/secretlint-rule-preset-recommend",
-        "@secretlint/secretlint-rule-privatekey",
-        "@secretlint/secretlint-rule-secp256k1-privatekey",
-        "@stylelint.*",
-        "@types.*",
-        "eslint.*",
-        "madge",
-        "postcss.*",
-        "remark.*",
-        "stylelint.*",
-        "ts.*",
-        "type.*",
-        "unified",
-
-        // Items flagged by knip report (ignored to suppress false-positives / repo-local tools)
-        "clsx",
-        "react-github-btn",
-        "actionlint",
-        "commitlint",
-        "gitleaks-secret-scanner",
-        "htmlhint",
-        "leasot",
-        "markdown-link-check",
-        "sloc",
-        "storybook",
-        "yamllint-js",
-        "react",
+        // Stryker resolves mutators from configuration strings.
+        "@stryker-mutator/.*",
+        // The shared Stylelint config resolves its plugin implementations.
+        "@double-great/stylelint-a11y",
+        "@stylistic/stylelint-plugin",
+        "postcss-.*",
+        "stylelint-.*",
+        // These shared configs are consumed by non-JavaScript config files or
+        // by explicit node_modules paths in package scripts.
+        "gitcliff-config-nick2bad4u",
+        "gitleaks-config-nick2bad4u",
+        "grype-config-nick2bad4u",
+        "jscpd-config-nick2bad4u",
+        "lychee-config-nick2bad4u",
+        "ncu-config-nick2bad4u",
+        "yamllint-config-nick2bad4u",
+        // These command/config package names are not statically resolvable by
+        // Knip from package-script arguments and JSON configuration.
+        "git-cliff",
+        "tsdoc-config-nick2bad4u",
+        "typed-css-modules",
+        "typedoc-config-nick2bad4u",
+        // JSDoc resolves these module names through @types packages.
+        "mdast",
+        "unist",
     ],
+    ignoreFiles: ["plugin.d.mts"],
+    ignoreIssues: {
+        "scripts/**/*.d.mts": ["exports", "types"],
+        // The README synchronizer imports this generated module from dist.
+        "src/_internal/config-references.ts": ["exports"],
+    },
     ignoreExportsUsedInFile: {
         interface: true,
         type: true,
     },
-    includeEntryExports: true,
-    project: [],
     rules: {
         binaries: "error",
         catalog: "error",
@@ -98,16 +79,23 @@ const knipConfig: KnipConfig = {
     },
     workspaces: {
         ".": {
-            entry: [],
-            project: [],
-        },
-        src: {
-            entry: ["src/plugin.ts"],
-            project: [
-                "!src/**/*.spec.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
-                "!src/**/*.test.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
-                "src/**/*.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
+            entry: [
+                ".secretlintrc.cjs",
+                "src/plugin.ts",
+                "scripts/**/*.{js,mjs,cjs,ts,mts,cts}",
+                "test/**/*.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
+                "vitest.stryker.config.ts",
             ],
+            project: [
+                "*.{js,mjs,cjs,ts,mts,cts}",
+                "scripts/**/*.{js,mjs,cjs,ts,mts,cts}",
+                "src/**/*.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
+                "test/**/*.{js,ts,tsx,jsx,mts,cjs,cts,mjs}",
+            ],
+        },
+        "docs/docusaurus": {
+            entry: ["sidebars*.ts", "src/**/*.{ts,tsx,mdx}"],
+            project: ["**/*.{js,ts,tsx,jsx,mts,cjs,cts,mjs,mdx}"],
         },
     },
 };

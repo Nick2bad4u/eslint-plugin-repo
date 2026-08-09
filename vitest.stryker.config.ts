@@ -1,44 +1,32 @@
+import {
+    createVitestConfig,
+    type VitestConfig,
+} from "vitest-config-nick2bad4u";
 import { defineConfig } from "vitest/config";
 
 /**
- * Vitest configuration used exclusively by Stryker mutation testing.
- *
- * @remarks
- * This profile intentionally disables file parallelism and forces a single
- * worker to keep mutant execution deterministic and resource-bounded.
+ * Resource-bounded Vitest policy used exclusively by Stryker mutation runs.
  */
-const strykerVitestConfig: ReturnType<typeof defineConfig> = defineConfig({
+const strykerVitestConfig: VitestConfig = createVitestConfig({
     test: {
         css: false,
-        dangerouslyIgnoreUnhandledErrors: false,
         env: {
             NODE_ENV: "test",
         },
         environment: "node",
         exclude: ["test/fixtures/**", "docs/**"],
-        expect: {
-            poll: { interval: 50, timeout: 15_000 },
-            requireAssertions: false,
-        },
-        fakeTimers: {
-            advanceTimeDelta: 20,
-            loopLimit: 10_000,
-            now: Date.now(),
-            shouldAdvanceTime: false,
-            shouldClearNativeTimers: true,
-        },
         fileParallelism: false,
         globals: true,
+        hookTimeout: 15_000,
         include: ["test/**/*.{test,spec}.ts"],
-        isolate: true,
         maxWorkers: 1,
         name: {
             color: "yellow",
             label: "Stryker",
-        }, // Custom project name and color for Stryker test runs
+        },
         pool: "threads",
         printConsoleTrace: false,
-        retry: 0,
+        restoreMocks: true,
         sequence: {
             concurrent: false,
             groupOrder: 0,
@@ -46,8 +34,12 @@ const strykerVitestConfig: ReturnType<typeof defineConfig> = defineConfig({
         },
         setupFiles: ["./test/_internal/vitest-setup.ts"],
         slowTestThreshold: 300,
+        teardownTimeout: 15_000,
         testTimeout: 15_000,
     },
 });
 
-export default strykerVitestConfig;
+const validatedStrykerVitestConfig: VitestConfig =
+    defineConfig(strykerVitestConfig);
+
+export default validatedStrykerVitestConfig;

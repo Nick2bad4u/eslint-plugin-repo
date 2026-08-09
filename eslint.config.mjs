@@ -11,7 +11,6 @@ const config = [
             "docs/docusaurus/typedoc-plugins/**",
             "knip.config.ts",
             "plugin.d.mts",
-            "vitest.stryker.config.ts",
         ],
         name: "Tooling Shims Outside Typed Lint Projects",
     },
@@ -37,6 +36,14 @@ const config = [
             // inline iterable expressions. Migrating those patterns rule-by-rule
             // is unrelated to this shared-config migration.
             "@typescript-eslint/restrict-template-expressions": "off",
+            // The createTypedRule helper injects `meta.languages: ["js/*"]` centrally.
+            // eslint-plugin cannot statically follow that custom factory.
+            "eslint-plugin/require-meta-languages": "off",
+            // `Program` is an ESLint selector key, not a freely named method.
+            "sonarjs/function-name": "off",
+            // Early-continue guards keep AST and repository scanners flat. A
+            // nested equivalent is harder to read and increases complexity.
+            "sonarjs/too-many-break-or-continue-in-loop": "off",
             "unicorn/consistent-boolean-name": "off",
             "unicorn/import-style": "off",
             "unicorn/no-break-in-nested-loop": "off",
@@ -167,7 +174,13 @@ const config = [
             // Registry files intentionally alias many default exports to unique
             // rule identifiers for plugin metadata.
             "@typescript-eslint/no-unsafe-assignment": "off",
+            // @typescript-eslint's readonly rule-module options do not yet
+            // structurally match ESLint 10's mutable Plugin rule contract, and
+            // the self-referential flat presets require a typed empty placeholder.
+            "@typescript-eslint/no-unsafe-type-assertion": "off",
             "@typescript-eslint/restrict-template-expressions": "off",
+            // TypeScript JSON modules require the `.json` extension.
+            "import-x/extensions": "off",
             "import-x/max-dependencies": "off",
             "import-x/no-rename-default": "off",
         },
@@ -177,7 +190,8 @@ const config = [
             "eslint.config.mjs",
             "stylelint.config.mjs",
             "stryker.config.mjs",
-            "vite.config.ts",
+            "vitest.config.ts",
+            "vitest.stryker.config.ts",
         ],
         name: "Config Tooling Compatibility",
         rules: {

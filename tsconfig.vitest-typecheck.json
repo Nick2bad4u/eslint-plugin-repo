@@ -1,8 +1,6 @@
 {
     "$schema": "https://www.schemastore.org/tsconfig.json",
     "compilerOptions": {
-        "isolatedDeclarations": false,
-        "noEmit": true,
         "tsBuildInfoFile": "./.cache/tsbuildinfo/tsconfig.vitest-typecheck.tsbuildinfo"
     },
     "exclude": [
@@ -12,7 +10,10 @@
         "node_modules/**",
         "test/fixtures/**"
     ],
-    "extends": "./tsconfig.json",
+    "extends": [
+        "./tsconfig.json",
+        "tsconfig-nick2bad4u/tsconfig.vitest-typecheck.json"
+    ],
     "include": [
         "benchmarks/**/*.ts",
         "knip.config.ts",
@@ -22,7 +23,7 @@
         "src/**/*.ts",
         "test/**/*.d.ts",
         "test/**/*.ts",
-        "vite.config.ts",
+        "vitest.config.ts",
         "vitest.stryker.config.ts"
     ]
 }
