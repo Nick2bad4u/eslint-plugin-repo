@@ -112,17 +112,16 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "package-lock.json"
 
-            - name: "Install dependencies"
-              run: "npm ci --force"
-
-            - name: "Install native lint tools"
+            - name: "Install declared npm version"
+              shell: "bash"
               run: |
                   set -euo pipefail
-                  sudo apt-get update
-                  sudo apt-get install --no-install-recommends --yes yamllint
-                  go install github.com/rhysd/actionlint/cmd/actionlint@latest
-                  go install github.com/zricethezav/gitleaks/v8@latest
-                  echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+                  npm_version=$(node -p "require('./package.json').packageManager.split('@').at(-1)")
+                  npm install --global "npm@${npm_version}"
+                  test "$(npm --version)" = "${npm_version}"
+
+            - name: "Install dependencies"
+              run: "npm ci --force"
 
             - name: "Configure Git for release automation"
               if: "github.event_name == 'workflow_dispatch'"
@@ -180,11 +179,10 @@ jobs:
               run: "npm run release:check"
 
             - name: "Ensure verification did not modify tracked files"
-              if: "startsWith(github.ref, 'refs/tags/v')"
               run: |
                   set -euo pipefail
                   if ! git diff --quiet || ! git diff --cached --quiet; then
-                    echo "release:check modified files on a tag-triggered release. Ensure main is clean before tagging." >&2
+                    echo "release:check modified tracked files. Commit generated changes before releasing." >&2
                     git status --short
                     exit 1
                   fi
@@ -337,7 +335,40 @@ jobs:
 
                   npm pack --json --pack-destination "$assets_dir" > "$pack_metadata_path"
 
-                  tarball_filename=$(node -e "const fs = require('node:fs'); const packMetadata = JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); process.stdout.write(packMetadata[0].filename);" "$pack_metadata_path")
+                  tarball_filename=$(
+                    PACK_METADATA_PATH="$pack_metadata_path" node --input-type=module <<'NODE'
+                  import { readFileSync } from "node:fs";
+
+                  const metadataPath = process.env.PACK_METADATA_PATH;
+                  if (metadataPath === undefined) {
+                    throw new Error("PACK_METADATA_PATH is required.");
+                  }
+
+                  const packMetadata = JSON.parse(readFileSync(metadataPath, "utf8"));
+                  const packRecords = Array.isArray(packMetadata)
+                    ? packMetadata
+                    : Object.values(packMetadata);
+
+                  if (packRecords.length !== 1) {
+                    throw new Error(
+                      `Expected exactly one npm pack record, received ${packRecords.length}.`
+                    );
+                  }
+
+                  const [packRecord] = packRecords;
+                  if (
+                    typeof packRecord !== "object" ||
+                    packRecord === null ||
+                    !("filename" in packRecord) ||
+                    typeof packRecord.filename !== "string" ||
+                    packRecord.filename.trim().length === 0
+                  ) {
+                    throw new Error("npm pack metadata did not contain a valid filename.");
+                  }
+
+                  process.stdout.write(packRecord.filename);
+                  NODE
+                  )
                   tarball_path="${assets_dir}/${tarball_filename}"
                   safe_package_name=$(printf '%s' "$PACKAGE_NAME" | sed 's/^@//; s#/#-#g')
                   zip_basename="${safe_package_name}-${VERSION}"
