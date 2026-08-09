@@ -166,6 +166,18 @@ describe(deriveRuleDocsMetadataByName, () => {
         ).toThrow("must belong to at least one preset");
     });
 
+    it("throws when rule docs metadata is array-shaped", () => {
+        expect.hasAssertions();
+
+        expect(() =>
+            deriveRuleDocsMetadataByName({
+                "require-fixture-array-docs": createFixtureRule(
+                    [] as unknown as FixtureDocs
+                ),
+            })
+        ).toThrow("must define object-shaped meta.docs");
+    });
+
     it("throws when a rule key does not match the require-* contract", () => {
         expect.hasAssertions();
 
