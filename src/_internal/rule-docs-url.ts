@@ -1,7 +1,7 @@
 /**
  * Base URL for plugin rule documentation pages.
  */
-export const RULE_DOCS_URL_BASE =
+const RULE_DOCS_URL_BASE =
     "https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/" as const;
 
 /**

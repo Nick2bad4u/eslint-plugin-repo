@@ -62,4 +62,4 @@ Disable this rule only if your repository deliberately relies on GitLab's implic
 
 ## Further reading
 
-- [GitLab Docs: `stages` keyword](https://docs.gitlab.com/ee/ci/yaml/#stages)
+- [GitLab Docs: `stages` keyword](https://docs.gitlab.com/ci/yaml/#stages)

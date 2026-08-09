@@ -45,7 +45,7 @@ const unpinnedImageLines = (source: string): readonly number[] => {
             .trim()
             .replaceAll(/["']/gv, "");
 
-        if (value.length === 0 || value.startsWith("{") || value === "name:") {
+        if (value === "name:" || value.length === 0 || value.startsWith("{")) {
             continue;
         }
 

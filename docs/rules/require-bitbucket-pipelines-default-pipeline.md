@@ -94,9 +94,9 @@ Disable this rule only if your pipeline strategy is fully branch-enumeration-bas
 
 ## Further reading
 
-- [Bitbucket Docs: Configure pipelines — default pipelines](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)
-- [Bitbucket Docs: Pipelines YAML reference — `pipelines.default`](https://support.atlassian.com/bitbucket-cloud/docs/pipelines-yaml-reference/)
-- [Atlassian: Best practices for Bitbucket Pipelines](https://support.atlassian.com/bitbucket-cloud/docs/best-practices-for-pipelines/)
+- [Bitbucket Pipelines configuration reference](https://support.atlassian.com/bitbucket-cloud/docs/bitbucket-pipelines-configuration-reference/)
+- [Bitbucket Pipelines start conditions](https://support.atlassian.com/bitbucket-cloud/docs/pipeline-start-conditions/)
+- [Bitbucket Pipelines step options](https://support.atlassian.com/bitbucket-cloud/docs/step-options/)
 
 ## Adoption resources
 

@@ -2,6 +2,8 @@ import type { Options as DocsPluginOptions } from "@docusaurus/plugin-content-do
 import type * as Preset from "@docusaurus/preset-classic";
 import type { Config, PluginModule } from "@docusaurus/types";
 
+// eslint-disable-next-line module-interop/no-require-esm -- Docusaurus loads this TypeScript config through its ESM-aware config loader before producing a CommonJS server bundle
+import { createMermaidConfig } from "mermaid-config-nick2bad4u";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { themes as prismThemes } from "prism-react-renderer";
@@ -489,6 +491,16 @@ const config = {
             style: "dark",
         },
         image: socialCardImagePath,
+        mermaid: {
+            options: createMermaidConfig("noir-hand-drawn", {
+                deterministicIDSeed: projectName,
+                startOnLoad: false,
+            }),
+            theme: {
+                dark: "base",
+                light: "base",
+            },
+        },
         metadata: [
             {
                 content: projectKeywords,

@@ -77,4 +77,4 @@ image pipeline and intentionally runs against a floating tag.
 ## Further reading
 
 - [Bitbucket Pipelines: Use Docker images as build environments](https://support.atlassian.com/bitbucket-cloud/docs/use-docker-images-as-build-environments/)
-- [Docker: Image tagging best practices](https://docs.docker.com/develop/dev-best-practices/#use-tags-wisely)
+- [Docker: Pin base image versions](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions)

@@ -4,6 +4,8 @@
  */
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
+const apiOverviewItemClassName = "sb-api-overview-item";
+
 /** Main sidebar configuration for the default docs plugin instance. */
 const sidebars = {
     docs: [
@@ -42,7 +44,7 @@ const sidebars = {
                     type: "doc",
                 },
                 {
-                    className: "sb-api-overview-item",
+                    className: apiOverviewItemClassName,
                     id: "developer/typed-paths",
                     label: "🧬 Typed paths inventory",
                     type: "doc",
@@ -58,31 +60,31 @@ const sidebars = {
                         "Entry point for generated API docs and highlighted plugin exports.",
                     items: [
                         {
-                            className: "sb-api-overview-item",
+                            className: apiOverviewItemClassName,
                             id: "developer/api/plugin/index",
                             label: "🧩 Plugin API index",
                             type: "doc",
                         },
                         {
-                            className: "sb-api-overview-item",
+                            className: apiOverviewItemClassName,
                             id: "developer/api/plugin/type-aliases/RepoComplianceConfigName",
                             label: "🧠 Type aliases · RepoComplianceConfigName",
                             type: "doc",
                         },
                         {
-                            className: "sb-api-overview-item",
+                            className: apiOverviewItemClassName,
                             id: "developer/api/plugin/variables/plugin",
                             label: "⚙️ Runtime exports · plugin",
                             type: "doc",
                         },
                         {
-                            className: "sb-api-overview-item",
+                            className: apiOverviewItemClassName,
                             id: "developer/api/plugin/variables/ruleDocsByName",
                             label: "⚙️ Runtime exports · ruleDocsByName",
                             type: "doc",
                         },
                         {
-                            className: "sb-api-overview-item",
+                            className: apiOverviewItemClassName,
                             id: "developer/api/plugin/variables/typeCheckedRules",
                             label: "⚙️ Runtime exports · typeCheckedRules",
                             type: "doc",

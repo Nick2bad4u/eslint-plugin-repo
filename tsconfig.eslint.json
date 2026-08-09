@@ -1,13 +1,8 @@
 {
     "$schema": "https://www.schemastore.org/tsconfig.json",
     "compilerOptions": {
-        "allowJs": true,
-        "checkJs": true,
-        "erasableSyntaxOnly": true,
         "incremental": true,
-        "isolatedDeclarations": false,
-        "noCheck": false,
-        "noEmit": true,
+        "jsx": "react-jsx",
         "tsBuildInfoFile": "./.cache/tsbuildinfo/tsconfig.eslint.tsbuildinfo"
     },
     "exclude": [
@@ -73,7 +68,10 @@
         "eslint.config.bundled_*.mjs",
         "test/fixtures/**"
     ],
-    "extends": "./tsconfig.json",
+    "extends": [
+        "./tsconfig.json",
+        "tsconfig-nick2bad4u/tsconfig.eslint.json"
+    ],
     "include": [
         "**/*",
         "**/.*"

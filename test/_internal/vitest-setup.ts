@@ -107,3 +107,5 @@ if (!("createTypedRuleSelectorAwarePassThrough" in globalThis)) {
         }
     );
 }
+
+export {};

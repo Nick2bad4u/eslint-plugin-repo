@@ -190,7 +190,7 @@
     display: grid;
     gap: 1rem;
     align-items: center;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
 }
 
 .logoFrame {
@@ -293,7 +293,7 @@
     .heroInner,
     .infoGrid,
     .statGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .visualPanel {

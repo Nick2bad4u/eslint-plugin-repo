@@ -78,4 +78,4 @@ policy and you prefer implicit behaviour over explicit configuration.
 
 ## Further reading
 
-- [GitLab CI/CD: Cache policy](https://docs.gitlab.com/ee/ci/caching/#cache-policy)
+- [GitLab CI/CD: `cache:policy`](https://docs.gitlab.com/ci/yaml/#cachepolicy)

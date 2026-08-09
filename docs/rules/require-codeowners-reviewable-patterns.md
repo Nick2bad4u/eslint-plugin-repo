@@ -67,5 +67,5 @@ them in before merging.
 ## Further reading
 
 - [GitHub Docs: About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
-- [GitLab Docs: Code Owners](https://docs.gitlab.com/ee/user/project/codeowners/)
+- [GitLab Docs: Code Owners](https://docs.gitlab.com/user/project/codeowners/)
 - [Bitbucket Cloud Docs: Set up and use code owners](https://support.atlassian.com/bitbucket-cloud/docs/set-up-and-use-code-owners/)

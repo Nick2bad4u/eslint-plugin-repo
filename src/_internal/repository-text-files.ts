@@ -203,13 +203,3 @@ export const readTextFileIfExists = (filePath: string): null | string => {
     fileContentCache.set(filePath, content);
     return content;
 };
-
-/**
- * Clears the file content cache. Used for testing purposes to ensure a fresh
- * state when re-running tests or when fixtures are modified between test runs.
- *
- * @internal
- */
-export const clearFileContentCache = (): void => {
-    fileContentCache.clear();
-};

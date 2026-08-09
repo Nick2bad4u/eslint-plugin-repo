@@ -3,6 +3,8 @@
     "compilerOptions": {
         "ignoreDeprecations": "6.0",
         "isolatedDeclarations": false,
+        "jsx": "react-jsx",
+        "jsxImportSource": "react",
         "module": "ESNext",
         "moduleResolution": "bundler",
         "noEmit": true,

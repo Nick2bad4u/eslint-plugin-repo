@@ -54,17 +54,20 @@ type RuleNamePattern = `require-${string}`;
 const isRuleNamePattern = (value: string): value is RuleNamePattern =>
     value.startsWith("require-");
 
+const isUnknownRecord = (value: unknown): value is UnknownRecord =>
+    typeof value === "object" && value !== null && !Array.isArray(value);
+
 const getRuleDocsContract = (
     ruleName: string,
     docs: unknown
 ): RuleDocsContract => {
-    if (typeof docs !== "object" || docs === null || Array.isArray(docs)) {
+    if (!isUnknownRecord(docs)) {
         throw new TypeError(
             `Rule '${ruleName}' must define object-shaped meta.docs.`
         );
     }
 
-    const candidate = docs as UnknownRecord;
+    const candidate = docs;
     const description = candidate["description"];
     const recommended = candidate["recommended"];
     const requiresTypeChecking = candidate["requiresTypeChecking"];
@@ -170,7 +173,7 @@ export const deriveRuleDocsMetadataByName = (
             throw new TypeError(`Unexpected rule name '${ruleName}'.`);
         }
 
-        const docs = getRuleDocsContract(ruleName, ruleModule.meta?.docs);
+        const docs = getRuleDocsContract(ruleName, ruleModule.meta.docs);
 
         metadataByRuleName[ruleName] = {
             configNames: normalizeConfigNames(ruleName, docs.repoConfigs),

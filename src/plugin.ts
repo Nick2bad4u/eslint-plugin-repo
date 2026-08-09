@@ -13,7 +13,6 @@ import {
 import packageJson from "../package.json" with { type: "json" };
 import {
     configMetadataByName,
-    configNames,
     type ConfigName as InternalConfigName,
 } from "./_internal/config-references.js";
 import {
@@ -80,7 +79,7 @@ const hostingProviderRuleNamePrefixes = [
     "require-vercel-",
 ] as const;
 
-const strictExcludedRuleNames = new Set<RepoComplianceRuleName>([
+const strictExcludedRuleNames: ReadonlySet<string> = new Set([
     "require-dependency-update-config",
     "require-node-version-file",
     "require-nvmrc-file",
@@ -97,8 +96,7 @@ const isHostingProviderSpecificRuleName = (
 const isStrictExcludedRuleName = (
     ruleName: unknown
 ): ruleName is RepoComplianceRuleName =>
-    typeof ruleName === "string" &&
-    setHas(strictExcludedRuleNames, ruleName as RepoComplianceRuleName);
+    typeof ruleName === "string" && setHas(strictExcludedRuleNames, ruleName);
 
 const deduplicateRuleNames = (
     ruleNames: readonly RepoComplianceRuleName[]
@@ -181,18 +179,25 @@ const ruleEntries = safeCastTo<
 const createEmptyPresetRuleMap = (): Record<
     RepoComplianceConfigName,
     RepoComplianceRuleName[]
-> => {
-    const map = {} as Record<
-        RepoComplianceConfigName,
-        RepoComplianceRuleName[]
-    >;
-
-    for (const configName of configNames) {
-        map[configName] = [];
-    }
-
-    return map;
-};
+> => ({
+    ai: [],
+    all: [],
+    aws: [],
+    azure: [],
+    bitbucket: [],
+    codeberg: [],
+    dependabot: [],
+    DigitalOcean: [],
+    docker: [],
+    github: [],
+    gitlab: [],
+    googleCloud: [],
+    netlify: [],
+    node: [],
+    recommended: [],
+    strict: [],
+    vercel: [],
+});
 
 const derivePresetRuleNamesByConfig = (): Readonly<
     Record<RepoComplianceConfigName, readonly RepoComplianceRuleName[]>

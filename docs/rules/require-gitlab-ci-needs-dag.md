@@ -78,5 +78,5 @@ to undertake.
 
 ## Further reading
 
-- [GitLab CI: `needs` keyword](https://docs.gitlab.com/ee/ci/yaml/#needs)
-- [GitLab CI: DAG pipelines](https://docs.gitlab.com/ee/ci/directed_acyclic_graph/)
+- [GitLab CI: `needs` keyword](https://docs.gitlab.com/ci/yaml/#needs)
+- [GitLab CI: DAG execution with `needs`](https://docs.gitlab.com/ci/yaml/#needs)

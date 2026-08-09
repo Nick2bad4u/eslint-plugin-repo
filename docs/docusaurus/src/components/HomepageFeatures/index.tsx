@@ -1,3 +1,5 @@
+import type { ReactElement } from "react";
+
 import Link from "@docusaurus/Link";
 import Heading from "@theme/Heading";
 
@@ -39,7 +41,7 @@ const featureCards = [
  *
  * @returns Homepage features section.
  */
-export default function HomepageFeatures() {
+export default function HomepageFeatures(): ReactElement {
     return (
         <section className={styles.features}>
             <div className="container">

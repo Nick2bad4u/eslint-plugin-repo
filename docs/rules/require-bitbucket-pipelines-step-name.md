@@ -60,4 +60,4 @@ Disable this rule only if your team intentionally prefers unnamed step blocks an
 ## Further reading
 
 - [Bitbucket Pipelines step options](https://support.atlassian.com/bitbucket-cloud/docs/step-options/)
-- [Configure bitbucket-pipelines.yml](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)
+- [Bitbucket Pipelines configuration reference](https://support.atlassian.com/bitbucket-cloud/docs/bitbucket-pipelines-configuration-reference/)
