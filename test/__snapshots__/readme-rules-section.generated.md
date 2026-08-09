@@ -1,1 +1,0 @@
-# README Rules Snapshot (migrated)

@@ -7,6 +7,8 @@ import { assertDefined } from "ts-extras";
 import { getRuleCatalogEntryForRuleNameOrNull } from "./rule-catalog.js";
 import { createRuleDocsUrl } from "./rule-docs-url.js";
 
+const javascriptRuleLanguages = ["js/*"] as const;
+
 /**
  * Canonical typed rule creator signature for plugin rules.
  */
@@ -75,6 +77,10 @@ export const createTypedRule: RuleCreator = (ruleDefinition) => {
         meta: {
             ...createdRule.meta,
             docs: docsWithCatalog,
+            // ESLint 10 uses this field to reject rules that do not support the
+            // configured language. TypeScript parsers still use ESLint's JS
+            // language family, so every rule created here supports `js/*`.
+            languages: javascriptRuleLanguages,
         },
         name: ruleDefinition.name,
     };

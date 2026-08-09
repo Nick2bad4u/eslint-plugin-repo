@@ -28,11 +28,11 @@ const hasLabelsKey = (source: string): boolean => {
         const indentation = line.length - trimmedStartLine.length;
 
         if (
-            trimmedLine.length === 0 ||
             trimmedLine === "---" ||
             trimmedLine === "..." ||
-            trimmedLine.startsWith("#") ||
-            indentation > 0
+            trimmedLine.length === 0 ||
+            indentation > 0 ||
+            trimmedLine.startsWith("#")
         ) {
             continue;
         }

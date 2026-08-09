@@ -101,12 +101,12 @@ Disable this rule only if your GitLab project intentionally runs all security sc
 
 ## Further reading
 
-- [GitLab Docs: SAST](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [GitLab Docs: Secret Detection](https://docs.gitlab.com/ee/user/application_security/secret_detection/)
-- [GitLab Docs: Dependency Scanning](https://docs.gitlab.com/ee/user/application_security/dependency_scanning/)
-- [GitLab Docs: Container Scanning](https://docs.gitlab.com/ee/user/application_security/container_scanning/)
-- [GitLab Docs: DAST](https://docs.gitlab.com/ee/user/application_security/dast/)
-- [GitLab Docs: Security configuration](https://docs.gitlab.com/ee/user/application_security/configuration/)
+- [GitLab Docs: SAST](https://docs.gitlab.com/user/application_security/sast/)
+- [GitLab Docs: Secret Detection](https://docs.gitlab.com/user/application_security/secret_detection/)
+- [GitLab Docs: Dependency Scanning](https://docs.gitlab.com/user/application_security/dependency_scanning/)
+- [GitLab Docs: Container Scanning](https://docs.gitlab.com/user/application_security/container_scanning/)
+- [GitLab Docs: DAST](https://docs.gitlab.com/user/application_security/dast/)
+- [GitLab Docs: Application security testing](https://docs.gitlab.com/user/application_security/)
 
 ## Adoption resources
 

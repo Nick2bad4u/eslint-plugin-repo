@@ -66,4 +66,4 @@ different dependency update tool entirely.
 
 ## Further reading
 
-- [Dependabot: supported ecosystems and registries](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates#supported-repositories-and-ecosystems)
+- [Dependabot: `package-ecosystem` option](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)

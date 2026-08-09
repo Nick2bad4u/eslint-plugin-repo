@@ -9,7 +9,10 @@ import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import builtPlugin from "../dist/plugin.js";
-import { generateReadmeRulesSectionFromRules } from "./sync-readme-rules-table.mjs";
+import {
+    generateReadmeRulesSectionFromRules,
+    normalizeRulesSectionMarkdown,
+} from "./sync-readme-rules-table.mjs";
 
 /**
  * @typedef {Readonly<{
@@ -429,7 +432,10 @@ const syncPresetDoc = async (presetConfigName, writeChanges) => {
         rulesSectionMarkdown
     );
 
-    if (markdownWithRulesSection === currentMarkdown) {
+    if (
+        normalizeRulesSectionMarkdown(markdownWithRulesSection) ===
+        normalizeRulesSectionMarkdown(currentMarkdown)
+    ) {
         return false;
     }
 
@@ -479,7 +485,9 @@ export const syncPresetsRulesMatrix = async ({ writeChanges }) => {
         )
     );
 
-    const changedIndex = indexWithGroupedRulesSection !== currentIndexMarkdown;
+    const changedIndex =
+        normalizeRulesSectionMarkdown(indexWithGroupedRulesSection) !==
+        normalizeRulesSectionMarkdown(currentIndexMarkdown);
     const changed = changedIndex || changedPresetDocs.some(Boolean);
 
     if (!changed) {

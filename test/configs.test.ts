@@ -67,7 +67,7 @@ describe("repo compliance preset contracts", () => {
 
         const allPresetRules = plugin.configs?.all?.rules ?? {};
 
-        for (const ruleName of Object.keys(plugin.rules ?? {})) {
+        for (const ruleName of Object.keys(plugin.rules)) {
             expect(allPresetRules).toHaveProperty(
                 `repo-compliance/${ruleName}`,
                 "error"

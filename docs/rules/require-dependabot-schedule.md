@@ -66,4 +66,4 @@ alternative Dependabot trigger mechanism.
 
 ## Further reading
 
-- [Dependabot: `schedule` option](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#schedule)
+- [Dependabot: `schedule` option](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)

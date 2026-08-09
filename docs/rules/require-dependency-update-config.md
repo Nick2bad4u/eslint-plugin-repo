@@ -104,6 +104,6 @@ Dependabot, or Updatecli configuration.
 
 ## Further reading
 
-- [Dependabot configuration options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+- [Dependabot options reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)
 - [Renovate documentation](https://docs.renovatebot.com/)
 - [Updatecli documentation](https://www.updatecli.io/)

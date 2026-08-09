@@ -436,5 +436,3 @@ export const repoComplianceRules: Readonly<
         requireVercelVersionValueRule
     ),
 };
-
-export default repoComplianceRules;

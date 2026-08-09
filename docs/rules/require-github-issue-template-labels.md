@@ -78,4 +78,4 @@ are legacy Markdown forms rather than structured YAML.
 ## Further reading
 
 - [GitHub Docs: Configuring issue templates for your repository](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository)
-- [GitHub Docs: About labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-labels)
+- [GitHub Docs: Managing labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels)

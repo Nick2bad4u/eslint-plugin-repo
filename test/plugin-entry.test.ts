@@ -9,6 +9,21 @@ const packageJson = requireFromTestModule("../package.json") as {
     version: string;
 };
 
+function assertHasLanguagesMetadata(
+    value: unknown
+): asserts value is { readonly languages: readonly string[] } {
+    if (
+        typeof value === "object" &&
+        value !== null &&
+        Object.hasOwn(value, "languages") &&
+        Array.isArray(Reflect.get(value, "languages"))
+    ) {
+        return;
+    }
+
+    throw new TypeError("Expected rule metadata to declare languages");
+}
+
 describe("plugin entry module", () => {
     it("exports plugin metadata with expected namespace", () => {
         expect.hasAssertions();
@@ -30,29 +45,25 @@ describe("plugin entry module", () => {
         );
     });
 
+    it("declares JavaScript language support for every rule", () => {
+        expect.hasAssertions();
+
+        for (const rule of Object.values(plugin.rules)) {
+            assertHasLanguagesMetadata(rule.meta);
+
+            expect(rule.meta.languages).toStrictEqual(["js/*"]);
+        }
+    });
+
     it("registers only repo-compliance rule ids in presets", () => {
         expect.hasAssertions();
 
         const ruleIds: string[] = [];
 
-        for (const config of Object.values(plugin.configs ?? {})) {
-            const isConfigObject =
-                typeof config !== "object" ||
-                config === null ||
-                Array.isArray(config);
+        for (const configName of configNames) {
+            const config = plugin.configs[configName];
 
-            if (!isConfigObject) {
-                const maybeRules = (config as { rules?: unknown }).rules;
-
-                const isRuleRecord =
-                    typeof maybeRules === "object" &&
-                    maybeRules !== null &&
-                    !Array.isArray(maybeRules);
-
-                if (isRuleRecord) {
-                    ruleIds.push(...Object.keys(maybeRules));
-                }
-            }
+            ruleIds.push(...Object.keys(config.rules));
         }
 
         expect(

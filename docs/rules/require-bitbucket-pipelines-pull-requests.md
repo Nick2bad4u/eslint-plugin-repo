@@ -69,7 +69,7 @@ Disable this rule only if your team intentionally runs all PR validation through
 ## Further reading
 
 - [Atlassian Docs: Pipeline start conditions](https://support.atlassian.com/bitbucket-cloud/docs/pipeline-start-conditions/)
-- [Atlassian Docs: Configure bitbucket-pipelines.yml](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)
+- [Bitbucket Pipelines configuration reference](https://support.atlassian.com/bitbucket-cloud/docs/bitbucket-pipelines-configuration-reference/)
 
 ## Adoption resources
 

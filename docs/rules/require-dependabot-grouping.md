@@ -90,5 +90,5 @@ individual update and the extra PR volume is acceptable for your workflow.
 
 ## Further reading
 
-- [Dependabot: `groups` option](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups)
-- [Dependabot: `multi-ecosystem-groups` option](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-multi-ecosystem-updates)
+- [Dependabot: `groups` option](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)
+- [Dependabot: `multi-ecosystem-groups` option](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configuring-multi-ecosystem-updates)

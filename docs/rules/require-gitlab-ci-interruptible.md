@@ -64,5 +64,5 @@ where partial execution causes inconsistency.
 
 ## Further reading
 
-- [GitLab CI: `interruptible` keyword](https://docs.gitlab.com/ee/ci/yaml/#interruptible)
-- [GitLab CI: Auto-cancel redundant pipelines](https://docs.gitlab.com/ee/ci/pipelines/settings.html#auto-cancel-redundant-pipelines)
+- [GitLab CI: `interruptible` keyword](https://docs.gitlab.com/ci/yaml/#interruptible)
+- [GitLab CI: Auto-cancel redundant pipelines](https://docs.gitlab.com/ci/pipelines/settings/#auto-cancel-redundant-pipelines)

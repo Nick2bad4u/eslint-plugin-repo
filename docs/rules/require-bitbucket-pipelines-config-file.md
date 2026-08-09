@@ -64,4 +64,4 @@ Disable this rule only if the repository does not use Bitbucket Pipelines.
 
 ## Further reading
 
-- [Bitbucket Docs: Configure your bitbucket-pipelines.yml file](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)
+- [Bitbucket Pipelines configuration reference](https://support.atlassian.com/bitbucket-cloud/docs/bitbucket-pipelines-configuration-reference/)

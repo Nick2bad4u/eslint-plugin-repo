@@ -77,4 +77,4 @@ Disable this rule only if timeout policy is intentionally managed outside reposi
 ## Further reading
 
 - [Atlassian Docs: Global options (`max-time`)](https://support.atlassian.com/bitbucket-cloud/docs/global-options/)
-- [Atlassian Docs: Configure bitbucket-pipelines.yml](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/)
+- [Bitbucket Pipelines configuration reference](https://support.atlassian.com/bitbucket-cloud/docs/bitbucket-pipelines-configuration-reference/)

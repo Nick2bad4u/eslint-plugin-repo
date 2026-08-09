@@ -7,7 +7,11 @@ import plugin from "../../src/plugin";
 type PluginRuleModule = Parameters<RuleTester["run"]>[1];
 
 RuleTester.afterAll = afterAll;
-RuleTester.describe = describe;
+RuleTester.describe = (name, callback): void => {
+    describe(name, () => {
+        callback();
+    });
+};
 RuleTester.it = it;
 RuleTester.itOnly = it;
 

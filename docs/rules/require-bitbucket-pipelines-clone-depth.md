@@ -73,4 +73,4 @@ comparisons) and you intentionally need a full clone.
 
 ## Further reading
 
-- [Bitbucket Pipelines: `clone` options](https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/#Clone-settings)
+- [Bitbucket Pipelines: Git clone behavior](https://support.atlassian.com/bitbucket-cloud/docs/git-clone-behavior/)

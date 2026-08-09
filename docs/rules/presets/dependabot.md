@@ -9,7 +9,7 @@ Use `repoPlugin.configs.dependabot` for Dependabot-focused repository compliance
 ## Provider documentation
 
 - [Dependabot version updates](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates)
-- [Dependabot configuration options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+- [Dependabot options reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)
 
 ## Rules in this preset
 
@@ -18,11 +18,11 @@ Use `repoPlugin.configs.dependabot` for Dependabot-focused repository compliance
   - `💡` = suggestions available
   - `—` = report only
 
-| Rule | Fix |
-| --- | :-: |
-| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file) | — |
-| [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping) | — |
-| [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers) | — |
-| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule) | — |
-| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) | — |
-| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config) | — |
+| Rule                                                                                                                                | Fix |
+| ----------------------------------------------------------------------------------------------------------------------------------- | :-: |
+| [`require-dependabot-config-file`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-config-file)       |  —  |
+| [`require-dependabot-grouping`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-grouping)             |  —  |
+| [`require-dependabot-reviewers`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-reviewers)           |  —  |
+| [`require-dependabot-schedule`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-schedule)             |  —  |
+| [`require-dependabot-update-entries`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependabot-update-entries) |  —  |
+| [`require-dependency-update-config`](https://nick2bad4u.github.io/eslint-plugin-repo/docs/rules/require-dependency-update-config)   |  —  |

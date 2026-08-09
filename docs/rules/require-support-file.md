@@ -71,4 +71,4 @@ or the support channel is already mandated by a broader organization portal.
 
 ## Further reading
 
-- [GitHub Docs: Supporting your project](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-support-resource-to-your-project)
+- [GitHub Docs: Adding support resources to your project](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-support-resources-to-your-project)
