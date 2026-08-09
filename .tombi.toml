@@ -1,0 +1,22 @@
+toml-version = "v1.1.0"
+
+[format.rules]
+    array-bracket-space-width         = 1
+    array-comma-space-width           = 1
+    date-time-delimiter               = "T"
+    group-blank-lines-limit           = 1
+    indent-style                      = "space"
+    indent-sub-tables                 = false
+    indent-table-key-value-pairs      = true
+    indent-width                      = 4
+    inline-table-brace-space-width    = 1
+    inline-table-comma-space-width    = 1
+    key-quote-style                   = "double"
+    key-value-equals-sign-alignment   = true
+    key-value-equals-sign-space-width = 1
+    line-ending                       = "lf"
+    line-width                        = 80
+    string-quote-style                = "double"
+    table-blank-lines                 = 1
+    trailing-comment-alignment        = false
+    trailing-comment-space-width      = 2
