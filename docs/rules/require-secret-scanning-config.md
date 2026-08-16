@@ -1,35 +1,34 @@
 # require-secret-scanning-config
 
-Require a GitHub secret scanning customization surface.
+Require an intentional GitHub secret scanning path-exclusion configuration.
 
 ## Targeted pattern scope
 
-This rule checks for the presence of one of the following GitHub-native secret
-scanning customization surfaces:
+This rule checks for the presence of GitHub's repository-level secret scanning
+exclusion file:
 
 - `.github/secret_scanning.yml`
-- `.github/secret_scanning.yaml`
-- `.github/secret-scanning.yml`
-- `.github/secret-scanning.yaml`
-- any `.yml` / `.yaml` file under `.github/secret-scanning/`
 
 ## What this rule reports
 
-This rule reports when no supported GitHub secret scanning customization
-surface is found.
+When explicitly enabled, this rule reports when `.github/secret_scanning.yml`
+is missing.
 
 ## Why this rule exists
 
-GitHub's secret scanning feature can be customized with repository-level custom
-patterns and related configuration surfaces. This rule does not prove that
-secret scanning is enabled for the repository; it only checks whether the
-repository has committed a supported customization surface rather than relying
-entirely on platform defaults or external administration.
+GitHub uses `.github/secret_scanning.yml` to exclude matching paths from secret
+scanning alerts and push protection. Repositories that intentionally depend on
+such exclusions may opt into this rule to ensure the policy remains committed.
+
+The rule is deliberately excluded from `recommended`, `strict`, and `github`.
+Requiring this file by default would be unsafe: repositories that need no
+exclusions should not create one, and custom secret patterns are configured in
+GitHub rather than in a repository file.
 
 ## ❌ Incorrect
 
 ```txt
-// .github directory has no secret scanning customization surface
+// The repository intentionally requires exclusions, but the policy is missing.
 .github/
   dependabot.yml
   CODEOWNERS
@@ -38,11 +37,10 @@ entirely on platform defaults or external administration.
 ## ✅ Correct
 
 ```yaml
-# .github/secret-scanning/custom-patterns.yml
-name: Internal token patterns
-patterns:
- - name: Example Internal Token
-   regex: "example_[A-Za-z0-9]{32}"
+# .github/secret_scanning.yml
+# Generated documentation fixtures contain invalid example tokens.
+paths-ignore:
+ - "docs/generated/**"
 ```
 
 ## ESLint flat config example
@@ -51,7 +49,6 @@ patterns:
 import repoPlugin from "eslint-plugin-repo";
 
 export default [
- repoPlugin.configs.github,
  {
   plugins: { "repo-compliance": repoPlugin },
   rules: {
@@ -63,9 +60,10 @@ export default [
 
 ## When not to use it
 
-Disable this rule if your repository deliberately relies on organisation-level
-secret scanning defaults and does not want repository-local custom patterns or
-configuration.
+Do not enable this rule merely to prove that secret scanning is active. It
+cannot inspect repository settings, and creating an exclusion file without a
+real need reduces scanning coverage. Define custom secret patterns through
+GitHub's repository, organization, or enterprise security settings instead.
 
 > **Rule catalog ID:** R042
 

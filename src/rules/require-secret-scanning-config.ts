@@ -3,36 +3,17 @@ import { createRepositoryFilePresenceRule } from "../_internal/repo-file-rule.js
 /** Rule definition for this repository compliance requirement. */
 const rule: ReturnType<typeof createRepositoryFilePresenceRule> =
     createRepositoryFilePresenceRule({
-        configReferences: [
-            "repoPlugin.configs.github",
-            "repoPlugin.configs.strict",
-            "repoPlugin.configs.all",
-        ],
+        configReferences: ["repoPlugin.configs.all"],
         description:
-            "require a GitHub secret scanning customization surface for repository-level patterns or tuning.",
+            "require an intentional GitHub secret scanning path-exclusion configuration.",
         messageId: "missingSecretScanningConfig",
         messageText:
-            "Repository is missing a GitHub secret scanning customization surface. Add `.github/secret_scanning.yml`, `.github/secret-scanning.yml`, or a `.github/secret-scanning/*.yml` custom-pattern file if you want repository-level secret scanning patterns or tuning committed to the repo.",
+            "Repository is missing `.github/secret_scanning.yml`. Enable this opt-in rule only when the repository intentionally excludes paths from secret scanning, then document the narrowest necessary `paths-ignore` entries in that file.",
         name: "require-secret-scanning-config",
         recommendation: false,
         requirement: {
-            kind: "any-of",
-            requirements: [
-                {
-                    kind: "one-of",
-                    paths: [
-                        ".github/secret_scanning.yml",
-                        ".github/secret_scanning.yaml",
-                        ".github/secret-scanning.yml",
-                        ".github/secret-scanning.yaml",
-                    ],
-                },
-                {
-                    directory: ".github/secret-scanning",
-                    extensions: [".yml", ".yaml"],
-                    kind: "directory-with-extension",
-                },
-            ],
+            kind: "file",
+            path: ".github/secret_scanning.yml",
         },
     });
 
