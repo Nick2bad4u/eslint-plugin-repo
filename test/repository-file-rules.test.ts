@@ -127,7 +127,7 @@ const descriptors: readonly RuleFixtureDescriptor[] = [
     {
         messageId: "missingSecretScanningConfig",
         name: "require-secret-scanning-config",
-        satisfyingFiles: [".github/secret-scanning/custom-patterns.yml"],
+        satisfyingFiles: [".github/secret_scanning.yml"],
     },
     {
         messageId: "missingDockerfile",
@@ -212,6 +212,29 @@ for (const descriptor of descriptors) {
         ],
     });
 }
+
+const secretScanningRuleName = "require-secret-scanning-config";
+const unsupportedCustomPatternFilename = ensureFixtureRepo(
+    secretScanningRuleName,
+    "invalid-unsupported-custom-pattern-file",
+    [".github/secret-scanning/custom-patterns.yml"]
+);
+
+ruleTester.run(
+    `${secretScanningRuleName}-unsupported-custom-pattern-file`,
+    getPluginRule(secretScanningRuleName),
+    {
+        invalid: [
+            {
+                code: moduleSource,
+                errors: [{ messageId: "missingSecretScanningConfig" }],
+                filename: unsupportedCustomPatternFilename,
+                name: "does not treat an invented custom-pattern file as GitHub secret scanning configuration",
+            },
+        ],
+        valid: [],
+    }
+);
 
 const releaseConfigRuleName = "require-release-config-file";
 const releaseConfigMessageId = "missingReleaseConfigFile";

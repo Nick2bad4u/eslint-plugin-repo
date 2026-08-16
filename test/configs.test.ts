@@ -75,6 +75,18 @@ describe("repo compliance preset contracts", () => {
         }
     });
 
+    it("keeps secret scanning exclusions opt-in", () => {
+        expect.hasAssertions();
+
+        const ruleId =
+            "repo-compliance/require-secret-scanning-config" as const;
+
+        expect(plugin.configs?.all?.rules).toHaveProperty(ruleId, "error");
+        expect(plugin.configs?.github?.rules).not.toHaveProperty(ruleId);
+        expect(plugin.configs?.recommended?.rules).not.toHaveProperty(ruleId);
+        expect(plugin.configs?.strict?.rules).not.toHaveProperty(ruleId);
+    });
+
     it("keeps recommended subset inside strict", () => {
         expect.hasAssertions();
 
