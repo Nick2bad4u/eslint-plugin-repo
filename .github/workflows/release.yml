@@ -271,9 +271,23 @@ jobs:
                     exit 1
                   fi
 
-                  git add -A
-                  if git diff --cached --quiet; then
-                    echo "No staged changes found for release commit." >&2
+                  git add -- package.json package-lock.json
+
+                  mapfile -t staged_files < <(git diff --cached --name-only)
+                  if [ "${#staged_files[@]}" -ne 2 ] ||
+                    [[ ! " ${staged_files[*]} " =~ " package.json " ]] ||
+                    [[ ! " ${staged_files[*]} " =~ " package-lock.json " ]]; then
+                    echo "Release commit must contain only package.json and package-lock.json." >&2
+                    printf 'Staged files:\n%s\n' "${staged_files[*]:-(none)}" >&2
+                    exit 1
+                  fi
+
+                  unstaged_files=$(git diff --name-only)
+                  untracked_files=$(git ls-files --others --exclude-standard)
+                  if [ -n "$unstaged_files" ] || [ -n "$untracked_files" ]; then
+                    echo "Unexpected files changed after the release version bump." >&2
+                    printf 'Unstaged files:\n%s\n' "${unstaged_files:-(none)}" >&2
+                    printf 'Untracked files:\n%s\n' "${untracked_files:-(none)}" >&2
                     exit 1
                   fi
 
