@@ -18,6 +18,31 @@ import repoPlugin from "eslint-plugin-repo";
 export default [repoPlugin.configs.recommended];
 ```
 
+## Usage with Oxlint
+
+All 117 exported rules are verified with Oxlint `1.80.0` and produced the same diagnostic messages and locations as ESLint `10.8.1`. Oxlint's JavaScript-plugin API is currently alpha; see the [Oxlint JS-plugin documentation](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
+
+```jsonc
+{
+  "jsPlugins": [
+    {
+      "name": "repo-compliance",
+      "specifier": "eslint-plugin-repo"
+    }
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.{js,cjs,mjs,ts,cts,mts}"],
+      "rules": {
+        "repo-compliance/require-readme-file": "error"
+      }
+    }
+  ]
+}
+```
+
+Run `npx oxlint --config .oxlintrc.json eslint.config.mjs`. The [rules table](#rules) lists the complete verified rule set; the ESLint preset objects are not imported automatically, so enable the rules you want in the Oxlint config.
+
 ## Presets
 
 - `repoPlugin.configs.recommended` — cross-provider baseline repository hygiene.
