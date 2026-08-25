@@ -274,9 +274,17 @@ jobs:
                   git add -- package.json package-lock.json
 
                   mapfile -t staged_files < <(git diff --cached --name-only)
-                  if [ "${#staged_files[@]}" -ne 2 ] ||
-                    [[ ! " ${staged_files[*]} " =~ " package.json " ]] ||
-                    [[ ! " ${staged_files[*]} " =~ " package-lock.json " ]]; then
+                  staged_files_valid=true
+                  if [ "${#staged_files[@]}" -ne 2 ]; then
+                    staged_files_valid=false
+                  fi
+                  for staged_file in "${staged_files[@]}"; do
+                    case "$staged_file" in
+                      package.json | package-lock.json) ;;
+                      *) staged_files_valid=false ;;
+                    esac
+                  done
+                  if [ "$staged_files_valid" != true ]; then
                     echo "Release commit must contain only package.json and package-lock.json." >&2
                     printf 'Staged files:\n%s\n' "${staged_files[*]:-(none)}" >&2
                     exit 1
